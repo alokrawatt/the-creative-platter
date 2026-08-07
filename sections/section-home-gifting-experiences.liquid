@@ -1,0 +1,219 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Gifting & Experiences Split
+  ============================================================
+  Two-column split section for Gifting and Experiences CTAs.
+  Copy into Shopify: sections/section-home-gifting-experiences.liquid
+{% endcomment %}
+
+<style>
+  .tcp-split {
+    background-color: var(--tcp-white, #FFFFFF);
+  }
+
+  .tcp-split__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* ── Split Card ── */
+  .tcp-split__card {
+    padding: 56px 60px;
+    border: 1px solid var(--tcp-border, #E5DFD5);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .tcp-split__card:first-child {
+    border-right: none;
+  }
+
+  .tcp-split__label {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--tcp-muted, #6B6560);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .tcp-split__label::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background-color: var(--tcp-border, #E5DFD5);
+  }
+
+  .tcp-split__heading {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 400;
+    color: var(--tcp-dark, #2D2D2D);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .tcp-split__description {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--tcp-muted, #6B6560);
+    line-height: 1.7;
+    margin-bottom: 28px;
+    max-width: 360px;
+  }
+
+  .tcp-split__image-wrap {
+    flex: 1;
+    min-height: 200px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    background-color: var(--tcp-beige, #F5F0E8);
+  }
+
+  .tcp-split__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    min-height: 200px;
+  }
+
+  .tcp-split__card:hover .tcp-split__image {
+    transform: scale(1.04);
+  }
+
+  .tcp-split__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--tcp-dark, #2D2D2D);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    align-self: flex-start;
+  }
+
+  .tcp-split__cta:hover {
+    color: var(--tcp-gold, #C8A96E);
+  }
+
+  .tcp-split__cta svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  .tcp-split__cta:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .tcp-split__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .tcp-split__card {
+      padding: 40px 24px;
+    }
+
+    .tcp-split__card:first-child {
+      border-right: 1px solid var(--tcp-border, #E5DFD5);
+      border-bottom: none;
+    }
+  }
+</style>
+
+<section class="tcp-split" id="tcp-home-gifting-experiences">
+  <div class="tcp-split__inner">
+
+    {% for block in section.blocks %}
+      {% if block.type == 'split_card' %}
+        <div class="tcp-split__card" {{ block.shopify_attributes }}>
+          <span class="tcp-split__label">{{ block.settings.label }}</span>
+          <h2 class="tcp-split__heading">{{ block.settings.heading }}</h2>
+          <p class="tcp-split__description">{{ block.settings.description }}</p>
+
+          {% if block.settings.image != blank %}
+            <div class="tcp-split__image-wrap">
+              <img 
+                class="tcp-split__image"
+                src="{{ block.settings.image | image_url: width: 700 }}"
+                alt="{{ block.settings.heading | strip_html }}"
+                loading="lazy"
+                width="700"
+                height="400"
+              >
+            </div>
+          {% endif %}
+
+          <a href="{{ block.settings.cta_url | default: '#' }}" class="tcp-split__cta">
+            {{ block.settings.cta_text }}
+            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TCP Gifting & Experiences",
+  "tag": "section",
+  "class": "tcp-split-section",
+  "blocks": [
+    {
+      "type": "split_card",
+      "name": "Split Card",
+      "limit": 2,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "GIFTING" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Thoughtful by design.\nMade to be remembered." },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Not just a gift.\nA gesture that stays with them." },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "cta_text", "label": "CTA text", "default": "DISCOVER GIFTING" },
+        { "type": "url", "id": "cta_url", "label": "CTA URL" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP Gifting & Experiences",
+      "blocks": [
+        {
+          "type": "split_card",
+          "settings": {
+            "label": "GIFTING",
+            "heading": "Thoughtful by design.\nMade to be remembered.",
+            "description": "Not just a gift.\nA gesture that stays with them.",
+            "cta_text": "DISCOVER GIFTING"
+          }
+        },
+        {
+          "type": "split_card",
+          "settings": {
+            "label": "EXPERIENCES",
+            "heading": "Moments that\nbring us together.",
+            "description": "Workshops, stories and shared rituals around craft and clay.",
+            "cta_text": "DISCOVER EXPERIENCES"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

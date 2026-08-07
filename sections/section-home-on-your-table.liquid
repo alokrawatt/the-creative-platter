@@ -1,0 +1,179 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — On Your Table / Lifestyle Banner
+  ============================================================
+  Full-width lifestyle banner with "On Your Table" heading
+  and CTA to see products in homes.
+  Copy into Shopify: sections/section-home-on-your-table.liquid
+{% endcomment %}
+
+<style>
+  .tcp-on-table {
+    position: relative;
+    overflow: hidden;
+    min-height: 440px;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .tcp-on-table__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .tcp-on-table__bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .tcp-on-table:hover .tcp-on-table__bg-img {
+    transform: scale(1.03);
+  }
+
+  .tcp-on-table__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(35, 28, 22, 0.75) 0%, rgba(35, 28, 22, 0.15) 60%, transparent 100%);
+    z-index: 1;
+  }
+
+  .tcp-on-table__inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 80px 56px;
+    width: 100%;
+  }
+
+  .tcp-on-table__heading {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 400;
+    color: var(--tcp-white, #FFFFFF);
+    line-height: 1.1;
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  .tcp-on-table__description {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    max-width: 340px;
+  }
+
+  .tcp-on-table__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--tcp-white, #FFFFFF);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .tcp-on-table__cta:hover {
+    color: var(--tcp-gold-light, #D4BA85);
+  }
+
+  .tcp-on-table__cta svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  .tcp-on-table__cta:hover svg {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 768px) {
+    .tcp-on-table {
+      min-height: 340px;
+    }
+
+    .tcp-on-table__inner {
+      padding: 0 24px 40px;
+    }
+  }
+</style>
+
+<section class="tcp-on-table" id="tcp-home-on-your-table">
+  <div class="tcp-on-table__bg">
+    {% if section.settings.bg_image != blank %}
+      <img 
+        class="tcp-on-table__bg-img"
+        src="{{ section.settings.bg_image | image_url: width: 1600 }}"
+        alt="{{ section.settings.heading | strip_html }}"
+        loading="lazy"
+        width="1600"
+        height="600"
+      >
+    {% else %}
+      <div class="tcp-on-table__bg-img" style="background: linear-gradient(135deg, #5C4F44, #3A2F28);"></div>
+    {% endif %}
+    <div class="tcp-on-table__overlay"></div>
+  </div>
+
+  <div class="tcp-on-table__inner">
+    <h2 class="tcp-on-table__heading">{{ section.settings.heading }}</h2>
+    <p class="tcp-on-table__description">{{ section.settings.description }}</p>
+    <a href="{{ section.settings.cta_url | default: '#' }}" class="tcp-on-table__cta">
+      {{ section.settings.cta_text }}
+      <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TCP On Your Table",
+  "tag": "section",
+  "class": "tcp-on-table-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "On Your Table"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Designed to be used.\nLoved.\nLived with."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "SEE IT IN HOMES"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP On Your Table"
+    }
+  ]
+}
+{% endschema %}

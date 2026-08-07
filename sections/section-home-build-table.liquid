@@ -1,0 +1,378 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Build Your Table
+  ============================================================
+  Interactive visual builder showing Plate + Bowl + Linen + 
+  Cutlery = Your Set with product cards and plus signs.
+  Copy into Shopify: sections/section-home-build-table.liquid
+{% endcomment %}
+
+<style>
+  .tcp-build {
+    background-color: var(--tcp-white, #FFFFFF);
+    padding: 80px 0;
+    border-top: 1px solid var(--tcp-border, #E5DFD5);
+  }
+
+  .tcp-build__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .tcp-build__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    gap: 24px;
+  }
+
+  .tcp-build__heading {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 400;
+    color: var(--tcp-dark, #2D2D2D);
+    line-height: 1.15;
+  }
+
+  .tcp-build__subtitle {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--tcp-muted, #6B6560);
+    line-height: 1.7;
+    max-width: 340px;
+    margin-top: 12px;
+  }
+
+  .tcp-build__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--tcp-dark, #2D2D2D);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--tcp-dark, #2D2D2D);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    margin-top: 20px;
+  }
+
+  .tcp-build__cta:hover {
+    color: var(--tcp-gold, #C8A96E);
+    border-bottom-color: var(--tcp-gold, #C8A96E);
+  }
+
+  .tcp-build__cta svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  .tcp-build__cta:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* ── Builder Flow ── */
+  .tcp-build__flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--tcp-border, #E5DFD5) transparent;
+  }
+
+  .tcp-build__item {
+    flex-shrink: 0;
+    text-align: center;
+    min-width: 140px;
+  }
+
+  .tcp-build__item-img-wrap {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--tcp-beige, #F5F0E8);
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .tcp-build__item:hover .tcp-build__item-img-wrap {
+    border-color: var(--tcp-gold, #C8A96E);
+  }
+
+  .tcp-build__item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .tcp-build__item:hover .tcp-build__item-img {
+    transform: scale(1.08);
+  }
+
+  .tcp-build__item-name {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--tcp-dark, #2D2D2D);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .tcp-build__item-desc {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    color: var(--tcp-muted, #6B6560);
+    font-style: italic;
+  }
+
+  /* ── Plus Sign ── */
+  .tcp-build__plus {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin: 0 8px;
+    margin-bottom: 36px;
+    color: var(--tcp-muted-light, #9B9590);
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 20px;
+    font-weight: 300;
+  }
+
+  /* ── Equals / Result ── */
+  .tcp-build__equals {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin: 0 8px;
+    margin-bottom: 36px;
+    color: var(--tcp-gold, #C8A96E);
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 22px;
+    font-weight: 300;
+  }
+
+  .tcp-build__result {
+    flex-shrink: 0;
+    text-align: center;
+    min-width: 160px;
+  }
+
+  .tcp-build__result-img-wrap {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--tcp-beige, #F5F0E8);
+    border: 2px solid var(--tcp-gold, #C8A96E);
+    position: relative;
+  }
+
+  .tcp-build__result-img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid var(--tcp-gold-light, #D4BA85);
+    opacity: 0.4;
+  }
+
+  .tcp-build__result-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .tcp-build__result-name {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--tcp-dark, #2D2D2D);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .tcp-build__result-desc {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    color: var(--tcp-muted, #6B6560);
+    font-style: italic;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .tcp-build__flow {
+      gap: 0;
+      justify-content: flex-start;
+    }
+
+    .tcp-build__item {
+      min-width: 120px;
+    }
+
+    .tcp-build__item-img-wrap {
+      width: 90px;
+      height: 90px;
+    }
+
+    .tcp-build__plus,
+    .tcp-build__equals {
+      width: 28px;
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tcp-build {
+      padding: 50px 0;
+    }
+
+    .tcp-build__inner {
+      padding: 0 24px;
+    }
+
+    .tcp-build__header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
+
+<section class="tcp-build" id="tcp-home-build-table">
+  <div class="tcp-build__inner">
+
+    <div class="tcp-build__header">
+      <div>
+        <h2 class="tcp-build__heading">{{ section.settings.heading }}</h2>
+        <p class="tcp-build__subtitle">{{ section.settings.subtitle }}</p>
+        <a href="{{ section.settings.cta_url | default: '#' }}" class="tcp-build__cta">
+          {{ section.settings.cta_text }}
+          <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="tcp-build__flow">
+      {% for block in section.blocks %}
+        {% if block.type == 'builder_item' %}
+          {% unless forloop.first %}
+            <div class="tcp-build__plus">+</div>
+          {% endunless %}
+          <div class="tcp-build__item" {{ block.shopify_attributes }}>
+            <div class="tcp-build__item-img-wrap">
+              {% if block.settings.image != blank %}
+                <img class="tcp-build__item-img" src="{{ block.settings.image | image_url: width: 240 }}" alt="{{ block.settings.name }}" loading="lazy" width="240" height="240">
+              {% else %}
+                <div class="tcp-build__item-img" style="background: var(--tcp-warm-bg);"></div>
+              {% endif %}
+            </div>
+            <span class="tcp-build__item-name">{{ block.settings.name }}</span>
+            <span class="tcp-build__item-desc">{{ block.settings.description }}</span>
+          </div>
+        {% endif %}
+
+        {% if block.type == 'result_item' %}
+          <div class="tcp-build__equals">=</div>
+          <div class="tcp-build__result" {{ block.shopify_attributes }}>
+            <div class="tcp-build__result-img-wrap">
+              {% if block.settings.image != blank %}
+                <img class="tcp-build__result-img" src="{{ block.settings.image | image_url: width: 280 }}" alt="{{ block.settings.name }}" loading="lazy" width="280" height="280">
+              {% else %}
+                <div class="tcp-build__result-img" style="background: var(--tcp-warm-bg);"></div>
+              {% endif %}
+            </div>
+            <span class="tcp-build__result-name">{{ block.settings.name }}</span>
+            <span class="tcp-build__result-desc">{{ block.settings.description }}</span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TCP Build Your Table",
+  "tag": "section",
+  "class": "tcp-build-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Build Your Table"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Mix, match and create a set that's uniquely yours."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "START BUILDING"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "builder_item",
+      "name": "Builder Item",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Item name", "default": "Plate" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Choose your style" },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    },
+    {
+      "type": "result_item",
+      "name": "Result (Your Set)",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "name", "label": "Result name", "default": "Your Set" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Beautifully curated." },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP Build Your Table",
+      "blocks": [
+        { "type": "builder_item", "settings": { "name": "Plate", "description": "Choose your style" } },
+        { "type": "builder_item", "settings": { "name": "Bowl", "description": "Choose your style" } },
+        { "type": "builder_item", "settings": { "name": "Linen", "description": "Choose your style" } },
+        { "type": "builder_item", "settings": { "name": "Cutlery", "description": "Choose your style" } },
+        { "type": "result_item", "settings": { "name": "Your Set", "description": "Beautifully curated." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

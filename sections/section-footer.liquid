@@ -1,0 +1,462 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Footer Section
+  ============================================================
+  Multi-column footer with logo, navigation, newsletter,
+  social links, and legal text.
+  Copy into Shopify: sections/section-footer.liquid
+{% endcomment %}
+
+<style>
+  /* ── Footer ── */
+  .tcp-footer {
+    background-color: var(--tcp-cream, #FAF8F4);
+    border-top: 1px solid var(--tcp-border, #E5DFD5);
+    padding: 64px 0 0;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+  }
+
+  .tcp-footer__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .tcp-footer__grid {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(6, 1fr) 1.5fr;
+    gap: 24px;
+    padding-bottom: 48px;
+  }
+
+  /* ── Logo Column ── */
+  .tcp-footer__logo-col {
+    padding-right: 20px;
+  }
+
+  .tcp-footer__logo {
+    text-decoration: none;
+    color: var(--tcp-dark, #2D2D2D);
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  .tcp-footer__logo-the {
+    font-family: var(--font-script, 'Dancing Script', cursive);
+    font-size: 13px;
+    color: var(--tcp-muted, #6B6560);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .tcp-footer__logo-name {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    display: block;
+  }
+
+  .tcp-footer__logo-tagline {
+    font-size: 7.5px;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--tcp-muted, #6B6560);
+    margin-top: 6px;
+    line-height: 1.6;
+    display: block;
+  }
+
+  .tcp-footer__social {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .tcp-footer__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: var(--tcp-dark, #2D2D2D);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid var(--tcp-border, #E5DFD5);
+  }
+
+  .tcp-footer__social-link:hover {
+    background-color: var(--tcp-gold, #C8A96E);
+    color: var(--tcp-white, #FFFFFF);
+    border-color: var(--tcp-gold, #C8A96E);
+  }
+
+  .tcp-footer__social-link svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .tcp-footer__copyright {
+    font-size: 10px;
+    color: var(--tcp-muted-light, #9B9590);
+    margin-top: 16px;
+    line-height: 1.5;
+  }
+
+  /* ── Nav Columns ── */
+  .tcp-footer__nav-col {}
+
+  .tcp-footer__nav-title {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--tcp-dark, #2D2D2D);
+    margin-bottom: 16px;
+  }
+
+  .tcp-footer__nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .tcp-footer__nav-list li {
+    margin-bottom: 10px;
+  }
+
+  .tcp-footer__nav-list a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--tcp-muted, #6B6560);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .tcp-footer__nav-list a:hover {
+    color: var(--tcp-gold, #C8A96E);
+  }
+
+  /* ── Newsletter Column ── */
+  .tcp-footer__newsletter-col {
+    padding-left: 20px;
+  }
+
+  .tcp-footer__newsletter-title {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--tcp-dark, #2D2D2D);
+    margin-bottom: 16px;
+  }
+
+  .tcp-footer__newsletter-form {
+    display: flex;
+    border: 1px solid var(--tcp-border-dark, #C5BFB5);
+    border-radius: 0;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  .tcp-footer__newsletter-form:focus-within {
+    border-color: var(--tcp-gold, #C8A96E);
+  }
+
+  .tcp-footer__newsletter-input {
+    flex: 1;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 13px;
+    padding: 12px 16px;
+    border: none;
+    background: transparent;
+    color: var(--tcp-dark, #2D2D2D);
+    outline: none;
+  }
+
+  .tcp-footer__newsletter-input::placeholder {
+    color: var(--tcp-muted-light, #9B9590);
+  }
+
+  .tcp-footer__newsletter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    background-color: var(--tcp-gold, #C8A96E);
+    border: none;
+    cursor: pointer;
+    color: var(--tcp-white, #FFFFFF);
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .tcp-footer__newsletter-btn:hover {
+    background-color: var(--tcp-gold-hover, #B8965A);
+  }
+
+  .tcp-footer__newsletter-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* ── Bottom Bar ── */
+  .tcp-footer__bottom {
+    border-top: 1px solid var(--tcp-border, #E5DFD5);
+    padding: 20px 0;
+  }
+
+  .tcp-footer__bottom-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+  }
+
+  .tcp-footer__legal-link {
+    font-size: 11px;
+    color: var(--tcp-muted, #6B6560);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .tcp-footer__legal-link:hover {
+    color: var(--tcp-gold, #C8A96E);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1100px) {
+    .tcp-footer__grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .tcp-footer__logo-col {
+      grid-column: 1 / -1;
+    }
+
+    .tcp-footer__newsletter-col {
+      grid-column: 1 / -1;
+      padding-left: 0;
+      max-width: 400px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tcp-footer {
+      padding: 40px 0 0;
+    }
+
+    .tcp-footer__inner {
+      padding: 0 24px;
+    }
+
+    .tcp-footer__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .tcp-footer__logo-col {
+      grid-column: 1 / -1;
+    }
+
+    .tcp-footer__newsletter-col {
+      grid-column: 1 / -1;
+      max-width: 100%;
+    }
+
+    .tcp-footer__bottom-inner {
+      padding: 0 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+  }
+</style>
+
+<footer class="tcp-footer" id="tcp-footer">
+  <div class="tcp-footer__inner">
+    <div class="tcp-footer__grid">
+
+      <!-- Logo Column -->
+      <div class="tcp-footer__logo-col">
+        <a href="/" class="tcp-footer__logo" aria-label="The Creative Platter — Home">
+          <span class="tcp-footer__logo-the">the</span>
+          <span class="tcp-footer__logo-name">CREATIVE PLATTER</span>
+        </a>
+        <span class="tcp-footer__logo-tagline">
+          {{ section.settings.tagline | default: 'BESPOKE TABLEWARE,<br>EXPERIENCES, ADVISORY.' }}
+        </span>
+
+        <div class="tcp-footer__social">
+          {% if section.settings.instagram_url != blank %}
+            <a href="{{ section.settings.instagram_url }}" class="tcp-footer__social-link" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+            </a>
+          {% endif %}
+          {% if section.settings.pinterest_url != blank %}
+            <a href="{{ section.settings.pinterest_url }}" class="tcp-footer__social-link" aria-label="Pinterest" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.182-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.805-2.424 1.808-2.424.853 0 1.264.64 1.264 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.481 1.806 1.778 0 3.144-1.874 3.144-4.58 0-2.394-1.72-4.068-4.177-4.068-2.845 0-4.515 2.134-4.515 4.34 0 .859.331 1.781.744 2.282a.3.3 0 01.069.287c-.076.316-.244.995-.277 1.134-.044.182-.144.221-.333.133-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.472 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.527-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z" fill="currentColor"/></svg>
+            </a>
+          {% endif %}
+        </div>
+
+        <p class="tcp-footer__copyright">
+          © {{ 'now' | date: "%Y" }} The Creative Platter. All rights reserved.
+        </p>
+      </div>
+
+      <!-- Navigation Columns (rendered from blocks) -->
+      {% for block in section.blocks %}
+        {% if block.type == 'nav_column' %}
+          <div class="tcp-footer__nav-col" {{ block.shopify_attributes }}>
+            <h4 class="tcp-footer__nav-title">{{ block.settings.column_title }}</h4>
+            <ul class="tcp-footer__nav-list">
+              {% if block.settings.link_1_text != blank %}
+                <li><a href="{{ block.settings.link_1_url }}">{{ block.settings.link_1_text }}</a></li>
+              {% endif %}
+              {% if block.settings.link_2_text != blank %}
+                <li><a href="{{ block.settings.link_2_url }}">{{ block.settings.link_2_text }}</a></li>
+              {% endif %}
+              {% if block.settings.link_3_text != blank %}
+                <li><a href="{{ block.settings.link_3_url }}">{{ block.settings.link_3_text }}</a></li>
+              {% endif %}
+              {% if block.settings.link_4_text != blank %}
+                <li><a href="{{ block.settings.link_4_url }}">{{ block.settings.link_4_text }}</a></li>
+              {% endif %}
+              {% if block.settings.link_5_text != blank %}
+                <li><a href="{{ block.settings.link_5_url }}">{{ block.settings.link_5_text }}</a></li>
+              {% endif %}
+              {% if block.settings.link_6_text != blank %}
+                <li><a href="{{ block.settings.link_6_url }}">{{ block.settings.link_6_text }}</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <!-- Newsletter Column -->
+      <div class="tcp-footer__newsletter-col">
+        <h4 class="tcp-footer__newsletter-title">{{ section.settings.newsletter_title | default: 'JOIN OUR WORLD' }}</h4>
+        <form class="tcp-footer__newsletter-form" action="/contact#contact_form" method="post">
+          <input type="hidden" name="form_type" value="customer">
+          <input type="hidden" name="utf8" value="✓">
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input 
+            type="email" 
+            name="contact[email]" 
+            class="tcp-footer__newsletter-input" 
+            placeholder="{{ section.settings.newsletter_placeholder | default: 'Enter your email' }}"
+            required
+            aria-label="Email address"
+          >
+          <button type="submit" class="tcp-footer__newsletter-btn" aria-label="Subscribe">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9.5 4.5L13 8l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Legal Bar -->
+  <div class="tcp-footer__bottom">
+    <div class="tcp-footer__bottom-inner">
+      <a href="{{ section.settings.privacy_url | default: '/policies/privacy-policy' }}" class="tcp-footer__legal-link">Privacy Policy</a>
+      <a href="{{ section.settings.terms_url | default: '/policies/terms-of-service' }}" class="tcp-footer__legal-link">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "TCP Footer",
+  "tag": "section",
+  "class": "tcp-footer-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Footer tagline",
+      "default": "BESPOKE TABLEWARE,<br>EXPERIENCES, ADVISORY."
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "pinterest_url",
+      "label": "Pinterest URL"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter heading",
+      "default": "JOIN OUR WORLD"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Newsletter placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "url",
+      "id": "privacy_url",
+      "label": "Privacy Policy URL"
+    },
+    {
+      "type": "url",
+      "id": "terms_url",
+      "label": "Terms & Conditions URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nav_column",
+      "name": "Nav Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "column_title",
+          "label": "Column title",
+          "default": "SHOP"
+        },
+        { "type": "text", "id": "link_1_text", "label": "Link 1 text" },
+        { "type": "url",  "id": "link_1_url",  "label": "Link 1 URL" },
+        { "type": "text", "id": "link_2_text", "label": "Link 2 text" },
+        { "type": "url",  "id": "link_2_url",  "label": "Link 2 URL" },
+        { "type": "text", "id": "link_3_text", "label": "Link 3 text" },
+        { "type": "url",  "id": "link_3_url",  "label": "Link 3 URL" },
+        { "type": "text", "id": "link_4_text", "label": "Link 4 text" },
+        { "type": "url",  "id": "link_4_url",  "label": "Link 4 URL" },
+        { "type": "text", "id": "link_5_text", "label": "Link 5 text" },
+        { "type": "url",  "id": "link_5_url",  "label": "Link 5 URL" },
+        { "type": "text", "id": "link_6_text", "label": "Link 6 text" },
+        { "type": "url",  "id": "link_6_url",  "label": "Link 6 URL" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP Footer",
+      "blocks": [
+        { "type": "nav_column", "settings": { "column_title": "SHOP", "link_1_text": "All Collections", "link_2_text": "Dinnerware", "link_3_text": "Linen", "link_4_text": "Serveware", "link_5_text": "Objects", "link_6_text": "Gift Cards" } },
+        { "type": "nav_column", "settings": { "column_title": "STORY", "link_1_text": "Our Story", "link_2_text": "Materials & Craft", "link_3_text": "Journal" } },
+        { "type": "nav_column", "settings": { "column_title": "BESPOKE (HOMES)", "link_1_text": "Design Your Set", "link_2_text": "Custom Process", "link_3_text": "FAQs" } },
+        { "type": "nav_column", "settings": { "column_title": "BESPOKE (B2B)", "link_1_text": "Overview", "link_2_text": "Process", "link_3_text": "Projects", "link_4_text": "Materials", "link_5_text": "Catalogue", "link_6_text": "Enquiry" } },
+        { "type": "nav_column", "settings": { "column_title": "GIFTING", "link_1_text": "All Gifts", "link_2_text": "Gift Sets", "link_3_text": "Corporate Gifting", "link_4_text": "Gift Cards" } },
+        { "type": "nav_column", "settings": { "column_title": "EXPERIENCES", "link_1_text": "Overview", "link_2_text": "Workshops", "link_3_text": "Table Stories", "link_4_text": "Events" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

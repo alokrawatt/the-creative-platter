@@ -1,0 +1,252 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Material & Craft
+  ============================================================
+  Process showcase: Natural Stoneware, Hand-applied Glaze,
+  Shaped by Hand, Fired to Perfection.
+  Copy into Shopify: sections/section-home-material-craft.liquid
+{% endcomment %}
+
+<style>
+  .tcp-material {
+    background-color: var(--tcp-cream, #FAF8F4);
+    padding: 80px 0;
+  }
+
+  .tcp-material__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .tcp-material__top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    gap: 24px;
+  }
+
+  .tcp-material__heading-area {}
+
+  .tcp-material__heading {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 400;
+    color: var(--tcp-dark, #2D2D2D);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .tcp-material__subtitle {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--tcp-muted, #6B6560);
+    line-height: 1.7;
+    max-width: 400px;
+  }
+
+  .tcp-material__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--tcp-dark, #2D2D2D);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .tcp-material__cta:hover {
+    color: var(--tcp-gold, #C8A96E);
+  }
+
+  .tcp-material__cta svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  .tcp-material__cta:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* ── Process Grid ── */
+  .tcp-material__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .tcp-material__card {
+    text-align: center;
+  }
+
+  .tcp-material__card-img-wrap {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background-color: var(--tcp-beige, #F5F0E8);
+  }
+
+  .tcp-material__card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .tcp-material__card:hover .tcp-material__card-img {
+    transform: scale(1.06);
+  }
+
+  .tcp-material__card-name {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--tcp-dark, #2D2D2D);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .tcp-material__card-desc {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--tcp-muted, #6B6560);
+    font-style: italic;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .tcp-material__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tcp-material {
+      padding: 50px 0;
+    }
+
+    .tcp-material__inner {
+      padding: 0 24px;
+    }
+
+    .tcp-material__top {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .tcp-material__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+  }
+</style>
+
+<section class="tcp-material" id="tcp-home-material-craft">
+  <div class="tcp-material__inner">
+
+    <div class="tcp-material__top">
+      <div class="tcp-material__heading-area">
+        <h2 class="tcp-material__heading">{{ section.settings.heading }}</h2>
+        <p class="tcp-material__subtitle">{{ section.settings.subtitle }}</p>
+      </div>
+      <a href="{{ section.settings.cta_url | default: '#' }}" class="tcp-material__cta">
+        {{ section.settings.cta_text }}
+        <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <div class="tcp-material__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'process_card' %}
+          <div class="tcp-material__card" {{ block.shopify_attributes }}>
+            <div class="tcp-material__card-img-wrap">
+              {% if block.settings.image != blank %}
+                <img 
+                  class="tcp-material__card-img"
+                  src="{{ block.settings.image | image_url: width: 500 }}"
+                  alt="{{ block.settings.name }}"
+                  loading="lazy"
+                  width="500"
+                  height="375"
+                >
+              {% else %}
+                <div class="tcp-material__card-img" style="background: var(--tcp-warm-bg);"></div>
+              {% endif %}
+            </div>
+            <span class="tcp-material__card-name">{{ block.settings.name }}</span>
+            {% if block.settings.description != blank %}
+              <span class="tcp-material__card-desc">{{ block.settings.description }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TCP Material & Craft",
+  "tag": "section",
+  "class": "tcp-material-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Material & Craft"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Thoughtfully chosen materials. Skilled hands. Time-honoured techniques.\nEvery piece is unique."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "OUR CRAFT"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "process_card",
+      "name": "Process Card",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Process name", "default": "Natural Stoneware" },
+        { "type": "text", "id": "description", "label": "Description" },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP Material & Craft",
+      "blocks": [
+        { "type": "process_card", "settings": { "name": "Natural Stoneware" } },
+        { "type": "process_card", "settings": { "name": "Hand-applied Glaze" } },
+        { "type": "process_card", "settings": { "name": "Shaped by Hand" } },
+        { "type": "process_card", "settings": { "name": "Fired to Perfection" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

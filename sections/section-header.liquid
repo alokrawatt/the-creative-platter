@@ -1,0 +1,738 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Header / Navigation Section
+  ============================================================
+  A premium sticky header with announcement bar, logo, 
+  navigation, and utility icons. Self-contained with CSS + JS.
+  Copy into Shopify: sections/section-header.liquid
+{% endcomment %}
+
+<!-- Google Fonts (load once in header) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Sacramento&display=swap" rel="stylesheet">
+
+<style>
+  /* ── CSS Custom Properties (Global Design Tokens) ── */
+  :root {
+    --tcp-cream: #FAF8F4;
+    --tcp-beige: #F5F0E8;
+    --tcp-warm-bg: #EDE8E0;
+    --tcp-gold: #C8A96E;
+    --tcp-gold-hover: #B8965A;
+    --tcp-gold-light: #D4BA85;
+    --tcp-dark: #2D2D2D;
+    --tcp-brown: #3A2F28;
+    --tcp-brown-light: #5C4F44;
+    --tcp-muted: #6B6560;
+    --tcp-muted-light: #9B9590;
+    --tcp-border: #E5DFD5;
+    --tcp-border-dark: #C5BFB5;
+    --tcp-white: #FFFFFF;
+    --tcp-light-text: #FAF8F4;
+    --tcp-overlay: rgba(45, 45, 45, 0.6);
+
+    --font-serif: 'Sacramento', cursive;
+    --font-sans: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-script: 'Sacramento', cursive;
+
+    --header-height: 72px;
+    --announcement-height: 36px;
+    --transition-base: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    --transition-fast: 0.2s ease;
+  }
+
+  /* ── Announcement Bar ── */
+  .tcp-announcement {
+    background-color: var(--tcp-brown);
+    color: var(--tcp-light-text);
+    text-align: center;
+    padding: 8px 20px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    line-height: 1.4;
+    position: relative;
+    z-index: 1001;
+    transition: transform var(--transition-base);
+  }
+
+  .tcp-announcement.hidden {
+    transform: translateY(-100%);
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .tcp-announcement a {
+    color: var(--tcp-gold-light);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .tcp-announcement a:hover {
+    color: var(--tcp-gold);
+    text-decoration: underline;
+  }
+
+  /* ── Header Container ── */
+  .tcp-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--tcp-cream);
+    border-bottom: 1px solid var(--tcp-border);
+    transition: box-shadow var(--transition-base), background-color var(--transition-base);
+  }
+
+  .tcp-header.is-scrolled {
+    box-shadow: 0 2px 20px rgba(58, 47, 40, 0.08);
+    background-color: rgba(250, 248, 244, 0.97);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .tcp-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: var(--header-height);
+  }
+
+  /* ── Logo ── */
+  .tcp-header__logo {
+    flex-shrink: 0;
+    text-decoration: none;
+    color: var(--tcp-dark);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 180px;
+  }
+
+  .tcp-header__logo-main {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .tcp-header__logo-the {
+    font-family: var(--font-script);
+    font-size: 15px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--tcp-dark);
+    line-height: 1;
+  }
+
+  .tcp-header__logo-name {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--tcp-dark);
+  }
+
+  .tcp-header__logo-tagline {
+    font-family: var(--font-sans);
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--tcp-muted);
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  /* ── Navigation ── */
+  .tcp-header__nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .tcp-header__nav-item {
+    position: relative;
+  }
+
+  .tcp-header__nav-link {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--tcp-dark);
+    text-decoration: none;
+    padding: 8px 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color var(--transition-fast);
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .tcp-header__nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 14px;
+    right: 14px;
+    height: 1.5px;
+    background-color: var(--tcp-gold);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--transition-base);
+  }
+
+  .tcp-header__nav-link:hover {
+    color: var(--tcp-brown);
+  }
+
+  .tcp-header__nav-link:hover::after,
+  .tcp-header__nav-link.active::after {
+    transform: scaleX(1);
+  }
+
+  .tcp-header__nav-link.active {
+    color: var(--tcp-brown);
+    font-weight: 600;
+  }
+
+  .tcp-header__nav-arrow {
+    width: 8px;
+    height: 8px;
+    transition: transform var(--transition-fast);
+  }
+
+  .tcp-header__nav-item:hover .tcp-header__nav-arrow {
+    transform: rotate(180deg);
+  }
+
+  /* ── Dropdown ── */
+  .tcp-header__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    background-color: var(--tcp-white);
+    border: 1px solid var(--tcp-border);
+    border-top: 2px solid var(--tcp-gold);
+    box-shadow: 0 12px 40px rgba(58, 47, 40, 0.1);
+    padding: 12px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: all var(--transition-fast);
+    z-index: 100;
+  }
+
+  .tcp-header__nav-item:hover .tcp-header__dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .tcp-header__dropdown-link {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--tcp-dark);
+    text-decoration: none;
+    padding: 10px 24px;
+    transition: all var(--transition-fast);
+  }
+
+  .tcp-header__dropdown-link:hover {
+    background-color: var(--tcp-beige);
+    color: var(--tcp-brown);
+    padding-left: 28px;
+  }
+
+  /* ── Utility Icons ── */
+  .tcp-header__utils {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 120px;
+    justify-content: flex-end;
+  }
+
+  .tcp-header__util-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--tcp-dark);
+    border-radius: 50%;
+    transition: all var(--transition-fast);
+    position: relative;
+    text-decoration: none;
+  }
+
+  .tcp-header__util-btn:hover {
+    background-color: var(--tcp-beige);
+    color: var(--tcp-brown);
+  }
+
+  .tcp-header__util-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 1.5;
+  }
+
+  .tcp-header__cart-count {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: var(--tcp-gold);
+    color: var(--tcp-white);
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  /* ── Mobile Menu Toggle ── */
+  .tcp-header__mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1010;
+  }
+
+  .tcp-header__mobile-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background-color: var(--tcp-dark);
+    transition: all var(--transition-base);
+    transform-origin: center;
+  }
+
+  .tcp-header__mobile-toggle.is-open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+
+  .tcp-header__mobile-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .tcp-header__mobile-toggle.is-open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* ── Mobile Nav ── */
+  .tcp-mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--tcp-cream);
+    z-index: 999;
+    overflow-y: auto;
+    padding: 100px 40px 40px;
+    transform: translateX(-100%);
+    transition: transform var(--transition-base);
+  }
+
+  .tcp-mobile-nav.is-open {
+    transform: translateX(0);
+  }
+
+  .tcp-mobile-nav__link {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--tcp-dark);
+    text-decoration: none;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--tcp-border);
+    transition: color var(--transition-fast);
+  }
+
+  .tcp-mobile-nav__link:hover {
+    color: var(--tcp-gold);
+  }
+
+  .tcp-mobile-nav__sub {
+    padding-left: 20px;
+  }
+
+  .tcp-mobile-nav__sub-link {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--tcp-muted);
+    text-decoration: none;
+    padding: 10px 0;
+    transition: color var(--transition-fast);
+  }
+
+  .tcp-mobile-nav__sub-link:hover {
+    color: var(--tcp-gold);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .tcp-header__nav {
+      display: none;
+    }
+
+    .tcp-header__mobile-toggle {
+      display: flex;
+    }
+
+    .tcp-mobile-nav {
+      display: block;
+    }
+
+    .tcp-header__inner {
+      padding: 0 20px;
+    }
+
+    .tcp-header__logo-name {
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tcp-header__logo-tagline {
+      display: none;
+    }
+
+    .tcp-header__utils {
+      gap: 2px;
+    }
+
+    .tcp-header__util-btn {
+      width: 36px;
+      height: 36px;
+    }
+  }
+</style>
+
+<!-- ── Announcement Bar ── -->
+{% if section.settings.show_announcement %}
+  <div class="tcp-announcement" id="tcp-announcement">
+    {{ section.settings.announcement_text }}
+  </div>
+{% endif %}
+
+<!-- ── Main Header ── -->
+<header class="tcp-header" id="tcp-header">
+  <div class="tcp-header__inner">
+
+    <!-- Logo -->
+    <a href="/" class="tcp-header__logo" aria-label="The Creative Platter — Home">
+      {% if section.settings.logo != blank %}
+        <img 
+          src="{{ section.settings.logo | image_url: width: 200 }}" 
+          alt="{{ shop.name }}" 
+          width="180" 
+          height="auto"
+          loading="eager"
+        >
+      {% else %}
+        <div class="tcp-header__logo-main">
+          <span class="tcp-header__logo-the">the</span>
+          <span class="tcp-header__logo-name">CREATIVE PLATTER</span>
+        </div>
+        <span class="tcp-header__logo-tagline">{{ section.settings.logo_tagline }}</span>
+      {% endif %}
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="tcp-header__nav" aria-label="Main navigation">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'nav_link' %}
+            <div class="tcp-header__nav-item" {{ block.shopify_attributes }}>
+              <a href="{{ block.settings.link_url }}" class="tcp-header__nav-link {% if block.settings.is_active %}active{% endif %}">
+                {{ block.settings.link_text }}
+              </a>
+            </div>
+
+          {% when 'nav_dropdown' %}
+            <div class="tcp-header__nav-item" {{ block.shopify_attributes }}>
+              <a href="{{ block.settings.link_url }}" class="tcp-header__nav-link {% if block.settings.is_active %}active{% endif %}">
+                {{ block.settings.link_text }}
+                <svg class="tcp-header__nav-arrow" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <div class="tcp-header__dropdown">
+                {% if block.settings.dropdown_1_text != blank %}
+                  <a href="{{ block.settings.dropdown_1_url }}" class="tcp-header__dropdown-link">{{ block.settings.dropdown_1_text }}</a>
+                {% endif %}
+                {% if block.settings.dropdown_2_text != blank %}
+                  <a href="{{ block.settings.dropdown_2_url }}" class="tcp-header__dropdown-link">{{ block.settings.dropdown_2_text }}</a>
+                {% endif %}
+                {% if block.settings.dropdown_3_text != blank %}
+                  <a href="{{ block.settings.dropdown_3_url }}" class="tcp-header__dropdown-link">{{ block.settings.dropdown_3_text }}</a>
+                {% endif %}
+                {% if block.settings.dropdown_4_text != blank %}
+                  <a href="{{ block.settings.dropdown_4_url }}" class="tcp-header__dropdown-link">{{ block.settings.dropdown_4_text }}</a>
+                {% endif %}
+                {% if block.settings.dropdown_5_text != blank %}
+                  <a href="{{ block.settings.dropdown_5_url }}" class="tcp-header__dropdown-link">{{ block.settings.dropdown_5_text }}</a>
+                {% endif %}
+                {% if block.settings.dropdown_6_text != blank %}
+                  <a href="{{ block.settings.dropdown_6_url }}" class="tcp-header__dropdown-link">{{ block.settings.dropdown_6_text }}</a>
+                {% endif %}
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </nav>
+
+    <!-- Utility Icons -->
+    <div class="tcp-header__utils">
+      <!-- Search -->
+      <a href="{{ section.settings.search_url | default: '/search' }}" class="tcp-header__util-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor"/>
+          <path d="M16 16L20 20" stroke="currentColor" stroke-linecap="round"/>
+        </svg>
+      </a>
+
+      <!-- Account -->
+      <a href="{{ section.settings.account_url | default: '/account' }}" class="tcp-header__util-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="8" r="4" stroke="currentColor"/>
+          <path d="M4 20C4 16.6863 7.58172 14 12 14C16.4183 14 20 16.6863 20 20" stroke="currentColor" stroke-linecap="round"/>
+        </svg>
+      </a>
+
+      <!-- Cart -->
+      <a href="/cart" class="tcp-header__util-btn" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 6H22L20 16H8L6 6Z" stroke="currentColor" stroke-linejoin="round"/>
+          <path d="M6 6L5 2H2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="10" cy="20" r="1.5" fill="currentColor"/>
+          <circle cx="18" cy="20" r="1.5" fill="currentColor"/>
+        </svg>
+        <span class="tcp-header__cart-count" id="tcp-cart-count">{{ cart.item_count }}</span>
+      </a>
+
+      <!-- Mobile Toggle -->
+      <button class="tcp-header__mobile-toggle" id="tcp-mobile-toggle" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ── Mobile Navigation ── -->
+<div class="tcp-mobile-nav" id="tcp-mobile-nav">
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'nav_link' %}
+        <a href="{{ block.settings.link_url }}" class="tcp-mobile-nav__link">{{ block.settings.link_text }}</a>
+
+      {% when 'nav_dropdown' %}
+        <a href="{{ block.settings.link_url }}" class="tcp-mobile-nav__link">{{ block.settings.link_text }}</a>
+        <div class="tcp-mobile-nav__sub">
+          {% if block.settings.dropdown_1_text != blank %}
+            <a href="{{ block.settings.dropdown_1_url }}" class="tcp-mobile-nav__sub-link">{{ block.settings.dropdown_1_text }}</a>
+          {% endif %}
+          {% if block.settings.dropdown_2_text != blank %}
+            <a href="{{ block.settings.dropdown_2_url }}" class="tcp-mobile-nav__sub-link">{{ block.settings.dropdown_2_text }}</a>
+          {% endif %}
+          {% if block.settings.dropdown_3_text != blank %}
+            <a href="{{ block.settings.dropdown_3_url }}" class="tcp-mobile-nav__sub-link">{{ block.settings.dropdown_3_text }}</a>
+          {% endif %}
+          {% if block.settings.dropdown_4_text != blank %}
+            <a href="{{ block.settings.dropdown_4_url }}" class="tcp-mobile-nav__sub-link">{{ block.settings.dropdown_4_text }}</a>
+          {% endif %}
+          {% if block.settings.dropdown_5_text != blank %}
+            <a href="{{ block.settings.dropdown_5_url }}" class="tcp-mobile-nav__sub-link">{{ block.settings.dropdown_5_text }}</a>
+          {% endif %}
+          {% if block.settings.dropdown_6_text != blank %}
+            <a href="{{ block.settings.dropdown_6_url }}" class="tcp-mobile-nav__sub-link">{{ block.settings.dropdown_6_text }}</a>
+          {% endif %}
+        </div>
+    {% endcase %}
+  {% endfor %}
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const header = document.getElementById('tcp-header');
+    const toggle = document.getElementById('tcp-mobile-toggle');
+    const mobileNav = document.getElementById('tcp-mobile-nav');
+    let lastScroll = 0;
+
+    /* Sticky header shadow on scroll */
+    window.addEventListener('scroll', function() {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > 20) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+      lastScroll = currentScroll;
+    }, { passive: true });
+
+    /* Mobile menu toggle */
+    if (toggle && mobileNav) {
+      toggle.addEventListener('click', function() {
+        const isOpen = toggle.classList.toggle('is-open');
+        mobileNav.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "TCP Header",
+  "tag": "section",
+  "class": "tcp-header-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "<p>COMPLIMENTARY SHIPPING ON ORDERS ABOVE ₹5,000</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image (optional, uses text logo if empty)"
+    },
+    {
+      "type": "text",
+      "id": "logo_tagline",
+      "label": "Logo tagline",
+      "default": "BESPOKE TABLEWARE. EXPERIENCES. ADVISORY."
+    },
+    {
+      "type": "url",
+      "id": "search_url",
+      "label": "Search page URL"
+    },
+    {
+      "type": "url",
+      "id": "account_url",
+      "label": "Account page URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nav_link",
+      "name": "Nav Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text",
+          "default": "Link"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_active",
+          "label": "Highlight as active",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "nav_dropdown",
+      "name": "Nav Dropdown",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Dropdown trigger text",
+          "default": "Shop"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Dropdown trigger URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_active",
+          "label": "Highlight as active",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Dropdown Links"
+        },
+        { "type": "text", "id": "dropdown_1_text", "label": "Link 1 text" },
+        { "type": "url",  "id": "dropdown_1_url",  "label": "Link 1 URL" },
+        { "type": "text", "id": "dropdown_2_text", "label": "Link 2 text" },
+        { "type": "url",  "id": "dropdown_2_url",  "label": "Link 2 URL" },
+        { "type": "text", "id": "dropdown_3_text", "label": "Link 3 text" },
+        { "type": "url",  "id": "dropdown_3_url",  "label": "Link 3 URL" },
+        { "type": "text", "id": "dropdown_4_text", "label": "Link 4 text" },
+        { "type": "url",  "id": "dropdown_4_url",  "label": "Link 4 URL" },
+        { "type": "text", "id": "dropdown_5_text", "label": "Link 5 text" },
+        { "type": "url",  "id": "dropdown_5_url",  "label": "Link 5 URL" },
+        { "type": "text", "id": "dropdown_6_text", "label": "Link 6 text" },
+        { "type": "url",  "id": "dropdown_6_url",  "label": "Link 6 URL" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP Header",
+      "blocks": [
+        { "type": "nav_dropdown", "settings": { "link_text": "SHOP" } },
+        { "type": "nav_link",     "settings": { "link_text": "STORY" } },
+        { "type": "nav_link",     "settings": { "link_text": "BESPOKE (HOMES)" } },
+        { "type": "nav_link",     "settings": { "link_text": "BESPOKE (B2B)" } },
+        { "type": "nav_link",     "settings": { "link_text": "GIFTING" } },
+        { "type": "nav_link",     "settings": { "link_text": "EXPERIENCES" } },
+        { "type": "nav_link",     "settings": { "link_text": "JOURNAL" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

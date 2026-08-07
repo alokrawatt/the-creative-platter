@@ -1,0 +1,1390 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Product Detail Page
+  ============================================================
+  Full product page: image gallery, variants, add to cart,
+  accordions, pair-it-with, trust badges, gift wrap, 
+  shipping/returns/care, sticky bottom bar.
+  Copy into Shopify: sections/section-product-detail.liquid
+{% endcomment %}
+
+<style>
+  /* ── Product Section ── */
+  .tcp-product {
+    background-color: var(--tcp-white, #FFFFFF);
+    padding: 0;
+  }
+
+  .tcp-product__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ── Breadcrumb ── */
+  .tcp-product__breadcrumb {
+    padding: 16px 0;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 12px;
+    color: var(--tcp-muted, #6B6560);
+  }
+
+  .tcp-product__breadcrumb a {
+    color: var(--tcp-muted, #6B6560);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .tcp-product__breadcrumb a:hover {
+    color: var(--tcp-gold, #C8A96E);
+  }
+
+  .tcp-product__breadcrumb span {
+    margin: 0 6px;
+    color: var(--tcp-muted-light, #9B9590);
+  }
+
+  /* ── Main Layout ── */
+  .tcp-product__main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 60px;
+  }
+
+  /* ── Gallery ── */
+  .tcp-product__gallery {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+    position: sticky;
+    top: 100px;
+    align-self: start;
+  }
+
+  .tcp-product__thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tcp-product__thumb {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+    background-color: var(--tcp-beige, #F5F0E8);
+  }
+
+  .tcp-product__thumb.is-active {
+    border-color: var(--tcp-gold, #C8A96E);
+  }
+
+  .tcp-product__thumb:hover {
+    border-color: var(--tcp-border-dark, #C5BFB5);
+  }
+
+  .tcp-product__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .tcp-product__main-image-wrap {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background-color: var(--tcp-beige, #F5F0E8);
+    position: relative;
+  }
+
+  .tcp-product__main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease;
+  }
+
+  .tcp-product__main-image-wrap .tcp-product__main-image {
+    cursor: zoom-in;
+  }
+
+  /* ── Product Info ── */
+  .tcp-product__info {
+    padding-top: 8px;
+  }
+
+  .tcp-product__collection-badge {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--tcp-muted, #6B6560);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .tcp-product__name {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: clamp(28px, 3vw, 36px);
+    font-weight: 400;
+    color: var(--tcp-dark, #2D2D2D);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .tcp-product__price {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--tcp-dark, #2D2D2D);
+    margin-bottom: 4px;
+  }
+
+  .tcp-product__tax-note {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 12px;
+    color: var(--tcp-muted-light, #9B9590);
+    margin-bottom: 20px;
+  }
+
+  .tcp-product__description {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 14px;
+    color: var(--tcp-muted, #6B6560);
+    line-height: 1.7;
+    margin-bottom: 28px;
+    max-width: 480px;
+  }
+
+  /* ── Size Selector ── */
+  .tcp-product__option-group {
+    margin-bottom: 24px;
+  }
+
+  .tcp-product__option-label {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--tcp-dark, #2D2D2D);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .tcp-product__sizes {
+    display: flex;
+    gap: 8px;
+  }
+
+  .tcp-product__size-btn {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--tcp-dark, #2D2D2D);
+    padding: 10px 20px;
+    border: 1px solid var(--tcp-border, #E5DFD5);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .tcp-product__size-btn:hover {
+    border-color: var(--tcp-dark, #2D2D2D);
+  }
+
+  .tcp-product__size-btn.is-active {
+    background-color: var(--tcp-dark, #2D2D2D);
+    color: var(--tcp-white, #FFFFFF);
+    border-color: var(--tcp-dark, #2D2D2D);
+  }
+
+  /* ── Finish Selector ── */
+  .tcp-product__finishes {
+    display: flex;
+    gap: 16px;
+  }
+
+  .tcp-product__finish {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  .tcp-product__finish-swatch {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+    position: relative;
+  }
+
+  .tcp-product__finish.is-active .tcp-product__finish-swatch,
+  .tcp-product__finish:hover .tcp-product__finish-swatch {
+    border-color: var(--tcp-dark, #2D2D2D);
+  }
+
+  .tcp-product__finish-swatch::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background-color: var(--swatch-color, #C5BFB5);
+  }
+
+  .tcp-product__finish-name {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 10px;
+    color: var(--tcp-muted, #6B6560);
+    text-transform: capitalize;
+  }
+
+  /* ── Quantity ── */
+  .tcp-product__quantity-group {
+    margin-bottom: 24px;
+  }
+
+  .tcp-product__quantity {
+    display: inline-flex;
+    border: 1px solid var(--tcp-border, #E5DFD5);
+    align-items: center;
+  }
+
+  .tcp-product__qty-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--tcp-dark, #2D2D2D);
+    transition: background-color 0.2s ease;
+  }
+
+  .tcp-product__qty-btn:hover {
+    background-color: var(--tcp-beige, #F5F0E8);
+  }
+
+  .tcp-product__qty-input {
+    width: 48px;
+    text-align: center;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--tcp-dark, #2D2D2D);
+    border: none;
+    border-left: 1px solid var(--tcp-border, #E5DFD5);
+    border-right: 1px solid var(--tcp-border, #E5DFD5);
+    height: 44px;
+    outline: none;
+    -moz-appearance: textfield;
+  }
+
+  .tcp-product__qty-input::-webkit-outer-spin-button,
+  .tcp-product__qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* ── Add to Cart & Buy Now ── */
+  .tcp-product__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .tcp-product__atc-btn {
+    width: 100%;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--tcp-white, #FFFFFF);
+    background-color: var(--tcp-dark, #2D2D2D);
+    border: 1.5px solid var(--tcp-dark, #2D2D2D);
+    padding: 16px 28px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .tcp-product__atc-btn:hover {
+    background-color: var(--tcp-gold, #C8A96E);
+    border-color: var(--tcp-gold, #C8A96E);
+  }
+
+  .tcp-product__buy-now-btn {
+    width: 100%;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--tcp-dark, #2D2D2D);
+    background: transparent;
+    border: 1.5px solid var(--tcp-dark, #2D2D2D);
+    padding: 16px 28px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .tcp-product__buy-now-btn:hover {
+    background-color: var(--tcp-dark, #2D2D2D);
+    color: var(--tcp-white, #FFFFFF);
+  }
+
+  .tcp-product__wishlist {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 13px;
+    color: var(--tcp-muted, #6B6560);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 0;
+    transition: color 0.2s ease;
+  }
+
+  .tcp-product__wishlist:hover {
+    color: var(--tcp-gold, #C8A96E);
+  }
+
+  .tcp-product__wishlist svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* ── Accordions ── */
+  .tcp-product__accordions {
+    margin-top: 32px;
+    border-top: 1px solid var(--tcp-border, #E5DFD5);
+  }
+
+  .tcp-product__accordion {
+    border-bottom: 1px solid var(--tcp-border, #E5DFD5);
+  }
+
+  .tcp-product__accordion-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--tcp-dark, #2D2D2D);
+    transition: color 0.2s ease;
+  }
+
+  .tcp-product__accordion-header:hover {
+    color: var(--tcp-gold, #C8A96E);
+  }
+
+  .tcp-product__accordion-icon {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+    color: var(--tcp-muted, #6B6560);
+  }
+
+  .tcp-product__accordion.is-open .tcp-product__accordion-icon {
+    transform: rotate(180deg);
+  }
+
+  .tcp-product__accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .tcp-product__accordion.is-open .tcp-product__accordion-body {
+    max-height: 400px;
+  }
+
+  .tcp-product__accordion-content {
+    padding: 0 0 18px;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 13px;
+    color: var(--tcp-muted, #6B6560);
+    line-height: 1.7;
+  }
+
+  /* ── Story Banner ── */
+  .tcp-product-story {
+    background-color: var(--tcp-cream, #FAF8F4);
+    overflow: hidden;
+  }
+
+  .tcp-product-story__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 400px;
+  }
+
+  .tcp-product-story__content {
+    padding: 56px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .tcp-product-story__heading {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--tcp-dark, #2D2D2D);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .tcp-product-story__text {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 14px;
+    color: var(--tcp-muted, #6B6560);
+    line-height: 1.7;
+    max-width: 440px;
+  }
+
+  .tcp-product-story__image-wrap {
+    overflow: hidden;
+  }
+
+  .tcp-product-story__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 400px;
+  }
+
+  /* ── Pair It With ── */
+  .tcp-pair {
+    background-color: var(--tcp-white, #FFFFFF);
+    padding: 60px 0;
+  }
+
+  .tcp-pair__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .tcp-pair__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+
+  .tcp-pair__heading {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--tcp-dark, #2D2D2D);
+  }
+
+  .tcp-pair__view-all {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--tcp-dark, #2D2D2D);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s ease;
+  }
+
+  .tcp-pair__view-all:hover {
+    color: var(--tcp-gold, #C8A96E);
+  }
+
+  .tcp-pair__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .tcp-pair__card {
+    text-decoration: none;
+    display: block;
+    position: relative;
+  }
+
+  .tcp-pair__card-img-wrap {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background-color: var(--tcp-beige, #F5F0E8);
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .tcp-pair__card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .tcp-pair__card:hover .tcp-pair__card-img {
+    transform: scale(1.05);
+  }
+
+  .tcp-pair__card-wishlist {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: var(--tcp-white, #FFFFFF);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--tcp-muted, #6B6560);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+    z-index: 2;
+  }
+
+  .tcp-pair__card-wishlist:hover {
+    color: var(--tcp-gold, #C8A96E);
+    transform: scale(1.1);
+  }
+
+  .tcp-pair__card-wishlist svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .tcp-pair__card-name {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--tcp-dark, #2D2D2D);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .tcp-pair__card-price {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tcp-dark, #2D2D2D);
+  }
+
+  /* ── Trust Badges ── */
+  .tcp-product-trust {
+    background-color: var(--tcp-white, #FFFFFF);
+    padding: 40px 0;
+    border-top: 1px solid var(--tcp-border, #E5DFD5);
+    border-bottom: 1px solid var(--tcp-border, #E5DFD5);
+  }
+
+  .tcp-product-trust__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .tcp-product-trust__item {
+    text-align: center;
+    max-width: 160px;
+  }
+
+  .tcp-product-trust__icon {
+    width: 28px;
+    height: 28px;
+    color: var(--tcp-gold, #C8A96E);
+    margin: 0 auto 8px;
+  }
+
+  .tcp-product-trust__title {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--tcp-dark, #2D2D2D);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .tcp-product-trust__desc {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    color: var(--tcp-muted, #6B6560);
+    line-height: 1.5;
+  }
+
+  /* ── Gift Wrap ── */
+  .tcp-product-gift {
+    background-color: var(--tcp-cream, #FAF8F4);
+    padding: 40px 0;
+  }
+
+  .tcp-product-gift__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .tcp-product-gift__image-wrap {
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background-color: var(--tcp-beige, #F5F0E8);
+  }
+
+  .tcp-product-gift__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .tcp-product-gift__content {}
+
+  .tcp-product-gift__heading {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--tcp-dark, #2D2D2D);
+    margin-bottom: 12px;
+  }
+
+  .tcp-product-gift__desc {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 14px;
+    color: var(--tcp-muted, #6B6560);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .tcp-product-gift__option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 13px;
+    color: var(--tcp-dark, #2D2D2D);
+  }
+
+  .tcp-product-gift__option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--tcp-gold, #C8A96E);
+    cursor: pointer;
+  }
+
+  .tcp-product-gift__note {
+    width: 100%;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 13px;
+    padding: 12px 16px;
+    border: 1px solid var(--tcp-border, #E5DFD5);
+    background: var(--tcp-white, #FFFFFF);
+    color: var(--tcp-dark, #2D2D2D);
+    outline: none;
+    resize: vertical;
+    min-height: 80px;
+    margin-top: 8px;
+    transition: border-color 0.3s ease;
+  }
+
+  .tcp-product-gift__note:focus {
+    border-color: var(--tcp-gold, #C8A96E);
+  }
+
+  .tcp-product-gift__char-count {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    color: var(--tcp-muted-light, #9B9590);
+    text-align: right;
+    margin-top: 4px;
+  }
+
+  /* ── Info Cards ── */
+  .tcp-product-info-cards {
+    background-color: var(--tcp-white, #FFFFFF);
+    padding: 40px 0;
+  }
+
+  .tcp-product-info-cards__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .tcp-product-info-card {
+    border: 1px solid var(--tcp-border, #E5DFD5);
+    padding: 24px;
+  }
+
+  .tcp-product-info-card__title {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--tcp-gold, #C8A96E);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .tcp-product-info-card__text {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 13px;
+    color: var(--tcp-muted, #6B6560);
+    line-height: 1.7;
+  }
+
+  /* ── Sticky Bottom Bar ── */
+  .tcp-product-sticky {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+    background-color: var(--tcp-dark, #2D2D2D);
+    color: var(--tcp-white, #FFFFFF);
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .tcp-product-sticky.is-visible {
+    transform: translateY(0);
+  }
+
+  .tcp-product-sticky__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .tcp-product-sticky__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .tcp-product-sticky__name {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .tcp-product-sticky__sub {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+  }
+
+  .tcp-product-sticky__btn {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--tcp-dark, #2D2D2D);
+    background-color: var(--tcp-gold, #C8A96E);
+    border: none;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .tcp-product-sticky__btn:hover {
+    background-color: var(--tcp-gold-hover, #B8965A);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .tcp-product__main {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .tcp-product__gallery {
+      position: static;
+      grid-template-columns: 1fr;
+    }
+
+    .tcp-product__thumbs {
+      flex-direction: row;
+      order: 2;
+    }
+
+    .tcp-product__main-image-wrap {
+      order: 1;
+    }
+
+    .tcp-pair__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .tcp-product-story__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .tcp-product-gift__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tcp-product__inner {
+      padding: 0 20px;
+    }
+
+    .tcp-pair__inner {
+      padding: 0 20px;
+    }
+
+    .tcp-pair__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .tcp-product-info-cards__inner {
+      grid-template-columns: 1fr;
+      padding: 0 20px;
+    }
+
+    .tcp-product__thumb {
+      width: 60px;
+      height: 60px;
+    }
+
+    .tcp-product-sticky__inner {
+      padding: 10px 20px;
+    }
+  }
+</style>
+
+<div class="tcp-product" id="tcp-product-detail">
+  <div class="tcp-product__inner">
+
+    <!-- Breadcrumb -->
+    <nav class="tcp-product__breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>›</span>
+      <a href="{{ section.settings.collection_url | default: '#' }}">{{ section.settings.collection_name }}</a>
+      <span>›</span>
+      <a href="{{ section.settings.category_url | default: '#' }}">{{ section.settings.category_name }}</a>
+      <span>›</span>
+      {{ section.settings.product_name }}
+    </nav>
+
+    <!-- Main Product Layout -->
+    <div class="tcp-product__main">
+
+      <!-- Gallery -->
+      <div class="tcp-product__gallery">
+        <div class="tcp-product__thumbs" id="tcp-product-thumbs">
+          {% for block in section.blocks %}
+            {% if block.type == 'product_image' %}
+              <div class="tcp-product__thumb {% if forloop.first %}is-active{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | image_url: width: 160 }}" alt="{{ section.settings.product_name }} - {{ forloop.index }}" loading="lazy" width="80" height="80">
+                {% else %}
+                  <div style="width:100%;height:100%;background:var(--tcp-warm-bg);"></div>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="tcp-product__main-image-wrap" id="tcp-main-image-wrap">
+          {% for block in section.blocks %}
+            {% if block.type == 'product_image' and forloop.first %}
+              {% if block.settings.image != blank %}
+                <img class="tcp-product__main-image" id="tcp-main-image" src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ section.settings.product_name }}" loading="eager" width="900" height="900">
+              {% else %}
+                <div class="tcp-product__main-image" id="tcp-main-image" style="background:var(--tcp-warm-bg); width:100%; height:100%;"></div>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Product Info -->
+      <div class="tcp-product__info">
+        <span class="tcp-product__collection-badge">{{ section.settings.collection_name }}</span>
+        <h1 class="tcp-product__name">{{ section.settings.product_name }}</h1>
+        <div class="tcp-product__price">{{ section.settings.price }}</div>
+        <p class="tcp-product__tax-note">{{ section.settings.tax_note }}</p>
+        <p class="tcp-product__description">{{ section.settings.description }}</p>
+
+        <!-- Size -->
+        <div class="tcp-product__option-group">
+          <span class="tcp-product__option-label">SIZE</span>
+          <div class="tcp-product__sizes" id="tcp-sizes">
+            {% for block in section.blocks %}
+              {% if block.type == 'size_option' %}
+                <button class="tcp-product__size-btn {% if block.settings.is_default %}is-active{% endif %}" data-size="{{ block.settings.value }}" {{ block.shopify_attributes }}>
+                  {{ block.settings.label }}
+                </button>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Finish -->
+        <div class="tcp-product__option-group">
+          <span class="tcp-product__option-label">FINISH</span>
+          <div class="tcp-product__finishes" id="tcp-finishes">
+            {% for block in section.blocks %}
+              {% if block.type == 'finish_option' %}
+                <div class="tcp-product__finish {% if block.settings.is_default %}is-active{% endif %}" data-finish="{{ block.settings.value }}" {{ block.shopify_attributes }}>
+                  <div class="tcp-product__finish-swatch" style="--swatch-color: {{ block.settings.color }};"></div>
+                  <span class="tcp-product__finish-name">{{ block.settings.label }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Quantity -->
+        <div class="tcp-product__quantity-group">
+          <span class="tcp-product__option-label">QUANTITY</span>
+          <div class="tcp-product__quantity">
+            <button class="tcp-product__qty-btn" id="tcp-qty-minus" aria-label="Decrease quantity">−</button>
+            <input type="number" class="tcp-product__qty-input" id="tcp-qty-input" value="1" min="1" max="99" aria-label="Quantity">
+            <button class="tcp-product__qty-btn" id="tcp-qty-plus" aria-label="Increase quantity">+</button>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="tcp-product__actions">
+          <button class="tcp-product__atc-btn" id="tcp-add-to-cart">
+            ADD TO CART — {{ section.settings.price }}
+          </button>
+          <button class="tcp-product__buy-now-btn" id="tcp-buy-now">
+            BUY IT NOW
+          </button>
+        </div>
+
+        <button class="tcp-product__wishlist" id="tcp-wishlist">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M10 17.5s-7-4.5-7-9a4 4 0 017-2.65A4 4 0 0117 8.5c0 4.5-7 9-7 9z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Add to Wishlist
+        </button>
+
+        <!-- Accordions -->
+        <div class="tcp-product__accordions" id="tcp-accordions">
+          {% for block in section.blocks %}
+            {% if block.type == 'accordion' %}
+              <div class="tcp-product__accordion" {{ block.shopify_attributes }}>
+                <button class="tcp-product__accordion-header" aria-expanded="false">
+                  {{ block.settings.title }}
+                  <svg class="tcp-product__accordion-icon" viewBox="0 0 18 18" fill="none"><path d="M4.5 7L9 11.5L13.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="tcp-product__accordion-body">
+                  <div class="tcp-product__accordion-content">
+                    {{ block.settings.content }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Story Banner -->
+  {% if section.settings.show_story_banner %}
+    <div class="tcp-product-story">
+      <div class="tcp-product-story__inner">
+        <div class="tcp-product-story__content">
+          <h2 class="tcp-product-story__heading">{{ section.settings.story_heading }}</h2>
+          <p class="tcp-product-story__text">{{ section.settings.story_text }}</p>
+        </div>
+        <div class="tcp-product-story__image-wrap">
+          {% if section.settings.story_image != blank %}
+            <img class="tcp-product-story__image" src="{{ section.settings.story_image | image_url: width: 900 }}" alt="" loading="lazy" width="900" height="600">
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Pair It With -->
+  <div class="tcp-pair">
+    <div class="tcp-pair__inner">
+      <div class="tcp-pair__header">
+        <h2 class="tcp-pair__heading">{{ section.settings.pair_heading | default: 'Pair it with' }}</h2>
+        <a href="{{ section.settings.pair_view_all_url | default: '#' }}" class="tcp-pair__view-all">
+          VIEW ALL
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="tcp-pair__grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'paired_product' %}
+            <a href="{{ block.settings.link_url | default: '#' }}" class="tcp-pair__card" {{ block.shopify_attributes }}>
+              <div class="tcp-pair__card-img-wrap">
+                {% if block.settings.image != blank %}
+                  <img class="tcp-pair__card-img" src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.name }}" loading="lazy" width="400" height="400">
+                {% else %}
+                  <div class="tcp-pair__card-img" style="background: var(--tcp-warm-bg);"></div>
+                {% endif %}
+                <button class="tcp-pair__card-wishlist" aria-label="Add to wishlist">
+                  <svg viewBox="0 0 16 16" fill="none"><path d="M8 14s-5.5-3.5-5.5-7a3.2 3.2 0 015.5-2.1A3.2 3.2 0 0113.5 7c0 3.5-5.5 7-5.5 7z" stroke="currentColor" stroke-width="1.2"/></svg>
+                </button>
+              </div>
+              <span class="tcp-pair__card-name">{{ block.settings.name }}</span>
+              <span class="tcp-pair__card-price">{{ block.settings.price }}</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Trust Badges -->
+  <div class="tcp-product-trust">
+    <div class="tcp-product-trust__inner">
+      {% for block in section.blocks %}
+        {% if block.type == 'product_trust_badge' %}
+          <div class="tcp-product-trust__item" {{ block.shopify_attributes }}>
+            <svg class="tcp-product-trust__icon" viewBox="0 0 28 28" fill="none">
+              <circle cx="14" cy="14" r="10" stroke="currentColor" stroke-width="1.3"/>
+              <path d="M9.5 14l3 3 6-6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="tcp-product-trust__title">{{ block.settings.title }}</span>
+            <span class="tcp-product-trust__desc">{{ block.settings.description }}</span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Gift Wrap -->
+  {% if section.settings.show_gift_section %}
+    <div class="tcp-product-gift">
+      <div class="tcp-product-gift__inner">
+        <div class="tcp-product-gift__image-wrap">
+          {% if section.settings.gift_image != blank %}
+            <img class="tcp-product-gift__image" src="{{ section.settings.gift_image | image_url: width: 700 }}" alt="Gift wrapping" loading="lazy" width="700" height="400">
+          {% endif %}
+        </div>
+        <div class="tcp-product-gift__content">
+          <h3 class="tcp-product-gift__heading">{{ section.settings.gift_heading | default: 'Make it a gift' }}</h3>
+          <p class="tcp-product-gift__desc">{{ section.settings.gift_description }}</p>
+          <label class="tcp-product-gift__option">
+            <input type="checkbox" name="gift_wrap" value="1">
+            Add gift wrap — {{ section.settings.gift_wrap_price | default: '₹150' }}
+          </label>
+          <label class="tcp-product-gift__option">
+            <input type="checkbox" name="handwritten_note" value="1">
+            Add a handwritten note
+          </label>
+          <textarea class="tcp-product-gift__note" placeholder="Write your note here..." maxlength="120"></textarea>
+          <div class="tcp-product-gift__char-count"><span id="tcp-char-count">0</span> / 120</div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Info Cards -->
+  <div class="tcp-product-info-cards">
+    <div class="tcp-product-info-cards__inner">
+      {% for block in section.blocks %}
+        {% if block.type == 'info_card' %}
+          <div class="tcp-product-info-card" {{ block.shopify_attributes }}>
+            <span class="tcp-product-info-card__title">{{ block.settings.title }}</span>
+            <p class="tcp-product-info-card__text">{{ block.settings.text }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- Sticky Bottom Bar -->
+<div class="tcp-product-sticky" id="tcp-product-sticky">
+  <div class="tcp-product-sticky__inner">
+    <div class="tcp-product-sticky__info">
+      <span class="tcp-product-sticky__name">{{ section.settings.product_name }}</span>
+      <span class="tcp-product-sticky__sub">Timeless design. Everyday beauty.</span>
+    </div>
+    <button class="tcp-product-sticky__btn" id="tcp-sticky-atc">
+      ADD TO CART — {{ section.settings.price }}
+    </button>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  /* Image Gallery */
+  const thumbs = document.querySelectorAll('.tcp-product__thumb');
+  const mainImage = document.getElementById('tcp-main-image');
+  const productImages = [];
+  
+  thumbs.forEach(function(thumb, index) {
+    const img = thumb.querySelector('img');
+    if (img) {
+      productImages.push(img.src.replace(/width=\d+/, 'width=900'));
+    }
+    thumb.addEventListener('click', function() {
+      thumbs.forEach(function(t) { t.classList.remove('is-active'); });
+      thumb.classList.add('is-active');
+      if (mainImage && productImages[index]) {
+        mainImage.style.opacity = '0';
+        setTimeout(function() {
+          mainImage.src = productImages[index];
+          mainImage.style.opacity = '1';
+        }, 200);
+      }
+    });
+  });
+
+  /* Size Selector */
+  const sizeButtons = document.querySelectorAll('.tcp-product__size-btn');
+  sizeButtons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      sizeButtons.forEach(function(b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+    });
+  });
+
+  /* Finish Selector */
+  const finishes = document.querySelectorAll('.tcp-product__finish');
+  finishes.forEach(function(fin) {
+    fin.addEventListener('click', function() {
+      finishes.forEach(function(f) { f.classList.remove('is-active'); });
+      fin.classList.add('is-active');
+    });
+  });
+
+  /* Quantity */
+  const qtyInput = document.getElementById('tcp-qty-input');
+  const qtyMinus = document.getElementById('tcp-qty-minus');
+  const qtyPlus = document.getElementById('tcp-qty-plus');
+
+  if (qtyMinus && qtyPlus && qtyInput) {
+    qtyMinus.addEventListener('click', function() {
+      const val = parseInt(qtyInput.value);
+      if (val > 1) qtyInput.value = val - 1;
+    });
+    qtyPlus.addEventListener('click', function() {
+      const val = parseInt(qtyInput.value);
+      if (val < 99) qtyInput.value = val + 1;
+    });
+  }
+
+  /* Accordions */
+  const accordions = document.querySelectorAll('.tcp-product__accordion-header');
+  accordions.forEach(function(header) {
+    header.addEventListener('click', function() {
+      const accordion = header.parentElement;
+      const isOpen = accordion.classList.contains('is-open');
+      accordion.classList.toggle('is-open');
+      header.setAttribute('aria-expanded', !isOpen);
+    });
+  });
+
+  /* Sticky Bar */
+  const stickyBar = document.getElementById('tcp-product-sticky');
+  const atcButton = document.getElementById('tcp-add-to-cart');
+  if (stickyBar && atcButton) {
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          stickyBar.classList.remove('is-visible');
+        } else {
+          stickyBar.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0 });
+    observer.observe(atcButton);
+  }
+
+  /* Gift Note Character Count */
+  const noteArea = document.querySelector('.tcp-product-gift__note');
+  const charCount = document.getElementById('tcp-char-count');
+  if (noteArea && charCount) {
+    noteArea.addEventListener('input', function() {
+      charCount.textContent = noteArea.value.length;
+    });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "TCP Product Detail",
+  "tag": "section",
+  "class": "tcp-product-section",
+  "settings": [
+    { "type": "header", "content": "Product Info" },
+    { "type": "text", "id": "collection_name", "label": "Collection name", "default": "PUSHPA COLLECTION" },
+    { "type": "url", "id": "collection_url", "label": "Collection URL" },
+    { "type": "text", "id": "category_name", "label": "Category", "default": "Dinnerware" },
+    { "type": "url", "id": "category_url", "label": "Category URL" },
+    { "type": "text", "id": "product_name", "label": "Product name", "default": "Sand Form Plate" },
+    { "type": "text", "id": "price", "label": "Price", "default": "₹1,250" },
+    { "type": "text", "id": "tax_note", "label": "Tax note", "default": "Inclusive of all taxes" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Handcrafted ceramic dinnerware with a soft textured glaze, designed to elevate everyday dining and special moments alike." },
+
+    { "type": "header", "content": "Story Banner" },
+    { "type": "checkbox", "id": "show_story_banner", "label": "Show story banner", "default": true },
+    { "type": "text", "id": "story_heading", "label": "Story heading", "default": "A form shaped\nby memory." },
+    { "type": "textarea", "id": "story_text", "label": "Story text", "default": "Each piece in the Pushpa collection is handcrafted in small batches. The Sand Form Plate is designed to bring balance to your table—quiet, timeless and made to be used, every day." },
+    { "type": "image_picker", "id": "story_image", "label": "Story image" },
+
+    { "type": "header", "content": "Pair It With" },
+    { "type": "text", "id": "pair_heading", "label": "Pair heading", "default": "Pair it with" },
+    { "type": "url", "id": "pair_view_all_url", "label": "View all URL" },
+
+    { "type": "header", "content": "Gift Section" },
+    { "type": "checkbox", "id": "show_gift_section", "label": "Show gift section", "default": true },
+    { "type": "text", "id": "gift_heading", "label": "Gift heading", "default": "Make it a gift" },
+    { "type": "text", "id": "gift_description", "label": "Gift description", "default": "Add gift wrap and a personal note." },
+    { "type": "text", "id": "gift_wrap_price", "label": "Gift wrap price", "default": "₹150" },
+    { "type": "image_picker", "id": "gift_image", "label": "Gift image" }
+  ],
+  "blocks": [
+    {
+      "type": "product_image",
+      "name": "Product Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    },
+    {
+      "type": "size_option",
+      "name": "Size Option",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Medium (10 in)" },
+        { "type": "text", "id": "value", "label": "Value", "default": "medium" },
+        { "type": "checkbox", "id": "is_default", "label": "Default selected", "default": false }
+      ]
+    },
+    {
+      "type": "finish_option",
+      "name": "Finish Option",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Sand" },
+        { "type": "text", "id": "value", "label": "Value", "default": "sand" },
+        { "type": "color", "id": "color", "label": "Swatch color", "default": "#C5BFB5" },
+        { "type": "checkbox", "id": "is_default", "label": "Default selected", "default": false }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Product Details" },
+        { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Details about the product.</p>" }
+      ]
+    },
+    {
+      "type": "paired_product",
+      "name": "Paired Product",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Quiet Bowl" },
+        { "type": "text", "id": "price", "label": "Price", "default": "₹1,150" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "url", "id": "link_url", "label": "Link URL" }
+      ]
+    },
+    {
+      "type": "product_trust_badge",
+      "name": "Trust Badge",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Handmade" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Crafted by skilled artisans in small batches." }
+      ]
+    },
+    {
+      "type": "info_card",
+      "name": "Info Card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "SHIPPING" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Orders are dispatched within 2-3 working days. Delivery within 5-7 working days across India." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP Product Detail",
+      "blocks": [
+        { "type": "product_image" },
+        { "type": "product_image" },
+        { "type": "product_image" },
+        { "type": "product_image" },
+        { "type": "size_option", "settings": { "label": "Small (8 in)", "value": "small" } },
+        { "type": "size_option", "settings": { "label": "Medium (10 in)", "value": "medium", "is_default": true } },
+        { "type": "size_option", "settings": { "label": "Large (12 in)", "value": "large" } },
+        { "type": "finish_option", "settings": { "label": "Sand", "value": "sand", "color": "#C5BFB5", "is_default": true } },
+        { "type": "finish_option", "settings": { "label": "Dune", "value": "dune", "color": "#A89B8C" } },
+        { "type": "finish_option", "settings": { "label": "Stone", "value": "stone", "color": "#8C8278" } },
+        { "type": "finish_option", "settings": { "label": "Ash", "value": "ash", "color": "#6B6560" } },
+        { "type": "accordion", "settings": { "title": "Product Details", "content": "<p>Material: Stoneware ceramic. High-fired at 1260°C. Food safe, lead-free glaze.</p>" } },
+        { "type": "accordion", "settings": { "title": "Care Instructions", "content": "<p>Use mild detergent and a soft sponge. Each piece is made to last with mindful care.</p>" } },
+        { "type": "accordion", "settings": { "title": "Shipping & Delivery", "content": "<p>Dispatched within 2-3 working days. Free shipping on orders above ₹5,000.</p>" } },
+        { "type": "accordion", "settings": { "title": "Our Promise", "content": "<p>Every piece is handcrafted and unique. Slight variations are a mark of its handmade character.</p>" } },
+        { "type": "paired_product", "settings": { "name": "Quiet Bowl", "price": "₹1,150" } },
+        { "type": "paired_product", "settings": { "name": "Curve Side Plate", "price": "₹950" } },
+        { "type": "paired_product", "settings": { "name": "Sand Mug", "price": "₹850" } },
+        { "type": "paired_product", "settings": { "name": "Linen Napkin (Set of 2)", "price": "₹750" } },
+        { "type": "paired_product", "settings": { "name": "Brass Dessert Spoon", "price": "₹650" } },
+        { "type": "product_trust_badge", "settings": { "title": "Handmade", "description": "Crafted by skilled artisans in small batches." } },
+        { "type": "product_trust_badge", "settings": { "title": "Dishwasher Safe", "description": "Everyday use with ease." } },
+        { "type": "product_trust_badge", "settings": { "title": "Food Safe", "description": "Lead-free and toxin free glazes." } },
+        { "type": "product_trust_badge", "settings": { "title": "Microwave Safe", "description": "Heat food with confidence." } },
+        { "type": "product_trust_badge", "settings": { "title": "Sustainable", "description": "Thoughtfully made. Responsibly produced." } },
+        { "type": "info_card", "settings": { "title": "SHIPPING", "text": "Orders are dispatched within 2-3 working days. Delivery within 5-7 working days across India." } },
+        { "type": "info_card", "settings": { "title": "RETURNS", "text": "We accept returns within 7 days of delivery if the product is damaged or defective." } },
+        { "type": "info_card", "settings": { "title": "CARE", "text": "Use mild detergent and a soft sponge. Each piece is made to last with mindful care." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

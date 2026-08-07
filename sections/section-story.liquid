@@ -1,0 +1,558 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Story Page
+  ============================================================
+  Full story page: concept, practice, founder, people & place,
+  recognition, and features sections.
+  Copy into Shopify: sections/section-story.liquid
+{% endcomment %}
+
+<style>
+  .tcp-story {
+    background-color: var(--tcp-cream, #FAF8F4);
+  }
+
+  /* ── Story Hero ── */
+  .tcp-story-hero {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .tcp-story-hero__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .tcp-story-hero__bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .tcp-story-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(30, 24, 18, 0.85) 0%, rgba(30, 24, 18, 0.4) 70%, transparent 100%);
+  }
+
+  .tcp-story-hero__inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 80px;
+    width: 100%;
+  }
+
+  .tcp-story-hero__label {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--tcp-gold-light, #D4BA85);
+    margin-bottom: 20px;
+  }
+
+  .tcp-story-hero__title {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 400;
+    color: var(--tcp-white, #FFFFFF);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    max-width: 500px;
+  }
+
+  .tcp-story-hero__desc {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 18px;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    max-width: 440px;
+  }
+
+  /* ── Concept Section ── */
+  .tcp-story-concept {
+    padding: 80px 0;
+    background-color: var(--tcp-white, #FFFFFF);
+  }
+
+  .tcp-story-concept__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .tcp-story-section-label {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--tcp-muted, #6B6560);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .tcp-story-section-label::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background-color: var(--tcp-border, #E5DFD5);
+  }
+
+  .tcp-story-heading {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 400;
+    color: var(--tcp-dark, #2D2D2D);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .tcp-story-text {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 15px;
+    color: var(--tcp-muted, #6B6560);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .tcp-story-quote {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 20px;
+    font-style: italic;
+    color: var(--tcp-dark, #2D2D2D);
+    line-height: 1.5;
+    padding-left: 24px;
+    border-left: 3px solid var(--tcp-gold, #C8A96E);
+    margin: 28px 0;
+  }
+
+  .tcp-story-img-wrap {
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background-color: var(--tcp-beige, #F5F0E8);
+  }
+
+  .tcp-story-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+  }
+
+  .tcp-story-img-wrap:hover .tcp-story-img {
+    transform: scale(1.04);
+  }
+
+  /* ── Practice Section ── */
+  .tcp-story-practice {
+    padding: 80px 0;
+    background-color: var(--tcp-cream, #FAF8F4);
+  }
+
+  .tcp-story-practice__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  /* ── Materials Strip ── */
+  .tcp-story-materials {
+    background-color: var(--tcp-brown, #3A2F28);
+    padding: 40px 0;
+  }
+
+  .tcp-story-materials__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .tcp-story-material {
+    text-align: center;
+  }
+
+  .tcp-story-material__name {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--tcp-white, #FFFFFF);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .tcp-story-material__line {
+    width: 24px;
+    height: 1px;
+    background-color: var(--tcp-gold, #C8A96E);
+    margin: 8px auto 0;
+  }
+
+  /* ── Founder Section ── */
+  .tcp-story-founder {
+    padding: 80px 0;
+    background-color: var(--tcp-white, #FFFFFF);
+  }
+
+  .tcp-story-founder__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .tcp-story-founder__name {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--tcp-gold, #C8A96E);
+    margin-top: 8px;
+    display: block;
+  }
+
+  /* ── People & Place ── */
+  .tcp-story-people {
+    padding: 80px 0;
+    background-color: var(--tcp-cream, #FAF8F4);
+    overflow: hidden;
+  }
+
+  .tcp-story-people__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .tcp-story-people__highlight {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--tcp-dark, #2D2D2D);
+    line-height: 1.6;
+    padding: 24px 0;
+    margin-top: 16px;
+    border-top: 1px solid var(--tcp-border, #E5DFD5);
+  }
+
+  /* ── Recognition & Features ── */
+  .tcp-story-recognition {
+    padding: 64px 0;
+    background-color: var(--tcp-white, #FFFFFF);
+    border-top: 1px solid var(--tcp-border, #E5DFD5);
+  }
+
+  .tcp-story-recognition__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    text-align: center;
+  }
+
+  .tcp-story-recognition__heading {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: clamp(28px, 3vw, 36px);
+    font-weight: 400;
+    color: var(--tcp-dark, #2D2D2D);
+    margin-bottom: 16px;
+  }
+
+  .tcp-story-recognition__text {
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 14px;
+    color: var(--tcp-muted, #6B6560);
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto 40px;
+  }
+
+  .tcp-story-recognition__logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .tcp-story-recognition__logo {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--tcp-muted-light, #9B9590);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+  }
+
+  .tcp-story-recognition__logo:hover {
+    color: var(--tcp-gold, #C8A96E);
+  }
+
+  .tcp-story-recognition__logo-img {
+    max-height: 36px;
+    width: auto;
+    filter: grayscale(100%);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+  }
+
+  .tcp-story-recognition__logo-img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .tcp-story-concept__inner,
+    .tcp-story-practice__inner,
+    .tcp-story-founder__inner,
+    .tcp-story-people__inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .tcp-story-hero__inner {
+      padding: 50px 24px;
+    }
+
+    .tcp-story-img-wrap {
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tcp-story-materials__inner {
+      gap: 24px;
+    }
+
+    .tcp-story-recognition__logos {
+      gap: 24px;
+    }
+  }
+</style>
+
+<!-- ── Story Hero ── -->
+<section class="tcp-story-hero" id="tcp-story-hero">
+  <div class="tcp-story-hero__bg">
+    {% if section.settings.hero_image != blank %}
+      <img class="tcp-story-hero__bg-img" src="{{ section.settings.hero_image | image_url: width: 1600 }}" alt="Our Story" loading="eager" fetchpriority="high" width="1600" height="600">
+    {% else %}
+      <div class="tcp-story-hero__bg-img" style="background: linear-gradient(135deg, #5C4F44, #3A2F28);"></div>
+    {% endif %}
+    <div class="tcp-story-hero__overlay"></div>
+  </div>
+  <div class="tcp-story-hero__inner">
+    <p class="tcp-story-hero__label">{{ section.settings.hero_label }}</p>
+    <h1 class="tcp-story-hero__title">{{ section.settings.hero_title }}</h1>
+    <p class="tcp-story-hero__desc">{{ section.settings.hero_tagline }}</p>
+  </div>
+</section>
+
+<!-- ── Concept ── -->
+<div class="tcp-story-concept">
+  <div class="tcp-story-concept__inner">
+    <div>
+      <span class="tcp-story-section-label">{{ section.settings.concept_label }}</span>
+      <h2 class="tcp-story-heading">{{ section.settings.concept_heading }}</h2>
+      <p class="tcp-story-text">{{ section.settings.concept_text_1 }}</p>
+      <p class="tcp-story-text">{{ section.settings.concept_text_2 }}</p>
+      <blockquote class="tcp-story-quote">{{ section.settings.concept_quote }}</blockquote>
+    </div>
+    <div class="tcp-story-img-wrap">
+      {% if section.settings.concept_image != blank %}
+        <img class="tcp-story-img" src="{{ section.settings.concept_image | image_url: width: 800 }}" alt="Our Concept" loading="lazy" width="800" height="1000">
+      {% else %}
+        <div class="tcp-story-img" style="background: var(--tcp-warm-bg);"></div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- ── Practice ── -->
+<div class="tcp-story-practice">
+  <div class="tcp-story-practice__inner">
+    <div class="tcp-story-img-wrap">
+      {% if section.settings.practice_image != blank %}
+        <img class="tcp-story-img" src="{{ section.settings.practice_image | image_url: width: 800 }}" alt="Our Practice" loading="lazy" width="800" height="1000">
+      {% else %}
+        <div class="tcp-story-img" style="background: var(--tcp-warm-bg);"></div>
+      {% endif %}
+    </div>
+    <div>
+      <span class="tcp-story-section-label">{{ section.settings.practice_label }}</span>
+      <h2 class="tcp-story-heading">{{ section.settings.practice_heading }}</h2>
+      <p class="tcp-story-text">{{ section.settings.practice_text_1 }}</p>
+      <p class="tcp-story-text">{{ section.settings.practice_text_2 }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── Materials Strip ── -->
+<div class="tcp-story-materials">
+  <div class="tcp-story-materials__inner">
+    {% for block in section.blocks %}
+      {% if block.type == 'material' %}
+        <div class="tcp-story-material" {{ block.shopify_attributes }}>
+          <span class="tcp-story-material__name">{{ block.settings.name }}</span>
+          <div class="tcp-story-material__line"></div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ── Founder ── -->
+<div class="tcp-story-founder">
+  <div class="tcp-story-founder__inner">
+    <div class="tcp-story-img-wrap">
+      {% if section.settings.founder_image != blank %}
+        <img class="tcp-story-img" src="{{ section.settings.founder_image | image_url: width: 800 }}" alt="{{ section.settings.founder_name }}" loading="lazy" width="800" height="1000">
+      {% else %}
+        <div class="tcp-story-img" style="background: var(--tcp-warm-bg);"></div>
+      {% endif %}
+    </div>
+    <div>
+      <span class="tcp-story-section-label">{{ section.settings.founder_label }}</span>
+      <h2 class="tcp-story-heading">{{ section.settings.founder_heading }}</h2>
+      <p class="tcp-story-text">{{ section.settings.founder_text }}</p>
+      <span class="tcp-story-founder__name">— {{ section.settings.founder_name }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── People & Place ── -->
+<div class="tcp-story-people">
+  <div class="tcp-story-people__inner">
+    <div>
+      <span class="tcp-story-section-label">{{ section.settings.people_label }}</span>
+      <h2 class="tcp-story-heading">{{ section.settings.people_heading }}</h2>
+      <p class="tcp-story-text">{{ section.settings.people_text }}</p>
+      <p class="tcp-story-people__highlight">{{ section.settings.people_highlight }}</p>
+    </div>
+    <div class="tcp-story-img-wrap">
+      {% if section.settings.people_image != blank %}
+        <img class="tcp-story-img" src="{{ section.settings.people_image | image_url: width: 800 }}" alt="People & Place" loading="lazy" width="800" height="1000">
+      {% else %}
+        <div class="tcp-story-img" style="background: var(--tcp-warm-bg);"></div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- ── Recognition & Features ── -->
+<div class="tcp-story-recognition">
+  <div class="tcp-story-recognition__inner">
+    <h2 class="tcp-story-recognition__heading">{{ section.settings.recognition_heading }}</h2>
+    <p class="tcp-story-recognition__text">{{ section.settings.recognition_text }}</p>
+    <div class="tcp-story-recognition__logos">
+      {% for block in section.blocks %}
+        {% if block.type == 'press_logo' %}
+          {% if block.settings.logo != blank %}
+            <img class="tcp-story-recognition__logo-img" src="{{ block.settings.logo | image_url: width: 160 }}" alt="{{ block.settings.name }}" loading="lazy" {{ block.shopify_attributes }}>
+          {% else %}
+            <span class="tcp-story-recognition__logo" {{ block.shopify_attributes }}>{{ block.settings.name }}</span>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "TCP Story Page",
+  "tag": "section",
+  "class": "tcp-story-section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_label", "label": "Hero label", "default": "OUR STORY" },
+    { "type": "text", "id": "hero_title", "label": "Hero title", "default": "Where art meets\nthe table." },
+    { "type": "text", "id": "hero_tagline", "label": "Hero tagline", "default": "Crafted to be felt, not just seen." },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero background" },
+
+    { "type": "header", "content": "Concept" },
+    { "type": "text", "id": "concept_label", "label": "Section label", "default": "CONCEPT" },
+    { "type": "text", "id": "concept_heading", "label": "Heading", "default": "We design for\nbespoke ritual." },
+    { "type": "textarea", "id": "concept_text_1", "label": "Text paragraph 1", "default": "At The Creative Platter, we design for everyday acts of eating, gathering, pausing, and inhabiting space." },
+    { "type": "textarea", "id": "concept_text_2", "label": "Text paragraph 2", "default": "Our work moves from the table outward—shaping how people interact with objects, food, and one another." },
+    { "type": "text", "id": "concept_quote", "label": "Quote", "default": "Art enters life through use." },
+    { "type": "image_picker", "id": "concept_image", "label": "Concept image" },
+
+    { "type": "header", "content": "Practice" },
+    { "type": "text", "id": "practice_label", "label": "Section label", "default": "PRACTICE" },
+    { "type": "text", "id": "practice_heading", "label": "Heading", "default": "Clay and mixed\nmaterials." },
+    { "type": "textarea", "id": "practice_text_1", "label": "Text paragraph 1", "default": "The Creative Platter is a design studio working with clay and mixed materials—wood, metal, and stone—to create functional objects across multiple scales." },
+    { "type": "textarea", "id": "practice_text_2", "label": "Text paragraph 2", "default": "All pieces are produced through hands-on techniques, using non-toxic, food-safe materials. High-fired at 1260–1280°C, the work balances durability with individuality." },
+    { "type": "image_picker", "id": "practice_image", "label": "Practice image" },
+
+    { "type": "header", "content": "Founder" },
+    { "type": "text", "id": "founder_label", "label": "Section label", "default": "FOUNDER" },
+    { "type": "text", "id": "founder_heading", "label": "Heading", "default": "A practice rooted in\nmaterial sensitivity." },
+    { "type": "textarea", "id": "founder_text", "label": "Founder text", "default": "Amankshii Rawatt founded The Creative Platter to explore how art can exist within everyday life, through objects that are used, touched, and lived with. Her multidisciplinary background informs a practice rooted in material sensitivity, restraint, and human rhythm." },
+    { "type": "text", "id": "founder_name", "label": "Founder name", "default": "Amankshii Rawatt" },
+    { "type": "image_picker", "id": "founder_image", "label": "Founder image" },
+
+    { "type": "header", "content": "People & Place" },
+    { "type": "text", "id": "people_label", "label": "Section label", "default": "PEOPLE & PLACE" },
+    { "type": "text", "id": "people_heading", "label": "Heading", "default": "Village-based.\nWomen-led." },
+    { "type": "textarea", "id": "people_text", "label": "Text", "default": "Production takes place in a village-based studio environment, working closely with women artisans. The focus lies on skill, continuity, and long-term collaboration—allowing craft to function as a contemporary design practice." },
+    { "type": "text", "id": "people_highlight", "label": "Highlight quote", "default": "At The Creative Platter, we honour the vision of village women, as a social impact enterprise." },
+    { "type": "image_picker", "id": "people_image", "label": "People image" },
+
+    { "type": "header", "content": "Recognition" },
+    { "type": "text", "id": "recognition_heading", "label": "Heading", "default": "Recognition & Features" },
+    { "type": "textarea", "id": "recognition_text", "label": "Text", "default": "The Creative Platter has been featured by leading editorial platforms including Vogue, Condé Nast Traveller, Today's Home, and more." }
+  ],
+  "blocks": [
+    { "type": "material", "name": "Material", "settings": [
+      { "type": "text", "id": "name", "label": "Material name", "default": "Clay" }
+    ]},
+    { "type": "press_logo", "name": "Press/Feature Logo", "settings": [
+      { "type": "text", "id": "name", "label": "Publication name", "default": "VOGUE" },
+      { "type": "image_picker", "id": "logo", "label": "Logo image (optional)" }
+    ]}
+  ],
+  "presets": [
+    {
+      "name": "TCP Story Page",
+      "blocks": [
+        { "type": "material", "settings": { "name": "Clay" } },
+        { "type": "material", "settings": { "name": "Metal" } },
+        { "type": "material", "settings": { "name": "Wood" } },
+        { "type": "material", "settings": { "name": "Stone" } },
+        { "type": "press_logo", "settings": { "name": "VOGUE" } },
+        { "type": "press_logo", "settings": { "name": "CONDÉ NAST" } },
+        { "type": "press_logo", "settings": { "name": "THE HINDU" } },
+        { "type": "press_logo", "settings": { "name": "TODAY'S HOME" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
