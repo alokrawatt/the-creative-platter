@@ -1,0 +1,15 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "section_header": {
+      "type": "section-header",
+      "settings": {
+        "show_announcement": true
+      }
+    }
+  },
+  "order": [
+    "section_header"
+  ]
+}

@@ -1,38 +1,39 @@
 {% comment %}
   ============================================================
-  THE CREATIVE PLATTER — Bespoke (B2B) Full Page
+  THE CREATIVE PLATTER — Bespoke (B2B) Hospitality Portal
   ============================================================
-  Complete B2B page: dark hero, service pillars, process steps,
-  recent projects carousel, trusted-by logos, materials section,
-  and contact/enquiry form.
+  Kevala Ceramics inspired full-scale B2B hospitality portal:
+  - Commercial tableware for chefs, hotels, and architects
+  - Interactive Glaze & Clay Library
+  - 6-Stage Custom Ceramic Development Process
+  - Technical specs (1280°C vitrification, zero porosity)
+  - Interactive Hospitality RFQ & Sample Request Form
   Copy into Shopify: sections/section-bespoke-b2b.liquid
 {% endcomment %}
 
 <style>
-  /* ── B2B Hero ── */
+  .tcp-b2b-page {
+    background: var(--tcp-sand, #FBF9F5);
+    color: var(--tcp-dark, #1F1D1B);
+    font-family: var(--font-sans, sans-serif);
+  }
+
+  /* ── Hero ── */
   .tcp-b2b-hero {
     position: relative;
-    min-height: 520px;
+    min-height: 600px;
     display: flex;
     align-items: center;
+    background: var(--tcp-dark, #1F1D1B);
+    color: var(--tcp-sand, #FBF9F5);
+    padding: 80px 0;
     overflow: hidden;
   }
 
   .tcp-b2b-hero__bg {
     position: absolute;
     inset: 0;
-  }
-
-  .tcp-b2b-hero__bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .tcp-b2b-hero__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, rgba(30, 24, 18, 0.92) 0%, rgba(30, 24, 18, 0.6) 60%, rgba(30, 24, 18, 0.2) 100%);
+    opacity: 0.35;
   }
 
   .tcp-b2b-hero__inner {
@@ -40,48 +41,45 @@
     z-index: 2;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 80px 80px;
-    width: 100%;
-  }
-
-  .tcp-b2b-hero__label {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--tcp-gold-light, #D4BA85);
-    margin-bottom: 20px;
-    display: flex;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
     align-items: center;
-    gap: 12px;
   }
 
-  .tcp-b2b-hero__label::after {
-    content: '';
-    width: 40px;
-    height: 1px;
-    background-color: var(--tcp-gold, #C8A96E);
-    opacity: 0.5;
+  .tcp-b2b-hero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--tcp-gold-light, #DFBA5E);
+    margin-bottom: 24px;
   }
 
   .tcp-b2b-hero__title {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(40px, 5vw, 64px);
+    font-family: var(--font-serif, serif);
+    font-size: clamp(40px, 5vw, 68px);
     font-weight: 400;
-    color: var(--tcp-white, #FFFFFF);
-    line-height: 1.1;
-    margin-bottom: 12px;
-    max-width: 550px;
+    color: #FFFFFF;
+    line-height: 1.05;
+    margin: 0 0 20px;
   }
 
   .tcp-b2b-hero__desc {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.75);
-    line-height: 1.7;
-    max-width: 450px;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 15.5px;
+    color: rgba(251, 249, 245, 0.8);
+    line-height: 1.8;
     margin-bottom: 36px;
+    max-width: 520px;
   }
 
   .tcp-b2b-hero__ctas {
@@ -91,1052 +89,585 @@
   }
 
   .tcp-b2b-hero__btn-gold {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-family: var(--font-sans, sans-serif);
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.8px;
+    font-weight: 700;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
-    background-color: var(--tcp-gold, #C8A96E);
-    border: 1.5px solid var(--tcp-gold, #C8A96E);
-    padding: 14px 28px;
+    color: var(--tcp-dark, #1F1D1B);
+    background: var(--tcp-gold, #C29B38);
+    padding: 16px 32px;
     text-decoration: none;
+    border-radius: 2px;
     transition: all 0.3s ease;
   }
 
   .tcp-b2b-hero__btn-gold:hover {
-    background-color: var(--tcp-gold-hover, #B8965A);
-    border-color: var(--tcp-gold-hover, #B8965A);
+    background: #FFFFFF;
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(200, 169, 110, 0.35);
   }
 
   .tcp-b2b-hero__btn-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-family: var(--font-sans, sans-serif);
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.8px;
+    font-weight: 700;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--tcp-white, #FFFFFF);
+    color: #FFFFFF;
     background: transparent;
-    border: 1.5px solid rgba(255, 255, 255, 0.4);
-    padding: 14px 28px;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    padding: 15px 28px;
     text-decoration: none;
+    border-radius: 2px;
     transition: all 0.3s ease;
   }
 
   .tcp-b2b-hero__btn-outline:hover {
-    border-color: var(--tcp-white, #FFFFFF);
-    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.1);
   }
 
-  .tcp-b2b-hero__btn-outline svg,
-  .tcp-b2b-hero__btn-gold svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  /* ── Service Pillars ── */
-  .tcp-b2b-pillars {
-    background-color: var(--tcp-cream, #FAF8F4);
-    padding: 64px 0;
-  }
-
-  .tcp-b2b-pillars__inner {
+  /* ── Sectors Matrix ── */
+  .tcp-b2b-sectors {
+    padding: 100px 0;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 
-  .tcp-b2b-pillars__intro {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(22px, 2.5vw, 30px);
-    font-weight: 400;
-    color: var(--tcp-dark, #2D2D2D);
-    line-height: 1.4;
-    max-width: 600px;
-    margin-bottom: 48px;
-  }
-
-  .tcp-b2b-pillars__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-  }
-
-  .tcp-b2b-pillar {
+  .tcp-b2b-section-header {
     text-align: center;
-    padding: 24px 16px;
-    border: 1px solid var(--tcp-border, #E5DFD5);
-    background-color: var(--tcp-white, #FFFFFF);
-    transition: border-color 0.3s ease;
+    max-width: 700px;
+    margin: 0 auto 60px;
   }
 
-  .tcp-b2b-pillar:hover {
-    border-color: var(--tcp-gold, #C8A96E);
-  }
-
-  .tcp-b2b-pillar__icon {
-    width: 36px;
-    height: 36px;
-    color: var(--tcp-gold, #C8A96E);
-    margin: 0 auto 16px;
-  }
-
-  .tcp-b2b-pillar__title {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--tcp-dark, #2D2D2D);
-    margin-bottom: 8px;
-    display: block;
-  }
-
-  .tcp-b2b-pillar__desc {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 12px;
-    color: var(--tcp-muted, #6B6560);
-    line-height: 1.6;
-  }
-
-  /* ── Process ── */
-  .tcp-b2b-process {
-    background-color: var(--tcp-white, #FFFFFF);
-    padding: 64px 0;
-  }
-
-  .tcp-b2b-process__inner {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 40px;
-  }
-
-  .tcp-b2b-process__header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 40px;
-  }
-
-  .tcp-b2b-process__title {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 11px;
-    font-weight: 600;
+  .tcp-b2b-section-label {
+    font-size: 10.5px;
+    font-weight: 700;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
-    white-space: nowrap;
+    color: var(--tcp-gold, #C29B38);
+    display: block;
+    margin-bottom: 8px;
   }
 
-  .tcp-b2b-process__line {
-    flex: 1;
-    height: 1px;
-    background-color: var(--tcp-border, #E5DFD5);
+  .tcp-b2b-section-title {
+    font-family: var(--font-serif, serif);
+    font-size: clamp(34px, 4vw, 48px);
+    font-weight: 400;
+    color: var(--tcp-dark, #1F1D1B);
+    line-height: 1.15;
+    margin: 0 0 16px;
+  }
+
+  .tcp-b2b-sectors__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .tcp-b2b-sector-card {
+    background: var(--tcp-white, #FFFFFF);
+    border: 1px solid var(--tcp-border, #E8E2D8);
+    border-radius: 4px;
+    padding: 36px 28px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s var(--ease-fluid);
+  }
+
+  .tcp-b2b-sector-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(31, 29, 27, 0.08);
+    border-color: var(--tcp-gold, #C29B38);
+  }
+
+  .tcp-b2b-sector-card__icon {
+    width: 44px;
+    height: 44px;
+    color: var(--tcp-gold, #C29B38);
+    margin-bottom: 20px;
+  }
+
+  .tcp-b2b-sector-card__title {
+    font-family: var(--font-serif, serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--tcp-dark, #1F1D1B);
+    margin: 0 0 10px;
+  }
+
+  .tcp-b2b-sector-card__desc {
+    font-size: 13.5px;
+    color: var(--tcp-muted, #68625B);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ── Interactive Glaze & Clay Library (Kevala style) ── */
+  .tcp-b2b-glazes {
+    background: var(--tcp-white, #FFFFFF);
+    padding: 100px 0;
+    border-top: 1px solid var(--tcp-border, #E8E2D8);
+    border-bottom: 1px solid var(--tcp-border, #E8E2D8);
+  }
+
+  .tcp-b2b-glazes__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .tcp-b2b-glazes__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .tcp-glaze-card {
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .tcp-glaze-swatch {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    box-shadow: 0 6px 16px rgba(31, 29, 27, 0.1);
+    border: 3px solid #FFF;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .tcp-glaze-card:hover .tcp-glaze-swatch {
+    transform: scale(1.08);
+    border-color: var(--tcp-gold, #C29B38);
+  }
+
+  .tcp-glaze-name {
+    font-family: var(--font-serif, serif);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--tcp-dark, #1F1D1B);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .tcp-glaze-type {
+    font-size: 11px;
+    color: var(--tcp-muted, #68625B);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── 6-Stage Process (Kevala style) ── */
+  .tcp-b2b-process {
+    padding: 100px 0;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 
   .tcp-b2b-process__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 48px;
   }
 
-  .tcp-b2b-process__step {
+  .tcp-process-step {
+    background: var(--tcp-white, #FFFFFF);
+    border: 1px solid var(--tcp-border, #E8E2D8);
+    border-radius: 4px;
+    padding: 32px;
     position: relative;
   }
 
-  .tcp-b2b-process__step-img-wrap {
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    margin-bottom: 16px;
-    background-color: var(--tcp-beige, #F5F0E8);
-  }
-
-  .tcp-b2b-process__step-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-  }
-
-  .tcp-b2b-process__step:hover .tcp-b2b-process__step-img {
-    transform: scale(1.05);
-  }
-
-  .tcp-b2b-process__step-info {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .tcp-b2b-process__step-num {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background-color: var(--tcp-gold, #C8A96E);
-    color: var(--tcp-white, #FFFFFF);
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 12px;
+  .tcp-process-step__num {
+    font-family: var(--font-serif, serif);
+    font-size: 32px;
     font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .tcp-b2b-process__step-name {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--tcp-dark, #2D2D2D);
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  .tcp-b2b-process__step-desc {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 12px;
-    color: var(--tcp-muted, #6B6560);
-    line-height: 1.6;
-  }
-
-  /* ── Projects ── */
-  .tcp-b2b-projects {
-    background-color: var(--tcp-cream, #FAF8F4);
-    padding: 64px 0;
-  }
-
-  .tcp-b2b-projects__inner {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 40px;
-  }
-
-  .tcp-b2b-projects__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 32px;
-  }
-
-  .tcp-b2b-projects__title-wrap {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .tcp-b2b-projects__section-title {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
-    white-space: nowrap;
-  }
-
-  .tcp-b2b-projects__arrows {
-    display: flex;
-    gap: 8px;
-  }
-
-  .tcp-b2b-projects__arrow-btn {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--tcp-border, #E5DFD5);
-    background: var(--tcp-white, #FFFFFF);
-    cursor: pointer;
-    color: var(--tcp-dark, #2D2D2D);
-    transition: all 0.3s ease;
-  }
-
-  .tcp-b2b-projects__arrow-btn:hover {
-    background-color: var(--tcp-gold, #C8A96E);
-    border-color: var(--tcp-gold, #C8A96E);
-    color: var(--tcp-white, #FFFFFF);
-  }
-
-  .tcp-b2b-projects__arrow-btn svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  .tcp-b2b-projects__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-  }
-
-  .tcp-b2b-projects__grid::-webkit-scrollbar {
-    display: none;
-  }
-
-  .tcp-b2b-project-card {
-    scroll-snap-align: start;
-    text-decoration: none;
-    display: block;
-  }
-
-  .tcp-b2b-project-card__img-wrap {
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
+    color: var(--tcp-gold, #C29B38);
+    line-height: 1;
     margin-bottom: 12px;
-    background-color: var(--tcp-beige, #F5F0E8);
-  }
-
-  .tcp-b2b-project-card__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-  }
-
-  .tcp-b2b-project-card:hover .tcp-b2b-project-card__img {
-    transform: scale(1.05);
-  }
-
-  .tcp-b2b-project-card__name {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
     display: block;
-    margin-bottom: 3px;
   }
 
-  .tcp-b2b-project-card__desc {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 12px;
-    color: var(--tcp-muted, #6B6560);
-  }
-
-  /* ── Trusted By ── */
-  .tcp-b2b-trusted {
-    background-color: var(--tcp-white, #FFFFFF);
-    padding: 48px 0;
-    border-top: 1px solid var(--tcp-border, #E5DFD5);
-  }
-
-  .tcp-b2b-trusted__inner {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 40px;
-  }
-
-  .tcp-b2b-trusted__header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 36px;
-  }
-
-  .tcp-b2b-trusted__title {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
-    white-space: nowrap;
-  }
-
-  .tcp-b2b-trusted__logos {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 48px;
-    flex-wrap: wrap;
-  }
-
-  .tcp-b2b-trusted__logo {
-    max-height: 44px;
-    width: auto;
-    filter: grayscale(100%);
-    opacity: 0.6;
-    transition: all 0.3s ease;
-  }
-
-  .tcp-b2b-trusted__logo:hover {
-    filter: grayscale(0%);
-    opacity: 1;
-  }
-
-  .tcp-b2b-trusted__logo-text {
-    font-family: var(--font-serif, 'Playfair Display', serif);
+  .tcp-process-step__title {
+    font-family: var(--font-serif, serif);
     font-size: 20px;
-    font-weight: 500;
-    color: var(--tcp-muted, #6B6560);
-    opacity: 0.5;
-    transition: opacity 0.3s ease;
-    white-space: nowrap;
-  }
-
-  .tcp-b2b-trusted__logo-text:hover {
-    opacity: 1;
-  }
-
-  .tcp-b2b-trusted__more {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 13px;
-    color: var(--tcp-muted, #6B6560);
-    font-style: italic;
-  }
-
-  /* ── Materials ── */
-  .tcp-b2b-materials {
-    background-color: var(--tcp-brown, #3A2F28);
-    padding: 64px 0;
-    color: var(--tcp-white, #FFFFFF);
-  }
-
-  .tcp-b2b-materials__inner {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 40px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
-  }
-
-  .tcp-b2b-materials__label {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 10px;
     font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--tcp-gold-light, #D4BA85);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    color: var(--tcp-dark, #1F1D1B);
+    margin: 0 0 8px;
   }
 
-  .tcp-b2b-materials__label::after {
-    content: '';
-    width: 40px;
-    height: 1px;
-    background-color: var(--tcp-gold, #C8A96E);
-    opacity: 0.5;
-  }
-
-  .tcp-b2b-materials__heading {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(28px, 3.5vw, 40px);
-    font-weight: 400;
-    line-height: 1.2;
-    margin-bottom: 24px;
-  }
-
-  .tcp-b2b-materials__list {
-    list-style: none;
-    padding: 0;
+  .tcp-process-step__desc {
+    font-size: 13px;
+    color: var(--tcp-muted, #68625B);
+    line-height: 1.65;
     margin: 0;
   }
 
-  .tcp-b2b-materials__list li {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.75);
-    padding: 6px 0 6px 20px;
-    position: relative;
+  /* ── Interactive RFQ & Sample Request ── */
+  .tcp-b2b-rfq {
+    background: var(--tcp-dark, #1F1D1B);
+    color: var(--tcp-sand, #FBF9F5);
+    padding: 100px 0;
   }
 
-  .tcp-b2b-materials__list li::before {
-    content: '·';
-    position: absolute;
-    left: 0;
-    color: var(--tcp-gold, #C8A96E);
-    font-size: 18px;
-    line-height: 1;
-  }
-
-  .tcp-b2b-materials__right {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  .tcp-b2b-materials__card {
-    background-color: rgba(255, 255, 255, 0.08);
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: border-color 0.3s ease;
-  }
-
-  .tcp-b2b-materials__card:hover {
-    border-color: var(--tcp-gold, #C8A96E);
-  }
-
-  .tcp-b2b-materials__card-title {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--tcp-gold-light, #D4BA85);
-    margin-bottom: 8px;
-    display: block;
-  }
-
-  .tcp-b2b-materials__card-desc {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.65);
-    line-height: 1.6;
-  }
-
-  /* ── Enquiry Form ── */
-  .tcp-b2b-enquiry {
-    background-color: var(--tcp-cream, #FAF8F4);
-    padding: 64px 0;
-  }
-
-  .tcp-b2b-enquiry__inner {
-    max-width: 1440px;
+  .tcp-b2b-rfq__inner {
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 40px;
   }
 
-  .tcp-b2b-enquiry__label {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--tcp-muted, #6B6560);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  .tcp-b2b-rfq__form {
+    background: #282420;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    padding: 48px;
+    margin-top: 40px;
   }
 
-  .tcp-b2b-enquiry__label::after {
-    content: '';
-    width: 40px;
-    height: 1px;
-    background-color: var(--tcp-border, #E5DFD5);
-  }
-
-  .tcp-b2b-enquiry__heading {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(28px, 3.5vw, 44px);
-    font-weight: 400;
-    color: var(--tcp-dark, #2D2D2D);
-    line-height: 1.15;
-    margin-bottom: 8px;
-  }
-
-  .tcp-b2b-enquiry__subtitle {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 14px;
-    color: var(--tcp-muted, #6B6560);
-    margin-bottom: 36px;
-  }
-
-  .tcp-b2b-enquiry__form {
+  .tcp-rfq-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
   }
 
-  .tcp-b2b-enquiry__field {
+  .tcp-rfq-field {
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
 
-  .tcp-b2b-enquiry__field--full {
-    grid-column: 1 / -1;
-  }
-
-  .tcp-b2b-enquiry__field--half {
-    grid-column: span 1;
-  }
-
-  .tcp-b2b-enquiry__field label {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--tcp-muted, #6B6560);
-  }
-
-  .tcp-b2b-enquiry__field input,
-  .tcp-b2b-enquiry__field textarea,
-  .tcp-b2b-enquiry__field select {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 14px;
-    padding: 14px 16px;
-    border: 1px solid var(--tcp-border, #E5DFD5);
-    background: var(--tcp-white, #FFFFFF);
-    color: var(--tcp-dark, #2D2D2D);
-    outline: none;
-    transition: border-color 0.3s ease;
-    appearance: none;
-    -webkit-appearance: none;
-  }
-
-  .tcp-b2b-enquiry__field input:focus,
-  .tcp-b2b-enquiry__field textarea:focus,
-  .tcp-b2b-enquiry__field select:focus {
-    border-color: var(--tcp-gold, #C8A96E);
-  }
-
-  .tcp-b2b-enquiry__field select {
-    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B6560' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    padding-right: 40px;
-  }
-
-  .tcp-b2b-enquiry__submit {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
+  .tcp-rfq-field label {
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.8px;
+    font-weight: 700;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
-    background-color: var(--tcp-gold, #C8A96E);
-    border: 1.5px solid var(--tcp-gold, #C8A96E);
+    color: var(--tcp-gold-light, #DFBA5E);
+  }
+
+  .tcp-rfq-field input,
+  .tcp-rfq-field select,
+  .tcp-rfq-field textarea {
+    background: #1F1D1B;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 12px 16px;
+    color: #FFFFFF;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 14px;
+    border-radius: 3px;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .tcp-rfq-field input:focus,
+  .tcp-rfq-field select:focus,
+  .tcp-rfq-field textarea:focus {
+    border-color: var(--tcp-gold, #C29B38);
+  }
+
+  .tcp-rfq-submit-btn {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--tcp-dark, #1F1D1B);
+    background: var(--tcp-gold, #C29B38);
+    border: none;
     padding: 16px 36px;
+    border-radius: 2px;
     cursor: pointer;
     transition: all 0.3s ease;
-    justify-self: end;
-    grid-column: 3;
+    width: 100%;
+    margin-top: 12px;
   }
 
-  .tcp-b2b-enquiry__submit:hover {
-    background-color: var(--tcp-gold-hover, #B8965A);
-    border-color: var(--tcp-gold-hover, #B8965A);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(200, 169, 110, 0.3);
-  }
-
-  .tcp-b2b-enquiry__submit svg {
-    width: 14px;
-    height: 14px;
+  .tcp-rfq-submit-btn:hover {
+    background: #FFFFFF;
   }
 
   /* ── Responsive ── */
   @media (max-width: 1024px) {
-    .tcp-b2b-pillars__grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .tcp-b2b-process__grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .tcp-b2b-projects__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .tcp-b2b-materials__inner {
+    .tcp-b2b-hero__inner {
       grid-template-columns: 1fr;
     }
-
-    .tcp-b2b-enquiry__form {
-      grid-template-columns: 1fr 1fr;
+    .tcp-b2b-sectors__grid {
+      grid-template-columns: repeat(2, 1fr);
     }
-
-    .tcp-b2b-enquiry__submit {
-      grid-column: 2;
+    .tcp-b2b-glazes__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .tcp-b2b-process__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .tcp-rfq-grid {
+      grid-template-columns: 1fr;
     }
   }
 
   @media (max-width: 600px) {
-    .tcp-b2b-hero__inner {
-      padding: 50px 24px;
+    .tcp-b2b-hero {
+      padding: 60px 20px;
     }
-
-    .tcp-b2b-hero__ctas {
-      flex-direction: column;
+    .tcp-b2b-sectors,
+    .tcp-b2b-glazes__inner,
+    .tcp-b2b-process,
+    .tcp-b2b-rfq__inner {
+      padding-left: 20px;
+      padding-right: 20px;
     }
-
-    .tcp-b2b-pillars__grid,
+    .tcp-b2b-sectors__grid,
     .tcp-b2b-process__grid {
       grid-template-columns: 1fr;
     }
-
-    .tcp-b2b-projects__grid {
-      grid-template-columns: 1fr;
-    }
-
-    .tcp-b2b-trusted__logos {
-      gap: 24px;
-    }
-
-    .tcp-b2b-enquiry__form {
-      grid-template-columns: 1fr;
-    }
-
-    .tcp-b2b-enquiry__submit {
-      grid-column: 1;
-      width: 100%;
-      justify-content: center;
-    }
-
-    .tcp-b2b-materials__right {
-      grid-template-columns: 1fr;
+    .tcp-b2b-rfq__form {
+      padding: 24px;
     }
   }
 </style>
 
-<!-- ── B2B Hero ── -->
-<section class="tcp-b2b-hero" id="tcp-b2b-hero">
-  <div class="tcp-b2b-hero__bg">
-    {% if section.settings.hero_image != blank %}
-      <img class="tcp-b2b-hero__bg-img" src="{{ section.settings.hero_image | image_url: width: 1600 }}" alt="" loading="eager" fetchpriority="high" width="1600" height="600">
-    {% else %}
-      <div class="tcp-b2b-hero__bg-img" style="background: linear-gradient(135deg, #3A2F28, #1E1812);"></div>
-    {% endif %}
-    <div class="tcp-b2b-hero__overlay"></div>
-  </div>
-
-  <div class="tcp-b2b-hero__inner">
-    <span class="tcp-b2b-hero__label">{{ section.settings.hero_label }}</span>
-    <h1 class="tcp-b2b-hero__title">{{ section.settings.hero_title }}</h1>
-    <p class="tcp-b2b-hero__desc">{{ section.settings.hero_description }}</p>
-    <div class="tcp-b2b-hero__ctas">
-      {% if section.settings.hero_cta_primary_text != blank %}
-        <a href="{{ section.settings.hero_cta_primary_url | default: '#tcp-b2b-enquiry' }}" class="tcp-b2b-hero__btn-gold">
-          {{ section.settings.hero_cta_primary_text }}
-          <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      {% endif %}
-      {% if section.settings.hero_cta_secondary_text != blank %}
-        <a href="{{ section.settings.hero_cta_secondary_url | default: '#' }}" class="tcp-b2b-hero__btn-outline">
-          {{ section.settings.hero_cta_secondary_text }}
-          <svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M4 9l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      {% endif %}
+<div class="tcp-b2b-page" id="tcp-b2b-page-root">
+  <!-- Hero Section -->
+  <section class="tcp-b2b-hero">
+    <div class="tcp-b2b-hero__inner">
+      <div>
+        <div class="tcp-b2b-hero__pill">
+          <span>Architectural &bull; Hospitality Studio</span>
+        </div>
+        <h1 class="tcp-b2b-hero__title">Bespoke Tableware for Exceptional Hospitality</h1>
+        <p class="tcp-b2b-hero__desc">
+          Crafted to withstand the intense pace of Michelin-star dining, luxury boutique resorts, and curated interior spaces. Vitrified at 1280°C with custom profile compounding and personalized branding.
+        </p>
+        <div class="tcp-b2b-hero__ctas">
+          <a href="#rfq" class="tcp-b2b-hero__btn-gold">Request Trade Consultation &rarr;</a>
+          <a href="#glazes" class="tcp-b2b-hero__btn-outline">Explore Glaze Archive</a>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── Service Pillars ── -->
-<div class="tcp-b2b-pillars">
-  <div class="tcp-b2b-pillars__inner">
-    <p class="tcp-b2b-pillars__intro">{{ section.settings.pillars_intro }}</p>
-    <div class="tcp-b2b-pillars__grid">
-      {% for block in section.blocks %}
-        {% if block.type == 'pillar' %}
-          <div class="tcp-b2b-pillar" {{ block.shopify_attributes }}>
-            <svg class="tcp-b2b-pillar__icon" viewBox="0 0 36 36" fill="none">
-              <circle cx="18" cy="18" r="14" stroke="currentColor" stroke-width="1.3"/>
-              <path d="M13 18l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="tcp-b2b-pillar__title">{{ block.settings.title }}</span>
-            <p class="tcp-b2b-pillar__desc">{{ block.settings.description }}</p>
-          </div>
-        {% endif %}
-      {% endfor %}
+  <!-- B2B Sectors -->
+  <section class="tcp-b2b-sectors" id="hospitality">
+    <div class="tcp-b2b-section-header">
+      <span class="tcp-b2b-section-label">PARTNERSHIP DISCIPLINES</span>
+      <h2 class="tcp-b2b-section-title">Engineered Across Four Creative Sectors</h2>
     </div>
-  </div>
-</div>
 
-<!-- ── Our Process ── -->
-<div class="tcp-b2b-process">
-  <div class="tcp-b2b-process__inner">
-    <div class="tcp-b2b-process__header">
-      <span class="tcp-b2b-process__title">OUR PROCESS</span>
-      <div class="tcp-b2b-process__line"></div>
+    <div class="tcp-b2b-sectors__grid">
+      <div class="tcp-b2b-sector-card">
+        <svg class="tcp-b2b-sector-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <h3 class="tcp-b2b-sector-card__title">Fine Dining &amp; Chefs</h3>
+        <p class="tcp-b2b-sector-card__desc">
+          Custom plate wells, temperature-retention stoneware, matte glazes that do not mark with cutlery, and chef-bespoke plating rims.
+        </p>
+      </div>
+
+      <div class="tcp-b2b-sector-card">
+        <svg class="tcp-b2b-sector-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M3 7v14M21 7v14M6 11h12M6 15h12M9 3h6v4H9z"/></svg>
+        <h3 class="tcp-b2b-sector-card__title">Resorts &amp; Boutique Stays</h3>
+        <p class="tcp-b2b-sector-card__desc">
+          Turnkey restaurant services, in-room tea rituals, bath amenities, spa vessels, and poolside stoneware resistant to thermal shock.
+        </p>
+      </div>
+
+      <div class="tcp-b2b-sector-card">
+        <svg class="tcp-b2b-sector-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <h3 class="tcp-b2b-sector-card__title">Architects &amp; Designers</h3>
+        <p class="tcp-b2b-sector-card__desc">
+          Site-specific wall installations, organic ceramic lighting pendants, sculptural stoneware urns, and custom architectural tiles.
+        </p>
+      </div>
+
+      <div class="tcp-b2b-sector-card">
+        <svg class="tcp-b2b-sector-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M16 8V6a4 4 0 00-8 0v2"/></svg>
+        <h3 class="tcp-b2b-sector-card__title">Corporate &amp; VIP Gifting</h3>
+        <p class="tcp-b2b-sector-card__desc">
+          Bespoke commemorative tableware with custom debossed seal logos, unbleached linen gift boxes, and social impact documentation.
+        </p>
+      </div>
     </div>
+  </section>
+
+  <!-- Glaze & Clay Library (Kevala style) -->
+  <section class="tcp-b2b-glazes" id="glazes">
+    <div class="tcp-b2b-glazes__inner">
+      <div class="tcp-b2b-section-header">
+        <span class="tcp-b2b-section-label">MATERIAL ARCHIVE</span>
+        <h2 class="tcp-b2b-section-title">Signature Glaze &amp; Finish Compounding</h2>
+      </div>
+
+      <div class="tcp-b2b-glazes__grid">
+        <div class="tcp-glaze-card">
+          <div class="tcp-glaze-swatch" style="background: #FAF8F4; border: 3px solid #C29B38;"></div>
+          <span class="tcp-glaze-name">Smriti Gold Rim</span>
+          <span class="tcp-glaze-type">Crackle &bull; 24k Leaf</span>
+        </div>
+
+        <div class="tcp-glaze-card">
+          <div class="tcp-glaze-swatch" style="background: #E8DEC8;"></div>
+          <span class="tcp-glaze-name">Earthen Sand</span>
+          <span class="tcp-glaze-type">Matte Stoneware</span>
+        </div>
+
+        <div class="tcp-glaze-card">
+          <div class="tcp-glaze-swatch" style="background: #2B2724;"></div>
+          <span class="tcp-glaze-name">Lava Charcoal</span>
+          <span class="tcp-glaze-type">Textured Basalt</span>
+        </div>
+
+        <div class="tcp-glaze-card">
+          <div class="tcp-glaze-swatch" style="background: #C4CDBE;"></div>
+          <span class="tcp-glaze-name">Muted Sage</span>
+          <span class="tcp-glaze-type">Satin Celadon</span>
+        </div>
+
+        <div class="tcp-glaze-card">
+          <div class="tcp-glaze-swatch" style="background: #9E6747;"></div>
+          <span class="tcp-glaze-name">Terracotta Clay</span>
+          <span class="tcp-glaze-type">High-Fire Raw</span>
+        </div>
+
+        <div class="tcp-glaze-card">
+          <div class="tcp-glaze-swatch" style="background: #DFBA5E;"></div>
+          <span class="tcp-glaze-name">Kintsugi Gold</span>
+          <span class="tcp-glaze-type">Artisan Brushed</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6-Stage Process -->
+  <section class="tcp-b2b-process" id="process">
+    <div class="tcp-b2b-section-header">
+      <span class="tcp-b2b-section-label">HOW WE WORK TOGETHER</span>
+      <h2 class="tcp-b2b-section-title">The 6-Stage Bespoke Development Cycle</h2>
+    </div>
+
     <div class="tcp-b2b-process__grid">
-      {% assign step_count = 0 %}
-      {% for block in section.blocks %}
-        {% if block.type == 'process_step' %}
-          {% assign step_count = step_count | plus: 1 %}
-          <div class="tcp-b2b-process__step" {{ block.shopify_attributes }}>
-            <div class="tcp-b2b-process__step-img-wrap">
-              {% if block.settings.image != blank %}
-                <img class="tcp-b2b-process__step-img" src="{{ block.settings.image | image_url: width: 500 }}" alt="{{ block.settings.title }}" loading="lazy" width="500" height="375">
-              {% else %}
-                <div class="tcp-b2b-process__step-img" style="background: var(--tcp-warm-bg);"></div>
-              {% endif %}
-            </div>
-            <div class="tcp-b2b-process__step-info">
-              <span class="tcp-b2b-process__step-num">{{ step_count }}</span>
-              <div>
-                <span class="tcp-b2b-process__step-name">{{ block.settings.title }}</span>
-                <p class="tcp-b2b-process__step-desc">{{ block.settings.description }}</p>
-              </div>
-            </div>
+      <div class="tcp-process-step">
+        <span class="tcp-process-step__num">01</span>
+        <h3 class="tcp-process-step__title">Consultation &amp; Brief</h3>
+        <p class="tcp-process-step__desc">We review your menu courses, interior finishes, dishwasher capacity, and operational stacking requirements.</p>
+      </div>
+
+      <div class="tcp-process-step">
+        <span class="tcp-process-step__num">02</span>
+        <h3 class="tcp-process-step__title">Glaze &amp; Form Formulation</h3>
+        <p class="tcp-process-step__desc">Our studio develops customized glaze swatches and profile drawings aligned with your dining identity.</p>
+      </div>
+
+      <div class="tcp-process-step">
+        <span class="tcp-process-step__num">03</span>
+        <h3 class="tcp-process-step__title">Hand-Made Prototyping</h3>
+        <p class="tcp-process-step__desc">Physical clay prototypes are hand-thrown and delivered to your kitchen for plating ergonomics testing.</p>
+      </div>
+
+      <div class="tcp-process-step">
+        <span class="tcp-process-step__num">04</span>
+        <h3 class="tcp-process-step__title">Chef Plating Trial</h3>
+        <p class="tcp-process-step__desc">Your culinary team tests sauce behavior, cutlery acoustic feedback, and thermal hold under pass heat lamps.</p>
+      </div>
+
+      <div class="tcp-process-step">
+        <span class="tcp-process-step__num">05</span>
+        <h3 class="tcp-process-step__title">1280°C Artisan Production</h3>
+        <p class="tcp-process-step__desc">Batch production in our Gurugram studio by trained women artisans, vitrified at 1280°C for lifetime durability.</p>
+      </div>
+
+      <div class="tcp-process-step">
+        <span class="tcp-process-step__num">06</span>
+        <h3 class="tcp-process-step__title">White-Glove Delivery &amp; Reorders</h3>
+        <p class="tcp-process-step__desc">Export-grade reinforced wooden crating, guaranteed delivery, and perpetual small-batch re-order archives.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive RFQ Form -->
+  <section class="tcp-b2b-rfq" id="rfq">
+    <div class="tcp-b2b-rfq__inner">
+      <div class="tcp-b2b-section-header" style="color:#FFF;">
+        <span class="tcp-b2b-section-label">DIRECT TRADE PORTAL</span>
+        <h2 class="tcp-b2b-section-title" style="color:#FFF;">Request Bespoke Quotation &amp; Samples</h2>
+        <p style="font-size:14px; color:rgba(255,255,255,0.75);">
+          Direct inquiry to studio founder Amankshii Rawatt. Response within 24 hours. Phone / WhatsApp: +91-8586946814 &bull; info@thecreativeplatter.com
+        </p>
+      </div>
+
+      <form class="tcp-b2b-rfq__form" action="/contact#contact_form" method="post">
+        <input type="hidden" name="form_type" value="contact">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="contact[tags]" value="b2b_hospitality_inquiry">
+
+        <div class="tcp-rfq-grid">
+          <div class="tcp-rfq-field">
+            <label>Your Name *</label>
+            <input type="text" name="contact[name]" placeholder="Chef / Designer / Owner" required>
           </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-</div>
-
-<!-- ── Recent Projects ── -->
-<div class="tcp-b2b-projects">
-  <div class="tcp-b2b-projects__inner">
-    <div class="tcp-b2b-projects__header">
-      <div class="tcp-b2b-projects__title-wrap">
-        <span class="tcp-b2b-projects__section-title">RECENT PROJECTS</span>
-      </div>
-      <div class="tcp-b2b-projects__arrows">
-        <button class="tcp-b2b-projects__arrow-btn" id="tcp-projects-prev" aria-label="Previous">
-          <svg viewBox="0 0 16 16" fill="none"><path d="M10 4L6 8l4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="tcp-b2b-projects__arrow-btn" id="tcp-projects-next" aria-label="Next">
-          <svg viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-    </div>
-    <div class="tcp-b2b-projects__grid" id="tcp-projects-grid">
-      {% for block in section.blocks %}
-        {% if block.type == 'project' %}
-          <a href="{{ block.settings.link_url | default: '#' }}" class="tcp-b2b-project-card" {{ block.shopify_attributes }}>
-            <div class="tcp-b2b-project-card__img-wrap">
-              {% if block.settings.image != blank %}
-                <img class="tcp-b2b-project-card__img" src="{{ block.settings.image | image_url: width: 500 }}" alt="{{ block.settings.name }}" loading="lazy" width="500" height="375">
-              {% else %}
-                <div class="tcp-b2b-project-card__img" style="background: var(--tcp-warm-bg);"></div>
-              {% endif %}
-            </div>
-            <span class="tcp-b2b-project-card__name">{{ block.settings.name }}</span>
-            <span class="tcp-b2b-project-card__desc">{{ block.settings.description }}</span>
-          </a>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-</div>
-
-<!-- ── Trusted By ── -->
-<div class="tcp-b2b-trusted">
-  <div class="tcp-b2b-trusted__inner">
-    <div class="tcp-b2b-trusted__header">
-      <span class="tcp-b2b-trusted__title">TRUSTED BY</span>
-      <div style="flex:1;height:1px;background:var(--tcp-border);"></div>
-    </div>
-    <div class="tcp-b2b-trusted__logos">
-      {% for block in section.blocks %}
-        {% if block.type == 'trusted_logo' %}
-          {% if block.settings.logo != blank %}
-            <img class="tcp-b2b-trusted__logo" src="{{ block.settings.logo | image_url: width: 160 }}" alt="{{ block.settings.name }}" loading="lazy" height="44" {{ block.shopify_attributes }}>
-          {% else %}
-            <span class="tcp-b2b-trusted__logo-text" {{ block.shopify_attributes }}>{{ block.settings.name }}</span>
-          {% endif %}
-        {% endif %}
-      {% endfor %}
-      <span class="tcp-b2b-trusted__more">and more</span>
-    </div>
-  </div>
-</div>
-
-<!-- ── Materials ── -->
-<div class="tcp-b2b-materials">
-  <div class="tcp-b2b-materials__inner">
-    <div>
-      <span class="tcp-b2b-materials__label">{{ section.settings.materials_label }}</span>
-      <h2 class="tcp-b2b-materials__heading">{{ section.settings.materials_heading }}</h2>
-      <ul class="tcp-b2b-materials__list">
-        {% for block in section.blocks %}
-          {% if block.type == 'capability' %}
-            <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
-    <div class="tcp-b2b-materials__right">
-      {% for block in section.blocks %}
-        {% if block.type == 'material_card' %}
-          <div class="tcp-b2b-materials__card" {{ block.shopify_attributes }}>
-            <span class="tcp-b2b-materials__card-title">{{ block.settings.title }}</span>
-            <p class="tcp-b2b-materials__card-desc">{{ block.settings.description }}</p>
+          <div class="tcp-rfq-field">
+            <label>Business / Establishment Name *</label>
+            <input type="text" name="contact[company]" placeholder="e.g. The Oberoi / Atelier Studio" required>
           </div>
-        {% endif %}
-      {% endfor %}
+        </div>
+
+        <div class="tcp-rfq-grid">
+          <div class="tcp-rfq-field">
+            <label>Email Address *</label>
+            <input type="email" name="contact[email]" placeholder="email@establishment.com" required>
+          </div>
+          <div class="tcp-rfq-field">
+            <label>Phone / WhatsApp Number *</label>
+            <input type="tel" name="contact[phone]" placeholder="+91 ..." required>
+          </div>
+        </div>
+
+        <div class="tcp-rfq-grid">
+          <div class="tcp-rfq-field">
+            <label>Industry Sector</label>
+            <select name="contact[sector]">
+              <option>Fine Dining &bull; Michelin / Standalone</option>
+              <option>Luxury Hotel / Boutique Resort</option>
+              <option>Architectural &bull; Interior Commission</option>
+              <option>Corporate &bull; VIP Gifting</option>
+            </select>
+          </div>
+          <div class="tcp-rfq-field">
+            <label>Estimated Quantity</label>
+            <select name="contact[quantity]">
+              <option>50 – 200 Pieces (Boutique / Tasting Menu)</option>
+              <option>200 – 500 Pieces (Full Restaurant Opening)</option>
+              <option>500 – 2,000+ Pieces (Hotel / Banquet Scale)</option>
+              <option>Sample Box Only (5 Pieces)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="tcp-rfq-field" style="margin-bottom: 24px;">
+          <label>Project Vision &amp; Requirements</label>
+          <textarea name="contact[body]" rows="4" placeholder="Describe your plate requirements, glaze preferences, launch timeline, or request a studio visit in Gurugram..."></textarea>
+        </div>
+
+        <button type="submit" class="tcp-rfq-submit-btn">Submit Trade Inquiry &rarr;</button>
+      </form>
     </div>
-  </div>
+  </section>
 </div>
-
-<!-- ── Enquiry Form ── -->
-<div class="tcp-b2b-enquiry" id="tcp-b2b-enquiry">
-  <div class="tcp-b2b-enquiry__inner">
-    <span class="tcp-b2b-enquiry__label">{{ section.settings.form_label }}</span>
-    <h2 class="tcp-b2b-enquiry__heading">{{ section.settings.form_heading }}</h2>
-    <p class="tcp-b2b-enquiry__subtitle">{{ section.settings.form_subtitle }}</p>
-
-    <form class="tcp-b2b-enquiry__form" action="/contact#contact_form" method="post">
-      <input type="hidden" name="form_type" value="contact">
-      <input type="hidden" name="utf8" value="✓">
-      <input type="hidden" name="contact[tags]" value="b2b-enquiry">
-
-      <div class="tcp-b2b-enquiry__field">
-        <label for="tcp-b2b-name">FULL NAME</label>
-        <input type="text" id="tcp-b2b-name" name="contact[name]" placeholder="Your name" required>
-      </div>
-      <div class="tcp-b2b-enquiry__field">
-        <label for="tcp-b2b-company">BUSINESS / COMPANY</label>
-        <input type="text" id="tcp-b2b-company" name="contact[company]" placeholder="Company name">
-      </div>
-      <div class="tcp-b2b-enquiry__field">
-        <label for="tcp-b2b-email">EMAIL</label>
-        <input type="email" id="tcp-b2b-email" name="contact[email]" placeholder="you@company.com" required>
-      </div>
-      <div class="tcp-b2b-enquiry__field">
-        <label for="tcp-b2b-project-type">PROJECT TYPE</label>
-        <select id="tcp-b2b-project-type" name="contact[project_type]">
-          <option value="" disabled selected>Select project type</option>
-          <option value="hotel">Hotel / Resort</option>
-          <option value="restaurant">Restaurant / Café</option>
-          <option value="retail">Retail / Showroom</option>
-          <option value="corporate">Corporate Gifting</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      <div class="tcp-b2b-enquiry__field">
-        <label for="tcp-b2b-requirement">REQUIREMENT</label>
-        <input type="text" id="tcp-b2b-requirement" name="contact[requirement]" placeholder="Tell us about your requirement">
-      </div>
-      <div class="tcp-b2b-enquiry__field">
-        <label for="tcp-b2b-timeline">ESTIMATED TIMELINE</label>
-        <select id="tcp-b2b-timeline" name="contact[timeline]">
-          <option value="" disabled selected>Select timeline</option>
-          <option value="1month">Within 1 month</option>
-          <option value="3months">1-3 months</option>
-          <option value="6months">3-6 months</option>
-          <option value="flexible">Flexible</option>
-        </select>
-      </div>
-
-      <button type="submit" class="tcp-b2b-enquiry__submit">
-        SUBMIT ENQUIRY
-        <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-    </form>
-  </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  /* Projects Scroll */
-  const grid = document.getElementById('tcp-projects-grid');
-  const prev = document.getElementById('tcp-projects-prev');
-  const next = document.getElementById('tcp-projects-next');
-
-  if (grid && prev && next) {
-    const scrollAmount = 320;
-    prev.addEventListener('click', function() {
-      grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    });
-    next.addEventListener('click', function() {
-      grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    });
-  }
-});
-</script>
 
 {% schema %}
 {
-  "name": "TCP Bespoke B2B Page",
+  "name": "TCP Bespoke B2B Portal",
   "tag": "section",
-  "class": "tcp-b2b-section",
-  "settings": [
-    { "type": "header", "content": "Hero" },
-    { "type": "text", "id": "hero_label", "label": "Hero label", "default": "BESPOKE (B2B) — STUDIO" },
-    { "type": "text", "id": "hero_title", "label": "Hero title", "default": "Bespoke for\nbusiness & spaces." },
-    { "type": "textarea", "id": "hero_description", "label": "Hero description", "default": "Thoughtfully designed tableware\nfor hospitality, retail and interiors." },
-    { "type": "text", "id": "hero_cta_primary_text", "label": "Primary CTA", "default": "START A PROJECT" },
-    { "type": "url", "id": "hero_cta_primary_url", "label": "Primary CTA URL" },
-    { "type": "text", "id": "hero_cta_secondary_text", "label": "Secondary CTA", "default": "DOWNLOAD CATALOGUE" },
-    { "type": "url", "id": "hero_cta_secondary_url", "label": "Secondary CTA URL" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero background" },
-
-    { "type": "header", "content": "Service Pillars" },
-    { "type": "textarea", "id": "pillars_intro", "label": "Pillars intro", "default": "We design and manufacture bespoke tableware at scale.\n\nRooted in craft. Made for purpose.\nCreated for your space." },
-
-    { "type": "header", "content": "Materials" },
-    { "type": "text", "id": "materials_label", "label": "Materials label", "default": "MATERIALS & CAPABILITY" },
-    { "type": "text", "id": "materials_heading", "label": "Materials heading", "default": "Crafted to perform.\nMade to last." },
-
-    { "type": "header", "content": "Enquiry Form" },
-    { "type": "text", "id": "form_label", "label": "Form label", "default": "START YOUR PROJECT" },
-    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Let's create something\nexceptional together." },
-    { "type": "text", "id": "form_subtitle", "label": "Form subtitle", "default": "Share your requirements and our studio will get in touch with you." }
-  ],
-  "blocks": [
-    { "type": "pillar", "name": "Service Pillar", "settings": [
-      { "type": "text", "id": "title", "label": "Title", "default": "Concept to creation" },
-      { "type": "text", "id": "description", "label": "Description", "default": "From initial idea to final execution." }
-    ]},
-    { "type": "process_step", "name": "Process Step", "settings": [
-      { "type": "text", "id": "title", "label": "Step title", "default": "Design & Concept" },
-      { "type": "text", "id": "description", "label": "Description", "default": "Understanding your vision, brand and space." },
-      { "type": "image_picker", "id": "image", "label": "Image" }
-    ]},
-    { "type": "project", "name": "Project", "settings": [
-      { "type": "text", "id": "name", "label": "Client name", "default": "THE LEELA PALACES" },
-      { "type": "text", "id": "description", "label": "Description", "default": "Stoneware Collection" },
-      { "type": "image_picker", "id": "image", "label": "Image" },
-      { "type": "url", "id": "link_url", "label": "Link" }
-    ]},
-    { "type": "trusted_logo", "name": "Trusted Logo", "settings": [
-      { "type": "text", "id": "name", "label": "Brand name", "default": "The Leela" },
-      { "type": "image_picker", "id": "logo", "label": "Logo (optional)" }
-    ]},
-    { "type": "capability", "name": "Capability Item", "settings": [
-      { "type": "text", "id": "text", "label": "Capability", "default": "Stoneware & Porcelain" }
-    ]},
-    { "type": "material_card", "name": "Material Card", "settings": [
-      { "type": "text", "id": "title", "label": "Title", "default": "MATERIALS" },
-      { "type": "text", "id": "description", "label": "Description", "default": "High quality stoneware and porcelain." }
-    ]}
-  ],
+  "class": "tcp-bespoke-b2b-section",
+  "settings": [],
   "presets": [
     {
-      "name": "TCP Bespoke B2B Page",
-      "blocks": [
-        { "type": "pillar", "settings": { "title": "Concept to creation", "description": "From initial idea to final execution." } },
-        { "type": "pillar", "settings": { "title": "Custom forms & finishes", "description": "Made to match your vision and brand identity." } },
-        { "type": "pillar", "settings": { "title": "Large volume production", "description": "Reliable, consistent and built to scale." } },
-        { "type": "pillar", "settings": { "title": "Studio-led craftsmanship", "description": "Thoughtful design meets skilled hands." } },
-        { "type": "process_step", "settings": { "title": "Design & Concept", "description": "Understanding your vision, brand and space." } },
-        { "type": "process_step", "settings": { "title": "Sampling", "description": "Prototypes crafted and refined to perfection." } },
-        { "type": "process_step", "settings": { "title": "Production", "description": "Expert manufacturing with rigorous quality control." } },
-        { "type": "process_step", "settings": { "title": "Finishing & Delivery", "description": "Carefully packed and delivered on time, every time." } },
-        { "type": "project", "settings": { "name": "THE LEELA PALACES", "description": "Stoneware Collection" } },
-        { "type": "project", "settings": { "name": "FOUR SEASONS RESORT", "description": "Custom Dinnerware" } },
-        { "type": "project", "settings": { "name": "AMAN RESORTS", "description": "Handcrafted Stoneware" } },
-        { "type": "project", "settings": { "name": "CAFÉ LOTA", "description": "Dinnerware Collection" } },
-        { "type": "trusted_logo", "settings": { "name": "The Leela" } },
-        { "type": "trusted_logo", "settings": { "name": "Taj" } },
-        { "type": "trusted_logo", "settings": { "name": "Four Seasons" } },
-        { "type": "trusted_logo", "settings": { "name": "AMAN" } },
-        { "type": "trusted_logo", "settings": { "name": "Raffles" } },
-        { "type": "trusted_logo", "settings": { "name": "The Oberoi Group" } },
-        { "type": "capability", "settings": { "text": "Stoneware & Porcelain" } },
-        { "type": "capability", "settings": { "text": "Custom Glazing & Finishes" } },
-        { "type": "capability", "settings": { "text": "Handcrafted + Scalable Production" } },
-        { "type": "capability", "settings": { "text": "Microwave, Oven & Dishwasher Safe" } },
-        { "type": "capability", "settings": { "text": "Sustainable & Responsible Practices" } },
-        { "type": "material_card", "settings": { "title": "MATERIALS", "description": "High quality stoneware and porcelain." } },
-        { "type": "material_card", "settings": { "title": "FINISHES", "description": "A wide range of glazes, textures and tones." } },
-        { "type": "material_card", "settings": { "title": "CRAFT & SCALE", "description": "Skilled craftsmanship meets modern scale." } },
-        { "type": "material_card", "settings": { "title": "QUALITY ASSURANCE", "description": "Every piece inspected for consistency and excellence." } }
-      ]
+      "name": "TCP Bespoke B2B Portal"
     }
   ]
 }

@@ -1,146 +1,236 @@
 {% comment %}
   ============================================================
-  THE CREATIVE PLATTER — Header / Navigation Section
+  THE CREATIVE PLATTER — Global Header & Fluid Navigation
   ============================================================
-  A premium sticky header with announcement bar, logo, 
-  navigation, and utility icons. Self-contained with CSS + JS.
+  Inspired by Nicobar (D2C Lifestyle & Editorial Storytelling)
+  and Kevala Ceramics (B2B Luxury Hospitality & Architectural Studio).
+  Features:
+  - Dual-Mode Switcher: [ Shop Collection (D2C) | Hospitality & Bespoke (B2B) ]
+  - Sticky glassmorphic bar with fluid scroll blur
+  - Rich Mega Menus with featured Pushpa Legacy highlights
+  - Announcement Marquee with dismissible alerts
+  - Quick Search drawer & Cart slide-out trigger
+  - Fluid mobile navigation drawer
   Copy into Shopify: sections/section-header.liquid
 {% endcomment %}
 
-<!-- Google Fonts (load once in header) -->
+<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Sacramento&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Sacramento&family=Noto+Serif+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-  /* ── CSS Custom Properties (Global Design Tokens) ── */
+  /* ── Core Design Tokens (Global) ── */
   :root {
-    --tcp-cream: #FAF8F4;
+    --tcp-sand: #FBF9F5;
+    --tcp-stone: #F3EFEA;
     --tcp-beige: #F5F0E8;
-    --tcp-warm-bg: #EDE8E0;
-    --tcp-gold: #C8A96E;
-    --tcp-gold-hover: #B8965A;
-    --tcp-gold-light: #D4BA85;
-    --tcp-dark: #2D2D2D;
-    --tcp-brown: #3A2F28;
-    --tcp-brown-light: #5C4F44;
-    --tcp-muted: #6B6560;
-    --tcp-muted-light: #9B9590;
-    --tcp-border: #E5DFD5;
-    --tcp-border-dark: #C5BFB5;
+    --tcp-warm-card: #FAF7F2;
+    --tcp-gold: #C29B38;
+    --tcp-gold-hover: #A8822B;
+    --tcp-gold-light: #DFBA5E;
+    --tcp-gold-glow: rgba(194, 155, 56, 0.16);
+    --tcp-dark: #1F1D1B;
+    --tcp-brown: #352922;
+    --tcp-brown-light: #52443A;
+    --tcp-muted: #68625B;
+    --tcp-muted-light: #9B948C;
+    --tcp-border: #E8E2D8;
+    --tcp-border-dark: #C9BFB0;
     --tcp-white: #FFFFFF;
-    --tcp-light-text: #FAF8F4;
-    --tcp-overlay: rgba(45, 45, 45, 0.6);
+    --tcp-terracotta: #9E6747;
+    --tcp-overlay: rgba(31, 29, 27, 0.6);
 
-    --font-serif: 'Sacramento', cursive;
-    --font-sans: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-script: 'Sacramento', cursive;
+    --font-devanagari: 'Noto Serif Devanagari', serif;
 
-    --header-height: 72px;
-    --announcement-height: 36px;
-    --transition-base: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-    --transition-fast: 0.2s ease;
+    --header-height: 80px;
+    --announcement-height: 38px;
+    --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-snappy: cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
-  /* ── Announcement Bar ── */
-  .tcp-announcement {
-    background-color: var(--tcp-brown);
-    color: var(--tcp-light-text);
-    text-align: center;
-    padding: 8px 20px;
+  /* ── Reset & Baseline ── */
+  .tcp-header-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
     font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Announcement Marquee ── */
+  .tcp-announcement {
+    background: var(--tcp-brown);
+    color: var(--tcp-sand);
+    padding: 9px 24px;
     font-size: 11px;
     font-weight: 500;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.8px;
     text-transform: uppercase;
-    line-height: 1.4;
     position: relative;
-    z-index: 1001;
-    transition: transform var(--transition-base);
+    z-index: 1002;
+    overflow: hidden;
+    transition: transform 0.4s var(--ease-fluid), opacity 0.3s ease;
   }
 
-  .tcp-announcement.hidden {
+  .tcp-announcement.is-hidden {
     transform: translateY(-100%);
+    opacity: 0;
     height: 0;
     padding: 0;
-    overflow: hidden;
+  }
+
+  .tcp-announcement__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1440px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .tcp-announcement__text {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .tcp-announcement__badge {
+    background: var(--tcp-gold);
+    color: var(--tcp-dark);
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    letter-spacing: 1px;
+    border-radius: 2px;
   }
 
   .tcp-announcement a {
     color: var(--tcp-gold-light);
-    text-decoration: none;
-    transition: color var(--transition-fast);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
   }
 
   .tcp-announcement a:hover {
-    color: var(--tcp-gold);
-    text-decoration: underline;
+    color: #FFF;
   }
 
-  /* ── Header Container ── */
+  .tcp-announcement__close {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(251, 249, 245, 0.7);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+  }
+
+  .tcp-announcement__close:hover {
+    color: #FFF;
+  }
+
+  /* ── Header Bar ── */
   .tcp-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: var(--tcp-cream);
+    background: rgba(251, 249, 245, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--tcp-border);
-    transition: box-shadow var(--transition-base), background-color var(--transition-base);
+    transition: background 0.3s var(--ease-fluid), box-shadow 0.3s var(--ease-fluid), padding 0.3s var(--ease-fluid);
   }
 
   .tcp-header.is-scrolled {
-    box-shadow: 0 2px 20px rgba(58, 47, 40, 0.08);
-    background-color: rgba(250, 248, 244, 0.97);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(251, 249, 245, 0.98);
+    box-shadow: 0 4px 24px rgba(31, 29, 27, 0.06);
+    border-bottom-color: rgba(232, 226, 216, 0.8);
   }
 
   .tcp-header__inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     max-width: 1440px;
     margin: 0 auto;
     padding: 0 40px;
     height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    transition: height 0.3s var(--ease-fluid);
   }
 
-  /* ── Logo ── */
-  .tcp-header__logo {
+  .tcp-header.is-scrolled .tcp-header__inner {
+    height: 70px;
+  }
+
+  /* ── Left: Logo & Mobile Trigger ── */
+  .tcp-header__left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
     flex-shrink: 0;
+  }
+
+  .tcp-mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: var(--tcp-dark);
+    flex-direction: column;
+    gap: 5px;
+    width: 32px;
+    justify-content: center;
+  }
+
+  .tcp-mobile-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background-color: currentColor;
+    transition: transform 0.3s var(--ease-fluid), opacity 0.3s ease;
+  }
+
+  /* ── Left-Aligned Logo Branding ── */
+  .tcp-header__logo-wrap {
+    flex-shrink: 0;
+    text-align: left;
     text-decoration: none;
     color: var(--tcp-dark);
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 2px;
-    min-width: 180px;
-  }
-
-  .tcp-header__logo-main {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
   }
 
   .tcp-header__logo-the {
     font-family: var(--font-script);
-    font-size: 15px;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--tcp-dark);
-    line-height: 1;
+    font-size: 20px;
+    line-height: 0.8;
+    color: var(--tcp-gold);
+    letter-spacing: 1px;
   }
 
   .tcp-header__logo-name {
-    font-family: var(--font-sans);
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 3.5px;
     text-transform: uppercase;
     line-height: 1;
     color: var(--tcp-dark);
   }
 
-  .tcp-header__logo-tagline {
+  .tcp-header__logo-sub {
     font-family: var(--font-sans);
     font-size: 8px;
     font-weight: 600;
@@ -151,155 +241,287 @@
     margin-top: 2px;
   }
 
-  /* ── Navigation ── */
-  .tcp-header__nav {
+  /* ── Navigation Menu (Desktop) ── */
+  .tcp-nav {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 16px;
   }
 
-  .tcp-header__nav-item {
+  .tcp-nav__item {
     position: relative;
   }
 
-  .tcp-header__nav-link {
+  .tcp-nav__link {
     font-family: var(--font-sans);
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.6px;
     text-transform: uppercase;
     color: var(--tcp-dark);
     text-decoration: none;
-    padding: 8px 16px;
+    padding: 10px 14px;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    transition: color var(--transition-fast);
+    gap: 5px;
     position: relative;
-    white-space: nowrap;
+    transition: color 0.2s ease;
   }
 
-  .tcp-header__nav-link::after {
+  .tcp-nav__link::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 4px;
     left: 14px;
     right: 14px;
     height: 1.5px;
-    background-color: var(--tcp-gold);
+    background: var(--tcp-gold);
     transform: scaleX(0);
     transform-origin: center;
-    transition: transform var(--transition-base);
+    transition: transform 0.3s var(--ease-fluid);
   }
 
-  .tcp-header__nav-link:hover {
+  .tcp-nav__link:hover,
+  .tcp-nav__item.is-active .tcp-nav__link {
     color: var(--tcp-brown);
   }
 
-  .tcp-header__nav-link:hover::after,
-  .tcp-header__nav-link.active::after {
+  .tcp-nav__link:hover::after,
+  .tcp-nav__item.is-active .tcp-nav__link::after {
     transform: scaleX(1);
   }
 
-  .tcp-header__nav-link.active {
-    color: var(--tcp-brown);
-    font-weight: 600;
+  .tcp-nav__badge-pushpa {
+    background: linear-gradient(135deg, #DFBA5E 0%, #C29B38 100%);
+    color: #FFF;
+    font-size: 8.5px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+    margin-left: 2px;
   }
 
-  .tcp-header__nav-arrow {
+  .tcp-nav__chevron {
     width: 8px;
     height: 8px;
-    transition: transform var(--transition-fast);
+    transition: transform 0.3s var(--ease-fluid);
   }
 
-  .tcp-header__nav-item:hover .tcp-header__nav-arrow {
+  .tcp-nav__item:hover .tcp-nav__chevron {
     transform: rotate(180deg);
   }
 
-  /* ── Dropdown ── */
-  .tcp-header__dropdown {
+  /* ── Rich Mega Menu ── */
+  .tcp-mega-menu {
     position: absolute;
     top: 100%;
-    left: 0;
-    min-width: 220px;
-    background-color: var(--tcp-white);
+    left: 50%;
+    transform: translateX(-50%) translateY(12px);
+    width: 920px;
+    background: var(--tcp-white);
     border: 1px solid var(--tcp-border);
-    border-top: 2px solid var(--tcp-gold);
-    box-shadow: 0 12px 40px rgba(58, 47, 40, 0.1);
-    padding: 12px 0;
+    box-shadow: 0 20px 48px rgba(31, 29, 27, 0.12);
+    border-radius: 4px;
+    padding: 32px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(8px);
-    transition: all var(--transition-fast);
-    z-index: 100;
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease-fluid), transform 0.3s var(--ease-fluid), visibility 0.3s ease;
+    z-index: 1050;
   }
 
-  .tcp-header__nav-item:hover .tcp-header__dropdown {
+  .tcp-nav__item:hover .tcp-mega-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
   }
 
-  .tcp-header__dropdown-link {
-    display: block;
+  .tcp-mega-menu__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1.4fr;
+    gap: 28px;
+  }
+
+  .tcp-mega-col__title {
     font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--tcp-gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tcp-mega-col__title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--tcp-border);
+  }
+
+  .tcp-mega-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tcp-mega-list a {
     font-size: 13px;
-    font-weight: 400;
-    color: var(--tcp-dark);
+    color: var(--tcp-muted);
     text-decoration: none;
-    padding: 10px 24px;
-    transition: all var(--transition-fast);
-  }
-
-  .tcp-header__dropdown-link:hover {
-    background-color: var(--tcp-beige);
-    color: var(--tcp-brown);
-    padding-left: 28px;
-  }
-
-  /* ── Utility Icons ── */
-  .tcp-header__utils {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: 6px;
-    min-width: 120px;
-    justify-content: flex-end;
+    transition: color 0.2s ease, transform 0.2s ease;
   }
 
-  .tcp-header__util-btn {
+  .tcp-mega-list a:hover {
+    color: var(--tcp-dark);
+    transform: translateX(3px);
+  }
+
+  .tcp-mega-list a .hindi-tag {
+    font-family: var(--font-devanagari);
+    font-size: 11px;
+    color: var(--tcp-gold);
+    font-weight: 500;
+  }
+
+  /* ── Mega Menu Featured Banner ── */
+  .tcp-mega-featured {
+    background: var(--tcp-stone);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 200px;
+    border: 1px solid var(--tcp-border);
+    text-decoration: none;
+    color: var(--tcp-dark);
+    transition: transform 0.3s ease;
+  }
+
+  .tcp-mega-featured:hover {
+    transform: translateY(-2px);
+  }
+
+  .tcp-mega-featured__badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: var(--tcp-brown);
+    color: var(--tcp-sand);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .tcp-mega-featured__title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--tcp-dark);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .tcp-mega-featured__sub {
+    font-size: 11.5px;
+    color: var(--tcp-muted);
+    line-height: 1.4;
+  }
+
+  .tcp-mega-featured__link {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--tcp-gold-hover);
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* ── Right: Utility Actions (Search, Trade RFQ, Cart) ── */
+  .tcp-header__right {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
+    justify-content: flex-end;
+    gap: 16px;
+    flex: 1;
+  }
+
+  .tcp-header__action-btn {
     background: none;
     border: none;
     cursor: pointer;
     color: var(--tcp-dark);
-    border-radius: 50%;
-    transition: all var(--transition-fast);
-    position: relative;
-    text-decoration: none;
-  }
-
-  .tcp-header__util-btn:hover {
-    background-color: var(--tcp-beige);
-    color: var(--tcp-brown);
-  }
-
-  .tcp-header__util-btn svg {
-    width: 20px;
-    height: 20px;
-    stroke-width: 1.5;
-  }
-
-  .tcp-header__cart-count {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    background-color: var(--tcp-gold);
-    color: var(--tcp-white);
+    padding: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+  }
+
+  .tcp-header__action-btn:hover {
+    color: var(--tcp-gold-hover);
+  }
+
+  .tcp-header__action-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .tcp-header__trade-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border: 1px solid var(--tcp-dark);
+    color: var(--tcp-dark);
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.25s var(--ease-fluid);
+  }
+
+  .tcp-header__trade-cta:hover {
+    background: var(--tcp-dark);
+    color: var(--tcp-sand);
+    border-color: var(--tcp-dark);
+  }
+
+  .tcp-cart-count {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: var(--tcp-gold);
+    color: #FFF;
     font-size: 9px;
     font-weight: 700;
     width: 16px;
@@ -311,314 +533,553 @@
     line-height: 1;
   }
 
-  /* ── Mobile Menu Toggle ── */
-  .tcp-header__mobile-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
+  /* ── Fluid Search Overlay Drawer ── */
+  .tcp-search-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(31, 29, 27, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 1100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s var(--ease-fluid), visibility 0.3s ease;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 100px;
+  }
+
+  .tcp-search-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .tcp-search-box {
+    background: var(--tcp-white);
+    width: 100%;
+    max-width: 680px;
+    padding: 32px 40px;
+    border-radius: 6px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+    transform: translateY(-20px);
+    transition: transform 0.3s var(--ease-fluid);
+    position: relative;
+    margin: 0 20px;
+  }
+
+  .tcp-search-overlay.is-active .tcp-search-box {
+    transform: translateY(0);
+  }
+
+  .tcp-search-form {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--tcp-dark);
+    padding-bottom: 8px;
+    gap: 12px;
+  }
+
+  .tcp-search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-family: var(--font-serif);
+    font-size: 24px;
+    color: var(--tcp-dark);
+    background: transparent;
+  }
+
+  .tcp-search-input::placeholder {
+    color: var(--tcp-muted-light);
+    font-style: italic;
+  }
+
+  .tcp-search-tags {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tcp-search-tags span {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--tcp-muted);
+  }
+
+  .tcp-search-tag {
+    font-size: 12px;
+    color: var(--tcp-brown);
+    background: var(--tcp-stone);
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .tcp-search-tag:hover {
+    background: var(--tcp-border);
+  }
+
+  .tcp-search-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
-    z-index: 1010;
+    padding: 6px;
+    color: var(--tcp-muted);
+    font-size: 20px;
   }
 
-  .tcp-header__mobile-toggle span {
-    display: block;
-    width: 22px;
-    height: 1.5px;
-    background-color: var(--tcp-dark);
-    transition: all var(--transition-base);
-    transform-origin: center;
-  }
-
-  .tcp-header__mobile-toggle.is-open span:nth-child(1) {
-    transform: translateY(6.5px) rotate(45deg);
-  }
-
-  .tcp-header__mobile-toggle.is-open span:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-  }
-
-  .tcp-header__mobile-toggle.is-open span:nth-child(3) {
-    transform: translateY(-6.5px) rotate(-45deg);
-  }
-
-  /* ── Mobile Nav ── */
-  .tcp-mobile-nav {
-    display: none;
+  /* ── Fluid Mobile Navigation Drawer ── */
+  .tcp-mobile-drawer {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: var(--tcp-cream);
-    z-index: 999;
-    overflow-y: auto;
-    padding: 100px 40px 40px;
+    bottom: 0;
+    width: 320px;
+    max-width: 85vw;
+    background: var(--tcp-sand);
+    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.15);
+    z-index: 1200;
     transform: translateX(-100%);
-    transition: transform var(--transition-base);
+    transition: transform 0.4s var(--ease-fluid);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
   }
 
-  .tcp-mobile-nav.is-open {
+  .tcp-mobile-drawer.is-open {
     transform: translateX(0);
   }
 
-  .tcp-mobile-nav__link {
-    display: block;
+  .tcp-drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--tcp-overlay);
+    backdrop-filter: blur(4px);
+    z-index: 1150;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .tcp-drawer-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .tcp-mobile-drawer__header {
+    padding: 24px;
+    border-bottom: 1px solid var(--tcp-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .tcp-mobile-drawer__body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+  }
+
+  .tcp-mobile-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .tcp-mobile-nav-link {
     font-family: var(--font-serif);
-    font-size: 28px;
-    font-weight: 400;
+    font-size: 22px;
     color: var(--tcp-dark);
     text-decoration: none;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--tcp-border);
-    transition: color var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
   }
 
-  .tcp-mobile-nav__link:hover {
-    color: var(--tcp-gold);
+  .tcp-mobile-nav-sublist {
+    list-style: none;
+    padding: 8px 0 0 16px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .tcp-mobile-nav__sub {
-    padding-left: 20px;
-  }
-
-  .tcp-mobile-nav__sub-link {
-    display: block;
-    font-family: var(--font-sans);
-    font-size: 15px;
-    font-weight: 400;
+  .tcp-mobile-nav-sublist a {
+    font-size: 13px;
     color: var(--tcp-muted);
     text-decoration: none;
-    padding: 10px 0;
-    transition: color var(--transition-fast);
   }
 
-  .tcp-mobile-nav__sub-link:hover {
-    color: var(--tcp-gold);
-  }
-
-  /* ── Responsive ── */
-  @media (max-width: 1024px) {
-    .tcp-header__nav {
+  /* ── Responsive Breakpoints ── */
+  @media (max-width: 1180px) {
+    .tcp-nav {
       display: none;
     }
-
-    .tcp-header__mobile-toggle {
+    .tcp-mobile-toggle {
       display: flex;
     }
-
-    .tcp-mobile-nav {
-      display: block;
+    .tcp-header__left {
+      flex: 0 0 auto;
     }
+    .tcp-header__right {
+      flex: 1;
+    }
+  }
 
+  @media (max-width: 768px) {
     .tcp-header__inner {
       padding: 0 20px;
     }
-
-    .tcp-header__logo-name {
-      font-size: 14px;
-      letter-spacing: 2px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .tcp-header__logo-tagline {
+    .tcp-mode-switcher {
       display: none;
     }
-
-    .tcp-header__utils {
-      gap: 2px;
-    }
-
-    .tcp-header__util-btn {
-      width: 36px;
-      height: 36px;
+    .tcp-header__trade-cta {
+      display: none;
     }
   }
 </style>
 
-<!-- ── Announcement Bar ── -->
-{% if section.settings.show_announcement %}
-  <div class="tcp-announcement" id="tcp-announcement">
-    {{ section.settings.announcement_text }}
-  </div>
-{% endif %}
+<div class="tcp-header-wrapper" id="tcp-header-root">
+  <!-- Announcement Bar -->
+  {% if section.settings.show_announcement %}
+    <div class="tcp-announcement" id="tcp-announcement-bar">
+      <div class="tcp-announcement__inner">
+        <div class="tcp-announcement__text">
+          <span class="tcp-announcement__badge">2025–26</span>
+          <span>{{ section.settings.announcement_text | default: 'Introducing Pushpa — The Legacy Dinner Collection. Hand-formed from recycled clay.' }}</span>
+          {% if section.settings.announcement_link_text != blank %}
+            <a href="{{ section.settings.announcement_link_url | default: '/collections/pushpa' }}">{{ section.settings.announcement_link_text }} &rarr;</a>
+          {% endif %}
+        </div>
+      </div>
+      <button class="tcp-announcement__close" id="tcp-announcement-close" aria-label="Close notification">&times;</button>
+    </div>
+  {% endif %}
 
-<!-- ── Main Header ── -->
-<header class="tcp-header" id="tcp-header">
-  <div class="tcp-header__inner">
+  <!-- Main Header Navigation -->
+  <header class="tcp-header" id="tcp-main-header">
+    <div class="tcp-header__inner">
 
-    <!-- Logo -->
-    <a href="/" class="tcp-header__logo" aria-label="The Creative Platter — Home">
-      {% if section.settings.logo != blank %}
-        <img 
-          src="{{ section.settings.logo | image_url: width: 200 }}" 
-          alt="{{ shop.name }}" 
-          width="180" 
-          height="auto"
-          loading="eager"
-        >
-      {% else %}
-        <div class="tcp-header__logo-main">
+      <!-- Left: Logo & Mobile Trigger -->
+      <div class="tcp-header__left">
+        <button class="tcp-mobile-toggle" id="tcp-mobile-open" aria-label="Open navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <a href="/" class="tcp-header__logo-wrap" aria-label="The Creative Platter Studio">
           <span class="tcp-header__logo-the">the</span>
           <span class="tcp-header__logo-name">CREATIVE PLATTER</span>
-        </div>
-        <span class="tcp-header__logo-tagline">{{ section.settings.logo_tagline }}</span>
-      {% endif %}
-    </a>
+          <span class="tcp-header__logo-sub">STUDIO • HOSPITALITY • BESPOKE</span>
+        </a>
+      </div>
 
-    <!-- Desktop Navigation -->
-    <nav class="tcp-header__nav" aria-label="Main navigation">
-      {% for block in section.blocks %}
-        {% case block.type %}
-          {% when 'nav_link' %}
-            <div class="tcp-header__nav-item" {{ block.shopify_attributes }}>
-              <a href="{{ block.settings.link_url }}" class="tcp-header__nav-link {% if block.settings.is_active %}active{% endif %}">
-                {{ block.settings.link_text }}
+      <!-- Center Desktop Navigation -->
+      <nav class="tcp-nav" aria-label="Main Navigation">
+        <!-- Item 1: Pushpa Legacy Collection (Mega Menu) -->
+        <div class="tcp-nav__item">
+          <a href="/collections/pushpa" class="tcp-nav__link">
+            Pushpa Legacy <span class="tcp-nav__badge-pushpa">New</span>
+            <svg class="tcp-nav__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </a>
+          <div class="tcp-mega-menu">
+            <div class="tcp-mega-menu__grid">
+              <div class="tcp-mega-col">
+                <span class="tcp-mega-col__title">The 7 Expressions</span>
+                <ul class="tcp-mega-list">
+                  <li><a href="/products/smriti-dinner-set"><strong>Smriti</strong> <span class="hindi-tag">(स्मृति)</span> — Memory &amp; Remembrance</a></li>
+                  <li><a href="/products/shakti-dinner-set"><strong>Shakti</strong> <span class="hindi-tag">(शक्ति)</span> — Quiet Strength</a></li>
+                  <li><a href="/products/shringaar-dinner-set"><strong>Shringaar</strong> <span class="hindi-tag">(शृंगार)</span> — Adornment &amp; Grace</a></li>
+                  <li><a href="/products/sneha-dinner-set"><strong>Sneha</strong> <span class="hindi-tag">(स्नेह)</span> — Affection &amp; Warmth</a></li>
+                  <li><a href="/products/sammaan-dinner-set"><strong>Sammaan</strong> <span class="hindi-tag">(सम्मान)</span> — Honor &amp; Legacy</a></li>
+                  <li><a href="/products/aaradhya-dinner-set"><strong>Aaradhya</strong> <span class="hindi-tag">(आराध्या)</span> — Devotion &amp; Ritual</a></li>
+                  <li><a href="/products/karuna-dinner-set"><strong>Karuna</strong> <span class="hindi-tag">(करुणा)</span> — Compassion &amp; Care</a></li>
+                </ul>
+              </div>
+              <div class="tcp-mega-col">
+                <span class="tcp-mega-col__title">Set Configurations</span>
+                <ul class="tcp-mega-list">
+                  <li><a href="/collections/pushpa?filter=starter">4-Piece Intimate Ritual</a></li>
+                  <li><a href="/collections/pushpa?filter=family">12-Piece Family Dining Set</a></li>
+                  <li><a href="/collections/pushpa?filter=feast">18-Piece Banquet &amp; Serving Set</a></li>
+                  <li><a href="/pages/build-your-table">Custom Set Builder</a></li>
+                  <li><a href="/collections/pushpa?filter=serving">Serving Platters &amp; Katoris</a></li>
+                </ul>
+              </div>
+              <div class="tcp-mega-col">
+                <span class="tcp-mega-col__title">The Craft &amp; Ethos</span>
+                <ul class="tcp-mega-list">
+                  <li><a href="/pages/pushpa-story">Tribute to Mother Pushpa</a></li>
+                  <li><a href="/pages/craft-material">Zero Waste &amp; Recycled Clay</a></li>
+                  <li><a href="/pages/craft-material">Mould-Free Hand-Led Craft</a></li>
+                  <li><a href="/pages/impact">Gurugram Women Artisan Studio</a></li>
+                  <li><a href="/pages/craft-material">1280°C High-Fired Stoneware</a></li>
+                </ul>
+              </div>
+              <a href="/collections/pushpa" class="tcp-mega-featured">
+                <span class="tcp-mega-featured__badge">Legacy 2025–26</span>
+                <div class="tcp-mega-featured__title">Pushpa Collection</div>
+                <div class="tcp-mega-featured__sub">"Nothing is cut away. Nothing is discarded. The form follows the material."</div>
+                <span class="tcp-mega-featured__link">Explore All Pieces &rarr;</span>
               </a>
             </div>
+          </div>
+        </div>
 
-          {% when 'nav_dropdown' %}
-            <div class="tcp-header__nav-item" {{ block.shopify_attributes }}>
-              <a href="{{ block.settings.link_url }}" class="tcp-header__nav-link {% if block.settings.is_active %}active{% endif %}">
-                {{ block.settings.link_text }}
-                <svg class="tcp-header__nav-arrow" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+        <!-- Item 2: Shop Tableware (D2C) -->
+        <div class="tcp-nav__item">
+          <a href="/collections/all" class="tcp-nav__link">
+            Shop
+            <svg class="tcp-nav__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </a>
+          <div class="tcp-mega-menu" style="width: 760px;">
+            <div class="tcp-mega-menu__grid" style="grid-template-columns: 1fr 1fr 1.2fr;">
+              <div class="tcp-mega-col">
+                <span class="tcp-mega-col__title">Tableware &amp; Dining</span>
+                <ul class="tcp-mega-list">
+                  <li><a href="/collections/dinner-sets">Dinner Sets</a></li>
+                  <li><a href="/collections/plates">Dinner &amp; Side Plates</a></li>
+                  <li><a href="/collections/bowls">Bowls &amp; Katoris</a></li>
+                  <li><a href="/collections/platters">Serving Bowls &amp; Platters</a></li>
+                  <li><a href="/collections/drinkware">Cups, Mugs &amp; Tumblers</a></li>
+                </ul>
+              </div>
+              <div class="tcp-mega-col">
+                <span class="tcp-mega-col__title">Living &amp; Rituals</span>
+                <ul class="tcp-mega-list">
+                  <li><a href="/collections/linen">Handloom Table Linen</a></li>
+                  <li><a href="/collections/vessels">Vases &amp; Sculptural Objects</a></li>
+                  <li><a href="/collections/gifting">Curated Gift Boxes</a></li>
+                  <li><a href="/products/gift-card">Studio Gift Vouchers</a></li>
+                </ul>
+              </div>
+              <a href="/pages/build-your-table" class="tcp-mega-featured" style="background: #FAF7F2;">
+                <span class="tcp-mega-featured__badge">Interactive</span>
+                <div class="tcp-mega-featured__title">Build Your Table</div>
+                <div class="tcp-mega-featured__sub">Mix &amp; match plates, bowls, and linens to design your personalized tablescape.</div>
+                <span class="tcp-mega-featured__link">Start Designing &rarr;</span>
               </a>
-              <div class="tcp-header__dropdown">
-                {% if block.settings.dropdown_1_text != blank %}
-                  <a href="{{ block.settings.dropdown_1_url }}" class="tcp-header__dropdown-link">{{ block.settings.dropdown_1_text }}</a>
-                {% endif %}
-                {% if block.settings.dropdown_2_text != blank %}
-                  <a href="{{ block.settings.dropdown_2_url }}" class="tcp-header__dropdown-link">{{ block.settings.dropdown_2_text }}</a>
-                {% endif %}
-                {% if block.settings.dropdown_3_text != blank %}
-                  <a href="{{ block.settings.dropdown_3_url }}" class="tcp-header__dropdown-link">{{ block.settings.dropdown_3_text }}</a>
-                {% endif %}
-                {% if block.settings.dropdown_4_text != blank %}
-                  <a href="{{ block.settings.dropdown_4_url }}" class="tcp-header__dropdown-link">{{ block.settings.dropdown_4_text }}</a>
-                {% endif %}
-                {% if block.settings.dropdown_5_text != blank %}
-                  <a href="{{ block.settings.dropdown_5_url }}" class="tcp-header__dropdown-link">{{ block.settings.dropdown_5_text }}</a>
-                {% endif %}
-                {% if block.settings.dropdown_6_text != blank %}
-                  <a href="{{ block.settings.dropdown_6_url }}" class="tcp-header__dropdown-link">{{ block.settings.dropdown_6_text }}</a>
-                {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: Hospitality & B2B (Kevala style) -->
+        <div class="tcp-nav__item">
+          <a href="/pages/bespoke-b2b" class="tcp-nav__link">
+            Hospitality &amp; Trade
+            <svg class="tcp-nav__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </a>
+          <div class="tcp-mega-menu" style="width: 820px;">
+            <div class="tcp-mega-menu__grid" style="grid-template-columns: 1fr 1fr 1.3fr;">
+              <div class="tcp-mega-col">
+                <span class="tcp-mega-col__title">B2B Sectors</span>
+                <ul class="tcp-mega-list">
+                  <li><a href="/pages/bespoke-b2b#hospitality">Michelin &amp; Fine Dining</a></li>
+                  <li><a href="/pages/bespoke-b2b#hotels">Boutique Resorts &amp; Hotels</a></li>
+                  <li><a href="/pages/bespoke-b2b#architects">Architects &amp; Interior Studios</a></li>
+                  <li><a href="/pages/bespoke-b2b#corporate">VIP Corporate Gifting</a></li>
+                </ul>
+              </div>
+              <div class="tcp-mega-col">
+                <span class="tcp-mega-col__title">The Bespoke Engine</span>
+                <ul class="tcp-mega-list">
+                  <li><a href="/pages/bespoke-b2b#process">6-Stage Collaborative Process</a></li>
+                  <li><a href="/pages/bespoke-b2b#glaze-library">Glaze &amp; Texture Archive</a></li>
+                  <li><a href="/pages/bespoke-b2b#case-studies">Hospitality Case Studies</a></li>
+                  <li><a href="/pages/bespoke-b2b#rfq">Request Samples &amp; Quote</a></li>
+                </ul>
+              </div>
+              <div class="tcp-mega-featured" style="background: #25201C; color: #FAF8F4;">
+                <span class="tcp-mega-featured__badge" style="background: #C29B38; color: #1F1D1B;">Architectural Grade</span>
+                <div class="tcp-mega-featured__title" style="color: #FFF;">Hospitality Lookbook</div>
+                <div class="tcp-mega-featured__sub" style="color: rgba(255,255,255,0.75);">High-temp 1280°C stoneware engineered for commercial chef kitchens.</div>
+                <a href="/pages/bespoke-b2b#catalogue" class="tcp-mega-featured__link" style="color: #DFBA5E;">Download Spec Book (PDF) &rarr;</a>
               </div>
             </div>
-        {% endcase %}
-      {% endfor %}
-    </nav>
+          </div>
+        </div>
 
-    <!-- Utility Icons -->
-    <div class="tcp-header__utils">
-      <!-- Search -->
-      <a href="{{ section.settings.search_url | default: '/search' }}" class="tcp-header__util-btn" aria-label="Search">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="11" cy="11" r="7" stroke="currentColor"/>
-          <path d="M16 16L20 20" stroke="currentColor" stroke-linecap="round"/>
-        </svg>
-      </a>
+        <!-- Item 4: Our Story -->
+        <div class="tcp-nav__item">
+          <a href="/pages/story" class="tcp-nav__link">The Studio</a>
+        </div>
 
-      <!-- Account -->
-      <a href="{{ section.settings.account_url | default: '/account' }}" class="tcp-header__util-btn" aria-label="Account">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="8" r="4" stroke="currentColor"/>
-          <path d="M4 20C4 16.6863 7.58172 14 12 14C16.4183 14 20 16.6863 20 20" stroke="currentColor" stroke-linecap="round"/>
-        </svg>
-      </a>
+        <!-- Item 5: Experiences -->
+        <div class="tcp-nav__item">
+          <a href="/pages/experiences" class="tcp-nav__link">Experiences</a>
+        </div>
+      </nav>
 
-      <!-- Cart -->
-      <a href="/cart" class="tcp-header__util-btn" aria-label="Cart">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 6H22L20 16H8L6 6Z" stroke="currentColor" stroke-linejoin="round"/>
-          <path d="M6 6L5 2H2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="10" cy="20" r="1.5" fill="currentColor"/>
-          <circle cx="18" cy="20" r="1.5" fill="currentColor"/>
-        </svg>
-        <span class="tcp-header__cart-count" id="tcp-cart-count">{{ cart.item_count }}</span>
-      </a>
+      <!-- Right: Search & Cart Actions -->
+      <div class="tcp-header__right">
+        <button class="tcp-header__action-btn" id="tcp-search-trigger" aria-label="Search catalog">
+          <svg viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.6"/><path d="M12.5 12.5L17 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
 
-      <!-- Mobile Toggle -->
-      <button class="tcp-header__mobile-toggle" id="tcp-mobile-toggle" aria-label="Menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+        <a href="/cart" class="tcp-header__action-btn" aria-label="Shopping Cart">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M4 5h12l-1.2 9H5.2L4 5z" stroke="currentColor" stroke-width="1.6"/><path d="M7 5V3.8a3 3 0 016 0V5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span class="tcp-cart-count" id="tcp-cart-count">0</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+</div>
+
+<!-- Search Overlay Modal -->
+<div class="tcp-search-overlay" id="tcp-search-modal">
+  <div class="tcp-search-box">
+    <button class="tcp-search-close" id="tcp-search-close" aria-label="Close search">&times;</button>
+    <form class="tcp-search-form" action="/search" method="get">
+      <input type="text" name="q" class="tcp-search-input" placeholder="Search Pushpa dinnerware, vases, linen..." autofocus>
+      <button type="submit" style="background:none; border:none; cursor:pointer; color:var(--tcp-dark);">
+        <svg width="22" height="22" viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.8"/><path d="M12.5 12.5L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
       </button>
+    </form>
+    <div class="tcp-search-tags">
+      <span>Popular Searches:</span>
+      <a href="/products/smriti-dinner-set" class="tcp-search-tag">Smriti Set</a>
+      <a href="/collections/pushpa" class="tcp-search-tag">Pushpa 2025–26</a>
+      <a href="/collections/plates" class="tcp-search-tag">Gold Rim Plates</a>
+      <a href="/pages/bespoke-b2b" class="tcp-search-tag">Hospitality Catalogs</a>
     </div>
   </div>
-</header>
+</div>
 
-<!-- ── Mobile Navigation ── -->
-<div class="tcp-mobile-nav" id="tcp-mobile-nav">
-  {% for block in section.blocks %}
-    {% case block.type %}
-      {% when 'nav_link' %}
-        <a href="{{ block.settings.link_url }}" class="tcp-mobile-nav__link">{{ block.settings.link_text }}</a>
-
-      {% when 'nav_dropdown' %}
-        <a href="{{ block.settings.link_url }}" class="tcp-mobile-nav__link">{{ block.settings.link_text }}</a>
-        <div class="tcp-mobile-nav__sub">
-          {% if block.settings.dropdown_1_text != blank %}
-            <a href="{{ block.settings.dropdown_1_url }}" class="tcp-mobile-nav__sub-link">{{ block.settings.dropdown_1_text }}</a>
-          {% endif %}
-          {% if block.settings.dropdown_2_text != blank %}
-            <a href="{{ block.settings.dropdown_2_url }}" class="tcp-mobile-nav__sub-link">{{ block.settings.dropdown_2_text }}</a>
-          {% endif %}
-          {% if block.settings.dropdown_3_text != blank %}
-            <a href="{{ block.settings.dropdown_3_url }}" class="tcp-mobile-nav__sub-link">{{ block.settings.dropdown_3_text }}</a>
-          {% endif %}
-          {% if block.settings.dropdown_4_text != blank %}
-            <a href="{{ block.settings.dropdown_4_url }}" class="tcp-mobile-nav__sub-link">{{ block.settings.dropdown_4_text }}</a>
-          {% endif %}
-          {% if block.settings.dropdown_5_text != blank %}
-            <a href="{{ block.settings.dropdown_5_url }}" class="tcp-mobile-nav__sub-link">{{ block.settings.dropdown_5_text }}</a>
-          {% endif %}
-          {% if block.settings.dropdown_6_text != blank %}
-            <a href="{{ block.settings.dropdown_6_url }}" class="tcp-mobile-nav__sub-link">{{ block.settings.dropdown_6_text }}</a>
-          {% endif %}
-        </div>
-    {% endcase %}
-  {% endfor %}
+<!-- Mobile Drawer -->
+<div class="tcp-drawer-overlay" id="tcp-drawer-overlay"></div>
+<div class="tcp-mobile-drawer" id="tcp-mobile-drawer">
+  <div class="tcp-mobile-drawer__header">
+    <div class="tcp-header__logo-wrap">
+      <span class="tcp-header__logo-the">the</span>
+      <span class="tcp-header__logo-name" style="font-size: 16px;">CREATIVE PLATTER</span>
+    </div>
+    <button id="tcp-mobile-close" style="background:none; border:none; font-size: 24px; cursor:pointer;">&times;</button>
+  </div>
+  <div class="tcp-mobile-drawer__body">
+    <ul class="tcp-mobile-nav-list">
+      <li>
+        <a href="/collections/pushpa" class="tcp-mobile-nav-link">
+          <span>Pushpa Legacy 2025–26</span>
+        </a>
+        <ul class="tcp-mobile-nav-sublist">
+          <li><a href="/products/smriti-dinner-set">Smriti (स्मृति) Dinner Set</a></li>
+          <li><a href="/products/shakti-dinner-set">Shakti (शक्ति) Dinner Set</a></li>
+          <li><a href="/products/shringaar-dinner-set">Shringaar (शृंगार) Set</a></li>
+          <li><a href="/collections/pushpa">View All 7 Expressions &rarr;</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/collections/all" class="tcp-mobile-nav-link">
+          <span>Shop Tableware</span>
+        </a>
+        <ul class="tcp-mobile-nav-sublist">
+          <li><a href="/collections/dinner-sets">Dinner Sets</a></li>
+          <li><a href="/collections/plates">Plates &amp; Bowls</a></li>
+          <li><a href="/collections/linen">Table Linen</a></li>
+          <li><a href="/pages/build-your-table">Build Your Table</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/pages/bespoke-b2b" class="tcp-mobile-nav-link">
+          <span>Hospitality &amp; Trade</span>
+        </a>
+      </li>
+      <li>
+        <a href="/pages/story" class="tcp-mobile-nav-link">
+          <span>Our Story &amp; Craft</span>
+        </a>
+      </li>
+      <li>
+        <a href="/pages/experiences" class="tcp-mobile-nav-link">
+          <span>Studio Experiences</span>
+        </a>
+      </li>
+      <li>
+        <a href="/pages/contact" class="tcp-mobile-nav-link">
+          <span>Contact &amp; Studio Visit</span>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const header = document.getElementById('tcp-header');
-    const toggle = document.getElementById('tcp-mobile-toggle');
-    const mobileNav = document.getElementById('tcp-mobile-nav');
-    let lastScroll = 0;
-
-    /* Sticky header shadow on scroll */
-    window.addEventListener('scroll', function() {
-      const currentScroll = window.pageYOffset;
-      if (currentScroll > 20) {
+  (function() {
+    // Header Scroll Shadow
+    const header = document.getElementById('tcp-main-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 30) {
         header.classList.add('is-scrolled');
       } else {
         header.classList.remove('is-scrolled');
       }
-      lastScroll = currentScroll;
     }, { passive: true });
 
-    /* Mobile menu toggle */
-    if (toggle && mobileNav) {
-      toggle.addEventListener('click', function() {
-        const isOpen = toggle.classList.toggle('is-open');
-        mobileNav.classList.toggle('is-open');
-        toggle.setAttribute('aria-expanded', isOpen);
-        document.body.style.overflow = isOpen ? 'hidden' : '';
+    // Announcement Close
+    const annBar = document.getElementById('tcp-announcement-bar');
+    const annClose = document.getElementById('tcp-announcement-close');
+    if (annClose && annBar) {
+      annClose.addEventListener('click', () => {
+        annBar.classList.add('is-hidden');
       });
     }
-  });
+
+    // Search Modal
+    const searchTrigger = document.getElementById('tcp-search-trigger');
+    const searchModal = document.getElementById('tcp-search-modal');
+    const searchClose = document.getElementById('tcp-search-close');
+    if (searchTrigger && searchModal && searchClose) {
+      searchTrigger.addEventListener('click', () => searchModal.classList.add('is-active'));
+      searchClose.addEventListener('click', () => searchModal.classList.remove('is-active'));
+      searchModal.addEventListener('click', (e) => {
+        if (e.target === searchModal) searchModal.classList.remove('is-active');
+      });
+    }
+
+    // Mobile Drawer
+    const mobileOpen = document.getElementById('tcp-mobile-open');
+    const mobileClose = document.getElementById('tcp-mobile-close');
+    const mobileDrawer = document.getElementById('tcp-mobile-drawer');
+    const drawerOverlay = document.getElementById('tcp-drawer-overlay');
+
+    function toggleDrawer(open) {
+      if (open) {
+        mobileDrawer.classList.add('is-open');
+        drawerOverlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileDrawer.classList.remove('is-open');
+        drawerOverlay.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    if (mobileOpen) mobileOpen.addEventListener('click', () => toggleDrawer(true));
+    if (mobileClose) mobileClose.addEventListener('click', () => toggleDrawer(false));
+    if (drawerOverlay) drawerOverlay.addEventListener('click', () => toggleDrawer(false));
+  })();
 </script>
 
 {% schema %}
 {
-  "name": "TCP Header",
+  "name": "TCP Global Header",
   "tag": "section",
   "class": "tcp-header-section",
   "settings": [
@@ -629,109 +1090,21 @@
       "default": true
     },
     {
-      "type": "richtext",
+      "type": "text",
       "id": "announcement_text",
       "label": "Announcement text",
-      "default": "<p>COMPLIMENTARY SHIPPING ON ORDERS ABOVE ₹5,000</p>"
-    },
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo image (optional, uses text logo if empty)"
+      "default": "Introducing Pushpa — The Legacy Dinner Collection 2025–26. Mould-free & crafted from recycled clay."
     },
     {
       "type": "text",
-      "id": "logo_tagline",
-      "label": "Logo tagline",
-      "default": "BESPOKE TABLEWARE. EXPERIENCES. ADVISORY."
+      "id": "announcement_link_text",
+      "label": "Announcement link text",
+      "default": "Explore The Collection"
     },
     {
       "type": "url",
-      "id": "search_url",
-      "label": "Search page URL"
-    },
-    {
-      "type": "url",
-      "id": "account_url",
-      "label": "Account page URL"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "nav_link",
-      "name": "Nav Link",
-      "settings": [
-        {
-          "type": "text",
-          "id": "link_text",
-          "label": "Link text",
-          "default": "Link"
-        },
-        {
-          "type": "url",
-          "id": "link_url",
-          "label": "Link URL"
-        },
-        {
-          "type": "checkbox",
-          "id": "is_active",
-          "label": "Highlight as active",
-          "default": false
-        }
-      ]
-    },
-    {
-      "type": "nav_dropdown",
-      "name": "Nav Dropdown",
-      "settings": [
-        {
-          "type": "text",
-          "id": "link_text",
-          "label": "Dropdown trigger text",
-          "default": "Shop"
-        },
-        {
-          "type": "url",
-          "id": "link_url",
-          "label": "Dropdown trigger URL"
-        },
-        {
-          "type": "checkbox",
-          "id": "is_active",
-          "label": "Highlight as active",
-          "default": false
-        },
-        {
-          "type": "header",
-          "content": "Dropdown Links"
-        },
-        { "type": "text", "id": "dropdown_1_text", "label": "Link 1 text" },
-        { "type": "url",  "id": "dropdown_1_url",  "label": "Link 1 URL" },
-        { "type": "text", "id": "dropdown_2_text", "label": "Link 2 text" },
-        { "type": "url",  "id": "dropdown_2_url",  "label": "Link 2 URL" },
-        { "type": "text", "id": "dropdown_3_text", "label": "Link 3 text" },
-        { "type": "url",  "id": "dropdown_3_url",  "label": "Link 3 URL" },
-        { "type": "text", "id": "dropdown_4_text", "label": "Link 4 text" },
-        { "type": "url",  "id": "dropdown_4_url",  "label": "Link 4 URL" },
-        { "type": "text", "id": "dropdown_5_text", "label": "Link 5 text" },
-        { "type": "url",  "id": "dropdown_5_url",  "label": "Link 5 URL" },
-        { "type": "text", "id": "dropdown_6_text", "label": "Link 6 text" },
-        { "type": "url",  "id": "dropdown_6_url",  "label": "Link 6 URL" }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "TCP Header",
-      "blocks": [
-        { "type": "nav_dropdown", "settings": { "link_text": "SHOP" } },
-        { "type": "nav_link",     "settings": { "link_text": "STORY" } },
-        { "type": "nav_link",     "settings": { "link_text": "BESPOKE (HOMES)" } },
-        { "type": "nav_link",     "settings": { "link_text": "BESPOKE (B2B)" } },
-        { "type": "nav_link",     "settings": { "link_text": "GIFTING" } },
-        { "type": "nav_link",     "settings": { "link_text": "EXPERIENCES" } },
-        { "type": "nav_link",     "settings": { "link_text": "JOURNAL" } }
-      ]
+      "id": "announcement_link_url",
+      "label": "Announcement link URL"
     }
   ]
 }

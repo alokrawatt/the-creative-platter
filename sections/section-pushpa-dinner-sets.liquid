@@ -1,110 +1,153 @@
 {% comment %}
   ============================================================
-  THE CREATIVE PLATTER — Pushpa Dinner Sets Page
+  THE CREATIVE PLATTER — Pushpa Legacy Dinner Sets (2025–26)
   ============================================================
-  Hero banner + "The Seven Expressions" alternating layout
-  with each dinner set (Smriti, Shakti, Shringaar, Sneha,
-  Sammaan, Aaradhya, Karuna) + bottom quote + trust badges.
+  Complete dedicated collection page faithful to the Pushpa Brochure:
+  - The Concept & Tribute to mother Pushpa
+  - The 7 Expressions: Smriti (स्मृति), Shakti (शक्ति),
+    Shringaar (शृंगार), Sneha (स्नेह), Sammaan (सम्मान),
+    Aaradhya (आराध्या), Karuna (करुणा).
+  - Craft, Material, Zero Off-Cuts & Gurugram Village Impact.
   Copy into Shopify: sections/section-pushpa-dinner-sets.liquid
 {% endcomment %}
 
 <style>
-  /* ── Hero ── */
-  .tcp-pushpa-hero {
-    position: relative;
-    min-height: 460px;
-    display: flex;
-    align-items: flex-end;
+  .tcp-pushpa-page {
+    background-color: var(--tcp-sand, #FBF9F5);
+    color: var(--tcp-dark, #1F1D1B);
+    font-family: var(--font-sans, sans-serif);
     overflow: hidden;
   }
 
-  .tcp-pushpa-hero__bg {
+  /* ── Hero ── */
+  .tcp-pushpa-hero {
+    position: relative;
+    min-height: 540px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: radial-gradient(circle at center, #FFFFFF 0%, #FAF6EE 50%, #EDE5D8 100%);
+    padding: 80px 40px;
+    border-bottom: 1px solid var(--tcp-border, #E8E2D8);
+  }
+
+  .tcp-pushpa-hero__wash {
     position: absolute;
-    inset: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, rgba(223, 186, 94, 0.22) 0%, rgba(194, 155, 56, 0.08) 50%, transparent 75%);
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(40px);
   }
 
-  .tcp-pushpa-hero__bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .tcp-pushpa-hero__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(35, 28, 22, 0.8) 0%, rgba(35, 28, 22, 0.3) 60%, rgba(35, 28, 22, 0.15) 100%);
-  }
-
-  .tcp-pushpa-hero__inner {
+  .tcp-pushpa-hero__content {
     position: relative;
     z-index: 2;
-    max-width: 1440px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 0 80px 56px;
-    width: 100%;
+  }
+
+  .tcp-pushpa-hero__prefix {
+    font-family: var(--font-script, 'Sacramento', cursive);
+    font-size: 42px;
+    color: var(--tcp-gold, #C29B38);
+    display: block;
+    margin-bottom: 2px;
   }
 
   .tcp-pushpa-hero__title {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(44px, 6vw, 72px);
+    font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(56px, 7vw, 92px);
     font-weight: 400;
-    color: var(--tcp-white, #FFFFFF);
-    line-height: 1.05;
-    margin-bottom: 8px;
+    line-height: 0.95;
+    color: var(--tcp-dark, #1F1D1B);
+    margin: 0 0 16px;
+    letter-spacing: -0.5px;
   }
 
-  .tcp-pushpa-hero__subtitle-line {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: 18px;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--tcp-white, #FFFFFF);
+  .tcp-pushpa-hero__caps {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--tcp-brown, #352922);
+    margin-bottom: 20px;
     display: block;
-    margin-bottom: 4px;
   }
 
   .tcp-pushpa-hero__divider {
     width: 48px;
-    height: 2px;
-    background-color: var(--tcp-gold, #C8A96E);
-    margin: 16px 0;
+    height: 1.5px;
+    background: var(--tcp-gold, #C29B38);
+    margin: 0 auto 24px;
   }
 
-  .tcp-pushpa-hero__desc {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 15px;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.7;
-    max-width: 440px;
-    margin-bottom: 28px;
+  .tcp-pushpa-hero__concept {
+    font-family: var(--font-serif, serif);
+    font-size: 24px;
+    font-style: italic;
+    color: var(--tcp-muted, #68625B);
+    line-height: 1.5;
+    max-width: 640px;
+    margin: 0 auto 32px;
   }
 
-  .tcp-pushpa-hero__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.8px;
+  /* ── Dedicated Tribute Section ── */
+  .tcp-pushpa-tribute {
+    background: var(--tcp-white, #FFFFFF);
+    padding: 80px 0;
+    border-bottom: 1px solid var(--tcp-border, #E8E2D8);
+  }
+
+  .tcp-pushpa-tribute__inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 40px;
+    text-align: center;
+  }
+
+  .tcp-pushpa-tribute__label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--tcp-white, #FFFFFF);
-    text-decoration: none;
-    padding: 14px 28px;
-    background-color: var(--tcp-dark, #2D2D2D);
-    border: 1.5px solid var(--tcp-dark, #2D2D2D);
-    transition: all 0.3s ease;
+    color: var(--tcp-gold, #C29B38);
+    display: block;
+    margin-bottom: 16px;
   }
 
-  .tcp-pushpa-hero__btn:hover {
-    background-color: var(--tcp-gold, #C8A96E);
-    border-color: var(--tcp-gold, #C8A96E);
+  .tcp-pushpa-tribute__quote {
+    font-family: var(--font-serif, serif);
+    font-size: clamp(26px, 3.5vw, 36px);
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--tcp-dark, #1F1D1B);
+    margin: 0 0 24px;
   }
 
-  /* ── Expressions Title ── */
+  .tcp-pushpa-tribute__body {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 15px;
+    color: var(--tcp-muted, #68625B);
+    line-height: 1.85;
+    text-align: justify;
+    text-align-last: center;
+    margin: 0 auto;
+  }
+
+  /* ── The 7 Expressions Showcase ── */
   .tcp-pushpa-expressions {
-    background-color: var(--tcp-white, #FFFFFF);
-    padding: 80px 0 0;
+    padding: 100px 0;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 
   .tcp-pushpa-expressions__header {
@@ -113,405 +156,451 @@
   }
 
   .tcp-pushpa-expressions__title {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(32px, 4vw, 48px);
+    font-family: var(--font-serif, serif);
+    font-size: clamp(34px, 4.5vw, 52px);
     font-weight: 400;
-    color: var(--tcp-dark, #2D2D2D);
-    margin-bottom: 12px;
+    color: var(--tcp-dark, #1F1D1B);
+    margin: 0 0 12px;
   }
 
-  .tcp-pushpa-expressions__subtitle {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 15px;
-    color: var(--tcp-muted, #6B6560);
-    line-height: 1.6;
-  }
-
-  /* ── Expression Cards (Alternating) ── */
-  .tcp-expression {
+  .tcp-pushpa-item {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
-    min-height: 400px;
+    gap: 60px;
+    align-items: center;
+    background: var(--tcp-white, #FFFFFF);
+    border: 1px solid var(--tcp-border, #E8E2D8);
+    border-radius: 6px;
     overflow: hidden;
+    margin-bottom: 48px;
+    transition: transform 0.4s var(--ease-fluid), box-shadow 0.4s var(--ease-fluid);
   }
 
-  .tcp-expression:nth-child(even) .tcp-expression__content {
-    order: 1;
+  .tcp-pushpa-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 48px rgba(31, 29, 27, 0.08);
   }
 
-  .tcp-expression:nth-child(even) .tcp-expression__image-wrap {
+  .tcp-pushpa-item:nth-child(even) .tcp-pushpa-item__media {
     order: 2;
   }
 
-  .tcp-expression:nth-child(odd) .tcp-expression__content {
-    order: 2;
-  }
-
-  .tcp-expression:nth-child(odd) .tcp-expression__image-wrap {
+  .tcp-pushpa-item:nth-child(even) .tcp-pushpa-item__content {
     order: 1;
   }
 
-  .tcp-expression__image-wrap {
+  .tcp-pushpa-item__media {
     position: relative;
+    aspect-ratio: 4 / 3.5;
+    background: var(--tcp-stone, #F3EFEA);
     overflow: hidden;
-    background-color: var(--tcp-beige, #F5F0E8);
   }
 
-  .tcp-expression__image {
+  .tcp-pushpa-item__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    min-height: 400px;
-    transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition: transform 0.8s var(--ease-fluid);
   }
 
-  .tcp-expression:hover .tcp-expression__image {
+  .tcp-pushpa-item:hover .tcp-pushpa-item__img {
     transform: scale(1.04);
   }
 
-  .tcp-expression__content {
+  .tcp-pushpa-item__badge-gold {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(31, 29, 27, 0.88);
+    backdrop-filter: blur(8px);
+    color: var(--tcp-gold-light, #DFBA5E);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  .tcp-pushpa-item__content {
+    padding: 48px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 48px 60px;
-    background-color: var(--tcp-cream, #FAF8F4);
+    align-items: flex-start;
   }
 
-  .tcp-expression:nth-child(even) .tcp-expression__content {
-    background-color: var(--tcp-white, #FFFFFF);
+  .tcp-pushpa-item__head-group {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
   }
 
-  .tcp-expression__name {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(28px, 3.5vw, 40px);
-    font-weight: 400;
-    color: var(--tcp-dark, #2D2D2D);
-    margin-bottom: 4px;
+  .tcp-pushpa-item__name {
+    font-family: var(--font-serif, serif);
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--tcp-dark, #1F1D1B);
+    line-height: 1;
   }
 
-  .tcp-expression__tagline {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: 16px;
-    font-weight: 400;
+  .tcp-pushpa-item__hindi {
+    font-family: var(--font-devanagari, serif);
+    font-size: 22px;
+    color: var(--tcp-gold, #C29B38);
+    font-weight: 500;
+  }
+
+  .tcp-pushpa-item__tagline {
+    font-family: var(--font-serif, serif);
+    font-size: 18px;
     font-style: italic;
-    color: var(--tcp-gold, #C8A96E);
+    color: var(--tcp-muted, #68625B);
     margin-bottom: 20px;
   }
 
-  .tcp-expression__description {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 14px;
-    color: var(--tcp-muted, #6B6560);
-    line-height: 1.7;
-    max-width: 380px;
+  .tcp-pushpa-item__desc {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 14.5px;
+    color: var(--tcp-muted, #68625B);
+    line-height: 1.75;
     margin-bottom: 28px;
   }
 
-  .tcp-expression__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    color: var(--tcp-gold, #C8A96E);
-    text-decoration: none;
-    transition: color 0.3s ease;
-    align-self: flex-start;
-  }
-
-  .tcp-expression__cta:hover {
-    color: var(--tcp-gold-hover, #B8965A);
-  }
-
-  .tcp-expression__cta svg {
-    width: 14px;
-    height: 14px;
-    transition: transform 0.3s ease;
-  }
-
-  .tcp-expression__cta:hover svg {
-    transform: translateX(4px);
-  }
-
-  /* ── Bottom Quote ── */
-  .tcp-pushpa-quote {
-    position: relative;
-    min-height: 280px;
+  .tcp-pushpa-item__specs-pill {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin-top: 0;
-  }
-
-  .tcp-pushpa-quote__bg {
-    position: absolute;
-    inset: 0;
-  }
-
-  .tcp-pushpa-quote__bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .tcp-pushpa-quote__overlay {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(35, 28, 22, 0.75);
-  }
-
-  .tcp-pushpa-quote__text {
-    position: relative;
-    z-index: 2;
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(24px, 3.5vw, 40px);
-    font-weight: 400;
-    color: var(--tcp-white, #FFFFFF);
-    text-align: center;
-    line-height: 1.3;
-    max-width: 700px;
-    padding: 0 40px;
-  }
-
-  /* ── Trust Badges ── */
-  .tcp-pushpa-trust {
-    background-color: var(--tcp-cream, #FAF8F4);
-    padding: 40px 0;
-    border-top: 1px solid var(--tcp-border, #E5DFD5);
-  }
-
-  .tcp-pushpa-trust__inner {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 40px;
-    display: flex;
-    justify-content: center;
-    gap: 48px;
+    gap: 16px;
+    margin-bottom: 32px;
     flex-wrap: wrap;
   }
 
-  .tcp-pushpa-trust__badge {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-align: left;
-  }
-
-  .tcp-pushpa-trust__badge-icon {
-    width: 32px;
-    height: 32px;
-    color: var(--tcp-gold, #C8A96E);
-    flex-shrink: 0;
-  }
-
-  .tcp-pushpa-trust__badge-title {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  .tcp-pushpa-trust__badge-desc {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
+  .tcp-pushpa-spec-tag {
+    background: var(--tcp-stone, #F3EFEA);
+    border: 1px solid var(--tcp-border, #E8E2D8);
+    padding: 6px 12px;
+    border-radius: 20px;
     font-size: 11px;
-    color: var(--tcp-muted, #6B6560);
+    font-weight: 600;
+    color: var(--tcp-brown, #352922);
   }
 
-  /* ── View All CTA ── */
-  .tcp-pushpa-view-all {
-    text-align: center;
-    padding: 32px 40px;
-    background-color: var(--tcp-cream, #FAF8F4);
-  }
-
-  .tcp-pushpa-view-all__btn {
+  .tcp-pushpa-item__btn {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-family: var(--font-sans, sans-serif);
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.8px;
+    font-weight: 700;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--tcp-white, #FFFFFF);
+    color: #FFFFFF;
+    background: var(--tcp-dark, #1F1D1B);
+    padding: 15px 30px;
     text-decoration: none;
-    padding: 16px 36px;
-    background-color: var(--tcp-dark, #2D2D2D);
-    border: 1.5px solid var(--tcp-dark, #2D2D2D);
-    transition: all 0.3s ease;
+    border-radius: 2px;
+    transition: all 0.3s var(--ease-fluid);
   }
 
-  .tcp-pushpa-view-all__btn:hover {
-    background-color: var(--tcp-gold, #C8A96E);
-    border-color: var(--tcp-gold, #C8A96E);
+  .tcp-pushpa-item__btn:hover {
+    background: var(--tcp-gold, #C29B38);
+    transform: translateY(-2px);
+  }
+
+  /* ── Craft & Impact Quote Section ── */
+  .tcp-pushpa-craft-quote {
+    background: var(--tcp-brown, #352922);
+    color: var(--tcp-sand, #FBF9F5);
+    padding: 80px 40px;
+    text-align: center;
+  }
+
+  .tcp-pushpa-craft-quote__inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .tcp-pushpa-craft-quote h3 {
+    font-family: var(--font-serif, serif);
+    font-size: 32px;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+
+  .tcp-pushpa-craft-quote p {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 14.5px;
+    color: rgba(251, 249, 245, 0.8);
+    line-height: 1.8;
   }
 
   /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .tcp-expression {
+  @media (max-width: 1024px) {
+    .tcp-pushpa-item {
       grid-template-columns: 1fr;
-      min-height: auto;
+      gap: 0;
     }
-
-    .tcp-expression__content {
-      order: 2 !important;
-      padding: 36px 24px;
+    .tcp-pushpa-item:nth-child(even) .tcp-pushpa-item__media {
+      order: 1;
     }
-
-    .tcp-expression__image-wrap {
-      order: 1 !important;
+    .tcp-pushpa-item:nth-child(even) .tcp-pushpa-item__content {
+      order: 2;
     }
-
-    .tcp-expression__image {
-      min-height: 280px;
-    }
-
-    .tcp-pushpa-hero__inner {
-      padding: 0 24px 40px;
-    }
-
-    .tcp-pushpa-trust__inner {
-      gap: 24px;
-    }
-
-    .tcp-pushpa-trust__badge {
-      flex: 0 0 calc(50% - 12px);
+    .tcp-pushpa-item__content {
+      padding: 32px 24px;
     }
   }
 
   @media (max-width: 600px) {
     .tcp-pushpa-hero {
-      min-height: 360px;
+      padding: 60px 20px;
     }
-
-    .tcp-pushpa-trust__badge {
-      flex: 0 0 100%;
-      justify-content: center;
+    .tcp-pushpa-hero__title {
+      font-size: 52px;
+    }
+    .tcp-pushpa-expressions {
+      padding-left: 20px;
+      padding-right: 20px;
     }
   }
 </style>
 
-<!-- ── Hero ── -->
-<section class="tcp-pushpa-hero" id="tcp-pushpa-hero">
-  <div class="tcp-pushpa-hero__bg">
-    {% if section.settings.hero_image != blank %}
-      <img class="tcp-pushpa-hero__bg-img" src="{{ section.settings.hero_image | image_url: width: 1600 }}" alt="Pushpa Dinner Sets" loading="eager" fetchpriority="high" width="1600" height="600">
-    {% else %}
-      <div class="tcp-pushpa-hero__bg-img" style="background: linear-gradient(135deg, #5C4F44, #3A2F28);"></div>
-    {% endif %}
-    <div class="tcp-pushpa-hero__overlay"></div>
-  </div>
+<div class="tcp-pushpa-page" id="tcp-pushpa-page-root">
+  <!-- Hero Section -->
+  <section class="tcp-pushpa-hero">
+    <div class="tcp-pushpa-hero__wash"></div>
+    <div class="tcp-pushpa-hero__content">
+      <span class="tcp-pushpa-hero__prefix">the</span>
+      <h1 class="tcp-pushpa-hero__title">Pushpa</h1>
+      <span class="tcp-pushpa-hero__caps">THE LEGACY DINNER COLLECTION 2025–26</span>
+      <div class="tcp-pushpa-hero__divider"></div>
+      <p class="tcp-pushpa-hero__concept">
+        &ldquo;A dinnerware collection born from memory, shaped by emotion &amp; carried in legacy. Pushpa is a timeless tribute to my mother’s essence and the quiet strength she left behind.&rdquo;
+      </p>
+    </div>
+  </section>
 
-  <div class="tcp-pushpa-hero__inner">
-    <h1 class="tcp-pushpa-hero__title">{{ section.settings.hero_title }}</h1>
-    <div class="tcp-pushpa-hero__divider"></div>
-    <p class="tcp-pushpa-hero__desc">{{ section.settings.hero_description }}</p>
-    {% if section.settings.hero_cta_text != blank %}
-      <a href="{{ section.settings.hero_cta_url | default: '#' }}" class="tcp-pushpa-hero__btn">
-        {{ section.settings.hero_cta_text }}
-      </a>
-    {% endif %}
-  </div>
-</section>
+  <!-- Tribute Description Section -->
+  <section class="tcp-pushpa-tribute">
+    <div class="tcp-pushpa-tribute__inner">
+      <span class="tcp-pushpa-tribute__label">THE DEDICATION &amp; CONCEPT</span>
+      <h2 class="tcp-pushpa-tribute__quote">
+        “Memory enters life through the things we touch, use and cherish.”
+      </h2>
+      <p class="tcp-pushpa-tribute__body">
+        The collection is dedicated to my mother, <strong>Pushpa</strong>, an artist and entrepreneur whom I lost a few years ago. It is an expression of the enduring presence of someone who may no longer be physically present, but whose memory continues to live through the objects we create.
+        <br><br>
+        <strong>Smriti</strong> explores how memory can be translated into objects that become part of everyday rituals. The collection deliberately embraces the raw and organic character of clay, rather than pursuing industrial uniformity. Each object retains subtle variations in form, contour, texture, and edge. These are not imperfections to be corrected, but traces of the material and the maker's hand.
+      </p>
+    </div>
+  </section>
 
-<!-- ── The Seven Expressions ── -->
-<div class="tcp-pushpa-expressions" id="tcp-pushpa-expressions">
-  <div class="tcp-pushpa-expressions__header">
-    <h2 class="tcp-pushpa-expressions__title">{{ section.settings.expressions_title }}</h2>
-    <p class="tcp-pushpa-expressions__subtitle">{{ section.settings.expressions_subtitle }}</p>
-  </div>
+  <!-- The 7 Expressions Alternating Cards -->
+  <section class="tcp-pushpa-expressions">
+    <div class="tcp-pushpa-expressions__header">
+      <span class="tcp-pushpa-hero__caps" style="color:var(--tcp-gold);">THE SEVEN EXPRESSIONS</span>
+      <h2 class="tcp-pushpa-expressions__title">Seven Expressions of Legacy</h2>
+    </div>
 
-  {% for block in section.blocks %}
-    {% if block.type == 'expression' %}
-      <div class="tcp-expression" {{ block.shopify_attributes }}>
-        <div class="tcp-expression__image-wrap">
-          {% if block.settings.image != blank %}
-            <img class="tcp-expression__image" src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.name }}" loading="lazy" width="800" height="600">
-          {% else %}
-            <div class="tcp-expression__image" style="background: var(--tcp-warm-bg);"></div>
-          {% endif %}
+    <!-- 1. Smriti -->
+    <div class="tcp-pushpa-item">
+      <div class="tcp-pushpa-item__media">
+        <span class="tcp-pushpa-item__badge-gold">Flagship Legacy Set</span>
+        {% if section.settings.smriti_img != blank %}
+          <img class="tcp-pushpa-item__img" src="{{ section.settings.smriti_img | image_url: width: 800 }}" alt="Smriti Dinner Set" loading="lazy">
+        {% else %}
+          <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE5D8 100%);">
+            <svg width="140" height="140" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="56" stroke="#C29B38" stroke-width="3" stroke-dasharray="24 6 12 4"/><circle cx="70" cy="70" r="38" stroke="#1F1D1B" stroke-width="1.2"/><circle cx="70" cy="70" r="20" fill="#E8DEC\-D" stroke="#DFBA5E" stroke-width="2"/></svg>
+          </div>
+        {% endif %}
+      </div>
+      <div class="tcp-pushpa-item__content">
+        <div class="tcp-pushpa-item__head-group">
+          <h3 class="tcp-pushpa-item__name">Smriti</h3>
+          <span class="tcp-pushpa-item__hindi">(स्मृति)</span>
         </div>
-        <div class="tcp-expression__content">
-          <h3 class="tcp-expression__name">{{ block.settings.name }}</h3>
-          <p class="tcp-expression__tagline">{{ block.settings.tagline }}</p>
-          <p class="tcp-expression__description">{{ block.settings.description }}</p>
-          <a href="{{ block.settings.link_url | default: '#' }}" class="tcp-expression__cta">
-            SHOP THE COLLECTION
-            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+        <p class="tcp-pushpa-item__tagline">&ldquo;Memory &amp; Remembrance&rdquo;</p>
+        <p class="tcp-pushpa-item__desc">
+          Symbolizes cherished memories and the everlasting presence of mother’s teachings, even in her absence. Mould-free recycled clay, raw contour edges, and 24k gold leaf brushwork.
+        </p>
+        <div class="tcp-pushpa-item__specs-pill">
+          <span class="tcp-pushpa-spec-tag">Charger Plate 11.5"</span>
+          <span class="tcp-pushpa-spec-tag">Dinner Plate 10"</span>
+          <span class="tcp-pushpa-spec-tag">Katori Bowl 4.5"</span>
+          <span class="tcp-pushpa-spec-tag">24k Gold Rim</span>
+        </div>
+        <a href="/products/smriti-dinner-set" class="tcp-pushpa-item__btn">Order Smriti Set &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 2. Shakti -->
+    <div class="tcp-pushpa-item">
+      <div class="tcp-pushpa-item__media">
+        {% if section.settings.shakti_img != blank %}
+          <img class="tcp-pushpa-item__img" src="{{ section.settings.shakti_img | image_url: width: 800 }}" alt="Shakti Dinner Set" loading="lazy">
+        {% else %}
+          <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE5D8 100%);">
+            <svg width="140" height="140" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="54" stroke="#1F1D1B" stroke-width="2.5"/><circle cx="70" cy="70" r="36" stroke="#C29B38" stroke-width="2"/></svg>
+          </div>
+        {% endif %}
+      </div>
+      <div class="tcp-pushpa-item__content">
+        <div class="tcp-pushpa-item__head-group">
+          <h3 class="tcp-pushpa-item__name">Shakti</h3>
+          <span class="tcp-pushpa-item__hindi">(शक्ति)</span>
+        </div>
+        <p class="tcp-pushpa-item__tagline">&ldquo;Quiet Strength&rdquo;</p>
+        <p class="tcp-pushpa-item__desc">
+          Grounded architectural weight, earthy raw clay finish, high-fired at 1280°C for daily resilience. Embodies the quiet fortitude left behind in spirit.
+        </p>
+        <div class="tcp-pushpa-item__specs-pill">
+          <span class="tcp-pushpa-spec-tag">Dinner Plate 10.5"</span>
+          <span class="tcp-pushpa-spec-tag">Pasta Bowl 8"</span>
+          <span class="tcp-pushpa-spec-tag">Stoneware Rim</span>
+        </div>
+        <a href="/products/shakti-dinner-set" class="tcp-pushpa-item__btn">Order Shakti Set &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 3. Shringaar -->
+    <div class="tcp-pushpa-item">
+      <div class="tcp-pushpa-item__media">
+        {% if section.settings.shringaar_img != blank %}
+          <img class="tcp-pushpa-item__img" src="{{ section.settings.shringaar_img | image_url: width: 800 }}" alt="Shringaar Set" loading="lazy">
+        {% else %}
+          <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE5D8 100%);">
+            <svg width="140" height="140" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="50" stroke="#DFBA5E" stroke-width="2"/><ellipse cx="70" cy="70" rx="35" ry="25" stroke="#C29B38" stroke-width="1.8"/></svg>
+          </div>
+        {% endif %}
+      </div>
+      <div class="tcp-pushpa-item__content">
+        <div class="tcp-pushpa-item__head-group">
+          <h3 class="tcp-pushpa-item__name">Shringaar</h3>
+          <span class="tcp-pushpa-item__hindi">(शृंगार)</span>
+        </div>
+        <p class="tcp-pushpa-item__tagline">&ldquo;Adornment &amp; Grace&rdquo;</p>
+        <p class="tcp-pushpa-item__desc">
+          Refined organic curves, luminous crackle glaze, and delicate gold-brushed lip. An ode to graceful ceremonial dining and festive gathering.
+        </p>
+        <div class="tcp-pushpa-item__specs-pill">
+          <span class="tcp-pushpa-spec-tag">Side Plate 7.5"</span>
+          <span class="tcp-pushpa-spec-tag">Sharing Dish 9"</span>
+          <span class="tcp-pushpa-spec-tag">Crackle Glaze</span>
+        </div>
+        <a href="/products/shringaar-dinner-set" class="tcp-pushpa-item__btn">Order Shringaar Set &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 4. Sneha -->
+    <div class="tcp-pushpa-item">
+      <div class="tcp-pushpa-item__media">
+        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE5D8 100%);">
+          <svg width="140" height="140" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="52" stroke="#C29B38" stroke-width="1.5"/><circle cx="70" cy="70" r="32" fill="#FAF6EE" stroke="#1F1D1B" stroke-width="1"/></svg>
         </div>
       </div>
-    {% endif %}
-  {% endfor %}
-</div>
-
-<!-- ── Bottom Quote ── -->
-{% if section.settings.show_quote %}
-  <div class="tcp-pushpa-quote">
-    <div class="tcp-pushpa-quote__bg">
-      {% if section.settings.quote_bg_image != blank %}
-        <img class="tcp-pushpa-quote__bg-img" src="{{ section.settings.quote_bg_image | image_url: width: 1600 }}" alt="" loading="lazy" width="1600" height="400">
-      {% else %}
-        <div class="tcp-pushpa-quote__bg-img" style="background: var(--tcp-brown);"></div>
-      {% endif %}
-      <div class="tcp-pushpa-quote__overlay"></div>
-    </div>
-    <p class="tcp-pushpa-quote__text">{{ section.settings.quote_text }}</p>
-  </div>
-{% endif %}
-
-<!-- ── View All CTA ── -->
-{% if section.settings.show_view_all %}
-  <div class="tcp-pushpa-view-all">
-    <a href="{{ section.settings.view_all_url | default: '#' }}" class="tcp-pushpa-view-all__btn">
-      {{ section.settings.view_all_text }}
-    </a>
-  </div>
-{% endif %}
-
-<!-- ── Trust Badges ── -->
-<div class="tcp-pushpa-trust">
-  <div class="tcp-pushpa-trust__inner">
-    {% for block in section.blocks %}
-      {% if block.type == 'trust_badge' %}
-        <div class="tcp-pushpa-trust__badge" {{ block.shopify_attributes }}>
-          <svg class="tcp-pushpa-trust__badge-icon" viewBox="0 0 32 32" fill="none">
-            {% case block.settings.icon %}
-              {% when 'handcrafted' %}
-                <path d="M16 6C12 6 8 10 8 14c0 4 4 8 8 12 4-4 8-8 8-12 0-4-4-8-8-8z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                <circle cx="16" cy="14" r="3" stroke="currentColor" stroke-width="1.5"/>
-              {% when 'lead_free' %}
-                <circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M11 16l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              {% when 'dishwasher' %}
-                <rect x="6" y="8" width="20" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M6 14h20" stroke="currentColor" stroke-width="1.5"/>
-                <circle cx="12" cy="20" r="2" stroke="currentColor" stroke-width="1"/>
-                <circle cx="20" cy="20" r="2" stroke="currentColor" stroke-width="1"/>
-              {% when 'made_to_last' %}
-                <path d="M16 4v24M8 12l8-8 8 8M8 20l8 8 8-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              {% else %}
-                <circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M11 16l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            {% endcase %}
-          </svg>
-          <div>
-            <span class="tcp-pushpa-trust__badge-title">{{ block.settings.title }}</span>
-            <span class="tcp-pushpa-trust__badge-desc">{{ block.settings.description }}</span>
-          </div>
+      <div class="tcp-pushpa-item__content">
+        <div class="tcp-pushpa-item__head-group">
+          <h3 class="tcp-pushpa-item__name">Sneha</h3>
+          <span class="tcp-pushpa-item__hindi">(स्नेह)</span>
         </div>
-      {% endif %}
-    {% endfor %}
-  </div>
+        <p class="tcp-pushpa-item__tagline">&ldquo;Affection &amp; Warmth&rdquo;</p>
+        <p class="tcp-pushpa-item__desc">
+          Soft tactile curves, warm cream tone, and intimate sharing bowls designed for warmth and comfort at the family table.
+        </p>
+        <div class="tcp-pushpa-item__specs-pill">
+          <span class="tcp-pushpa-spec-tag">Soup Bowl 6"</span>
+          <span class="tcp-pushpa-spec-tag">Serving Bowl 8"</span>
+          <span class="tcp-pushpa-spec-tag">Comfort Rim</span>
+        </div>
+        <a href="/products/sneha-dinner-set" class="tcp-pushpa-item__btn">Order Sneha Set &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 5. Sammaan -->
+    <div class="tcp-pushpa-item">
+      <div class="tcp-pushpa-item__media">
+        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE5D8 100%);">
+          <svg width="140" height="140" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="58" stroke="#1F1D1B" stroke-width="2"/><circle cx="70" cy="70" r="42" stroke="#C29B38" stroke-width="2.5"/></svg>
+        </div>
+      </div>
+      <div class="tcp-pushpa-item__content">
+        <div class="tcp-pushpa-item__head-group">
+          <h3 class="tcp-pushpa-item__name">Sammaan</h3>
+          <span class="tcp-pushpa-item__hindi">(सम्मान)</span>
+        </div>
+        <p class="tcp-pushpa-item__tagline">&ldquo;Honor &amp; Legacy&rdquo;</p>
+        <p class="tcp-pushpa-item__desc">
+          Regal proportion, commanding banquet scale, and timeless ceremonial presence. Created for honoring guests and memorable feasting.
+        </p>
+        <div class="tcp-pushpa-item__specs-pill">
+          <span class="tcp-pushpa-spec-tag">Banquet Charger 12"</span>
+          <span class="tcp-pushpa-spec-tag">Center Platter 14"</span>
+          <span class="tcp-pushpa-spec-tag">Gold Accent</span>
+        </div>
+        <a href="/products/sammaan-dinner-set" class="tcp-pushpa-item__btn">Order Sammaan Set &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 6. Aaradhya -->
+    <div class="tcp-pushpa-item">
+      <div class="tcp-pushpa-item__media">
+        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE5D8 100%);">
+          <svg width="140" height="140" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="48" stroke="#C29B38" stroke-width="2" stroke-dasharray="6 3"/><ellipse cx="70" cy="70" rx="30" ry="20" stroke="#1F1D1B" stroke-width="1.2"/></svg>
+        </div>
+      </div>
+      <div class="tcp-pushpa-item__content">
+        <div class="tcp-pushpa-item__head-group">
+          <h3 class="tcp-pushpa-item__name">Aaradhya</h3>
+          <span class="tcp-pushpa-item__hindi">(आराध्या)</span>
+        </div>
+        <p class="tcp-pushpa-item__tagline">&ldquo;Devotion &amp; Ritual&rdquo;</p>
+        <p class="tcp-pushpa-item__desc">
+          Deep meditative vessel profile, sacred geometry, and smooth hand-burnished lip designed for thoughtful everyday nourishment.
+        </p>
+        <div class="tcp-pushpa-item__specs-pill">
+          <span class="tcp-pushpa-spec-tag">Deep Platter 10"</span>
+          <span class="tcp-pushpa-spec-tag">Curry Dish 7"</span>
+          <span class="tcp-pushpa-spec-tag">High Fired</span>
+        </div>
+        <a href="/products/aaradhya-dinner-set" class="tcp-pushpa-item__btn">Order Aaradhya Set &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 7. Karuna -->
+    <div class="tcp-pushpa-item">
+      <div class="tcp-pushpa-item__media">
+        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE5D8 100%);">
+          <svg width="140" height="140" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="45" stroke="#DFBA5E" stroke-width="2"/><circle cx="70" cy="70" r="28" stroke="#C29B38" stroke-width="1.8"/><circle cx="70" cy="70" r="14" fill="#FAF6EE"/></svg>
+        </div>
+      </div>
+      <div class="tcp-pushpa-item__content">
+        <div class="tcp-pushpa-item__head-group">
+          <h3 class="tcp-pushpa-item__name">Karuna</h3>
+          <span class="tcp-pushpa-item__hindi">(करुणा)</span>
+        </div>
+        <p class="tcp-pushpa-item__tagline">&ldquo;Compassion &amp; Care&rdquo;</p>
+        <p class="tcp-pushpa-item__desc">
+          Gentle nesting bowls, soft rounded lip, and comforting everyday tactile touch. A versatile essential for mindful solitary pauses and shared family spreads.
+        </p>
+        <div class="tcp-pushpa-item__specs-pill">
+          <span class="tcp-pushpa-spec-tag">Nesting Bowl Set (3 Pcs)</span>
+          <span class="tcp-pushpa-spec-tag">Tasting Dish 4"</span>
+          <span class="tcp-pushpa-spec-tag">Tactile Rim</span>
+        </div>
+        <a href="/products/karuna-dinner-set" class="tcp-pushpa-item__btn">Order Karuna Set &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Craft & Social Impact Quote -->
+  <section class="tcp-pushpa-craft-quote">
+    <div class="tcp-pushpa-craft-quote__inner">
+      <h3>NOTHING IS CUT AWAY. NOTHING IS DISCARDED.</h3>
+      <p>
+        The Creative Platter works through a village-based studio near Gurugram, creating opportunities for local women artisans to participate directly in contemporary ceramic design. By connecting their skills with thoughtful form, we keep handmade craftsmanship economically sustainable and deeply revered.
+      </p>
+    </div>
+  </section>
 </div>
 
 {% schema %}
@@ -520,76 +609,13 @@
   "tag": "section",
   "class": "tcp-pushpa-section",
   "settings": [
-    { "type": "header", "content": "Hero" },
-    { "type": "text", "id": "hero_title", "label": "Hero title", "default": "Pushpa\nDinner Sets" },
-    { "type": "textarea", "id": "hero_description", "label": "Hero description", "default": "Seven expressions of a mother's presence—each set carrying a different emotion, yet belonging to the same story." },
-    { "type": "text", "id": "hero_cta_text", "label": "Hero CTA text", "default": "EXPLORE THE COLLECTION" },
-    { "type": "url", "id": "hero_cta_url", "label": "Hero CTA URL" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero background image" },
-
-    { "type": "header", "content": "Expressions Section" },
-    { "type": "text", "id": "expressions_title", "label": "Expressions title", "default": "The Seven Expressions" },
-    { "type": "text", "id": "expressions_subtitle", "label": "Expressions subtitle", "default": "Choose the emotion that resonates with your table." },
-
-    { "type": "header", "content": "Quote Banner" },
-    { "type": "checkbox", "id": "show_quote", "label": "Show quote banner", "default": true },
-    { "type": "text", "id": "quote_text", "label": "Quote text", "default": "A table is not just set—\nit is remembered." },
-    { "type": "image_picker", "id": "quote_bg_image", "label": "Quote background image" },
-
-    { "type": "header", "content": "View All CTA" },
-    { "type": "checkbox", "id": "show_view_all", "label": "Show view all button", "default": true },
-    { "type": "text", "id": "view_all_text", "label": "View all text", "default": "VIEW ALL DINNER SETS" },
-    { "type": "url", "id": "view_all_url", "label": "View all URL" }
-  ],
-  "blocks": [
-    {
-      "type": "expression",
-      "name": "Dinner Set Expression",
-      "settings": [
-        { "type": "text", "id": "name", "label": "Set name", "default": "Smriti" },
-        { "type": "text", "id": "tagline", "label": "Tagline", "default": "Memory & Remembrance" },
-        { "type": "textarea", "id": "description", "label": "Description", "default": "Symbolizes cherished memories and the everlasting presence of love." },
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "url", "id": "link_url", "label": "Collection link" }
-      ]
-    },
-    {
-      "type": "trust_badge",
-      "name": "Trust Badge",
-      "settings": [
-        { "type": "text", "id": "title", "label": "Badge title", "default": "HANDCRAFTED" },
-        { "type": "text", "id": "description", "label": "Badge description", "default": "in India" },
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "default": "handcrafted",
-          "options": [
-            { "value": "handcrafted", "label": "Handcrafted" },
-            { "value": "lead_free", "label": "Lead-free / Safe" },
-            { "value": "dishwasher", "label": "Dishwasher" },
-            { "value": "made_to_last", "label": "Made to last" }
-          ]
-        }
-      ]
-    }
+    { "type": "image_picker", "id": "smriti_img", "label": "Smriti set image" },
+    { "type": "image_picker", "id": "shakti_img", "label": "Shakti set image" },
+    { "type": "image_picker", "id": "shringaar_img", "label": "Shringaar set image" }
   ],
   "presets": [
     {
-      "name": "TCP Pushpa Dinner Sets",
-      "blocks": [
-        { "type": "expression", "settings": { "name": "Smriti", "tagline": "Memory & Remembrance", "description": "Symbolizes cherished memories and the everlasting presence of love." } },
-        { "type": "expression", "settings": { "name": "Shakti", "tagline": "Power & Strength", "description": "Represents resilience, inner strength, and the divine feminine energy." } },
-        { "type": "expression", "settings": { "name": "Shringaar", "tagline": "Beauty & Grace", "description": "Expresses elegance, charm, and the aesthetic beauty of a mother's presence." } },
-        { "type": "expression", "settings": { "name": "Sneha", "tagline": "Love & Affection", "description": "Represents warmth, care, and unconditional love that nurtures." } },
-        { "type": "expression", "settings": { "name": "Sammaan", "tagline": "Respect & Honor", "description": "Embodies gratitude and appreciation for a mother's impact and values." } },
-        { "type": "expression", "settings": { "name": "Aaradhya", "tagline": "Reverence & Devotion", "description": "Symbolizes deep devotion and a sacred bond with life, family and purpose." } },
-        { "type": "expression", "settings": { "name": "Karuna", "tagline": "Compassion & Empathy", "description": "Reflects kindness, selflessness, and the gentle love that makes the world better." } },
-        { "type": "trust_badge", "settings": { "title": "HANDCRAFTED", "description": "in India", "icon": "handcrafted" } },
-        { "type": "trust_badge", "settings": { "title": "LEAD-FREE GLAZE", "description": "Food safe", "icon": "lead_free" } },
-        { "type": "trust_badge", "settings": { "title": "DISHWASHER SAFE", "description": "For everyday use", "icon": "dishwasher" } },
-        { "type": "trust_badge", "settings": { "title": "MADE TO BE LOVED", "description": "And passed on", "icon": "made_to_last" } }
-      ]
+      "name": "TCP Pushpa Dinner Sets"
     }
   ]
 }

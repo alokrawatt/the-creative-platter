@@ -1,129 +1,99 @@
 {% comment %}
   ============================================================
-  THE CREATIVE PLATTER — Experiences Page
+  THE CREATIVE PLATTER — Studio Experiences & Masterclasses
   ============================================================
-  Workshops, immersive dining, and curated tablescape events.
+  Pottery workshops, sensory dining rituals, and tablescaping
+  sessions in our Gurugram studio.
   Copy into Shopify: sections/section-experiences.liquid
 {% endcomment %}
 
 <style>
-  /* ── Experiences Hero ── */
+  .tcp-exp-page {
+    background-color: var(--tcp-sand, #FBF9F5);
+    color: var(--tcp-dark, #1F1D1B);
+    font-family: var(--font-sans, sans-serif);
+  }
+
+  /* ── Hero ── */
   .tcp-exp-hero {
     position: relative;
-    min-height: 480px;
+    min-height: 520px;
     display: flex;
     align-items: center;
-    overflow: hidden;
-  }
-
-  .tcp-exp-hero__bg {
-    position: absolute;
-    inset: 0;
-  }
-
-  .tcp-exp-hero__bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .tcp-exp-hero__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, rgba(30, 24, 18, 0.88) 0%, rgba(30, 24, 18, 0.4) 70%, transparent 100%);
+    justify-content: center;
+    text-align: center;
+    background: radial-gradient(circle at center, #FAF8F4 0%, #FAF5ED 50%, #ECE4D6 100%);
+    padding: 80px 40px;
+    border-bottom: 1px solid var(--tcp-border, #E8E2D8);
   }
 
   .tcp-exp-hero__inner {
-    position: relative;
-    z-index: 2;
-    max-width: 1440px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 80px;
-    width: 100%;
   }
 
   .tcp-exp-hero__label {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--tcp-gold-light, #D4BA85);
-    margin-bottom: 20px;
+    color: var(--tcp-gold, #C29B38);
+    display: block;
+    margin-bottom: 16px;
   }
 
   .tcp-exp-hero__title {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(40px, 5vw, 64px);
+    font-family: var(--font-serif, serif);
+    font-size: clamp(40px, 5.5vw, 68px);
     font-weight: 400;
-    color: var(--tcp-white, #FFFFFF);
-    line-height: 1.1;
-    margin-bottom: 12px;
-    max-width: 550px;
+    color: var(--tcp-dark, #1F1D1B);
+    line-height: 1.05;
+    margin: 0 0 20px;
   }
 
   .tcp-exp-hero__desc {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.75);
-    line-height: 1.7;
-    max-width: 440px;
-  }
-
-  /* ── Intro ── */
-  .tcp-exp-intro {
-    background-color: var(--tcp-white, #FFFFFF);
-    padding: 64px 0;
-    text-align: center;
-  }
-
-  .tcp-exp-intro__inner {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 0 40px;
-  }
-
-  .tcp-exp-intro__text {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(20px, 2.5vw, 28px);
-    font-weight: 400;
+    font-family: var(--font-serif, serif);
+    font-size: 22px;
     font-style: italic;
-    color: var(--tcp-dark, #2D2D2D);
-    line-height: 1.6;
+    color: var(--tcp-muted, #68625B);
+    line-height: 1.5;
   }
 
-  /* ── Experience Cards ── */
-  .tcp-exp-cards {
-    background-color: var(--tcp-cream, #FAF8F4);
-    padding: 64px 0;
-  }
-
-  .tcp-exp-cards__inner {
+  /* ── Experience Grid ── */
+  .tcp-exp-grid-section {
+    padding: 100px 0;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 
-  .tcp-exp-cards__grid {
+  .tcp-exp-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
   }
 
   .tcp-exp-card {
-    background-color: var(--tcp-white, #FFFFFF);
-    border: 1px solid var(--tcp-border, #E5DFD5);
+    background: var(--tcp-white, #FFFFFF);
+    border: 1px solid var(--tcp-border, #E8E2D8);
+    border-radius: 6px;
     overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s var(--ease-fluid), box-shadow 0.4s var(--ease-fluid), border-color 0.3s ease;
   }
 
   .tcp-exp-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(58, 47, 40, 0.1);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(31, 29, 27, 0.08);
+    border-color: var(--tcp-gold, #C29B38);
   }
 
-  .tcp-exp-card__img-wrap {
-    aspect-ratio: 4 / 3;
+  .tcp-exp-card__media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: var(--tcp-stone, #F3EFEA);
     overflow: hidden;
   }
 
@@ -131,380 +101,261 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    transition: transform 0.8s var(--ease-fluid);
   }
 
   .tcp-exp-card:hover .tcp-exp-card__img {
     transform: scale(1.05);
   }
 
-  .tcp-exp-card__content {
-    padding: 28px;
-  }
-
   .tcp-exp-card__tag {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 2px;
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(31, 29, 27, 0.88);
+    color: var(--tcp-gold-light, #DFBA5E);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
-    color: var(--tcp-gold, #C8A96E);
-    margin-bottom: 12px;
-    display: inline-block;
-    background-color: rgba(200, 169, 110, 0.1);
-    padding: 4px 10px;
+    padding: 3px 8px;
+    border-radius: 2px;
   }
 
-  .tcp-exp-card__name {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: 22px;
-    font-weight: 400;
-    color: var(--tcp-dark, #2D2D2D);
-    margin-bottom: 8px;
-    display: block;
+  .tcp-exp-card__body {
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .tcp-exp-card__title {
+    font-family: var(--font-serif, serif);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--tcp-dark, #1F1D1B);
+    margin: 0 0 10px;
     line-height: 1.2;
   }
 
   .tcp-exp-card__desc {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 14px;
-    color: var(--tcp-muted, #6B6560);
+    font-size: 13.5px;
+    color: var(--tcp-muted, #68625B);
     line-height: 1.7;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    flex: 1;
   }
 
-  .tcp-exp-card__details {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-
-  .tcp-exp-card__detail {
+  .tcp-exp-card__meta {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 12px;
-    color: var(--tcp-muted, #6B6560);
-  }
-
-  .tcp-exp-card__detail svg {
-    width: 14px;
-    height: 14px;
-    color: var(--tcp-gold, #C8A96E);
-  }
-
-  .tcp-exp-card__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 11px;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid var(--tcp-border, #E8E2D8);
+    font-size: 11.5px;
     font-weight: 600;
-    letter-spacing: 1.5px;
+    color: var(--tcp-brown, #352922);
+  }
+
+  .tcp-exp-card__btn {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
     text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
+    color: var(--tcp-dark, #1F1D1B);
+    background: var(--tcp-stone, #F3EFEA);
+    border: 1px solid var(--tcp-border, #E8E2D8);
+    padding: 13px;
     text-decoration: none;
-    padding: 12px 24px;
-    border: 1.5px solid var(--tcp-dark, #2D2D2D);
+    border-radius: 2px;
     transition: all 0.3s ease;
   }
 
-  .tcp-exp-card__cta:hover {
-    background-color: var(--tcp-gold, #C8A96E);
-    border-color: var(--tcp-gold, #C8A96E);
-    color: var(--tcp-white, #FFFFFF);
+  .tcp-exp-card:hover .tcp-exp-card__btn {
+    background: var(--tcp-dark, #1F1D1B);
+    color: #FFFFFF;
+    border-color: var(--tcp-dark, #1F1D1B);
   }
 
-  .tcp-exp-card__cta svg {
-    width: 12px;
-    height: 12px;
-    transition: transform 0.3s ease;
-  }
-
-  .tcp-exp-card__cta:hover svg {
-    transform: translateX(3px);
-  }
-
-  /* ── Testimonial Quote ── */
-  .tcp-exp-quote {
-    background-color: var(--tcp-brown, #3A2F28);
-    padding: 64px 40px;
-    text-align: center;
-  }
-
-  .tcp-exp-quote__text {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(22px, 3vw, 32px);
-    font-weight: 400;
-    font-style: italic;
-    color: var(--tcp-white, #FFFFFF);
-    line-height: 1.5;
-    max-width: 700px;
-    margin: 0 auto 20px;
-  }
-
-  .tcp-exp-quote__attribution {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 12px;
-    color: var(--tcp-gold-light, #D4BA85);
-    letter-spacing: 1px;
-  }
-
-  /* ── Private Experiences CTA ── */
+  /* ── Private Session Box ── */
   .tcp-exp-private {
-    background-color: var(--tcp-cream, #FAF8F4);
-    padding: 64px 0;
+    background: var(--tcp-brown, #352922);
+    color: var(--tcp-sand, #FBF9F5);
+    padding: 80px 0;
   }
 
   .tcp-exp-private__inner {
-    max-width: 1440px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 40px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
+    text-align: center;
   }
 
-  .tcp-exp-private__heading {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(28px, 3vw, 40px);
-    font-weight: 400;
-    color: var(--tcp-dark, #2D2D2D);
-    line-height: 1.2;
-    margin-bottom: 16px;
+  .tcp-exp-private__title {
+    font-family: var(--font-serif, serif);
+    font-size: 36px;
+    color: #FFFFFF;
+    margin: 0 0 16px;
   }
 
   .tcp-exp-private__desc {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
     font-size: 15px;
-    color: var(--tcp-muted, #6B6560);
-    line-height: 1.7;
-    margin-bottom: 28px;
-    max-width: 400px;
+    color: rgba(251, 249, 245, 0.85);
+    line-height: 1.8;
+    max-width: 680px;
+    margin: 0 auto 32px;
   }
 
-  .tcp-exp-private__btn {
+  .tcp-exp-private__cta {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.8px;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
-    background-color: var(--tcp-gold, #C8A96E);
-    border: 1.5px solid var(--tcp-gold, #C8A96E);
-    padding: 14px 28px;
+    color: var(--tcp-dark, #1F1D1B);
+    background: var(--tcp-gold, #C29B38);
+    padding: 16px 36px;
     text-decoration: none;
+    border-radius: 2px;
     transition: all 0.3s ease;
   }
 
-  .tcp-exp-private__btn:hover {
-    background-color: var(--tcp-gold-hover, #B8965A);
-    border-color: var(--tcp-gold-hover, #B8965A);
-    transform: translateY(-2px);
-  }
-
-  .tcp-exp-private__img-wrap {
-    overflow: hidden;
-    aspect-ratio: 16 / 10;
-    background-color: var(--tcp-beige, #F5F0E8);
-  }
-
-  .tcp-exp-private__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-  }
-
-  .tcp-exp-private__img-wrap:hover .tcp-exp-private__img {
-    transform: scale(1.04);
+  .tcp-exp-private__cta:hover {
+    background: #FFFFFF;
   }
 
   /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .tcp-exp-cards__grid {
-      grid-template-columns: 1fr;
-      max-width: 500px;
-      margin: 0 auto;
+  @media (max-width: 1024px) {
+    .tcp-exp-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
+  }
 
+  @media (max-width: 600px) {
+    .tcp-exp-hero {
+      padding: 60px 20px;
+    }
+    .tcp-exp-grid-section {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .tcp-exp-grid {
+      grid-template-columns: 1fr;
+    }
     .tcp-exp-private__inner {
-      grid-template-columns: 1fr;
-    }
-
-    .tcp-exp-hero__inner {
-      padding: 50px 24px;
+      padding: 0 20px;
     }
   }
 </style>
 
-<!-- ── Hero ── -->
-<section class="tcp-exp-hero" id="tcp-exp-hero">
-  <div class="tcp-exp-hero__bg">
-    {% if section.settings.hero_image != blank %}
-      <img class="tcp-exp-hero__bg-img" src="{{ section.settings.hero_image | image_url: width: 1600 }}" alt="" loading="eager" fetchpriority="high" width="1600" height="600">
-    {% else %}
-      <div class="tcp-exp-hero__bg-img" style="background: linear-gradient(135deg, #5C4F44, #3A2F28);"></div>
-    {% endif %}
-    <div class="tcp-exp-hero__overlay"></div>
-  </div>
-  <div class="tcp-exp-hero__inner">
-    <p class="tcp-exp-hero__label">{{ section.settings.hero_label }}</p>
-    <h1 class="tcp-exp-hero__title">{{ section.settings.hero_title }}</h1>
-    <p class="tcp-exp-hero__desc">{{ section.settings.hero_description }}</p>
-  </div>
-</section>
-
-<!-- ── Intro ── -->
-{% if section.settings.intro_text != blank %}
-  <div class="tcp-exp-intro">
-    <div class="tcp-exp-intro__inner">
-      <p class="tcp-exp-intro__text">{{ section.settings.intro_text }}</p>
+<div class="tcp-exp-page" id="tcp-exp-page-root">
+  <!-- Hero -->
+  <section class="tcp-exp-hero">
+    <div class="tcp-exp-hero__inner">
+      <span class="tcp-exp-hero__label">THE STUDIO EXPERIENCES</span>
+      <h1 class="tcp-exp-hero__title">Rituals in Clay &amp; Gathering</h1>
+      <p class="tcp-exp-hero__desc">
+        &ldquo;The studio extends into immersive experiences that bring material, making, and people together around craft, food, and ritual.&rdquo;
+      </p>
     </div>
-  </div>
-{% endif %}
+  </section>
 
-<!-- ── Experience Cards ── -->
-<div class="tcp-exp-cards">
-  <div class="tcp-exp-cards__inner">
-    <div class="tcp-exp-cards__grid">
-      {% for block in section.blocks %}
-        {% if block.type == 'experience_card' %}
-          <div class="tcp-exp-card" {{ block.shopify_attributes }}>
-            <div class="tcp-exp-card__img-wrap">
-              {% if block.settings.image != blank %}
-                <img class="tcp-exp-card__img" src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name }}" loading="lazy" width="600" height="450">
-              {% else %}
-                <div class="tcp-exp-card__img" style="background: var(--tcp-warm-bg);"></div>
-              {% endif %}
-            </div>
-            <div class="tcp-exp-card__content">
-              <span class="tcp-exp-card__tag">{{ block.settings.tag }}</span>
-              <span class="tcp-exp-card__name">{{ block.settings.name }}</span>
-              <p class="tcp-exp-card__desc">{{ block.settings.description }}</p>
-              <div class="tcp-exp-card__details">
-                {% if block.settings.duration != blank %}
-                  <span class="tcp-exp-card__detail">
-                    <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v3.5l2.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-                    {{ block.settings.duration }}
-                  </span>
-                {% endif %}
-                {% if block.settings.group_size != blank %}
-                  <span class="tcp-exp-card__detail">
-                    <svg viewBox="0 0 16 16" fill="none"><circle cx="6" cy="5" r="2.5" stroke="currentColor" stroke-width="1.2"/><circle cx="11" cy="5" r="2" stroke="currentColor" stroke-width="1"/><path d="M1 13c0-2.2 2.2-4 5-4s5 1.8 5 4" stroke="currentColor" stroke-width="1.2"/></svg>
-                    {{ block.settings.group_size }}
-                  </span>
-                {% endif %}
-                {% if block.settings.price != blank %}
-                  <span class="tcp-exp-card__detail">
-                    <svg viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M2 7h12" stroke="currentColor" stroke-width="1.2"/></svg>
-                    {{ block.settings.price }}
-                  </span>
-                {% endif %}
-              </div>
-              <a href="{{ block.settings.link_url | default: '#' }}" class="tcp-exp-card__cta">
-                {{ block.settings.cta_text | default: 'LEARN MORE' }}
-                <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-            </div>
+  <!-- Experiences Grid -->
+  <section class="tcp-exp-grid-section">
+    <div class="tcp-exp-grid">
+      <!-- 1. Clay & Craft -->
+      <div class="tcp-exp-card">
+        <div class="tcp-exp-card__media">
+          <span class="tcp-exp-card__tag">Hand-Building Workshop</span>
+          <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE6DC 100%);">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="30" stroke="#C29B38" stroke-width="2"/><circle cx="40" cy="40" r="18" stroke="#1F1D1B" stroke-width="1.2"/></svg>
           </div>
-        {% endif %}
-      {% endfor %}
+        </div>
+        <div class="tcp-exp-card__body">
+          <h3 class="tcp-exp-card__title">Clay &amp; Craft Masterclass</h3>
+          <p class="tcp-exp-card__desc">
+            Explore the tactile poetry of hand-building and pinch-pot techniques with recycled clay. Shape and glaze your own vessels with studio artisans.
+          </p>
+          <div class="tcp-exp-card__meta">
+            <span>3 Hours &bull; Gurugram Studio</span>
+            <span>₹3,500 / Person</span>
+          </div>
+          <a href="/pages/contact?subject=workshop" class="tcp-exp-card__btn">Reserve A Seat &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 2. Table Stories Sensory Dinner -->
+      <div class="tcp-exp-card">
+        <div class="tcp-exp-card__media">
+          <span class="tcp-exp-card__tag">Immersive Dining</span>
+          <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE6DC 100%);">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="32" stroke="#DFBA5E" stroke-width="2"/><circle cx="40" cy="40" r="22" stroke="#C29B38" stroke-width="1.5"/></svg>
+          </div>
+        </div>
+        <div class="tcp-exp-card__body">
+          <h3 class="tcp-exp-card__title">Table Stories &bull; Feasting</h3>
+          <p class="tcp-exp-card__desc">
+            An intimate multi-course culinary experience where each dish is plated on bespoke Pushpa stoneware, exploring the dialogue between chef and maker.
+          </p>
+          <div class="tcp-exp-card__meta">
+            <span>4 Hours &bull; 12 Guests Max</span>
+            <span>By Reservation</span>
+          </div>
+          <a href="/pages/contact?subject=dining" class="tcp-exp-card__btn">Join The Table &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 3. Tablescape Styling -->
+      <div class="tcp-exp-card">
+        <div class="tcp-exp-card__media">
+          <span class="tcp-exp-card__tag">Design &amp; Styling</span>
+          <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE6DC 100%);">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="15" y="15" width="50" height="50" rx="3" stroke="#C29B38" stroke-width="1.5"/><circle cx="40" cy="40" r="16" stroke="#1F1D1B" stroke-width="1.2"/></svg>
+          </div>
+        </div>
+        <div class="tcp-exp-card__body">
+          <h3 class="tcp-exp-card__title">Curated Tablescaping</h3>
+          <p class="tcp-exp-card__desc">
+            Learn the art of mindful tablescaping, material harmony, seasonal florals, and bespoke ceramic placement for private and corporate gatherings.
+          </p>
+          <div class="tcp-exp-card__meta">
+            <span>2.5 Hours &bull; Studio / Private</span>
+            <span>Custom Consultation</span>
+          </div>
+          <a href="/pages/contact?subject=tablescape" class="tcp-exp-card__btn">Inquire For Dates &rarr;</a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- ── Quote ── -->
-{% if section.settings.quote_text != blank %}
-  <div class="tcp-exp-quote">
-    <p class="tcp-exp-quote__text">"{{ section.settings.quote_text }}"</p>
-    {% if section.settings.quote_author != blank %}
-      <p class="tcp-exp-quote__attribution">— {{ section.settings.quote_author }}</p>
-    {% endif %}
-  </div>
-{% endif %}
-
-<!-- ── Private Experiences CTA ── -->
-{% if section.settings.show_private_section %}
-  <div class="tcp-exp-private">
+  <!-- Private & Corporate Experiences -->
+  <section class="tcp-exp-private">
     <div class="tcp-exp-private__inner">
-      <div>
-        <h2 class="tcp-exp-private__heading">{{ section.settings.private_heading }}</h2>
-        <p class="tcp-exp-private__desc">{{ section.settings.private_description }}</p>
-        <a href="{{ section.settings.private_cta_url | default: '#' }}" class="tcp-exp-private__btn">
-          {{ section.settings.private_cta_text }}
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-      <div class="tcp-exp-private__img-wrap">
-        {% if section.settings.private_image != blank %}
-          <img class="tcp-exp-private__img" src="{{ section.settings.private_image | image_url: width: 800 }}" alt="" loading="lazy" width="800" height="500">
-        {% else %}
-          <div class="tcp-exp-private__img" style="background: var(--tcp-warm-bg);"></div>
-        {% endif %}
-      </div>
+      <h2 class="tcp-exp-private__title">Private &amp; Corporate Studio Sessions</h2>
+      <p class="tcp-exp-private__desc">
+        We curate private team offsites, intimate anniversary dinners, and bespoke bridal tablescape retreats at our Gurugram village studio.
+      </p>
+      <a href="/pages/contact?subject=private-experience" class="tcp-exp-private__cta">Inquire For Private Bookings &rarr;</a>
     </div>
-  </div>
-{% endif %}
+  </section>
+</div>
 
 {% schema %}
 {
-  "name": "TCP Experiences Page",
+  "name": "TCP Studio Experiences",
   "tag": "section",
   "class": "tcp-experiences-section",
-  "settings": [
-    { "type": "header", "content": "Hero" },
-    { "type": "text", "id": "hero_label", "label": "Label", "default": "EXPERIENCES" },
-    { "type": "text", "id": "hero_title", "label": "Title", "default": "Moments that\nbring us together." },
-    { "type": "textarea", "id": "hero_description", "label": "Description", "default": "Workshops, stories and shared rituals around craft and clay." },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero background" },
-
-    { "type": "header", "content": "Intro" },
-    { "type": "textarea", "id": "intro_text", "label": "Intro text", "default": "The studio extends into experiences that bring material, making, and people together." },
-
-    { "type": "header", "content": "Quote" },
-    { "type": "text", "id": "quote_text", "label": "Quote text", "default": "There is something deeply human about shaping clay with your hands." },
-    { "type": "text", "id": "quote_author", "label": "Quote author", "default": "Amankshii Rawatt, Founder" },
-
-    { "type": "header", "content": "Private Experiences" },
-    { "type": "checkbox", "id": "show_private_section", "label": "Show private experiences", "default": true },
-    { "type": "text", "id": "private_heading", "label": "Heading", "default": "Private & Corporate\nExperiences" },
-    { "type": "textarea", "id": "private_description", "label": "Description", "default": "Curate a bespoke experience for your team, friends, or family. We design intimate workshops and immersive dining events tailored to your group." },
-    { "type": "text", "id": "private_cta_text", "label": "CTA text", "default": "ENQUIRE NOW" },
-    { "type": "url", "id": "private_cta_url", "label": "CTA URL" },
-    { "type": "image_picker", "id": "private_image", "label": "Image" }
-  ],
-  "blocks": [
-    {
-      "type": "experience_card",
-      "name": "Experience",
-      "settings": [
-        { "type": "text", "id": "tag", "label": "Tag", "default": "WORKSHOP" },
-        { "type": "text", "id": "name", "label": "Name", "default": "Clay & Craft Workshop" },
-        { "type": "textarea", "id": "description", "label": "Description", "default": "Explore the fundamentals of hand-building with clay. Shape, form, and glaze your own piece under the guidance of our studio artisans." },
-        { "type": "text", "id": "duration", "label": "Duration", "default": "3 hours" },
-        { "type": "text", "id": "group_size", "label": "Group size", "default": "4-12 people" },
-        { "type": "text", "id": "price", "label": "Price", "default": "₹3,500 / person" },
-        { "type": "text", "id": "cta_text", "label": "CTA text", "default": "BOOK NOW" },
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "url", "id": "link_url", "label": "Link URL" }
-      ]
-    }
-  ],
+  "settings": [],
   "presets": [
     {
-      "name": "TCP Experiences Page",
-      "blocks": [
-        { "type": "experience_card", "settings": { "tag": "WORKSHOP", "name": "Clay & Craft Workshop", "description": "Explore hand-building with clay. Shape, form, and glaze your own piece under the guidance of our studio artisans.", "duration": "3 hours", "group_size": "4-12 people", "price": "₹3,500 / person", "cta_text": "BOOK NOW" } },
-        { "type": "experience_card", "settings": { "tag": "IMMERSIVE DINING", "name": "Table Stories", "description": "An intimate dining experience where food, craft, and conversation come together around a handcrafted table.", "duration": "4 hours", "group_size": "8-16 people", "price": "On request", "cta_text": "ENQUIRE" } },
-        { "type": "experience_card", "settings": { "tag": "EVENT", "name": "Curated Tablescapes", "description": "Bespoke tablescape design for private dinners, celebrations, and corporate events using our studio collection.", "duration": "Custom", "group_size": "Any size", "price": "On request", "cta_text": "LEARN MORE" } }
-      ]
+      "name": "TCP Studio Experiences"
     }
   ]
 }

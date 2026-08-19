@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "tcp_contact": {
+      "type": "section-contact",
+      "settings": {}
+    }
+  },
+  "order": [
+    "tcp_contact"
+  ]
+}

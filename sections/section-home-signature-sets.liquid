@@ -1,16 +1,20 @@
 {% comment %}
   ============================================================
-  THE CREATIVE PLATTER — Signature Dinner Sets
+  THE CREATIVE PLATTER — Pushpa Signature Dinner Sets
   ============================================================
-  Showcase of the five signature dinner sets (Mrida, Rekh,
-  Smriti, Viraasat, Neer) with descriptive subtitles.
+  Showcasing the 7 Expressions from the Pushpa Brochure:
+  Smriti (स्मृति), Shakti (शक्ति), Shringaar (शृंगार), Sneha (स्नेह),
+  Sammaan (सम्मान), Aaradhya (आराध्या), Karuna (करुणा).
   Copy into Shopify: sections/section-home-signature-sets.liquid
 {% endcomment %}
 
 <style>
   .tcp-signature {
-    background-color: var(--tcp-cream, #FAF8F4);
-    padding: 80px 0;
+    background-color: var(--tcp-sand, #FBF9F5);
+    padding: 100px 0;
+    position: relative;
+    border-top: 1px solid var(--tcp-border, #E8E2D8);
+    border-bottom: 1px solid var(--tcp-border, #E8E2D8);
   }
 
   .tcp-signature__inner {
@@ -19,262 +23,281 @@
     padding: 0 40px;
   }
 
+  /* ── Header ── */
   .tcp-signature__top {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 40px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
     margin-bottom: 48px;
-    align-items: end;
+    gap: 32px;
+  }
+
+  .tcp-signature__heading-group {
+    max-width: 620px;
+  }
+
+  .tcp-signature__label {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: var(--tcp-gold, #C29B38);
+    margin-bottom: 8px;
+    display: block;
   }
 
   .tcp-signature__heading {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(32px, 4vw, 44px);
+    font-family: var(--font-serif, serif);
+    font-size: clamp(34px, 4vw, 50px);
     font-weight: 400;
-    color: var(--tcp-dark, #2D2D2D);
-    line-height: 1.15;
-    margin-bottom: 16px;
+    color: var(--tcp-dark, #1F1D1B);
+    line-height: 1.1;
+    margin: 0 0 12px;
   }
 
   .tcp-signature__description {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--tcp-muted, #6B6560);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 14.5px;
+    color: var(--tcp-muted, #68625B);
     line-height: 1.7;
-    margin-bottom: 24px;
-    max-width: 300px;
+    margin: 0;
   }
 
-  .tcp-signature__feature-images {
-    display: flex;
-    gap: 12px;
-    justify-content: flex-end;
-  }
-
-  .tcp-signature__feature-img-wrap {
+  /* ── Fluid Horizontal Set Slider / Tabs ── */
+  .tcp-signature__carousel-wrap {
     position: relative;
-    width: calc(33.333% - 8px);
-    aspect-ratio: 3 / 4;
-    overflow: hidden;
   }
 
-  .tcp-signature__feature-img {
+  .tcp-signature__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .tcp-set-card {
+    background: var(--tcp-white, #FFFFFF);
+    border: 1px solid var(--tcp-border, #E8E2D8);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--tcp-dark, #1F1D1B);
+    transition: transform 0.4s var(--ease-fluid), box-shadow 0.4s var(--ease-fluid), border-color 0.3s ease;
+  }
+
+  .tcp-set-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(31, 29, 27, 0.09);
+    border-color: var(--tcp-gold, #C29B38);
+  }
+
+  .tcp-set-card__media {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--tcp-stone, #F3EFEA);
+  }
+
+  .tcp-set-card__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    transition: transform 0.8s var(--ease-fluid);
   }
 
-  .tcp-signature__feature-img-wrap:hover .tcp-signature__feature-img {
-    transform: scale(1.05);
+  .tcp-set-card:hover .tcp-set-card__img {
+    transform: scale(1.08);
   }
 
-  .tcp-signature__feature-label {
+  .tcp-set-card__gold-accent {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 16px;
-    background: linear-gradient(to top, rgba(45, 45, 45, 0.7) 0%, transparent 100%);
-  }
-
-  .tcp-signature__feature-name {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--tcp-white, #FFFFFF);
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  .tcp-signature__feature-sub {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 11px;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.8);
-    letter-spacing: 0.3px;
-  }
-
-  /* ── CTA Link ── */
-  .tcp-signature__cta {
-    display: inline-flex;
+    top: 12px;
+    right: 12px;
+    background: rgba(31, 29, 27, 0.85);
+    backdrop-filter: blur(8px);
+    color: var(--tcp-gold-light, #DFBA5E);
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 20px;
+    display: flex;
     align-items: center;
-    gap: 8px;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    gap: 4px;
+    letter-spacing: 0.8px;
+  }
+
+  .tcp-set-card__gold-accent svg {
+    width: 10px;
+    height: 10px;
+    color: var(--tcp-gold);
+  }
+
+  .tcp-set-card__content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .tcp-set-card__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+
+  .tcp-set-card__title {
+    font-family: var(--font-serif, serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--tcp-dark, #1F1D1B);
+    line-height: 1.2;
+  }
+
+  .tcp-set-card__hindi {
+    font-family: var(--font-devanagari, serif);
+    font-size: 15px;
+    color: var(--tcp-gold, #C29B38);
+    font-weight: 500;
+  }
+
+  .tcp-set-card__tagline {
+    font-family: var(--font-serif, serif);
+    font-size: 14px;
+    font-style: italic;
+    color: var(--tcp-muted, #68625B);
+    margin-bottom: 14px;
+  }
+
+  .tcp-set-card__desc {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 12.5px;
+    color: var(--tcp-muted, #68625B);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+  }
+
+  .tcp-set-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid var(--tcp-border, #E8E2D8);
+  }
+
+  .tcp-set-card__pieces {
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 1.8px;
+    color: var(--tcp-brown, #352922);
+    letter-spacing: 0.5px;
+  }
+
+  .tcp-set-card__cta {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
-    text-decoration: none;
-    padding-bottom: 2px;
-    border-bottom: 1px solid var(--tcp-dark, #2D2D2D);
-    transition: all 0.3s ease;
+    color: var(--tcp-gold-hover, #A8822B);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: transform 0.2s ease;
   }
 
-  .tcp-signature__cta:hover {
-    color: var(--tcp-gold, #C8A96E);
-    border-bottom-color: var(--tcp-gold, #C8A96E);
-  }
-
-  .tcp-signature__cta svg {
-    width: 14px;
-    height: 14px;
-    transition: transform 0.3s ease;
-  }
-
-  .tcp-signature__cta:hover svg {
+  .tcp-set-card:hover .tcp-set-card__cta {
     transform: translateX(4px);
   }
 
-  /* ── Bottom Grid (More Sets) ── */
-  .tcp-signature__bottom-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    margin-top: 48px;
-  }
-
-  .tcp-signature__set-card {
-    text-decoration: none;
-    display: block;
-  }
-
-  .tcp-signature__set-img-wrap {
-    aspect-ratio: 1;
-    overflow: hidden;
-    margin-bottom: 12px;
-    background-color: var(--tcp-beige, #F5F0E8);
-  }
-
-  .tcp-signature__set-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-  }
-
-  .tcp-signature__set-card:hover .tcp-signature__set-img {
-    transform: scale(1.06);
-  }
-
-  .tcp-signature__set-name {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--tcp-dark, #2D2D2D);
-    margin-bottom: 3px;
-    display: block;
-  }
-
-  .tcp-signature__set-sub {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 12px;
-    font-style: italic;
-    color: var(--tcp-muted, #6B6560);
-    letter-spacing: 0.3px;
-  }
-
   /* ── Responsive ── */
-  @media (max-width: 1024px) {
-    .tcp-signature__top {
-      grid-template-columns: 1fr;
+  @media (max-width: 1200px) {
+    .tcp-signature__grid {
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
-    }
-
-    .tcp-signature__bottom-grid {
-      grid-template-columns: repeat(3, 1fr);
     }
   }
 
   @media (max-width: 600px) {
     .tcp-signature {
-      padding: 50px 0;
+      padding: 60px 0;
     }
-
     .tcp-signature__inner {
-      padding: 0 24px;
+      padding: 0 20px;
     }
-
-    .tcp-signature__feature-images {
+    .tcp-signature__top {
       flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 32px;
     }
-
-    .tcp-signature__feature-img-wrap {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-    }
-
-    .tcp-signature__bottom-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    .tcp-signature__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
     }
   }
 </style>
 
-<section class="tcp-signature" id="tcp-home-signature-sets">
+<section class="tcp-signature" id="tcp-signature-sets">
   <div class="tcp-signature__inner">
 
-    <!-- Top Area -->
     <div class="tcp-signature__top">
-      <div>
-        <h2 class="tcp-signature__heading">{{ section.settings.heading }}</h2>
-        <p class="tcp-signature__description">{{ section.settings.description }}</p>
-        <a href="{{ section.settings.cta_url | default: '#' }}" class="tcp-signature__cta">
-          {{ section.settings.cta_text }}
-          <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+      <div class="tcp-signature__heading-group">
+        <span class="tcp-signature__label">{{ section.settings.label | default: 'PUSHPA LEGACY 2025–26' }}</span>
+        <h2 class="tcp-signature__heading">{{ section.settings.heading | default: 'The Seven Expressions' }}</h2>
+        <p class="tcp-signature__description">
+          {{ section.settings.description | default: 'A dinnerware collection born from memory, shaped by emotion & carried in legacy. Each set embraces raw organic edges, zero material off-cuts, and the quiet beauty of recycled clay.' }}
+        </p>
       </div>
-
-      <!-- Feature Images (Top 3 highlighted) -->
-      <div class="tcp-signature__feature-images">
-        {% for block in section.blocks %}
-          {% if block.type == 'featured_set' %}
-            <a href="{{ block.settings.link_url | default: '#' }}" class="tcp-signature__feature-img-wrap" {{ block.shopify_attributes }}>
-              {% if block.settings.image != blank %}
-                <img 
-                  class="tcp-signature__feature-img"
-                  src="{{ block.settings.image | image_url: width: 500 }}"
-                  alt="{{ block.settings.name }}"
-                  loading="lazy"
-                  width="500"
-                  height="667"
-                >
-              {% else %}
-                <div class="tcp-signature__feature-img" style="background: var(--tcp-warm-bg);"></div>
-              {% endif %}
-              <div class="tcp-signature__feature-label">
-                <span class="tcp-signature__feature-name">{{ block.settings.name }}</span>
-                <span class="tcp-signature__feature-sub">{{ block.settings.subtitle }}</span>
-              </div>
-            </a>
-          {% endif %}
-        {% endfor %}
-      </div>
+      <a href="{{ section.settings.cta_url | default: '/collections/pushpa' }}" class="tcp-hero__btn-secondary" style="white-space:nowrap;">
+        {{ section.settings.cta_text | default: 'View All 7 Expressions' }} &rarr;
+      </a>
     </div>
 
-    <!-- Bottom Grid (More Sets) -->
-    <div class="tcp-signature__bottom-grid">
+    <div class="tcp-signature__grid">
       {% for block in section.blocks %}
-        {% if block.type == 'set_card' %}
-          <a href="{{ block.settings.link_url | default: '#' }}" class="tcp-signature__set-card" {{ block.shopify_attributes }}>
-            <div class="tcp-signature__set-img-wrap">
+        {% if block.type == 'dinner_set' %}
+          <a href="{{ block.settings.link_url | default: '#' }}" class="tcp-set-card" {{ block.shopify_attributes }}>
+            <div class="tcp-set-card__media">
+              <div class="tcp-set-card__gold-accent">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <span>24k Gold Lip</span>
+              </div>
+
               {% if block.settings.image != blank %}
                 <img 
-                  class="tcp-signature__set-img"
-                  src="{{ block.settings.image | image_url: width: 400 }}"
+                  class="tcp-set-card__img"
+                  src="{{ block.settings.image | image_url: width: 800 }}"
                   alt="{{ block.settings.name }}"
                   loading="lazy"
-                  width="400"
-                  height="400"
+                  width="800"
+                  height="800"
                 >
               {% else %}
-                <div class="tcp-signature__set-img" style="background: var(--tcp-warm-bg);"></div>
+                <!-- Organic Ceramic Plate Art -->
+                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EFE8DD 100%);">
+                  <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+                    <circle cx="60" cy="60" r="48" stroke="#C29B38" stroke-width="2.5" stroke-dasharray="24 4 16 6"/>
+                    <circle cx="60" cy="60" r="32" stroke="#1F1D1B" stroke-width="1.2"/>
+                    <circle cx="60" cy="60" r="16" fill="#EDE4D6" stroke="#DFBA5E" stroke-width="1.5"/>
+                  </svg>
+                </div>
               {% endif %}
             </div>
-            <span class="tcp-signature__set-name">{{ block.settings.name }}</span>
-            <span class="tcp-signature__set-sub">{{ block.settings.subtitle }}</span>
+
+            <div class="tcp-set-card__content">
+              <div class="tcp-set-card__header">
+                <h3 class="tcp-set-card__title">{{ block.settings.name }}</h3>
+                <span class="tcp-set-card__hindi">{{ block.settings.hindi_name }}</span>
+              </div>
+              <span class="tcp-set-card__tagline">&ldquo;{{ block.settings.tagline }}&rdquo;</span>
+              <p class="tcp-set-card__desc">{{ block.settings.description }}</p>
+
+              <div class="tcp-set-card__footer">
+                <span class="tcp-set-card__pieces">{{ block.settings.pieces_text | default: '4, 12 or 18-Piece Sets' }}</span>
+                <span class="tcp-set-card__cta">Explore Set &rarr;</span>
+              </div>
+            </div>
           </a>
         {% endif %}
       {% endfor %}
@@ -291,48 +314,46 @@
   "settings": [
     {
       "type": "text",
+      "id": "label",
+      "label": "Top label",
+      "default": "PUSHPA LEGACY 2025–26"
+    },
+    {
+      "type": "text",
       "id": "heading",
-      "label": "Heading",
-      "default": "Our Signature\nDinner Sets"
+      "label": "Section heading",
+      "default": "The Seven Expressions"
     },
     {
       "type": "textarea",
       "id": "description",
-      "label": "Description",
-      "default": "Five expressions.\nRooted in tradition,\ndesigned for today."
+      "label": "Description text",
+      "default": "A dinnerware collection born from memory, shaped by emotion & carried in legacy. Each set embraces raw organic edges, zero material off-cuts, and the quiet beauty of recycled clay."
     },
     {
       "type": "text",
       "id": "cta_text",
-      "label": "CTA text",
-      "default": "EXPLORE ALL COLLECTIONS"
+      "label": "CTA button text",
+      "default": "View All 7 Expressions"
     },
     {
       "type": "url",
       "id": "cta_url",
-      "label": "CTA URL"
+      "label": "CTA button URL"
     }
   ],
   "blocks": [
     {
-      "type": "featured_set",
-      "name": "Featured Set (Top Row)",
-      "limit": 3,
-      "settings": [
-        { "type": "text", "id": "name", "label": "Set name", "default": "Mrida" },
-        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Earthy · Raw · Grounded" },
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "url", "id": "link_url", "label": "Link URL" }
-      ]
-    },
-    {
-      "type": "set_card",
-      "name": "Set Card (Bottom Row)",
+      "type": "dinner_set",
+      "name": "Pushpa Dinner Set",
       "settings": [
         { "type": "text", "id": "name", "label": "Set name", "default": "Smriti" },
-        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Timeless · Soft · Nostalgic" },
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "url", "id": "link_url", "label": "Link URL" }
+        { "type": "text", "id": "hindi_name", "label": "Hindi name", "default": "(स्मृति)" },
+        { "type": "text", "id": "tagline", "label": "Tagline", "default": "Memory & Remembrance" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Symbolizes cherished memories and the everlasting presence of mother’s teachings. Hand-formed with raw organic edges and subtle 24k gold leaf brushwork." },
+        { "type": "text", "id": "pieces_text", "label": "Configuration options", "default": "4, 12, or 18-Piece Sets" },
+        { "type": "image_picker", "id": "image", "label": "Set image" },
+        { "type": "url", "id": "link_url", "label": "Product link URL" }
       ]
     }
   ],
@@ -340,11 +361,46 @@
     {
       "name": "TCP Signature Sets",
       "blocks": [
-        { "type": "featured_set", "settings": { "name": "Mrida", "subtitle": "Earthy · Raw · Grounded" } },
-        { "type": "featured_set", "settings": { "name": "Rekh", "subtitle": "Minimal · Modern · Refined" } },
-        { "type": "set_card", "settings": { "name": "Smriti", "subtitle": "Timeless · Soft · Nostalgic" } },
-        { "type": "set_card", "settings": { "name": "Viraasat", "subtitle": "Rich · Layered · Celebratory" } },
-        { "type": "set_card", "settings": { "name": "Neer", "subtitle": "Light · Calm · Everyday" } }
+        {
+          "type": "dinner_set",
+          "settings": {
+            "name": "Smriti",
+            "hindi_name": "(स्मृति)",
+            "tagline": "Memory & Remembrance",
+            "description": "The flagship legacy set. Hand-formed from recycled clay with raw organic edges and 24k gold kintsugi accent.",
+            "link_url": "/products/smriti-dinner-set"
+          }
+        },
+        {
+          "type": "dinner_set",
+          "settings": {
+            "name": "Shakti",
+            "hindi_name": "(शक्ति)",
+            "tagline": "Quiet Strength",
+            "description": "Grounded architectural weight, earthy raw clay texture, high-fired for lasting everyday resonance.",
+            "link_url": "/products/shakti-dinner-set"
+          }
+        },
+        {
+          "type": "dinner_set",
+          "settings": {
+            "name": "Shringaar",
+            "hindi_name": "(शृंगार)",
+            "tagline": "Adornment & Grace",
+            "description": "Refined organic contours, subtle luminous crackle glaze, and delicate gold-brushed rims.",
+            "link_url": "/products/shringaar-dinner-set"
+          }
+        },
+        {
+          "type": "dinner_set",
+          "settings": {
+            "name": "Sneha",
+            "hindi_name": "(स्नेह)",
+            "tagline": "Affection & Warmth",
+            "description": "Comforting tactile curves, warm cream stoneware finish, and intimate sharing bowls.",
+            "link_url": "/products/sneha-dinner-set"
+          }
+        }
       ]
     }
   ]

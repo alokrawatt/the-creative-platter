@@ -1,15 +1,17 @@
 {% comment %}
   ============================================================
-  THE CREATIVE PLATTER — Contact Page
+  THE CREATIVE PLATTER — Contact & Studio Visit
   ============================================================
-  Contact form with studio info, social links, and map embed.
+  Connect with founder Amankshii Rawatt & the Gurugram studio.
   Copy into Shopify: sections/section-contact.liquid
 {% endcomment %}
 
 <style>
   .tcp-contact {
-    background-color: var(--tcp-cream, #FAF8F4);
-    padding: 80px 0;
+    background-color: var(--tcp-sand, #FBF9F5);
+    padding: 80px 0 100px;
+    font-family: var(--font-sans, sans-serif);
+    color: var(--tcp-dark, #1F1D1B);
   }
 
   .tcp-contact__inner {
@@ -17,125 +19,115 @@
     margin: 0 auto;
     padding: 0 40px;
     display: grid;
-    grid-template-columns: 1fr 1.3fr;
+    grid-template-columns: 1fr 1.2fr;
     gap: 80px;
+    align-items: start;
   }
-
-  /* ── Left: Studio Info ── */
-  .tcp-contact__info {}
 
   .tcp-contact__label {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 10px;
-    font-weight: 600;
+    font-size: 10.5px;
+    font-weight: 700;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: var(--tcp-muted, #6B6560);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .tcp-contact__label::after {
-    content: '';
-    width: 40px;
-    height: 1px;
-    background-color: var(--tcp-border, #E5DFD5);
+    color: var(--tcp-gold, #C29B38);
+    display: block;
+    margin-bottom: 12px;
   }
 
   .tcp-contact__heading {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(32px, 4vw, 48px);
+    font-family: var(--font-serif, serif);
+    font-size: clamp(36px, 4.5vw, 54px);
     font-weight: 400;
-    color: var(--tcp-dark, #2D2D2D);
-    line-height: 1.15;
-    margin-bottom: 16px;
+    line-height: 1.1;
+    margin: 0 0 16px;
   }
 
   .tcp-contact__subtitle {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
     font-size: 15px;
-    color: var(--tcp-muted, #6B6560);
-    line-height: 1.7;
+    color: var(--tcp-muted, #68625B);
+    line-height: 1.75;
     margin-bottom: 40px;
-    max-width: 380px;
+    max-width: 440px;
   }
 
-  .tcp-contact__detail-group {
-    margin-bottom: 28px;
-  }
-
-  .tcp-contact__detail-title {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
-    margin-bottom: 8px;
-    display: block;
-  }
-
-  .tcp-contact__detail-text {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 14px;
-    color: var(--tcp-muted, #6B6560);
-    line-height: 1.7;
-  }
-
-  .tcp-contact__detail-text a {
-    color: var(--tcp-dark, #2D2D2D);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .tcp-contact__detail-text a:hover {
-    color: var(--tcp-gold, #C8A96E);
-  }
-
-  .tcp-contact__social {
+  .tcp-contact__cards {
     display: flex;
-    gap: 12px;
-    margin-top: 32px;
+    flex-direction: column;
+    gap: 24px;
   }
 
-  .tcp-contact__social-link {
+  .tcp-contact-card {
+    background: var(--tcp-white, #FFFFFF);
+    border: 1px solid var(--tcp-border, #E8E2D8);
+    border-radius: 4px;
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .tcp-contact-card__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--tcp-stone, #F3EFEA);
+    color: var(--tcp-gold, #C29B38);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--tcp-border, #E5DFD5);
-    border-radius: 50%;
-    color: var(--tcp-dark, #2D2D2D);
+    flex-shrink: 0;
+  }
+
+  .tcp-contact-card__icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .tcp-contact-card__title {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--tcp-brown, #352922);
+    margin: 0 0 4px;
+  }
+
+  .tcp-contact-card__text {
+    font-size: 14px;
+    color: var(--tcp-muted, #68625B);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .tcp-contact-card__text a {
+    color: var(--tcp-dark, #1F1D1B);
     text-decoration: none;
-    transition: all 0.3s ease;
+    font-weight: 600;
   }
 
-  .tcp-contact__social-link:hover {
-    background-color: var(--tcp-gold, #C8A96E);
-    border-color: var(--tcp-gold, #C8A96E);
-    color: var(--tcp-white, #FFFFFF);
-  }
-
-  .tcp-contact__social-link svg {
-    width: 16px;
-    height: 16px;
+  .tcp-contact-card__text a:hover {
+    color: var(--tcp-gold, #C29B38);
   }
 
   /* ── Right: Form ── */
-  .tcp-contact__form-wrap {
-    background-color: var(--tcp-white, #FFFFFF);
+  .tcp-contact__form-box {
+    background: var(--tcp-white, #FFFFFF);
+    border: 1px solid var(--tcp-border, #E8E2D8);
+    border-radius: 6px;
     padding: 48px;
-    border: 1px solid var(--tcp-border, #E5DFD5);
+    box-shadow: 0 16px 40px rgba(31, 29, 27, 0.05);
   }
 
   .tcp-contact__form-title {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: 24px;
-    font-weight: 400;
-    color: var(--tcp-dark, #2D2D2D);
+    font-family: var(--font-serif, serif);
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+
+  .tcp-contact__form-sub {
+    font-size: 13.5px;
+    color: var(--tcp-muted, #68625B);
     margin-bottom: 28px;
   }
 
@@ -145,114 +137,65 @@
     gap: 20px;
   }
 
-  .tcp-contact__form-row {
+  .tcp-form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
   }
 
-  .tcp-contact__field {
+  .tcp-form-field {
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
 
-  .tcp-contact__field label {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
+  .tcp-form-field label {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
-    color: var(--tcp-muted, #6B6560);
+    color: var(--tcp-brown, #352922);
   }
 
-  .tcp-contact__field input,
-  .tcp-contact__field textarea,
-  .tcp-contact__field select {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
+  .tcp-form-field input,
+  .tcp-form-field select,
+  .tcp-form-field textarea {
+    background: var(--tcp-sand, #FBF9F5);
+    border: 1px solid var(--tcp-border, #E8E2D8);
+    border-radius: 3px;
+    padding: 13px 16px;
+    font-family: var(--font-sans, sans-serif);
     font-size: 14px;
-    padding: 14px 16px;
-    border: 1px solid var(--tcp-border, #E5DFD5);
-    background: var(--tcp-cream, #FAF8F4);
-    color: var(--tcp-dark, #2D2D2D);
+    color: var(--tcp-dark, #1F1D1B);
     outline: none;
-    transition: border-color 0.3s ease;
-    -webkit-appearance: none;
-    appearance: none;
+    transition: border-color 0.2s ease;
   }
 
-  .tcp-contact__field input:focus,
-  .tcp-contact__field textarea:focus,
-  .tcp-contact__field select:focus {
-    border-color: var(--tcp-gold, #C8A96E);
+  .tcp-form-field input:focus,
+  .tcp-form-field select:focus,
+  .tcp-form-field textarea:focus {
+    border-color: var(--tcp-gold, #C29B38);
+    background: #FFFFFF;
   }
 
-  .tcp-contact__field textarea {
-    resize: vertical;
-    min-height: 120px;
-  }
-
-  .tcp-contact__field select {
-    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B6560' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    padding-right: 40px;
-  }
-
-  .tcp-contact__submit {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
+  .tcp-form-submit {
+    font-family: var(--font-sans, sans-serif);
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.8px;
+    font-weight: 700;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
-    background-color: var(--tcp-gold, #C8A96E);
-    border: 1.5px solid var(--tcp-gold, #C8A96E);
-    padding: 16px 36px;
+    color: #FFFFFF;
+    background: var(--tcp-dark, #1F1D1B);
+    border: none;
+    padding: 16px;
+    border-radius: 2px;
     cursor: pointer;
     transition: all 0.3s ease;
-    align-self: flex-start;
-    width: 100%;
+    margin-top: 8px;
   }
 
-  .tcp-contact__submit:hover {
-    background-color: var(--tcp-gold-hover, #B8965A);
-    border-color: var(--tcp-gold-hover, #B8965A);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(200, 169, 110, 0.3);
-  }
-
-  .tcp-contact__submit svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  /* ── Map ── */
-  .tcp-contact-map {
-    background-color: var(--tcp-white, #FFFFFF);
-    padding: 0 0 80px;
-  }
-
-  .tcp-contact-map__inner {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 40px;
-  }
-
-  .tcp-contact-map__embed {
-    width: 100%;
-    height: 360px;
-    border: 1px solid var(--tcp-border, #E5DFD5);
-    filter: grayscale(60%) contrast(1.1);
-    transition: filter 0.5s ease;
-  }
-
-  .tcp-contact-map__embed:hover {
-    filter: grayscale(0%) contrast(1);
+  .tcp-form-submit:hover {
+    background: var(--tcp-gold, #C29B38);
   }
 
   /* ── Responsive ── */
@@ -261,177 +204,116 @@
       grid-template-columns: 1fr;
       gap: 40px;
     }
-
-    .tcp-contact__form-wrap {
-      padding: 32px 24px;
-    }
-
-    .tcp-contact__form-row {
+    .tcp-form-row {
       grid-template-columns: 1fr;
     }
-  }
-
-  @media (max-width: 600px) {
-    .tcp-contact {
-      padding: 50px 0;
-    }
-
-    .tcp-contact__inner {
-      padding: 0 24px;
+    .tcp-contact__form-box {
+      padding: 32px 20px;
     }
   }
 </style>
 
 <section class="tcp-contact" id="tcp-contact">
   <div class="tcp-contact__inner">
-
-    <!-- Left: Studio Info -->
+    <!-- Left: Details -->
     <div class="tcp-contact__info">
-      <span class="tcp-contact__label">{{ section.settings.label }}</span>
-      <h1 class="tcp-contact__heading">{{ section.settings.heading }}</h1>
-      <p class="tcp-contact__subtitle">{{ section.settings.subtitle }}</p>
+      <span class="tcp-contact__label">GET IN TOUCH</span>
+      <h1 class="tcp-contact__heading">Connect With The Studio</h1>
+      <p class="tcp-contact__subtitle">
+        Whether you are planning a bespoke home dinner setting, seeking custom hospitality tableware, or booking a studio experience, we welcome your dialogue.
+      </p>
 
-      <div class="tcp-contact__detail-group">
-        <span class="tcp-contact__detail-title">STUDIO</span>
-        <p class="tcp-contact__detail-text">{{ section.settings.studio_address }}</p>
-      </div>
-
-      <div class="tcp-contact__detail-group">
-        <span class="tcp-contact__detail-title">EMAIL</span>
-        <p class="tcp-contact__detail-text">
-          <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
-        </p>
-      </div>
-
-      <div class="tcp-contact__detail-group">
-        <span class="tcp-contact__detail-title">PHONE</span>
-        <p class="tcp-contact__detail-text">
-          <a href="tel:{{ section.settings.phone }}">{{ section.settings.phone }}</a>
-        </p>
-      </div>
-
-      {% if section.settings.website != blank %}
-        <div class="tcp-contact__detail-group">
-          <span class="tcp-contact__detail-title">WEBSITE</span>
-          <p class="tcp-contact__detail-text">
-            <a href="{{ section.settings.website }}" target="_blank" rel="noopener">{{ section.settings.website }}</a>
-          </p>
+      <div class="tcp-contact__cards">
+        <div class="tcp-contact-card">
+          <div class="tcp-contact-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <h4 class="tcp-contact-card__title">Village Studio &bull; Gurugram</h4>
+            <p class="tcp-contact-card__text">The Creative Platter Studio<br>Near Gurugram, Haryana / New Delhi, India</p>
+          </div>
         </div>
-      {% endif %}
 
-      <div class="tcp-contact__social">
-        {% if section.settings.instagram_url != blank %}
-          <a href="{{ section.settings.instagram_url }}" class="tcp-contact__social-link" aria-label="Instagram" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-          </a>
-        {% endif %}
-        {% if section.settings.pinterest_url != blank %}
-          <a href="{{ section.settings.pinterest_url }}" class="tcp-contact__social-link" aria-label="Pinterest" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.182-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.805-2.424 1.808-2.424.853 0 1.264.64 1.264 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.481 1.806 1.778 0 3.144-1.874 3.144-4.58 0-2.394-1.72-4.068-4.177-4.068-2.845 0-4.515 2.134-4.515 4.34 0 .859.331 1.781.744 2.282a.3.3 0 01.069.287c-.076.316-.244.995-.277 1.134-.044.182-.144.221-.333.133-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.472 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.527-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z" fill="currentColor"/></svg>
-          </a>
-        {% endif %}
-        {% if section.settings.facebook_url != blank %}
-          <a href="{{ section.settings.facebook_url }}" class="tcp-contact__social-link" aria-label="Facebook" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        {% endif %}
+        <div class="tcp-contact-card">
+          <div class="tcp-contact-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+          </div>
+          <div>
+            <h4 class="tcp-contact-card__title">Email Dialogue</h4>
+            <p class="tcp-contact-card__text"><a href="mailto:info@thecreativeplatter.com">info@thecreativeplatter.com</a></p>
+          </div>
+        </div>
+
+        <div class="tcp-contact-card">
+          <div class="tcp-contact-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <h4 class="tcp-contact-card__title">Direct &bull; WhatsApp</h4>
+            <p class="tcp-contact-card__text"><a href="tel:+918586946814">+91-8586946814</a></p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Right: Contact Form -->
-    <div class="tcp-contact__form-wrap">
-      <h2 class="tcp-contact__form-title">{{ section.settings.form_title }}</h2>
+    <!-- Right: Form -->
+    <div class="tcp-contact__form-box">
+      <h2 class="tcp-contact__form-title">Send a Message</h2>
+      <p class="tcp-contact__form-sub">We reply within 24 business hours.</p>
 
       <form class="tcp-contact__form" action="/contact#contact_form" method="post">
         <input type="hidden" name="form_type" value="contact">
         <input type="hidden" name="utf8" value="✓">
 
-        <div class="tcp-contact__form-row">
-          <div class="tcp-contact__field">
-            <label for="tcp-contact-name">YOUR NAME</label>
-            <input type="text" id="tcp-contact-name" name="contact[name]" placeholder="Full name" required>
+        <div class="tcp-form-row">
+          <div class="tcp-form-field">
+            <label>Your Name *</label>
+            <input type="text" name="contact[name]" placeholder="Full Name" required>
           </div>
-          <div class="tcp-contact__field">
-            <label for="tcp-contact-email">EMAIL</label>
-            <input type="email" id="tcp-contact-email" name="contact[email]" placeholder="you@email.com" required>
+          <div class="tcp-form-field">
+            <label>Email Address *</label>
+            <input type="email" name="contact[email]" placeholder="email@domain.com" required>
           </div>
         </div>
 
-        <div class="tcp-contact__form-row">
-          <div class="tcp-contact__field">
-            <label for="tcp-contact-phone">PHONE</label>
-            <input type="tel" id="tcp-contact-phone" name="contact[phone]" placeholder="+91 XXXXX XXXXX">
+        <div class="tcp-form-row">
+          <div class="tcp-form-field">
+            <label>Phone / WhatsApp</label>
+            <input type="tel" name="contact[phone]" placeholder="+91 ...">
           </div>
-          <div class="tcp-contact__field">
-            <label for="tcp-contact-subject">SUBJECT</label>
-            <select id="tcp-contact-subject" name="contact[subject]">
-              <option value="" disabled selected>Select a topic</option>
-              <option value="general">General Enquiry</option>
-              <option value="bespoke-homes">Bespoke (Homes)</option>
-              <option value="bespoke-b2b">Bespoke (B2B)</option>
-              <option value="experiences">Experiences</option>
-              <option value="gifting">Gifting</option>
-              <option value="press">Press & Media</option>
-              <option value="other">Other</option>
+          <div class="tcp-form-field">
+            <label>Inquiry Nature</label>
+            <select name="contact[topic]">
+              <option>Retail &bull; Pushpa Collection Order</option>
+              <option>Bespoke (Homes) Dinnerware</option>
+              <option>Hospitality (B2B) Tableware RFQ</option>
+              <option>Studio Workshop &bull; Booking</option>
+              <option>Corporate Gifting &bull; Volume</option>
+              <option>Press &bull; Media Inquiry</option>
             </select>
           </div>
         </div>
 
-        <div class="tcp-contact__field">
-          <label for="tcp-contact-message">MESSAGE</label>
-          <textarea id="tcp-contact-message" name="contact[body]" placeholder="Tell us how we can help..." required></textarea>
+        <div class="tcp-form-field">
+          <label>Your Message *</label>
+          <textarea name="contact[body]" rows="5" placeholder="Share your table requirements, vision, or desired dates..." required></textarea>
         </div>
 
-        <button type="submit" class="tcp-contact__submit">
-          SEND MESSAGE
-          <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+        <button type="submit" class="tcp-form-submit">Send Message &rarr;</button>
       </form>
     </div>
-
   </div>
 </section>
 
-<!-- ── Map ── -->
-{% if section.settings.show_map and section.settings.map_embed != blank %}
-  <div class="tcp-contact-map">
-    <div class="tcp-contact-map__inner">
-      {{ section.settings.map_embed }}
-    </div>
-  </div>
-{% endif %}
-
 {% schema %}
 {
-  "name": "TCP Contact Page",
+  "name": "TCP Contact Section",
   "tag": "section",
   "class": "tcp-contact-section",
-  "settings": [
-    { "type": "text", "id": "label", "label": "Label", "default": "GET IN TOUCH" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Let's create\nsomething together." },
-    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "We'd love to hear from you. Whether it's a bespoke project, an experience, or simply a conversation about craft." },
-
-    { "type": "header", "content": "Studio Details" },
-    { "type": "textarea", "id": "studio_address", "label": "Address", "default": "The Creative Platter Studio\nNew Delhi, India" },
-    { "type": "text", "id": "email", "label": "Email", "default": "info@thecreativeplatter.com" },
-    { "type": "text", "id": "phone", "label": "Phone", "default": "+91-8586946814" },
-    { "type": "text", "id": "website", "label": "Website URL", "default": "www.thecreativeplatter.com" },
-
-    { "type": "header", "content": "Social Links" },
-    { "type": "url", "id": "instagram_url", "label": "Instagram" },
-    { "type": "url", "id": "pinterest_url", "label": "Pinterest" },
-    { "type": "url", "id": "facebook_url", "label": "Facebook" },
-
-    { "type": "header", "content": "Form" },
-    { "type": "text", "id": "form_title", "label": "Form title", "default": "Send us a message" },
-
-    { "type": "header", "content": "Map" },
-    { "type": "checkbox", "id": "show_map", "label": "Show map", "default": false },
-    { "type": "html", "id": "map_embed", "label": "Map embed code (iframe)" }
-  ],
+  "settings": [],
   "presets": [
     {
-      "name": "TCP Contact Page"
+      "name": "TCP Contact Section"
     }
   ]
 }

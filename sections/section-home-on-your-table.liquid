@@ -1,137 +1,202 @@
 {% comment %}
   ============================================================
-  THE CREATIVE PLATTER — On Your Table / Lifestyle Banner
+  THE CREATIVE PLATTER — On Your Table & Editorial Press
   ============================================================
-  Full-width lifestyle banner with "On Your Table" heading
-  and CTA to see products in homes.
+  Press accolades (Vogue, Condé Nast, The Hindu) +
+  living customer tablescapes.
   Copy into Shopify: sections/section-home-on-your-table.liquid
 {% endcomment %}
 
 <style>
   .tcp-on-table {
+    background: var(--tcp-white, #FFFFFF);
+    padding: 80px 0;
     position: relative;
-    overflow: hidden;
-    min-height: 440px;
-    display: flex;
-    align-items: flex-end;
-  }
-
-  .tcp-on-table__bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .tcp-on-table__bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
-  }
-
-  .tcp-on-table:hover .tcp-on-table__bg-img {
-    transform: scale(1.03);
-  }
-
-  .tcp-on-table__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(35, 28, 22, 0.75) 0%, rgba(35, 28, 22, 0.15) 60%, transparent 100%);
-    z-index: 1;
+    border-top: 1px solid var(--tcp-border, #E8E2D8);
   }
 
   .tcp-on-table__inner {
-    position: relative;
-    z-index: 2;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 80px 56px;
+    padding: 0 40px;
+  }
+
+  /* ── Press Marquee / Logo Bar ── */
+  .tcp-press-bar {
+    text-align: center;
+    margin-bottom: 60px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid var(--tcp-border, #E8E2D8);
+  }
+
+  .tcp-press-bar__label {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--tcp-muted, #68625B);
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .tcp-press-bar__logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .tcp-press-item {
+    font-family: var(--font-serif, serif);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--tcp-brown-light, #52443A);
+    opacity: 0.85;
+    transition: opacity 0.3s ease, color 0.3s ease;
+  }
+
+  .tcp-press-item:hover {
+    opacity: 1;
+    color: var(--tcp-gold, #C29B38);
+  }
+
+  /* ── Hero Banner ── */
+  .tcp-on-table__banner {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    min-height: 400px;
+    display: flex;
+    align-items: flex-end;
+    background: #2B231D;
+  }
+
+  .tcp-on-table__banner-img {
+    position: absolute;
+    inset: 0;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.65;
+    transition: transform 0.8s var(--ease-fluid);
+  }
+
+  .tcp-on-table__banner:hover .tcp-on-table__banner-img {
+    transform: scale(1.03);
+  }
+
+  .tcp-on-table__banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(31, 29, 27, 0.9) 0%, rgba(31, 29, 27, 0.2) 60%, transparent 100%);
+  }
+
+  .tcp-on-table__banner-content {
+    position: relative;
+    z-index: 2;
+    padding: 48px;
+    max-width: 600px;
   }
 
   .tcp-on-table__heading {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(36px, 5vw, 56px);
+    font-family: var(--font-serif, serif);
+    font-size: clamp(34px, 4.5vw, 52px);
     font-weight: 400;
-    color: var(--tcp-white, #FFFFFF);
+    color: #FFFFFF;
     line-height: 1.1;
-    margin-bottom: 12px;
-    font-style: italic;
+    margin: 0 0 12px;
   }
 
   .tcp-on-table__description {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 15px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 14.5px;
+    color: rgba(255, 255, 255, 0.85);
     line-height: 1.7;
     margin-bottom: 24px;
-    max-width: 340px;
   }
 
   .tcp-on-table__cta {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-family: var(--font-sans, sans-serif);
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.8px;
+    font-weight: 700;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--tcp-white, #FFFFFF);
+    color: var(--tcp-gold-light, #DFBA5E);
     text-decoration: none;
-    transition: color 0.3s ease;
+    padding-bottom: 3px;
+    border-bottom: 1.5px solid var(--tcp-gold-light, #DFBA5E);
+    transition: all 0.3s ease;
   }
 
   .tcp-on-table__cta:hover {
-    color: var(--tcp-gold-light, #D4BA85);
-  }
-
-  .tcp-on-table__cta svg {
-    width: 14px;
-    height: 14px;
-    transition: transform 0.3s ease;
-  }
-
-  .tcp-on-table__cta:hover svg {
+    color: #FFFFFF;
+    border-bottom-color: #FFFFFF;
     transform: translateX(4px);
   }
 
+  /* ── Responsive ── */
   @media (max-width: 768px) {
-    .tcp-on-table {
-      min-height: 340px;
-    }
-
     .tcp-on-table__inner {
-      padding: 0 24px 40px;
+      padding: 0 20px;
+    }
+    .tcp-press-bar__logos {
+      gap: 24px;
+    }
+    .tcp-press-item {
+      font-size: 16px;
+    }
+    .tcp-on-table__banner-content {
+      padding: 32px 20px;
     }
   }
 </style>
 
 <section class="tcp-on-table" id="tcp-home-on-your-table">
-  <div class="tcp-on-table__bg">
-    {% if section.settings.bg_image != blank %}
-      <img 
-        class="tcp-on-table__bg-img"
-        src="{{ section.settings.bg_image | image_url: width: 1600 }}"
-        alt="{{ section.settings.heading | strip_html }}"
-        loading="lazy"
-        width="1600"
-        height="600"
-      >
-    {% else %}
-      <div class="tcp-on-table__bg-img" style="background: linear-gradient(135deg, #5C4F44, #3A2F28);"></div>
-    {% endif %}
-    <div class="tcp-on-table__overlay"></div>
-  </div>
-
   <div class="tcp-on-table__inner">
-    <h2 class="tcp-on-table__heading">{{ section.settings.heading }}</h2>
-    <p class="tcp-on-table__description">{{ section.settings.description }}</p>
-    <a href="{{ section.settings.cta_url | default: '#' }}" class="tcp-on-table__cta">
-      {{ section.settings.cta_text }}
-      <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+
+    <!-- Press Accolades -->
+    <div class="tcp-press-bar">
+      <span class="tcp-press-bar__label">RECOGNISED BY LEADING EDITORIAL PLATFORMS</span>
+      <div class="tcp-press-bar__logos">
+        <span class="tcp-press-item">VOGUE</span>
+        <span class="tcp-press-item">CONDÉ NAST TRAVELLER</span>
+        <span class="tcp-press-item">THE HINDU</span>
+        <span class="tcp-press-item">TODAY'S HOME</span>
+      </div>
+    </div>
+
+    <!-- Lifestyle Hero Banner -->
+    <div class="tcp-on-table__banner">
+      {% if section.settings.bg_image != blank %}
+        <img 
+          class="tcp-on-table__banner-img"
+          src="{{ section.settings.bg_image | image_url: width: 1600 }}"
+          alt="{{ section.settings.heading | strip_html }}"
+          loading="lazy"
+          width="1600"
+          height="600"
+        >
+      {% endif %}
+      <div class="tcp-on-table__banner-overlay"></div>
+
+      <div class="tcp-on-table__banner-content">
+        <h2 class="tcp-on-table__heading">{{ section.settings.heading | default: 'On Your Table' }}</h2>
+        <p class="tcp-on-table__description">
+          {{ section.settings.description | default: 'Designed to be used. Loved. Lived with. Ceramic objects that participate quietly in the human ritual of gathering.' }}
+        </p>
+        <a href="{{ section.settings.cta_url | default: 'https://instagram.com/thecreativeplatter_studio' }}" target="_blank" rel="noopener" class="tcp-on-table__cta">
+          {{ section.settings.cta_text | default: 'View On Instagram @thecreativeplatter_studio' }} &rarr;
+        </a>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -151,13 +216,13 @@
       "type": "textarea",
       "id": "description",
       "label": "Description",
-      "default": "Designed to be used.\nLoved.\nLived with."
+      "default": "Designed to be used. Loved. Lived with. Ceramic objects that participate quietly in the human ritual of gathering."
     },
     {
       "type": "text",
       "id": "cta_text",
       "label": "CTA text",
-      "default": "SEE IT IN HOMES"
+      "default": "Follow @thecreativeplatter_studio"
     },
     {
       "type": "url",

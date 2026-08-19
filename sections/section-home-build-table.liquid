@@ -1,17 +1,18 @@
 {% comment %}
   ============================================================
-  THE CREATIVE PLATTER — Build Your Table
+  THE CREATIVE PLATTER — Build Your Table Customizer
   ============================================================
-  Interactive visual builder showing Plate + Bowl + Linen + 
-  Cutlery = Your Set with product cards and plus signs.
+  Interactive tablescape customizer inspired by Nicobar D2C
+  rituals: Dinner Plate + Quarter Plate + Katori Bowl + Linen.
   Copy into Shopify: sections/section-home-build-table.liquid
 {% endcomment %}
 
 <style>
   .tcp-build {
     background-color: var(--tcp-white, #FFFFFF);
-    padding: 80px 0;
-    border-top: 1px solid var(--tcp-border, #E5DFD5);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
   }
 
   .tcp-build__inner {
@@ -21,295 +22,416 @@
   }
 
   .tcp-build__header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 48px;
-    gap: 24px;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 56px;
   }
 
-  .tcp-build__heading {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: clamp(32px, 4vw, 44px);
+  .tcp-build__label {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--tcp-gold, #C29B38);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .tcp-build__title {
+    font-family: var(--font-serif, serif);
+    font-size: clamp(34px, 4.5vw, 52px);
     font-weight: 400;
-    color: var(--tcp-dark, #2D2D2D);
-    line-height: 1.15;
+    color: var(--tcp-dark, #1F1D1B);
+    line-height: 1.1;
+    margin: 0 0 16px;
   }
 
   .tcp-build__subtitle {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--tcp-muted, #6B6560);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 15px;
+    color: var(--tcp-muted, #68625B);
     line-height: 1.7;
-    max-width: 340px;
-    margin-top: 12px;
   }
 
-  .tcp-build__cta {
-    display: inline-flex;
+  /* ── Interactive Builder Layout ── */
+  .tcp-build__builder-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    align-items: center;
+    background: var(--tcp-sand, #FBF9F5);
+    border: 1px solid var(--tcp-border, #E8E2D8);
+    border-radius: 6px;
+    padding: 48px;
+  }
+
+  /* ── Left: Interactive Layer Selectors ── */
+  .tcp-build__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .tcp-build__step-row {
+    background: var(--tcp-white, #FFFFFF);
+    border: 1px solid var(--tcp-border, #E8E2D8);
+    border-radius: 4px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-fluid);
+  }
+
+  .tcp-build__step-row:hover,
+  .tcp-build__step-row.is-selected {
+    border-color: var(--tcp-gold, #C29B38);
+    box-shadow: 0 4px 16px rgba(194, 155, 56, 0.12);
+  }
+
+  .tcp-build__step-row.is-selected {
+    background: var(--tcp-warm-card, #FAF7F2);
+  }
+
+  .tcp-build__step-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .tcp-build__step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--tcp-stone, #F3EFEA);
+    color: var(--tcp-dark, #1F1D1B);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .tcp-build__step-row.is-selected .tcp-build__step-num {
+    background: var(--tcp-gold, #C29B38);
+    color: #FFFFFF;
+  }
+
+  .tcp-build__step-info h4 {
+    font-family: var(--font-serif, serif);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--tcp-dark, #1F1D1B);
+    margin: 0 0 2px;
+  }
+
+  .tcp-build__step-info p {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 12px;
+    color: var(--tcp-muted, #68625B);
+    margin: 0;
+  }
+
+  .tcp-build__step-toggle {
+    display: flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
-    text-decoration: none;
-    padding-bottom: 2px;
-    border-bottom: 1px solid var(--tcp-dark, #2D2D2D);
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    margin-top: 20px;
+    font-weight: 700;
+    color: var(--tcp-brown, #352922);
   }
 
-  .tcp-build__cta:hover {
-    color: var(--tcp-gold, #C8A96E);
-    border-bottom-color: var(--tcp-gold, #C8A96E);
-  }
-
-  .tcp-build__cta svg {
-    width: 14px;
-    height: 14px;
-    transition: transform 0.3s ease;
-  }
-
-  .tcp-build__cta:hover svg {
-    transform: translateX(4px);
-  }
-
-  /* ── Builder Flow ── */
-  .tcp-build__flow {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    overflow-x: auto;
-    padding-bottom: 8px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--tcp-border, #E5DFD5) transparent;
-  }
-
-  .tcp-build__item {
-    flex-shrink: 0;
-    text-align: center;
-    min-width: 140px;
-  }
-
-  .tcp-build__item-img-wrap {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 12px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: var(--tcp-beige, #F5F0E8);
-    border: 2px solid transparent;
-    transition: border-color 0.3s ease;
-    cursor: pointer;
-  }
-
-  .tcp-build__item:hover .tcp-build__item-img-wrap {
-    border-color: var(--tcp-gold, #C8A96E);
-  }
-
-  .tcp-build__item-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-
-  .tcp-build__item:hover .tcp-build__item-img {
-    transform: scale(1.08);
-  }
-
-  .tcp-build__item-name {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--tcp-dark, #2D2D2D);
-    display: block;
-    margin-bottom: 3px;
-  }
-
-  .tcp-build__item-desc {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 11px;
-    color: var(--tcp-muted, #6B6560);
-    font-style: italic;
-  }
-
-  /* ── Plus Sign ── */
-  .tcp-build__plus {
-    flex-shrink: 0;
+  .tcp-build__checkbox {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--tcp-border-dark, #C9BFB0);
+    border-radius: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    margin: 0 8px;
-    margin-bottom: 36px;
-    color: var(--tcp-muted-light, #9B9590);
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 20px;
-    font-weight: 300;
+    background: #FFF;
+    transition: all 0.2s ease;
   }
 
-  /* ── Equals / Result ── */
-  .tcp-build__equals {
-    flex-shrink: 0;
+  .tcp-build__step-row.is-selected .tcp-build__checkbox {
+    background: var(--tcp-gold, #C29B38);
+    border-color: var(--tcp-gold, #C29B38);
+    color: #FFF;
+  }
+
+  /* ── Right: Live Visual Tablescape Stack ── */
+  .tcp-build__preview-panel {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    margin: 0 8px;
-    margin-bottom: 36px;
-    color: var(--tcp-gold, #C8A96E);
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 22px;
-    font-weight: 300;
-  }
-
-  .tcp-build__result {
-    flex-shrink: 0;
     text-align: center;
-    min-width: 160px;
   }
 
-  .tcp-build__result-img-wrap {
-    width: 140px;
-    height: 140px;
-    margin: 0 auto 12px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: var(--tcp-beige, #F5F0E8);
-    border: 2px solid var(--tcp-gold, #C8A96E);
+  .tcp-build__visual-stack {
     position: relative;
+    width: 320px;
+    height: 320px;
+    margin: 0 auto 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .tcp-build__result-img-wrap::after {
-    content: '';
+  /* Layered Plates Animation */
+  .tcp-stack-layer {
     position: absolute;
-    inset: -6px;
     border-radius: 50%;
-    border: 1px solid var(--tcp-gold-light, #D4BA85);
-    opacity: 0.4;
+    transition: transform 0.6s var(--ease-fluid), opacity 0.4s ease;
+    box-shadow: 0 10px 24px rgba(31, 29, 27, 0.12);
   }
 
-  .tcp-build__result-img {
+  .tcp-stack-layer--charger {
+    width: 280px;
+    height: 280px;
+    background: #F4EFE6;
+    border: 3px solid #C29B38;
+    z-index: 1;
+  }
+
+  .tcp-stack-layer--dinner {
+    width: 220px;
+    height: 220px;
+    background: #FAF8F4;
+    border: 2px solid #DFBA5E;
+    z-index: 2;
+  }
+
+  .tcp-stack-layer--side {
+    width: 160px;
+    height: 160px;
+    background: #F4EFE6;
+    border: 2px solid #C29B38;
+    z-index: 3;
+  }
+
+  .tcp-stack-layer--katori {
+    width: 100px;
+    height: 100px;
+    background: #FFFFFF;
+    border: 2px solid #DFBA5E;
+    z-index: 4;
+  }
+
+  .tcp-build__summary-box {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    background: var(--tcp-white, #FFFFFF);
+    border: 1px solid var(--tcp-border, #E8E2D8);
+    border-radius: 4px;
+    padding: 24px;
+    text-align: left;
   }
 
-  .tcp-build__result-name {
-    font-family: var(--font-serif, 'Playfair Display', serif);
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--tcp-dark, #2D2D2D);
-    display: block;
-    margin-bottom: 3px;
+  .tcp-build__summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
   }
 
-  .tcp-build__result-desc {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
+  .tcp-build__summary-title {
+    font-family: var(--font-serif, serif);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--tcp-dark, #1F1D1B);
+  }
+
+  .tcp-build__summary-count {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--tcp-gold-hover, #A8822B);
+  }
+
+  .tcp-build__action-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-sans, sans-serif);
     font-size: 11px;
-    color: var(--tcp-muted, #6B6560);
-    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background: var(--tcp-dark, #1F1D1B);
+    padding: 14px;
+    text-decoration: none;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-fluid);
+    margin-top: 16px;
+  }
+
+  .tcp-build__action-btn:hover {
+    background: var(--tcp-gold, #C29B38);
   }
 
   /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .tcp-build__flow {
-      gap: 0;
-      justify-content: flex-start;
-    }
-
-    .tcp-build__item {
-      min-width: 120px;
-    }
-
-    .tcp-build__item-img-wrap {
-      width: 90px;
-      height: 90px;
-    }
-
-    .tcp-build__plus,
-    .tcp-build__equals {
-      width: 28px;
-      font-size: 18px;
+  @media (max-width: 1024px) {
+    .tcp-build__builder-grid {
+      grid-template-columns: 1fr;
+      padding: 32px;
     }
   }
 
   @media (max-width: 600px) {
     .tcp-build {
-      padding: 50px 0;
+      padding: 60px 0;
     }
-
     .tcp-build__inner {
-      padding: 0 24px;
+      padding: 0 20px;
     }
-
-    .tcp-build__header {
-      flex-direction: column;
-      align-items: flex-start;
+    .tcp-build__builder-grid {
+      padding: 20px;
     }
+    .tcp-build__visual-stack {
+      width: 240px;
+      height: 240px;
+    }
+    .tcp-stack-layer--charger { width: 220px; height: 220px; }
+    .tcp-stack-layer--dinner { width: 170px; height: 170px; }
+    .tcp-stack-layer--side { width: 120px; height: 120px; }
+    .tcp-stack-layer--katori { width: 80px; height: 80px; }
   }
 </style>
 
-<section class="tcp-build" id="tcp-home-build-table">
+<section class="tcp-build" id="tcp-build-table">
   <div class="tcp-build__inner">
-
     <div class="tcp-build__header">
-      <div>
-        <h2 class="tcp-build__heading">{{ section.settings.heading }}</h2>
-        <p class="tcp-build__subtitle">{{ section.settings.subtitle }}</p>
-        <a href="{{ section.settings.cta_url | default: '#' }}" class="tcp-build__cta">
-          {{ section.settings.cta_text }}
-          <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+      <span class="tcp-build__label">{{ section.settings.label | default: 'BESPOKE RITUAL' }}</span>
+      <h2 class="tcp-build__title">{{ section.settings.heading | default: 'Build Your Tablescape' }}</h2>
+      <p class="tcp-build__subtitle">
+        {{ section.settings.description | default: 'Mix & match organic handcrafted elements to curate a dining ritual that settles quietly into your home.' }}
+      </p>
+    </div>
+
+    <div class="tcp-build__builder-grid">
+      <!-- Left: Interactive Selectors -->
+      <div class="tcp-build__steps" id="tcp-build-steps">
+        <div class="tcp-build__step-row is-selected" data-layer="charger">
+          <div class="tcp-build__step-left">
+            <span class="tcp-build__step-num">1</span>
+            <div class="tcp-build__step-info">
+              <h4>Pushpa Smriti Base Charger (11.5")</h4>
+              <p>Mould-free raw contour with 24k gold leaf rim accent</p>
+            </div>
+          </div>
+          <div class="tcp-build__step-toggle">
+            <span class="tcp-build__checkbox">&check;</span>
+          </div>
+        </div>
+
+        <div class="tcp-build__step-row is-selected" data-layer="dinner">
+          <div class="tcp-build__step-left">
+            <span class="tcp-build__step-num">2</span>
+            <div class="tcp-build__step-info">
+              <h4>Shakti Stoneware Dinner Plate (10")</h4>
+              <p>Architectural weight, crackle glaze tactile surface</p>
+            </div>
+          </div>
+          <div class="tcp-build__step-toggle">
+            <span class="tcp-build__checkbox">&check;</span>
+          </div>
+        </div>
+
+        <div class="tcp-build__step-row is-selected" data-layer="side">
+          <div class="tcp-build__step-left">
+            <span class="tcp-build__step-num">3</span>
+            <div class="tcp-build__step-info">
+              <h4>Shringaar Salad &amp; Side Plate (7.5")</h4>
+              <p>Delicate hand-pinched contour with gold brushwork</p>
+            </div>
+          </div>
+          <div class="tcp-build__step-toggle">
+            <span class="tcp-build__checkbox">&check;</span>
+          </div>
+        </div>
+
+        <div class="tcp-build__step-row is-selected" data-layer="katori">
+          <div class="tcp-build__step-left">
+            <span class="tcp-build__step-num">4</span>
+            <div class="tcp-build__step-info">
+              <h4>Karuna Tasting &amp; Katori Bowl (4.5")</h4>
+              <p>Organic nesting bowl shaped by Gurugram women artisans</p>
+            </div>
+          </div>
+          <div class="tcp-build__step-toggle">
+            <span class="tcp-build__checkbox">&check;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Live Stack Preview -->
+      <div class="tcp-build__preview-panel">
+        <div class="tcp-build__visual-stack" id="tcp-visual-stack">
+          <div class="tcp-stack-layer tcp-stack-layer--charger" id="layer-charger"></div>
+          <div class="tcp-stack-layer tcp-stack-layer--dinner" id="layer-dinner"></div>
+          <div class="tcp-stack-layer tcp-stack-layer--side" id="layer-side"></div>
+          <div class="tcp-stack-layer tcp-stack-layer--katori" id="layer-katori"></div>
+        </div>
+
+        <div class="tcp-build__summary-box">
+          <div class="tcp-build__summary-header">
+            <span class="tcp-build__summary-title">Custom Curated Setting</span>
+            <span class="tcp-build__summary-count" id="tcp-build-count">4 Selected Elements</span>
+          </div>
+          <p style="font-size:12px; color:var(--tcp-muted); margin:0 0 16px;">
+            Crafted from recycled ceramic clay, zero waste, high fired at 1280°C. Safe for dishwasher and microwave.
+          </p>
+          <a href="/cart/add" class="tcp-build__action-btn" id="tcp-build-cta">
+            <span>Curate This Tablescape &rarr;</span>
+          </a>
+        </div>
       </div>
     </div>
-
-    <div class="tcp-build__flow">
-      {% for block in section.blocks %}
-        {% if block.type == 'builder_item' %}
-          {% unless forloop.first %}
-            <div class="tcp-build__plus">+</div>
-          {% endunless %}
-          <div class="tcp-build__item" {{ block.shopify_attributes }}>
-            <div class="tcp-build__item-img-wrap">
-              {% if block.settings.image != blank %}
-                <img class="tcp-build__item-img" src="{{ block.settings.image | image_url: width: 240 }}" alt="{{ block.settings.name }}" loading="lazy" width="240" height="240">
-              {% else %}
-                <div class="tcp-build__item-img" style="background: var(--tcp-warm-bg);"></div>
-              {% endif %}
-            </div>
-            <span class="tcp-build__item-name">{{ block.settings.name }}</span>
-            <span class="tcp-build__item-desc">{{ block.settings.description }}</span>
-          </div>
-        {% endif %}
-
-        {% if block.type == 'result_item' %}
-          <div class="tcp-build__equals">=</div>
-          <div class="tcp-build__result" {{ block.shopify_attributes }}>
-            <div class="tcp-build__result-img-wrap">
-              {% if block.settings.image != blank %}
-                <img class="tcp-build__result-img" src="{{ block.settings.image | image_url: width: 280 }}" alt="{{ block.settings.name }}" loading="lazy" width="280" height="280">
-              {% else %}
-                <div class="tcp-build__result-img" style="background: var(--tcp-warm-bg);"></div>
-              {% endif %}
-            </div>
-            <span class="tcp-build__result-name">{{ block.settings.name }}</span>
-            <span class="tcp-build__result-desc">{{ block.settings.description }}</span>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-
   </div>
 </section>
+
+<script>
+  (function() {
+    const stepRows = document.querySelectorAll('.tcp-build__step-row');
+    const countEl = document.getElementById('tcp-build-count');
+
+    stepRows.forEach(row => {
+      row.addEventListener('click', () => {
+        const layer = row.getAttribute('data-layer');
+        const targetLayer = document.getElementById('layer-' + layer);
+        
+        row.classList.toggle('is-selected');
+        const checkbox = row.querySelector('.tcp-build__checkbox');
+
+        if (row.classList.contains('is-selected')) {
+          checkbox.innerHTML = '&check;';
+          if (targetLayer) {
+            targetLayer.style.opacity = '1';
+            targetLayer.style.transform = 'scale(1)';
+          }
+        } else {
+          checkbox.innerHTML = '';
+          if (targetLayer) {
+            targetLayer.style.opacity = '0';
+            targetLayer.style.transform = 'scale(0.8)';
+          }
+        }
+
+        const selectedCount = document.querySelectorAll('.tcp-build__step-row.is-selected').length;
+        if (countEl) {
+          countEl.textContent = selectedCount + ' Selected Element' + (selectedCount === 1 ? '' : 's');
+        }
+      });
+    });
+  })();
+</script>
 
 {% schema %}
 {
@@ -319,59 +441,26 @@
   "settings": [
     {
       "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Build Your Table"
-    },
-    {
-      "type": "textarea",
-      "id": "subtitle",
-      "label": "Subtitle",
-      "default": "Mix, match and create a set that's uniquely yours."
+      "id": "label",
+      "label": "Top label",
+      "default": "BESPOKE RITUAL"
     },
     {
       "type": "text",
-      "id": "cta_text",
-      "label": "CTA text",
-      "default": "START BUILDING"
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Build Your Tablescape"
     },
     {
-      "type": "url",
-      "id": "cta_url",
-      "label": "CTA URL"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "builder_item",
-      "name": "Builder Item",
-      "settings": [
-        { "type": "text", "id": "name", "label": "Item name", "default": "Plate" },
-        { "type": "text", "id": "description", "label": "Description", "default": "Choose your style" },
-        { "type": "image_picker", "id": "image", "label": "Image" }
-      ]
-    },
-    {
-      "type": "result_item",
-      "name": "Result (Your Set)",
-      "limit": 1,
-      "settings": [
-        { "type": "text", "id": "name", "label": "Result name", "default": "Your Set" },
-        { "type": "text", "id": "description", "label": "Description", "default": "Beautifully curated." },
-        { "type": "image_picker", "id": "image", "label": "Image" }
-      ]
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Mix & match organic handcrafted elements to curate a dining ritual that settles quietly into your home."
     }
   ],
   "presets": [
     {
-      "name": "TCP Build Your Table",
-      "blocks": [
-        { "type": "builder_item", "settings": { "name": "Plate", "description": "Choose your style" } },
-        { "type": "builder_item", "settings": { "name": "Bowl", "description": "Choose your style" } },
-        { "type": "builder_item", "settings": { "name": "Linen", "description": "Choose your style" } },
-        { "type": "builder_item", "settings": { "name": "Cutlery", "description": "Choose your style" } },
-        { "type": "result_item", "settings": { "name": "Your Set", "description": "Beautifully curated." } }
-      ]
+      "name": "TCP Build Your Table"
     }
   ]
 }

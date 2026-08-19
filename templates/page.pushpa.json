@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "tcp_pushpa": {
+      "type": "section-pushpa-dinner-sets",
+      "settings": {}
+    }
+  },
+  "order": [
+    "tcp_pushpa"
+  ]
+}

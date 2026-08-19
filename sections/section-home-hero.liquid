@@ -1,264 +1,389 @@
 {% comment %}
   ============================================================
-  THE CREATIVE PLATTER — Home Hero Section
+  THE CREATIVE PLATTER — Home Hero Section (Full Background)
   ============================================================
-  Compact, elegant hero matching reference screenshot.
+  Cinematic full-background hero showcasing bespoke ceramic tableware
+  with elegant editorial typography and dual D2C / B2B pathways.
   Copy into Shopify: sections/section-home-hero.liquid
 {% endcomment %}
 
 <style>
   .tcp-hero {
-    background-color: var(--tcp-cream, #FAF8F4);
     position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: #FFFFFF;
+    background-color: #1F1D1B;
+  }
+
+  /* ── Full Background Media ── */
+  .tcp-hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
     overflow: hidden;
   }
 
-  /* ── Background Wave Line Watermark ── */
-  .tcp-hero__watermark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 280px;
+  .tcp-hero__bg-img {
+    width: 100%;
     height: 100%;
-    pointer-events: none;
-    opacity: 0.45;
-    z-index: 1;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transform: scale(1.02);
+    transition: transform 10s ease;
   }
 
-  .tcp-hero__container {
-    max-width: 1440px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1.15fr;
-    min-height: 540px;
-    align-items: center;
+  .tcp-hero:hover .tcp-hero__bg-img {
+    transform: scale(1.05);
+  }
+
+  /* ── Editorial Fallback Background (when no image uploaded) ── */
+  .tcp-hero__bg-fallback {
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(ellipse at 70% 30%, rgba(194, 155, 56, 0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(53, 41, 34, 0.9) 0%, transparent 70%),
+      linear-gradient(135deg, #1A1715 0%, #2D2520 40%, #1F1D1B 100%);
     position: relative;
-    z-index: 2;
   }
 
-  /* ── Left Content Column ── */
-  .tcp-hero__content {
-    padding: 50px 40px 50px 80px;
+  .tcp-hero__bg-fallback svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.22;
+    pointer-events: none;
+  }
+
+  /* ── Atmospheric Scrim & Overlay ── */
+  .tcp-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(20, 18, 16, 0.9) 0%,
+      rgba(20, 18, 16, 0.72) 48%,
+      rgba(20, 18, 16, 0.38) 100%
+    );
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .tcp-hero__radial-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 50%, transparent 40%, rgba(15, 14, 13, 0.6) 100%);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* ── Foreground Container (Left Aligned) ── */
+  .tcp-hero__container {
+    position: relative;
+    z-index: 5;
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 120px 48px 90px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    text-align: left;
   }
 
-  .tcp-hero__label {
-    font-family: var(--font-sans, 'Raleway', sans-serif);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
+  /* ── Top Pill Badge ── */
+  .tcp-hero__pill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 30px;
+    padding: 8px 20px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .tcp-hero__pill-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--tcp-gold-light, #DFBA5E);
+    box-shadow: 0 0 10px rgba(223, 186, 94, 0.8);
+    animation: tcp-pulse 2s infinite ease-in-out;
+  }
+
+  @keyframes tcp-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.6; }
+  }
+
+  .tcp-hero__pill-text {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.2px;
     text-transform: uppercase;
-    color: var(--tcp-gold-hover, #B8965A);
-    margin-bottom: 12px;
+    color: #FAF8F4;
+  }
+
+  /* ── Title Group ── */
+  .tcp-hero__title-group {
+    margin-bottom: 20px;
+    max-width: 800px;
+    text-align: left;
+  }
+
+  .tcp-hero__prefix {
+    font-family: var(--font-script, 'Sacramento', cursive);
+    font-size: clamp(42px, 5.5vw, 60px);
+    color: var(--tcp-gold-light, #DFBA5E);
+    line-height: 0.9;
+    display: block;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
   }
 
   .tcp-hero__title {
-    font-family: var(--font-script, 'Sacramento', cursive);
-    font-size: clamp(54px, 6vw, 76px);
+    font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(56px, 7.5vw, 100px);
     font-weight: 400;
-    color: var(--tcp-dark, #2D2D2D);
-    line-height: 1;
-    margin-bottom: 6px;
-    letter-spacing: 0;
-  }
-
-  .tcp-hero__title-dot {
-    color: var(--tcp-gold, #C8A96E);
-  }
-
-  .tcp-hero__subtitle {
-    font-family: var(--font-script, 'Sacramento', cursive);
-    font-size: 26px;
-    font-weight: 400;
-    color: var(--tcp-dark, #2D2D2D);
-    margin-bottom: 20px;
+    color: #FFFFFF;
+    line-height: 0.95;
+    letter-spacing: -0.5px;
+    margin: 0;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
   }
 
   .tcp-hero__divider {
-    width: 32px;
-    height: 1.5px;
-    background-color: var(--tcp-gold, #C8A96E);
-    margin-bottom: 20px;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--tcp-gold, #C29B38), transparent);
+    margin: 18px 0 24px;
   }
 
   .tcp-hero__description {
-    font-family: var(--font-script, 'Sacramento', cursive);
-    font-size: 24px;
+    font-family: var(--font-sans, sans-serif);
+    font-size: clamp(15px, 1.8vw, 17px);
     font-weight: 400;
-    color: var(--tcp-dark, #2D2D2D);
-    line-height: 1.4;
-    margin-bottom: 32px;
+    color: rgba(250, 248, 244, 0.92);
+    line-height: 1.8;
+    max-width: 620px;
+    margin: 0 0 36px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    text-align: left;
   }
 
   /* ── CTAs ── */
   .tcp-hero__ctas {
     display: flex;
     align-items: center;
-    gap: 24px;
+    justify-content: flex-start;
+    gap: 18px;
     flex-wrap: wrap;
+    margin-bottom: 48px;
   }
 
-  .tcp-hero__btn-solid {
+  .tcp-hero__btn-primary {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    background: var(--tcp-gold, #C29B38);
+    color: #1F1D1B;
+    padding: 16px 36px;
+    border-radius: 2px;
+    text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-family: var(--font-sans, 'Raleway', sans-serif);
-    font-size: 10px;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 6px 20px rgba(194, 155, 56, 0.35);
+  }
+
+  .tcp-hero__btn-primary:hover {
+    background: #DFBA5E;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(194, 155, 56, 0.5);
+    color: #1F1D1B;
+  }
+
+  .tcp-hero__btn-secondary {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 1.8px;
     text-transform: uppercase;
-    color: var(--tcp-white, #FFFFFF);
-    background-color: var(--tcp-gold-hover, #B8965A);
-    padding: 13px 24px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 16px 32px;
+    border-radius: 2px;
     text-decoration: none;
-    transition: all 0.3s ease;
-  }
-
-  .tcp-hero__btn-solid:hover {
-    background-color: var(--tcp-brown, #3A2F28);
-    transform: translateY(-1px);
-  }
-
-  .tcp-hero__btn-text {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-family: var(--font-sans, 'Raleway', sans-serif);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
-    text-decoration: none;
-    border-bottom: 1.5px solid var(--tcp-dark, #2D2D2D);
-    padding-bottom: 2px;
-    transition: color 0.3s ease, border-color 0.3s ease;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .tcp-hero__btn-text:hover {
-    color: var(--tcp-gold, #C8A96E);
-    border-color: var(--tcp-gold, #C8A96E);
+  .tcp-hero__btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+    transform: translateY(-2px);
   }
 
-  /* ── Right Image Column ── */
-  .tcp-hero__image-wrap {
-    height: 100%;
-    min-height: 480px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .tcp-hero__image {
+  /* ── Trust Badges ── */
+  .tcp-hero__badges {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 28px;
+    flex-wrap: wrap;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    max-width: 780px;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+  }
+
+  .tcp-hero__badge-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    color: rgba(250, 248, 244, 0.88);
+  }
+
+  .tcp-hero__badge-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--tcp-gold-light, #DFBA5E);
+    flex-shrink: 0;
   }
 
   /* ── Responsive ── */
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
+    .tcp-hero {
+      min-height: 75vh;
+    }
     .tcp-hero__container {
-      grid-template-columns: 1fr;
-      min-height: auto;
+      padding: 70px 20px 50px;
     }
-
-    .tcp-hero__content {
-      padding: 50px 32px;
-      order: 2;
-    }
-
-    .tcp-hero__image-wrap {
-      min-height: 380px;
-      order: 1;
-    }
-
     .tcp-hero__title {
-      font-size: clamp(40px, 8vw, 56px);
+      font-size: 48px;
     }
-  }
-
-  @media (max-width: 600px) {
-    .tcp-hero__content {
-      padding: 36px 20px;
+    .tcp-hero__prefix {
+      font-size: 34px;
     }
-
-    .tcp-hero__image-wrap {
-      min-height: 280px;
-    }
-
     .tcp-hero__ctas {
       flex-direction: column;
-      align-items: stretch;
-      gap: 16px;
+      width: 100%;
+      gap: 12px;
     }
-
-    .tcp-hero__btn-solid,
-    .tcp-hero__btn-text {
+    .tcp-hero__btn-primary,
+    .tcp-hero__btn-secondary {
+      width: 100%;
       justify-content: center;
+    }
+    .tcp-hero__badges {
+      gap: 14px 20px;
     }
   }
 </style>
 
 <section class="tcp-hero" id="tcp-home-hero">
-  <!-- Subtle wave line watermark SVG background on left -->
-  <svg class="tcp-hero__watermark" viewBox="0 0 300 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M-50 0 C50 150 -20 300 80 450 C130 520 20 600 -50 650" stroke="#EAE4D9" stroke-width="1.2" />
-    <path d="M-80 0 C20 150 -50 300 50 450 C100 520 -10 600 -80 650" stroke="#EAE4D9" stroke-width="1.2" />
-  </svg>
-
-  <div class="tcp-hero__container">
-    <!-- Left Content -->
-    <div class="tcp-hero__content">
-      {% if section.settings.label != blank %}
-        <p class="tcp-hero__label">{{ section.settings.label }}</p>
-      {% endif %}
-
-      <h1 class="tcp-hero__title">
-        {{ section.settings.title }}<span class="tcp-hero__title-dot">.</span>
-      </h1>
-
-      {% if section.settings.subtitle != blank %}
-        <p class="tcp-hero__subtitle">{{ section.settings.subtitle }}</p>
-      {% endif %}
-
-      <div class="tcp-hero__divider"></div>
-
-      {% if section.settings.description != blank %}
-        <p class="tcp-hero__description">{{ section.settings.description | newline_to_br }}</p>
-      {% endif %}
-
-      <div class="tcp-hero__ctas">
-        {% if section.settings.cta_primary_text != blank %}
-          <a href="{{ section.settings.cta_primary_url | default: '#' }}" class="tcp-hero__btn-solid">
-            {{ section.settings.cta_primary_text }} &rarr;
-          </a>
-        {% endif %}
-
-        {% if section.settings.cta_secondary_text != blank %}
-          <a href="{{ section.settings.cta_secondary_url | default: '#' }}" class="tcp-hero__btn-text">
-            {{ section.settings.cta_secondary_text }} &rarr;
-          </a>
-        {% endif %}
+  <!-- Full Background Media -->
+  <div class="tcp-hero__bg">
+    {% if section.settings.hero_image != blank %}
+      <img 
+        class="tcp-hero__bg-img"
+        src="{{ section.settings.hero_image | image_url: width: 2400 }}"
+        alt="{{ section.settings.hero_image_alt | default: 'The Creative Platter Handcrafted Ceramics' }}"
+        loading="eager"
+        fetchpriority="high"
+        width="2400"
+        height="1400"
+      >
+    {% else %}
+      <div class="tcp-hero__bg-fallback">
+        <svg viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="1100" cy="550" rx="420" ry="220" fill="#FAF8F4" fill-opacity="0.08" stroke="#C29B38" stroke-width="2" stroke-dasharray="24 8 12 4" />
+          <ellipse cx="1100" cy="530" rx="350" ry="180" fill="#F4EFE6" fill-opacity="0.06" stroke="#DFBA5E" stroke-width="1.5" />
+          <ellipse cx="1100" cy="500" rx="260" ry="130" fill="#EDE4D8" fill-opacity="0.05" stroke="#C29B38" stroke-width="2" />
+          <path d="M-100 200 C300 450 150 700 500 850" stroke="#DFBA5E" stroke-width="1.5" stroke-dasharray="6 6" stroke-opacity="0.25"/>
+          <circle cx="200" cy="700" r="140" stroke="#C29B38" stroke-width="1" stroke-opacity="0.2"/>
+        </svg>
       </div>
+    {% endif %}
+  </div>
+
+  <!-- Atmospheric Scrim & Vignette Overlays -->
+  <div class="tcp-hero__overlay"></div>
+  <div class="tcp-hero__radial-vignette"></div>
+
+  <!-- Foreground Content -->
+  <div class="tcp-hero__container">
+    <div class="tcp-hero__pill-tag">
+      <span class="tcp-hero__pill-dot"></span>
+      <span class="tcp-hero__pill-text">{{ section.settings.top_pill | default: 'The Legacy Dinner Collection 2025–26' }}</span>
     </div>
 
-    <!-- Right Image -->
-    <div class="tcp-hero__image-wrap">
-      {% if section.settings.hero_image != blank %}
-        <img 
-          class="tcp-hero__image"
-          src="{{ section.settings.hero_image | image_url: width: 1200 }}"
-          alt="{{ section.settings.hero_image_alt | default: 'Pushpa Collection' }}"
-          loading="eager"
-          fetchpriority="high"
-          width="1200"
-          height="800"
-        >
-      {% else %}
-        <div class="tcp-hero__image" style="background: linear-gradient(135deg, #FAF8F4 0%, #F5F0E8 100%); width:100%; height:100%;"></div>
-      {% endif %}
+    <div class="tcp-hero__title-group">
+      <span class="tcp-hero__prefix">the</span>
+      <h1 class="tcp-hero__title">
+        {{ section.settings.title | default: 'Pushpa' }}
+      </h1>
+    </div>
+
+    <div class="tcp-hero__divider"></div>
+
+    <p class="tcp-hero__description">
+      {{ section.settings.description | default: 'A dinnerware collection born from memory, shaped by emotion & carried in legacy. Dedicated to mother Pushpa — hand-formed mould-free from recycled clay by village women artisans near Gurugram.' }}
+    </p>
+
+    <div class="tcp-hero__ctas">
+      <a href="{{ section.settings.cta_primary_url | default: '/collections/pushpa' }}" class="tcp-hero__btn-primary">
+        {{ section.settings.cta_primary_text | default: 'Explore Pushpa Collection' }} &rarr;
+      </a>
+      <a href="{{ section.settings.cta_secondary_url | default: '/pages/bespoke-b2b' }}" class="tcp-hero__btn-secondary">
+        {{ section.settings.cta_secondary_text | default: 'Hospitality & B2B Studio' }}
+      </a>
+    </div>
+
+    <!-- Trust Badges -->
+    <div class="tcp-hero__badges">
+      <div class="tcp-hero__badge-item">
+        <svg class="tcp-hero__badge-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        <span>Mould-Free Clay</span>
+      </div>
+      <div class="tcp-hero__badge-item">
+        <svg class="tcp-hero__badge-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        <span>Zero Off-Cuts</span>
+      </div>
+      <div class="tcp-hero__badge-item">
+        <svg class="tcp-hero__badge-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        <span>1280°C High Fired</span>
+      </div>
+      <div class="tcp-hero__badge-item">
+        <svg class="tcp-hero__badge-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        <span>Women Artisans</span>
+      </div>
     </div>
   </div>
 </section>
@@ -270,10 +395,21 @@
   "class": "tcp-home-hero-section",
   "settings": [
     {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Background Image"
+    },
+    {
       "type": "text",
-      "id": "label",
-      "label": "Top label",
-      "default": "THE LEGACY COLLECTION"
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "The Creative Platter Handcrafted Ceramics"
+    },
+    {
+      "type": "text",
+      "id": "top_pill",
+      "label": "Top pill badge",
+      "default": "The Legacy Dinner Collection 2025–26"
     },
     {
       "type": "text",
@@ -282,22 +418,16 @@
       "default": "Pushpa"
     },
     {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Subtitle (italic)",
-      "default": "The Legacy Collection"
-    },
-    {
       "type": "textarea",
       "id": "description",
-      "label": "Description",
-      "default": "Crafted in memory.\nMade for your home."
+      "label": "Description text",
+      "default": "A dinnerware collection born from memory, shaped by emotion & carried in legacy. Dedicated to mother Pushpa — hand-formed mould-free from recycled clay by village women artisans near Gurugram."
     },
     {
       "type": "text",
       "id": "cta_primary_text",
       "label": "Primary CTA text",
-      "default": "SHOP THE COLLECTION"
+      "default": "Explore Pushpa Collection"
     },
     {
       "type": "url",
@@ -308,23 +438,12 @@
       "type": "text",
       "id": "cta_secondary_text",
       "label": "Secondary CTA text",
-      "default": "DESIGN YOUR SET"
+      "default": "Hospitality & B2B Studio"
     },
     {
       "type": "url",
       "id": "cta_secondary_url",
       "label": "Secondary CTA URL"
-    },
-    {
-      "type": "image_picker",
-      "id": "hero_image",
-      "label": "Hero image"
-    },
-    {
-      "type": "text",
-      "id": "hero_image_alt",
-      "label": "Hero image alt text",
-      "default": "Pushpa Collection — Handcrafted ceramic dinnerware"
     }
   ],
   "presets": [

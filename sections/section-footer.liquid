@@ -1,19 +1,19 @@
 {% comment %}
   ============================================================
-  THE CREATIVE PLATTER — Footer Section
+  THE CREATIVE PLATTER — Global Footer Section
   ============================================================
-  Multi-column footer with logo, navigation, newsletter,
-  social links, and legal text.
+  Multi-column editorial footer with Pushpa Legacy tribute,
+  dual D2C / B2B portals, Gurugram studio contact, and newsletter.
   Copy into Shopify: sections/section-footer.liquid
 {% endcomment %}
 
 <style>
-  /* ── Footer ── */
   .tcp-footer {
-    background-color: var(--tcp-cream, #FAF8F4);
-    border-top: 1px solid var(--tcp-border, #E5DFD5);
-    padding: 64px 0 0;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    background-color: var(--tcp-brown, #352922);
+    color: var(--tcp-sand, #FBF9F5);
+    padding: 80px 0 0;
+    font-family: var(--font-sans, sans-serif);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .tcp-footer__inner {
@@ -24,191 +24,186 @@
 
   .tcp-footer__grid {
     display: grid;
-    grid-template-columns: 1.4fr repeat(6, 1fr) 1.5fr;
-    gap: 24px;
-    padding-bottom: 48px;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1.4fr;
+    gap: 48px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  /* ── Logo Column ── */
-  .tcp-footer__logo-col {
-    padding-right: 20px;
+  /* ── Brand Col ── */
+  .tcp-footer__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .tcp-footer__logo {
     text-decoration: none;
-    color: var(--tcp-dark, #2D2D2D);
-    display: inline-block;
-    margin-bottom: 12px;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 16px;
   }
 
   .tcp-footer__logo-the {
-    font-family: var(--font-script, 'Dancing Script', cursive);
-    font-size: 13px;
-    color: var(--tcp-muted, #6B6560);
-    display: block;
-    margin-bottom: 2px;
+    font-family: var(--font-script, cursive);
+    font-size: 22px;
+    color: var(--tcp-gold-light, #DFBA5E);
+    line-height: 1;
   }
 
   .tcp-footer__logo-name {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
+    font-family: var(--font-serif, serif);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 3.5px;
     text-transform: uppercase;
-    display: block;
+    line-height: 1;
   }
 
-  .tcp-footer__logo-tagline {
-    font-size: 7.5px;
-    font-weight: 500;
+  .tcp-footer__tagline {
+    font-size: 11px;
     letter-spacing: 1.8px;
     text-transform: uppercase;
-    color: var(--tcp-muted, #6B6560);
-    margin-top: 6px;
+    color: rgba(251, 249, 245, 0.7);
     line-height: 1.6;
-    display: block;
+    margin-bottom: 24px;
+  }
+
+  .tcp-footer__contact-info {
+    font-size: 13px;
+    color: rgba(251, 249, 245, 0.8);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .tcp-footer__contact-info a {
+    color: var(--tcp-gold-light, #DFBA5E);
+    text-decoration: none;
   }
 
   .tcp-footer__social {
     display: flex;
     gap: 12px;
-    margin-top: 20px;
   }
 
   .tcp-footer__social-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    color: var(--tcp-dark, #2D2D2D);
+    color: #FFFFFF;
     text-decoration: none;
     transition: all 0.3s ease;
-    border: 1px solid var(--tcp-border, #E5DFD5);
   }
 
   .tcp-footer__social-link:hover {
-    background-color: var(--tcp-gold, #C8A96E);
-    color: var(--tcp-white, #FFFFFF);
-    border-color: var(--tcp-gold, #C8A96E);
+    background: var(--tcp-gold, #C29B38);
+    border-color: var(--tcp-gold, #C29B38);
+    color: var(--tcp-dark, #1F1D1B);
+    transform: translateY(-2px);
   }
 
   .tcp-footer__social-link svg {
-    width: 14px;
-    height: 14px;
+    width: 15px;
+    height: 15px;
   }
 
-  .tcp-footer__copyright {
-    font-size: 10px;
-    color: var(--tcp-muted-light, #9B9590);
-    margin-top: 16px;
-    line-height: 1.5;
-  }
-
-  /* ── Nav Columns ── */
+  /* ── Nav Cols ── */
   .tcp-footer__nav-col {}
 
   .tcp-footer__nav-title {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-family: var(--font-sans, sans-serif);
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.2px;
+    font-weight: 700;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
-    margin-bottom: 16px;
+    color: var(--tcp-gold-light, #DFBA5E);
+    margin: 0 0 20px;
   }
 
   .tcp-footer__nav-list {
     list-style: none;
-    margin: 0;
     padding: 0;
-  }
-
-  .tcp-footer__nav-list li {
-    margin-bottom: 10px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .tcp-footer__nav-list a {
     font-size: 13px;
-    font-weight: 400;
-    color: var(--tcp-muted, #6B6560);
+    color: rgba(251, 249, 245, 0.75);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
   }
 
   .tcp-footer__nav-list a:hover {
-    color: var(--tcp-gold, #C8A96E);
+    color: #FFFFFF;
+    transform: translateX(3px);
   }
 
   /* ── Newsletter Column ── */
-  .tcp-footer__newsletter-col {
-    padding-left: 20px;
-  }
+  .tcp-footer__news-col {}
 
-  .tcp-footer__newsletter-title {
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    color: var(--tcp-dark, #2D2D2D);
+  .tcp-footer__news-desc {
+    font-size: 13px;
+    color: rgba(251, 249, 245, 0.75);
+    line-height: 1.6;
     margin-bottom: 16px;
   }
 
-  .tcp-footer__newsletter-form {
+  .tcp-footer__form {
     display: flex;
-    border: 1px solid var(--tcp-border-dark, #C5BFB5);
-    border-radius: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
     overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
     transition: border-color 0.3s ease;
   }
 
-  .tcp-footer__newsletter-form:focus-within {
-    border-color: var(--tcp-gold, #C8A96E);
+  .tcp-footer__form:focus-within {
+    border-color: var(--tcp-gold, #C29B38);
   }
 
-  .tcp-footer__newsletter-input {
+  .tcp-footer__input {
     flex: 1;
-    font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 13px;
-    padding: 12px 16px;
-    border: none;
     background: transparent;
-    color: var(--tcp-dark, #2D2D2D);
+    border: none;
+    padding: 13px 16px;
+    color: #FFFFFF;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 13px;
     outline: none;
   }
 
-  .tcp-footer__newsletter-input::placeholder {
-    color: var(--tcp-muted-light, #9B9590);
+  .tcp-footer__input::placeholder {
+    color: rgba(251, 249, 245, 0.4);
   }
 
-  .tcp-footer__newsletter-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    background-color: var(--tcp-gold, #C8A96E);
+  .tcp-footer__submit {
+    background: var(--tcp-gold, #C29B38);
     border: none;
+    color: var(--tcp-dark, #1F1D1B);
+    padding: 0 18px;
     cursor: pointer;
-    color: var(--tcp-white, #FFFFFF);
-    transition: background-color 0.3s ease;
-    flex-shrink: 0;
+    font-weight: 700;
+    transition: background 0.2s ease;
   }
 
-  .tcp-footer__newsletter-btn:hover {
-    background-color: var(--tcp-gold-hover, #B8965A);
-  }
-
-  .tcp-footer__newsletter-btn svg {
-    width: 16px;
-    height: 16px;
+  .tcp-footer__submit:hover {
+    background: #FFFFFF;
   }
 
   /* ── Bottom Bar ── */
   .tcp-footer__bottom {
-    border-top: 1px solid var(--tcp-border, #E5DFD5);
-    padding: 20px 0;
+    padding: 24px 0;
   }
 
   .tcp-footer__bottom-inner {
@@ -216,66 +211,67 @@
     margin: 0 auto;
     padding: 0 40px;
     display: flex;
-    justify-content: flex-end;
-    gap: 24px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11.5px;
+    color: rgba(251, 249, 245, 0.5);
+    flex-wrap: wrap;
+    gap: 16px;
   }
 
-  .tcp-footer__legal-link {
-    font-size: 11px;
-    color: var(--tcp-muted, #6B6560);
+  .tcp-footer__legal-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .tcp-footer__legal-links a {
+    color: rgba(251, 249, 245, 0.5);
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
-  .tcp-footer__legal-link:hover {
-    color: var(--tcp-gold, #C8A96E);
+  .tcp-footer__legal-links a:hover {
+    color: #FFFFFF;
+  }
+
+  .tcp-footer__back-to-top {
+    background: none;
+    border: none;
+    color: var(--tcp-gold-light, #DFBA5E);
+    cursor: pointer;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
 
   /* ── Responsive ── */
   @media (max-width: 1100px) {
     .tcp-footer__grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
     }
-
-    .tcp-footer__logo-col {
+    .tcp-footer__brand,
+    .tcp-footer__news-col {
       grid-column: 1 / -1;
-    }
-
-    .tcp-footer__newsletter-col {
-      grid-column: 1 / -1;
-      padding-left: 0;
-      max-width: 400px;
     }
   }
 
   @media (max-width: 600px) {
     .tcp-footer {
-      padding: 40px 0 0;
+      padding: 50px 0 0;
     }
-
-    .tcp-footer__inner {
-      padding: 0 24px;
-    }
-
-    .tcp-footer__grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-    }
-
-    .tcp-footer__logo-col {
-      grid-column: 1 / -1;
-    }
-
-    .tcp-footer__newsletter-col {
-      grid-column: 1 / -1;
-      max-width: 100%;
-    }
-
+    .tcp-footer__inner,
     .tcp-footer__bottom-inner {
-      padding: 0 24px;
-      flex-wrap: wrap;
-      gap: 12px;
+      padding: 0 20px;
+    }
+    .tcp-footer__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
     }
   }
 </style>
@@ -284,81 +280,79 @@
   <div class="tcp-footer__inner">
     <div class="tcp-footer__grid">
 
-      <!-- Logo Column -->
-      <div class="tcp-footer__logo-col">
-        <a href="/" class="tcp-footer__logo" aria-label="The Creative Platter — Home">
+      <!-- Col 1: Brand & Contact -->
+      <div class="tcp-footer__brand">
+        <a href="/" class="tcp-footer__logo">
           <span class="tcp-footer__logo-the">the</span>
           <span class="tcp-footer__logo-name">CREATIVE PLATTER</span>
         </a>
-        <span class="tcp-footer__logo-tagline">
-          {{ section.settings.tagline | default: 'BESPOKE TABLEWARE,<br>EXPERIENCES, ADVISORY.' }}
+        <span class="tcp-footer__tagline">
+          Pushpa Legacy Dinnerware &bull; Bespoke Hospitality &bull; Experiences
         </span>
-
-        <div class="tcp-footer__social">
-          {% if section.settings.instagram_url != blank %}
-            <a href="{{ section.settings.instagram_url }}" class="tcp-footer__social-link" aria-label="Instagram" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-            </a>
-          {% endif %}
-          {% if section.settings.pinterest_url != blank %}
-            <a href="{{ section.settings.pinterest_url }}" class="tcp-footer__social-link" aria-label="Pinterest" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.182-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.805-2.424 1.808-2.424.853 0 1.264.64 1.264 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.481 1.806 1.778 0 3.144-1.874 3.144-4.58 0-2.394-1.72-4.068-4.177-4.068-2.845 0-4.515 2.134-4.515 4.34 0 .859.331 1.781.744 2.282a.3.3 0 01.069.287c-.076.316-.244.995-.277 1.134-.044.182-.144.221-.333.133-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.472 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.527-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z" fill="currentColor"/></svg>
-            </a>
-          {% endif %}
+        <div class="tcp-footer__contact-info">
+          Gurugram Studio, Haryana / New Delhi<br>
+          Direct: <a href="tel:+918586946814">+91-8586946814</a><br>
+          Email: <a href="mailto:info@thecreativeplatter.com">info@thecreativeplatter.com</a>
         </div>
-
-        <p class="tcp-footer__copyright">
-          © {{ 'now' | date: "%Y" }} The Creative Platter. All rights reserved.
-        </p>
+        <div class="tcp-footer__social">
+          <a href="https://instagram.com/thecreativeplatter_studio" target="_blank" rel="noopener" class="tcp-footer__social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="mailto:info@thecreativeplatter.com" class="tcp-footer__social-link" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+          </a>
+        </div>
       </div>
 
-      <!-- Navigation Columns (rendered from blocks) -->
-      {% for block in section.blocks %}
-        {% if block.type == 'nav_column' %}
-          <div class="tcp-footer__nav-col" {{ block.shopify_attributes }}>
-            <h4 class="tcp-footer__nav-title">{{ block.settings.column_title }}</h4>
-            <ul class="tcp-footer__nav-list">
-              {% if block.settings.link_1_text != blank %}
-                <li><a href="{{ block.settings.link_1_url }}">{{ block.settings.link_1_text }}</a></li>
-              {% endif %}
-              {% if block.settings.link_2_text != blank %}
-                <li><a href="{{ block.settings.link_2_url }}">{{ block.settings.link_2_text }}</a></li>
-              {% endif %}
-              {% if block.settings.link_3_text != blank %}
-                <li><a href="{{ block.settings.link_3_url }}">{{ block.settings.link_3_text }}</a></li>
-              {% endif %}
-              {% if block.settings.link_4_text != blank %}
-                <li><a href="{{ block.settings.link_4_url }}">{{ block.settings.link_4_text }}</a></li>
-              {% endif %}
-              {% if block.settings.link_5_text != blank %}
-                <li><a href="{{ block.settings.link_5_url }}">{{ block.settings.link_5_text }}</a></li>
-              {% endif %}
-              {% if block.settings.link_6_text != blank %}
-                <li><a href="{{ block.settings.link_6_url }}">{{ block.settings.link_6_text }}</a></li>
-              {% endif %}
-            </ul>
-          </div>
-        {% endif %}
-      {% endfor %}
+      <!-- Col 2: Pushpa & Retail (D2C) -->
+      <div class="tcp-footer__nav-col">
+        <h4 class="tcp-footer__nav-title">Retail &amp; D2C</h4>
+        <ul class="tcp-footer__nav-list">
+          <li><a href="/collections/pushpa">Pushpa Collection 2025–26</a></li>
+          <li><a href="/products/smriti-dinner-set">Smriti (स्मृति) Set</a></li>
+          <li><a href="/collections/plates">Plates &amp; Bowls</a></li>
+          <li><a href="/collections/platters">Serving Platters</a></li>
+          <li><a href="/collections/linen">Table Linens</a></li>
+          <li><a href="/pages/build-your-table">Build Your Table</a></li>
+        </ul>
+      </div>
 
-      <!-- Newsletter Column -->
-      <div class="tcp-footer__newsletter-col">
-        <h4 class="tcp-footer__newsletter-title">{{ section.settings.newsletter_title | default: 'JOIN OUR WORLD' }}</h4>
-        <form class="tcp-footer__newsletter-form" action="/contact#contact_form" method="post">
+      <!-- Col 3: Hospitality & B2B -->
+      <div class="tcp-footer__nav-col">
+        <h4 class="tcp-footer__nav-title">Hospitality &amp; B2B</h4>
+        <ul class="tcp-footer__nav-list">
+          <li><a href="/pages/bespoke-b2b">Commercial Tableware</a></li>
+          <li><a href="/pages/bespoke-b2b#hospitality">Fine Dining &amp; Chefs</a></li>
+          <li><a href="/pages/bespoke-b2b#hotels">Resorts &amp; Boutique Stays</a></li>
+          <li><a href="/pages/bespoke-b2b#glazes">Glaze &amp; Clay Library</a></li>
+          <li><a href="/pages/bespoke-b2b#process">6-Stage Process</a></li>
+          <li><a href="/pages/bespoke-b2b#rfq">Request Trade Samples</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: The Studio & Craft -->
+      <div class="tcp-footer__nav-col">
+        <h4 class="tcp-footer__nav-title">The Studio</h4>
+        <ul class="tcp-footer__nav-list">
+          <li><a href="/pages/story">Tribute to Pushpa</a></li>
+          <li><a href="/pages/story#impact">Women Artisan Studio</a></li>
+          <li><a href="/pages/craft-material">Zero Waste Philosophy</a></li>
+          <li><a href="/pages/experiences">Studio Experiences</a></li>
+          <li><a href="/pages/contact">Visit The Studio</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 5: Newsletter -->
+      <div class="tcp-footer__news-col">
+        <h4 class="tcp-footer__nav-title">Join The Ritual</h4>
+        <p class="tcp-footer__news-desc">
+          Receive exclusive invitations to new Pushpa collection releases, studio feasting dinners, and pottery masterclasses.
+        </p>
+        <form class="tcp-footer__form" action="/contact#contact_form" method="post">
           <input type="hidden" name="form_type" value="customer">
-          <input type="hidden" name="utf8" value="✓">
           <input type="hidden" name="contact[tags]" value="newsletter">
-          <input 
-            type="email" 
-            name="contact[email]" 
-            class="tcp-footer__newsletter-input" 
-            placeholder="{{ section.settings.newsletter_placeholder | default: 'Enter your email' }}"
-            required
-            aria-label="Email address"
-          >
-          <button type="submit" class="tcp-footer__newsletter-btn" aria-label="Subscribe">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9.5 4.5L13 8l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
+          <input type="email" name="contact[email]" class="tcp-footer__input" placeholder="Your email address..." required>
+          <button type="submit" class="tcp-footer__submit">&rarr;</button>
         </form>
       </div>
 
@@ -368,95 +362,24 @@
   <!-- Bottom Legal Bar -->
   <div class="tcp-footer__bottom">
     <div class="tcp-footer__bottom-inner">
-      <a href="{{ section.settings.privacy_url | default: '/policies/privacy-policy' }}" class="tcp-footer__legal-link">Privacy Policy</a>
-      <a href="{{ section.settings.terms_url | default: '/policies/terms-of-service' }}" class="tcp-footer__legal-link">Terms & Conditions</a>
+      <span>&copy; {{ 'now' | date: "%Y" }} The Creative Platter. All rights reserved.</span>
+      <div class="tcp-footer__legal-links">
+        <a href="/policies/privacy-policy">Privacy Policy</a>
+        <a href="/policies/terms-of-service">Terms of Service</a>
+        <a href="/pages/bespoke-b2b#rfq">Trade Inquiries</a>
+      </div>
+      <button type="button" class="tcp-footer__back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        Back to top &uarr;
+      </button>
     </div>
   </div>
 </footer>
 
 {% schema %}
 {
-  "name": "TCP Footer",
+  "name": "TCP Global Footer",
   "tag": "section",
   "class": "tcp-footer-section",
-  "settings": [
-    {
-      "type": "text",
-      "id": "tagline",
-      "label": "Footer tagline",
-      "default": "BESPOKE TABLEWARE,<br>EXPERIENCES, ADVISORY."
-    },
-    {
-      "type": "url",
-      "id": "instagram_url",
-      "label": "Instagram URL"
-    },
-    {
-      "type": "url",
-      "id": "pinterest_url",
-      "label": "Pinterest URL"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_title",
-      "label": "Newsletter heading",
-      "default": "JOIN OUR WORLD"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_placeholder",
-      "label": "Newsletter placeholder",
-      "default": "Enter your email"
-    },
-    {
-      "type": "url",
-      "id": "privacy_url",
-      "label": "Privacy Policy URL"
-    },
-    {
-      "type": "url",
-      "id": "terms_url",
-      "label": "Terms & Conditions URL"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "nav_column",
-      "name": "Nav Column",
-      "settings": [
-        {
-          "type": "text",
-          "id": "column_title",
-          "label": "Column title",
-          "default": "SHOP"
-        },
-        { "type": "text", "id": "link_1_text", "label": "Link 1 text" },
-        { "type": "url",  "id": "link_1_url",  "label": "Link 1 URL" },
-        { "type": "text", "id": "link_2_text", "label": "Link 2 text" },
-        { "type": "url",  "id": "link_2_url",  "label": "Link 2 URL" },
-        { "type": "text", "id": "link_3_text", "label": "Link 3 text" },
-        { "type": "url",  "id": "link_3_url",  "label": "Link 3 URL" },
-        { "type": "text", "id": "link_4_text", "label": "Link 4 text" },
-        { "type": "url",  "id": "link_4_url",  "label": "Link 4 URL" },
-        { "type": "text", "id": "link_5_text", "label": "Link 5 text" },
-        { "type": "url",  "id": "link_5_url",  "label": "Link 5 URL" },
-        { "type": "text", "id": "link_6_text", "label": "Link 6 text" },
-        { "type": "url",  "id": "link_6_url",  "label": "Link 6 URL" }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "TCP Footer",
-      "blocks": [
-        { "type": "nav_column", "settings": { "column_title": "SHOP", "link_1_text": "All Collections", "link_2_text": "Dinnerware", "link_3_text": "Linen", "link_4_text": "Serveware", "link_5_text": "Objects", "link_6_text": "Gift Cards" } },
-        { "type": "nav_column", "settings": { "column_title": "STORY", "link_1_text": "Our Story", "link_2_text": "Materials & Craft", "link_3_text": "Journal" } },
-        { "type": "nav_column", "settings": { "column_title": "BESPOKE (HOMES)", "link_1_text": "Design Your Set", "link_2_text": "Custom Process", "link_3_text": "FAQs" } },
-        { "type": "nav_column", "settings": { "column_title": "BESPOKE (B2B)", "link_1_text": "Overview", "link_2_text": "Process", "link_3_text": "Projects", "link_4_text": "Materials", "link_5_text": "Catalogue", "link_6_text": "Enquiry" } },
-        { "type": "nav_column", "settings": { "column_title": "GIFTING", "link_1_text": "All Gifts", "link_2_text": "Gift Sets", "link_3_text": "Corporate Gifting", "link_4_text": "Gift Cards" } },
-        { "type": "nav_column", "settings": { "column_title": "EXPERIENCES", "link_1_text": "Overview", "link_2_text": "Workshops", "link_3_text": "Table Stories", "link_4_text": "Events" } }
-      ]
-    }
-  ]
+  "settings": []
 }
 {% endschema %}

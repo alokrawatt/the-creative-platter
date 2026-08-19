@@ -1,0 +1,51 @@
+{
+  "sections": {
+    "tcp_home_hero": {
+      "type": "section-home-hero",
+      "settings": {}
+    },
+    "tcp_home_collections": {
+      "type": "section-home-collections",
+      "settings": {}
+    },
+    "tcp_home_signature_sets": {
+      "type": "section-home-signature-sets",
+      "settings": {}
+    },
+    "tcp_pushpa_dinner_sets": {
+      "type": "section-pushpa-dinner-sets",
+      "settings": {}
+    },
+    "tcp_home_bespoke_homes": {
+      "type": "section-home-bespoke-homes",
+      "settings": {}
+    },
+    "tcp_home_bespoke_b2b": {
+      "type": "section-home-bespoke-b2b",
+      "settings": {}
+    },
+    "tcp_home_gifting_experiences": {
+      "type": "section-home-gifting-experiences",
+      "settings": {}
+    },
+    "tcp_home_material_craft": {
+      "type": "section-home-material-craft",
+      "settings": {}
+    },
+    "tcp_home_on_your_table": {
+      "type": "section-home-on-your-table",
+      "settings": {}
+    }
+  },
+  "order": [
+    "tcp_home_hero",
+    "tcp_home_collections",
+    "tcp_home_signature_sets",
+    "tcp_pushpa_dinner_sets",
+    "tcp_home_bespoke_homes",
+    "tcp_home_bespoke_b2b",
+    "tcp_home_gifting_experiences",
+    "tcp_home_material_craft",
+    "tcp_home_on_your_table"
+  ]
+}

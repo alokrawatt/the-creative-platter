@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "tcp_bespoke_b2b": {
+      "type": "section-bespoke-b2b",
+      "settings": {}
+    }
+  },
+  "order": [
+    "tcp_bespoke_b2b"
+  ]
+}
