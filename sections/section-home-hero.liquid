@@ -2,21 +2,32 @@
   ============================================================
   THE CREATIVE PLATTER — Home Hero Section (Full Background)
   ============================================================
-  Cinematic full-background hero showcasing bespoke ceramic tableware
-  with elegant editorial typography and dual D2C / B2B pathways.
+  Matches the exact editorial typography and styling from reference design:
+  - Large Serif "Pushpa." with gold dot
+  - "The Legacy Collection" (italic serif) + "bespoke dinnerware" (script)
+  - Short gold divider dash
+  - "Crafted in memory." / "Made for your home." / "A legacy you can hold."
+  - "from The Creative Platter" / "Bespoke tableware • Experiences • Advisory"
+  - Solid "EXPLORE COLLECTION →" & Underlined "DESIGN YOUR SET →"
+  - Blends seamlessly with the floating navbar
   Copy into Shopify: sections/section-home-hero.liquid
 {% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
   .tcp-hero {
     position: relative;
-    min-height: 85vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: hidden;
-    color: #FFFFFF;
-    background-color: #1F1D1B;
+    color: #1F1D1B;
+    background-color: #F8F5F0;
   }
 
   /* ── Full Background Media ── */
@@ -35,22 +46,21 @@
     object-fit: cover;
     object-position: center;
     display: block;
-    transform: scale(1.02);
-    transition: transform 10s ease;
+    transform: scale(1.01);
+    transition: transform 8s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
   .tcp-hero:hover .tcp-hero__bg-img {
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
 
-  /* ── Editorial Fallback Background (when no image uploaded) ── */
+  /* ── Editorial Fallback Canvas (when no custom photo is chosen) ── */
   .tcp-hero__bg-fallback {
     width: 100%;
     height: 100%;
     background: 
-      radial-gradient(ellipse at 70% 30%, rgba(194, 155, 56, 0.25) 0%, transparent 60%),
-      radial-gradient(ellipse at 20% 80%, rgba(53, 41, 34, 0.9) 0%, transparent 70%),
-      linear-gradient(135deg, #1A1715 0%, #2D2520 40%, #1F1D1B 100%);
+      radial-gradient(ellipse at 80% 50%, rgba(223, 214, 198, 0.6) 0%, transparent 65%),
+      linear-gradient(135deg, #FAF8F5 0%, #F3EDE3 50%, #EAE2D5 100%);
     position: relative;
   }
 
@@ -59,256 +69,248 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.22;
+    opacity: 0.25;
     pointer-events: none;
   }
 
-  /* ── Atmospheric Scrim & Overlay ── */
+  /* ── Soft Clean Gradient (Ensures Text Stays 100% Legible on Any Photo) ── */
   .tcp-hero__overlay {
     position: absolute;
     inset: 0;
+    {% assign op = section.settings.overlay_opacity | default: 0 %}
     background: linear-gradient(
       90deg,
-      rgba(20, 18, 16, 0.9) 0%,
-      rgba(20, 18, 16, 0.72) 48%,
-      rgba(20, 18, 16, 0.38) 100%
+      rgba(250, 248, 245, {{ op | times: 0.01 | plus: 0.45 | at_most: 0.9 }}) 0%,
+      rgba(250, 248, 245, {{ op | times: 0.008 | plus: 0.15 | at_most: 0.6 }}) 50%,
+      rgba(250, 248, 245, 0) 100%
     );
     z-index: 2;
     pointer-events: none;
   }
 
-  .tcp-hero__radial-vignette {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 30% 50%, transparent 40%, rgba(15, 14, 13, 0.6) 100%);
-    z-index: 3;
-    pointer-events: none;
-  }
-
-  /* ── Foreground Container (Left Aligned) ── */
+  /* ── Foreground Container (Blended & Positioned Below Navbar) ── */
   .tcp-hero__container {
     position: relative;
     z-index: 5;
     max-width: 1440px;
     width: 100%;
     margin: 0 auto;
-    padding: 120px 48px 90px;
+    padding: calc(var(--header-height, 90px) + 60px) 56px 80px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
   }
 
-  /* ── Top Pill Badge ── */
-  .tcp-hero__pill-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 30px;
-    padding: 8px 20px;
-    margin-bottom: 28px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  .tcp-hero__pill-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--tcp-gold-light, #DFBA5E);
-    box-shadow: 0 0 10px rgba(223, 186, 94, 0.8);
-    animation: tcp-pulse 2s infinite ease-in-out;
-  }
-
-  @keyframes tcp-pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.4); opacity: 0.6; }
-  }
-
-  .tcp-hero__pill-text {
-    font-family: var(--font-sans, sans-serif);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2.2px;
-    text-transform: uppercase;
-    color: #FAF8F4;
-  }
-
-  /* ── Title Group ── */
-  .tcp-hero__title-group {
-    margin-bottom: 20px;
-    max-width: 800px;
+  /* ── Editorial Card Container ── */
+  .tcp-hero__editorial-card {
+    max-width: 580px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     text-align: left;
   }
 
-  .tcp-hero__prefix {
-    font-family: var(--font-script, 'Sacramento', cursive);
-    font-size: clamp(42px, 5.5vw, 60px);
-    color: var(--tcp-gold-light, #DFBA5E);
+  /* ── Main Heading: Pushpa. ── */
+  .tcp-hero__main-heading {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(68px, 8.5vw, 116px);
+    font-weight: 500;
+    color: #1A1715;
     line-height: 0.9;
-    display: block;
-    margin-bottom: 6px;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
-  }
-
-  .tcp-hero__title {
-    font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
-    font-size: clamp(56px, 7.5vw, 100px);
-    font-weight: 400;
-    color: #FFFFFF;
-    line-height: 0.95;
-    letter-spacing: -0.5px;
+    letter-spacing: -1px;
     margin: 0;
-    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+    display: inline-block;
   }
 
-  .tcp-hero__divider {
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, var(--tcp-gold, #C29B38), transparent);
-    margin: 18px 0 24px;
-  }
-
-  .tcp-hero__description {
-    font-family: var(--font-sans, sans-serif);
-    font-size: clamp(15px, 1.8vw, 17px);
-    font-weight: 400;
-    color: rgba(250, 248, 244, 0.92);
-    line-height: 1.8;
-    max-width: 620px;
-    margin: 0 0 36px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
-    text-align: left;
-  }
-
-  /* ── CTAs ── */
-  .tcp-hero__ctas {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 18px;
-    flex-wrap: wrap;
-    margin-bottom: 48px;
-  }
-
-  .tcp-hero__btn-primary {
-    font-family: var(--font-sans, sans-serif);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    background: var(--tcp-gold, #C29B38);
-    color: #1F1D1B;
-    padding: 16px 36px;
-    border-radius: 2px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 6px 20px rgba(194, 155, 56, 0.35);
-  }
-
-  .tcp-hero__btn-primary:hover {
-    background: #DFBA5E;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 28px rgba(194, 155, 56, 0.5);
-    color: #1F1D1B;
-  }
-
-  .tcp-hero__btn-secondary {
-    font-family: var(--font-sans, sans-serif);
-    font-size: 12px;
+  .tcp-hero__gold-dot {
+    color: #A6732E;
     font-weight: 600;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: #FFFFFF;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    padding: 16px 32px;
-    border-radius: 2px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-left: 2px;
   }
 
-  .tcp-hero__btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.22);
-    border-color: #FFFFFF;
-    color: #FFFFFF;
-    transform: translateY(-2px);
+  /* ── Collection Subtitle Lines ── */
+  .tcp-hero__collection-lines {
+    margin-top: 14px;
   }
 
-  /* ── Trust Badges ── */
-  .tcp-hero__badges {
+  .tcp-hero__legacy-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 400;
+    color: #24201D;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .tcp-hero__bespoke-script {
+    font-family: 'Caveat', 'Sacramento', cursive;
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 500;
+    color: #A6732E;
+    line-height: 1;
+    margin: 4px 0 0;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Short Gold Dash Divider ── */
+  .tcp-hero__gold-dash {
+    width: 32px;
+    height: 1.5px;
+    background: #A6732E;
+    margin: 22px 0 24px;
+  }
+
+  /* ── Poetic Quote Block ── */
+  .tcp-hero__poetic-block {
+    margin-bottom: 28px;
+  }
+
+  .tcp-hero__poetic-line {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(19px, 2.3vw, 25px);
+    font-weight: 400;
+    color: #1F1D1B;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .tcp-hero__poetic-script {
+    font-family: 'Caveat', 'Sacramento', cursive;
+    font-size: clamp(28px, 3.4vw, 38px);
+    font-weight: 500;
+    color: #A6732E;
+    line-height: 1.2;
+    margin: 4px 0 0;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Studio Attribution Block ── */
+  .tcp-hero__studio-block {
+    margin-bottom: 36px;
+  }
+
+  .tcp-hero__from-line {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 17px;
+    color: #24201D;
+    margin: 0 0 5px;
+  }
+
+  .tcp-hero__from-line em {
+    font-style: italic;
+    margin-right: 3px;
+  }
+
+  .tcp-hero__sub-services {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #4A443C;
+    letter-spacing: 0.3px;
+    margin: 0;
+  }
+
+  .tcp-hero__service-dot {
+    color: #A6732E;
+    margin: 0 6px;
+    font-weight: 700;
+  }
+
+  /* ── Action Buttons Row ── */
+  .tcp-hero__actions-row {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     gap: 28px;
     flex-wrap: wrap;
-    padding-top: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-    max-width: 780px;
-    width: 100%;
   }
 
-  .tcp-hero__badge-item {
-    display: flex;
+  .tcp-hero__btn-solid {
+    background: #A6732E;
+    color: #FFFFFF;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border-radius: 0;
+    text-decoration: none;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-sans, sans-serif);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.8px;
-    color: rgba(250, 248, 244, 0.88);
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 16px rgba(166, 115, 46, 0.28);
   }
 
-  .tcp-hero__badge-icon {
-    width: 16px;
-    height: 16px;
-    color: var(--tcp-gold-light, #DFBA5E);
-    flex-shrink: 0;
+  .tcp-hero__btn-solid:hover {
+    background: #8C5F22;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(166, 115, 46, 0.4);
+    color: #FFFFFF;
   }
 
-  /* ── Responsive ── */
+  .tcp-hero__btn-underline {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1F1D1B;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1.5px solid #1F1D1B;
+    padding-bottom: 3px;
+    transition: all 0.25s ease;
+  }
+
+  .tcp-hero__btn-underline:hover {
+    color: #A6732E;
+    border-color: #A6732E;
+    transform: translateX(3px);
+  }
+
+  /* ── Responsive Breakpoints ── */
   @media (max-width: 768px) {
     .tcp-hero {
-      min-height: 75vh;
+      min-height: 85vh;
     }
     .tcp-hero__container {
-      padding: 70px 20px 50px;
+      padding: calc(var(--header-height, 90px) + 30px) 24px 60px;
     }
-    .tcp-hero__title {
-      font-size: 48px;
+    .tcp-hero__main-heading {
+      font-size: 58px;
     }
-    .tcp-hero__prefix {
-      font-size: 34px;
+    .tcp-hero__legacy-title {
+      font-size: 22px;
     }
-    .tcp-hero__ctas {
+    .tcp-hero__bespoke-script {
+      font-size: 28px;
+    }
+    .tcp-hero__poetic-line {
+      font-size: 18px;
+    }
+    .tcp-hero__poetic-script {
+      font-size: 24px;
+    }
+    .tcp-hero__actions-row {
       flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
       width: 100%;
-      gap: 12px;
     }
-    .tcp-hero__btn-primary,
-    .tcp-hero__btn-secondary {
+    .tcp-hero__btn-solid {
       width: 100%;
       justify-content: center;
-    }
-    .tcp-hero__badges {
-      gap: 14px 20px;
     }
   }
 </style>
 
 <section class="tcp-hero" id="tcp-home-hero">
-  <!-- Full Background Media -->
+  <!-- Full Background Media (Bleeds under Navbar) -->
   <div class="tcp-hero__bg">
     {% if section.settings.hero_image != blank %}
       <img 
@@ -323,67 +325,66 @@
     {% else %}
       <div class="tcp-hero__bg-fallback">
         <svg viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="1100" cy="550" rx="420" ry="220" fill="#FAF8F4" fill-opacity="0.08" stroke="#C29B38" stroke-width="2" stroke-dasharray="24 8 12 4" />
-          <ellipse cx="1100" cy="530" rx="350" ry="180" fill="#F4EFE6" fill-opacity="0.06" stroke="#DFBA5E" stroke-width="1.5" />
-          <ellipse cx="1100" cy="500" rx="260" ry="130" fill="#EDE4D8" fill-opacity="0.05" stroke="#C29B38" stroke-width="2" />
-          <path d="M-100 200 C300 450 150 700 500 850" stroke="#DFBA5E" stroke-width="1.5" stroke-dasharray="6 6" stroke-opacity="0.25"/>
-          <circle cx="200" cy="700" r="140" stroke="#C29B38" stroke-width="1" stroke-opacity="0.2"/>
+          <ellipse cx="1100" cy="550" rx="420" ry="220" fill="#FAF8F4" fill-opacity="0.2" stroke="#A6732E" stroke-width="2" stroke-dasharray="24 8 12 4" />
+          <ellipse cx="1100" cy="530" rx="350" ry="180" fill="#F4EFE6" fill-opacity="0.15" stroke="#DFBA5E" stroke-width="1.5" />
+          <ellipse cx="1100" cy="500" rx="260" ry="130" fill="#EDE4D8" fill-opacity="0.12" stroke="#A6732E" stroke-width="2" />
+          <path d="M-100 200 C300 450 150 700 500 850" stroke="#DFBA5E" stroke-width="1.5" stroke-dasharray="6 6" stroke-opacity="0.3"/>
+          <circle cx="200" cy="700" r="140" stroke="#A6732E" stroke-width="1" stroke-opacity="0.2"/>
         </svg>
       </div>
     {% endif %}
   </div>
 
-  <!-- Atmospheric Scrim & Vignette Overlays -->
+  <!-- Soft Clean Left Scrim Overlay -->
   <div class="tcp-hero__overlay"></div>
-  <div class="tcp-hero__radial-vignette"></div>
 
-  <!-- Foreground Content -->
+  <!-- Foreground Editorial Content -->
   <div class="tcp-hero__container">
-    <div class="tcp-hero__pill-tag">
-      <span class="tcp-hero__pill-dot"></span>
-      <span class="tcp-hero__pill-text">{{ section.settings.top_pill | default: 'The Legacy Dinner Collection 2025–26' }}</span>
-    </div>
+    <div class="tcp-hero__editorial-card">
 
-    <div class="tcp-hero__title-group">
-      <span class="tcp-hero__prefix">the</span>
-      <h1 class="tcp-hero__title">
-        {{ section.settings.title | default: 'Pushpa' }}
+      <!-- Heading: Pushpa. -->
+      <h1 class="tcp-hero__main-heading">
+        {{ section.settings.title | default: 'Pushpa' }}<span class="tcp-hero__gold-dot">.</span>
       </h1>
-    </div>
 
-    <div class="tcp-hero__divider"></div>
+      <!-- Subtitle Lines -->
+      <div class="tcp-hero__collection-lines">
+        <p class="tcp-hero__legacy-title">{{ section.settings.legacy_title | default: 'The Legacy Collection' }}</p>
+        <p class="tcp-hero__bespoke-script">{{ section.settings.bespoke_script | default: 'bespoke dinnerware' }}</p>
+      </div>
 
-    <p class="tcp-hero__description">
-      {{ section.settings.description | default: 'A dinnerware collection born from memory, shaped by emotion & carried in legacy. Dedicated to mother Pushpa — hand-formed mould-free from recycled clay by village women artisans near Gurugram.' }}
-    </p>
+      <!-- Small Gold Dash -->
+      <div class="tcp-hero__gold-dash"></div>
 
-    <div class="tcp-hero__ctas">
-      <a href="{{ section.settings.cta_primary_url | default: '/collections/pushpa' }}" class="tcp-hero__btn-primary">
-        {{ section.settings.cta_primary_text | default: 'Explore Pushpa Collection' }} &rarr;
-      </a>
-      <a href="{{ section.settings.cta_secondary_url | default: '/pages/bespoke-b2b' }}" class="tcp-hero__btn-secondary">
-        {{ section.settings.cta_secondary_text | default: 'Hospitality & B2B Studio' }}
-      </a>
-    </div>
+      <!-- Poetic Lines -->
+      <div class="tcp-hero__poetic-block">
+        <p class="tcp-hero__poetic-line">{{ section.settings.line_1 | default: 'Crafted in memory.' }}</p>
+        <p class="tcp-hero__poetic-line">{{ section.settings.line_2 | default: 'Made for your home.' }}</p>
+        <p class="tcp-hero__poetic-script">{{ section.settings.line_3_script | default: 'A legacy you can hold.' }}</p>
+      </div>
 
-    <!-- Trust Badges -->
-    <div class="tcp-hero__badges">
-      <div class="tcp-hero__badge-item">
-        <svg class="tcp-hero__badge-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-        <span>Mould-Free Clay</span>
+      <!-- Studio Attribution -->
+      <div class="tcp-hero__studio-block">
+        <p class="tcp-hero__from-line"><em>from</em> {{ section.settings.studio_name | default: 'The Creative Platter' }}</p>
+        <p class="tcp-hero__sub-services">
+          {{ section.settings.service_1 | default: 'Bespoke tableware' }} 
+          <span class="tcp-hero__service-dot">&bull;</span> 
+          {{ section.settings.service_2 | default: 'Experiences' }} 
+          <span class="tcp-hero__service-dot">&bull;</span> 
+          {{ section.settings.service_3 | default: 'Advisory' }}
+        </p>
       </div>
-      <div class="tcp-hero__badge-item">
-        <svg class="tcp-hero__badge-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-        <span>Zero Off-Cuts</span>
+
+      <!-- Action Buttons -->
+      <div class="tcp-hero__actions-row">
+        <a href="{{ section.settings.cta_primary_url | default: '/collections/pushpa' }}" class="tcp-hero__btn-solid">
+          {{ section.settings.cta_primary_text | default: 'EXPLORE COLLECTION' }} &rarr;
+        </a>
+        <a href="{{ section.settings.cta_secondary_url | default: '/pages/bespoke-b2b' }}" class="tcp-hero__btn-underline">
+          {{ section.settings.cta_secondary_text | default: 'DESIGN YOUR SET' }} &rarr;
+        </a>
       </div>
-      <div class="tcp-hero__badge-item">
-        <svg class="tcp-hero__badge-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-        <span>1280°C High Fired</span>
-      </div>
-      <div class="tcp-hero__badge-item">
-        <svg class="tcp-hero__badge-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-        <span>Women Artisans</span>
-      </div>
+
     </div>
   </div>
 </section>
@@ -400,6 +401,16 @@
       "label": "Hero Background Image"
     },
     {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Soft Overlay Tint",
+      "default": 15
+    },
+    {
       "type": "text",
       "id": "hero_image_alt",
       "label": "Hero image alt text",
@@ -407,43 +418,85 @@
     },
     {
       "type": "text",
-      "id": "top_pill",
-      "label": "Top pill badge",
-      "default": "The Legacy Dinner Collection 2025–26"
-    },
-    {
-      "type": "text",
       "id": "title",
-      "label": "Main heading",
+      "label": "Main Heading",
       "default": "Pushpa"
     },
     {
-      "type": "textarea",
-      "id": "description",
-      "label": "Description text",
-      "default": "A dinnerware collection born from memory, shaped by emotion & carried in legacy. Dedicated to mother Pushpa — hand-formed mould-free from recycled clay by village women artisans near Gurugram."
+      "type": "text",
+      "id": "legacy_title",
+      "label": "Collection Subtitle (Italic)",
+      "default": "The Legacy Collection"
+    },
+    {
+      "type": "text",
+      "id": "bespoke_script",
+      "label": "Script Subtitle",
+      "default": "bespoke dinnerware"
+    },
+    {
+      "type": "text",
+      "id": "line_1",
+      "label": "Poetic Line 1",
+      "default": "Crafted in memory."
+    },
+    {
+      "type": "text",
+      "id": "line_2",
+      "label": "Poetic Line 2",
+      "default": "Made for your home."
+    },
+    {
+      "type": "text",
+      "id": "line_3_script",
+      "label": "Poetic Line 3 (Script)",
+      "default": "A legacy you can hold."
+    },
+    {
+      "type": "text",
+      "id": "studio_name",
+      "label": "Studio Name",
+      "default": "The Creative Platter"
+    },
+    {
+      "type": "text",
+      "id": "service_1",
+      "label": "Service 1",
+      "default": "Bespoke tableware"
+    },
+    {
+      "type": "text",
+      "id": "service_2",
+      "label": "Service 2",
+      "default": "Experiences"
+    },
+    {
+      "type": "text",
+      "id": "service_3",
+      "label": "Service 3",
+      "default": "Advisory"
     },
     {
       "type": "text",
       "id": "cta_primary_text",
-      "label": "Primary CTA text",
-      "default": "Explore Pushpa Collection"
+      "label": "Primary Button Text",
+      "default": "EXPLORE COLLECTION"
     },
     {
       "type": "url",
       "id": "cta_primary_url",
-      "label": "Primary CTA URL"
+      "label": "Primary Button URL"
     },
     {
       "type": "text",
       "id": "cta_secondary_text",
-      "label": "Secondary CTA text",
-      "default": "Hospitality & B2B Studio"
+      "label": "Secondary Link Text",
+      "default": "DESIGN YOUR SET"
     },
     {
       "type": "url",
       "id": "cta_secondary_url",
-      "label": "Secondary CTA URL"
+      "label": "Secondary Link URL"
     }
   ],
   "presets": [
