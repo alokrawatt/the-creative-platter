@@ -1,283 +1,317 @@
 {% comment %}
   ============================================================
-  THE CREATIVE PLATTER — Home Collections Grid (Nicobar Inspired)
+  THE CREATIVE PLATTER — Explore Our Collection Section
   ============================================================
-  Fluid editorial collection showcase featuring Pushpa Legacy Sets,
-  Dinnerware, Serveware, and Table Linens with micro-zoom & counts.
+  Matches the editorial reference layout:
+  - Header: "EXPLORE OUR COLLECTION —"
+  - 4-Column Minimalist Grid:
+    1. DINNERWARE →
+    2. LINEN →
+    3. SERVEWARE →
+    4. OBJECTS →
   Copy into Shopify: sections/section-home-collections.liquid
 {% endcomment %}
 
 <style>
-  .tcp-collections {
-    background-color: var(--tcp-white, #FFFFFF);
-    padding: 90px 0;
+  .tcp-explore-collections {
+    background-color: #FAF8F5;
+    padding: 80px 0 90px;
     position: relative;
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
   }
 
-  .tcp-collections__inner {
+  .tcp-explore-collections__inner {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 48px;
   }
 
-  .tcp-collections__header-wrap {
+  /* ── Header ── */
+  .tcp-explore-collections__header {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 48px;
-    gap: 24px;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 36px;
   }
 
-  .tcp-collections__title-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .tcp-collections__label {
-    font-family: var(--font-sans, sans-serif);
-    font-size: 10.5px;
+  .tcp-explore-collections__title {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 2.2px;
     text-transform: uppercase;
-    color: var(--tcp-gold, #C29B38);
-  }
-
-  .tcp-collections__heading {
-    font-family: var(--font-serif, serif);
-    font-size: clamp(32px, 3.8vw, 46px);
-    font-weight: 400;
-    color: var(--tcp-dark, #1F1D1B);
-    line-height: 1.1;
+    color: #1F1D1B;
     margin: 0;
   }
 
-  .tcp-collections__view-all {
-    font-family: var(--font-sans, sans-serif);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    color: var(--tcp-dark, #1F1D1B);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding-bottom: 4px;
-    border-bottom: 1.5px solid var(--tcp-dark, #1F1D1B);
-    transition: all 0.3s ease;
-    white-space: nowrap;
+  .tcp-explore-collections__dash {
+    width: 24px;
+    height: 1.5px;
+    background: #A6732E;
+    display: inline-block;
   }
 
-  .tcp-collections__view-all:hover {
-    color: var(--tcp-gold, #C29B38);
-    border-bottom-color: var(--tcp-gold, #C29B38);
-    transform: translateX(3px);
-  }
-
-  /* ── 4-Column Fluid Grid ── */
-  .tcp-collections__grid {
+  /* ── 4-Column Grid ── */
+  .tcp-explore-collections__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 28px;
   }
 
-  .tcp-collection-card {
-    position: relative;
+  .tcp-explore-card {
     text-decoration: none;
-    color: var(--tcp-dark, #1F1D1B);
+    color: #1F1D1B;
     display: flex;
     flex-direction: column;
     group: true;
-    background: var(--tcp-sand, #FBF9F5);
-    border: 1px solid var(--tcp-border, #E8E2D8);
-    border-radius: 4px;
-    overflow: hidden;
-    transition: transform 0.4s var(--ease-fluid), box-shadow 0.4s var(--ease-fluid), border-color 0.3s ease;
+    transition: transform 0.3s ease;
   }
 
-  .tcp-collection-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 36px rgba(31, 29, 27, 0.08);
-    border-color: var(--tcp-gold-light, #DFBA5E);
-  }
-
-  .tcp-collection-card__media {
+  .tcp-explore-card__media {
     position: relative;
-    aspect-ratio: 1 / 1.15;
+    width: 100%;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
-    background: var(--tcp-stone, #F3EFEA);
+    background: #EFE9DE;
+    border-radius: 0;
   }
 
-  .tcp-collection-card__img {
+  .tcp-explore-card__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s var(--ease-fluid);
+    object-position: center;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .tcp-collection-card:hover .tcp-collection-card__img {
-    transform: scale(1.06);
+  .tcp-explore-card:hover .tcp-explore-card__img {
+    transform: scale(1.04);
   }
 
-  .tcp-collection-card__tag {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--tcp-border, #E8E2D8);
-    padding: 3px 8px;
-    border-radius: 2px;
-    font-family: var(--font-sans, sans-serif);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    color: var(--tcp-brown, #352922);
-  }
-
-  .tcp-collection-card__content {
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--tcp-white, #FFFFFF);
-    border-top: 1px solid var(--tcp-border, #E8E2D8);
-  }
-
-  .tcp-collection-card__info {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .tcp-collection-card__name {
-    font-family: var(--font-serif, serif);
-    font-size: 19px;
-    font-weight: 600;
-    color: var(--tcp-dark, #1F1D1B);
-    line-height: 1.2;
-    transition: color 0.2s ease;
-  }
-
-  .tcp-collection-card:hover .tcp-collection-card__name {
-    color: var(--tcp-gold-hover, #A8822B);
-  }
-
-  .tcp-collection-card__sub {
-    font-family: var(--font-sans, sans-serif);
-    font-size: 11px;
-    color: var(--tcp-muted, #68625B);
-  }
-
-  .tcp-collection-card__arrow-btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--tcp-stone, #F3EFEA);
-    border: 1px solid var(--tcp-border, #E8E2D8);
+  /* ── Fallback Category Visuals ── */
+  .tcp-explore-card__fallback {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--tcp-dark, #1F1D1B);
-    transition: all 0.3s ease;
-    flex-shrink: 0;
+    background: radial-gradient(circle at 60% 40%, #F5F1E9 0%, #E7E0D3 100%);
+    position: relative;
   }
 
-  .tcp-collection-card:hover .tcp-collection-card__arrow-btn {
-    background: var(--tcp-dark, #1F1D1B);
-    border-color: var(--tcp-dark, #1F1D1B);
-    color: #FFFFFF;
-    transform: rotate(-45deg);
+  .tcp-explore-card__fallback svg {
+    width: 70%;
+    height: 70%;
+    transition: transform 0.6s ease;
   }
 
-  .tcp-collection-card__arrow-btn svg {
-    width: 13px;
-    height: 13px;
+  .tcp-explore-card:hover .tcp-explore-card__fallback svg {
+    transform: scale(1.05);
+  }
+
+  /* ── Label & Arrow ── */
+  .tcp-explore-card__label-wrap {
+    margin-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tcp-explore-card__name {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1F1D1B;
+    transition: color 0.2s ease;
+  }
+
+  .tcp-explore-card__arrow {
+    color: #A6732E;
+    font-size: 13px;
+    transition: transform 0.25s ease, color 0.2s ease;
+    display: inline-block;
+  }
+
+  .tcp-explore-card:hover .tcp-explore-card__name {
+    color: #A6732E;
+  }
+
+  .tcp-explore-card:hover .tcp-explore-card__arrow {
+    transform: translateX(4px);
+    color: #8C5F22;
   }
 
   /* ── Responsive ── */
   @media (max-width: 1024px) {
-    .tcp-collections__grid {
+    .tcp-explore-collections__grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
     }
   }
 
   @media (max-width: 600px) {
-    .tcp-collections {
-      padding: 60px 0;
+    .tcp-explore-collections {
+      padding: 50px 0 60px;
     }
-    .tcp-collections__inner {
+    .tcp-explore-collections__inner {
       padding: 0 20px;
     }
-    .tcp-collections__header-wrap {
-      flex-direction: column;
-      align-items: flex-start;
-      margin-bottom: 32px;
-    }
-    .tcp-collections__grid {
-      grid-template-columns: 1fr;
+    .tcp-explore-collections__grid {
+      grid-template-columns: repeat(2, 1fr);
       gap: 16px;
+    }
+    .tcp-explore-card__name {
+      font-size: 10px;
+      letter-spacing: 1.5px;
     }
   }
 </style>
 
-<section class="tcp-collections" id="tcp-home-collections">
-  <div class="tcp-collections__inner">
+<section class="tcp-explore-collections" id="tcp-explore-collections">
+  <div class="tcp-explore-collections__inner">
 
-    <div class="tcp-collections__header-wrap">
-      <div class="tcp-collections__title-group">
-        <span class="tcp-collections__label">{{ section.settings.label | default: 'CRAFTED FOR RITUAL' }}</span>
-        <h2 class="tcp-collections__heading">{{ section.settings.heading | default: 'Explore By Category' }}</h2>
-      </div>
-      <a href="{{ section.settings.view_all_url | default: '/collections/all' }}" class="tcp-collections__view-all">
-        {{ section.settings.view_all_text | default: 'View Complete Catalog' }} &rarr;
-      </a>
+    <!-- Header: EXPLORE OUR COLLECTION — -->
+    <div class="tcp-explore-collections__header">
+      <h2 class="tcp-explore-collections__title">
+        {{ section.settings.heading | default: 'EXPLORE OUR COLLECTION' }}
+      </h2>
+      <span class="tcp-explore-collections__dash"></span>
     </div>
 
-    <div class="tcp-collections__grid">
-      {% for block in section.blocks %}
-        {% if block.type == 'collection_card' %}
-          <a href="{{ block.settings.link_url | default: '#' }}" class="tcp-collection-card" {{ block.shopify_attributes }}>
-            <div class="tcp-collection-card__media">
-              {% if block.settings.tag != blank %}
-                <span class="tcp-collection-card__tag">{{ block.settings.tag }}</span>
-              {% endif %}
-
-              {% if block.settings.image != blank %}
-                <img 
-                  class="tcp-collection-card__img"
-                  src="{{ block.settings.image | image_url: width: 700 }}"
-                  alt="{{ block.settings.name }}"
-                  loading="lazy"
-                  width="700"
-                  height="800"
-                >
-              {% else %}
-                <!-- Fallback Luxury Ceramic Category Graphic -->
-                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE7DD 100%);">
-                  <svg width="100" height="100" viewBox="0 0 100 100" fill="none" opacity="0.6">
-                    <circle cx="50" cy="50" r="38" stroke="#C29B38" stroke-width="1.5" stroke-dasharray="6 3"/>
-                    <ellipse cx="50" cy="50" rx="26" ry="18" stroke="#1F1D1B" stroke-width="1.2"/>
-                  </svg>
-                </div>
-              {% endif %}
-            </div>
-
-            <div class="tcp-collection-card__content">
-              <div class="tcp-collection-card__info">
-                <span class="tcp-collection-card__name">{{ block.settings.name }}</span>
-                <span class="tcp-collection-card__sub">{{ block.settings.subtext | default: 'Explore Curated Pieces' }}</span>
+    <!-- 4-Column Grid -->
+    <div class="tcp-explore-collections__grid">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% if block.type == 'collection_item' %}
+            <a href="{{ block.settings.link_url | default: '/collections/all' }}" class="tcp-explore-card" {{ block.shopify_attributes }}>
+              <div class="tcp-explore-card__media">
+                {% if block.settings.image != blank %}
+                  <img 
+                    class="tcp-explore-card__img"
+                    src="{{ block.settings.image | image_url: width: 800 }}"
+                    alt="{{ block.settings.title }}"
+                    loading="lazy"
+                    width="800"
+                    height="800"
+                  >
+                {% else %}
+                  <div class="tcp-explore-card__fallback">
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="100" cy="100" r="70" fill="#ECE5DA" stroke="#A6732E" stroke-width="1.5" stroke-dasharray="8 4"/>
+                      <ellipse cx="100" cy="115" rx="55" ry="30" fill="#FAF8F5" stroke="#1F1D1B" stroke-width="1.5"/>
+                      <path d="M70 100 Q100 135 130 100" stroke="#A6732E" stroke-width="1.2"/>
+                    </svg>
+                  </div>
+                {% endif %}
               </div>
-              <span class="tcp-collection-card__arrow-btn">
-                <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h9M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </div>
-          </a>
-        {% endif %}
-      {% endfor %}
+              <div class="tcp-explore-card__label-wrap">
+                <span class="tcp-explore-card__name">{{ block.settings.title }}</span>
+                <span class="tcp-explore-card__arrow">&rarr;</span>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <!-- Default 4 Category Cards matching reference design -->
+        <!-- 1. DINNERWARE -->
+        <a href="{{ section.settings.card_1_url | default: '/collections/dinner-sets' }}" class="tcp-explore-card">
+          <div class="tcp-explore-card__media">
+            {% if section.settings.card_1_image != blank %}
+              <img class="tcp-explore-card__img" src="{{ section.settings.card_1_image | image_url: width: 800 }}" alt="Dinnerware" loading="lazy" width="800" height="800">
+            {% else %}
+              <div class="tcp-explore-card__fallback">
+                <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <ellipse cx="120" cy="155" rx="90" ry="32" fill="#E4DCD0" stroke="#1F1D1B" stroke-width="1.5"/>
+                  <ellipse cx="120" cy="140" rx="68" ry="24" fill="#F4EFE6" stroke="#A6732E" stroke-width="1.5"/>
+                  <ellipse cx="120" cy="100" rx="46" ry="30" fill="#FAF8F4" stroke="#1F1D1B" stroke-width="1.5"/>
+                  <path d="M120 70 C145 70 166 84 166 100 C166 122 145 136 120 136 C95 136 74 122 74 100 C74 84 95 70 120 70 Z" fill="#FBF9F5" stroke="#A6732E" stroke-width="1.5"/>
+                </svg>
+              </div>
+            {% endif %}
+          </div>
+          <div class="tcp-explore-card__label-wrap">
+            <span class="tcp-explore-card__name">{{ section.settings.card_1_title | default: 'DINNERWARE' }}</span>
+            <span class="tcp-explore-card__arrow">&rarr;</span>
+          </div>
+        </a>
+
+        <!-- 2. LINEN -->
+        <a href="{{ section.settings.card_2_url | default: '/collections/linen' }}" class="tcp-explore-card">
+          <div class="tcp-explore-card__media">
+            {% if section.settings.card_2_image != blank %}
+              <img class="tcp-explore-card__img" src="{{ section.settings.card_2_image | image_url: width: 800 }}" alt="Linen" loading="lazy" width="800" height="800">
+            {% else %}
+              <div class="tcp-explore-card__fallback">
+                <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M50 80 Q120 60 190 85 L180 180 Q110 155 40 175 Z" fill="#EDE4D8" stroke="#1F1D1B" stroke-width="1.5"/>
+                  <path d="M60 95 Q125 78 180 100" stroke="#A6732E" stroke-width="1.5" stroke-dasharray="4 4"/>
+                  <path d="M55 115 Q120 98 175 120" stroke="#A6732E" stroke-width="1.5" stroke-dasharray="4 4"/>
+                  <path d="M50 135 Q115 118 170 140" stroke="#A6732E" stroke-width="1.5" stroke-dasharray="4 4"/>
+                </svg>
+              </div>
+            {% endif %}
+          </div>
+          <div class="tcp-explore-card__label-wrap">
+            <span class="tcp-explore-card__name">{{ section.settings.card_2_title | default: 'LINEN' }}</span>
+            <span class="tcp-explore-card__arrow">&rarr;</span>
+          </div>
+        </a>
+
+        <!-- 3. SERVEWARE -->
+        <a href="{{ section.settings.card_3_url | default: '/collections/platters' }}" class="tcp-explore-card">
+          <div class="tcp-explore-card__media">
+            {% if section.settings.card_3_image != blank %}
+              <img class="tcp-explore-card__img" src="{{ section.settings.card_3_image | image_url: width: 800 }}" alt="Serveware" loading="lazy" width="800" height="800">
+            {% else %}
+              <div class="tcp-explore-card__fallback">
+                <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <ellipse cx="120" cy="120" rx="75" ry="48" fill="#F4EFE6" stroke="#1F1D1B" stroke-width="1.5"/>
+                  <ellipse cx="120" cy="115" rx="60" ry="36" fill="#FAF8F5" stroke="#A6732E" stroke-width="1.5"/>
+                  <path d="M140 70 Q160 95 145 110" stroke="#A6732E" stroke-width="1.5"/>
+                  <circle cx="140" cy="70" r="4" fill="#A6732E"/>
+                  <circle cx="152" cy="80" r="3" fill="#A6732E"/>
+                  <circle cx="160" cy="95" r="3.5" fill="#A6732E"/>
+                </svg>
+              </div>
+            {% endif %}
+          </div>
+          <div class="tcp-explore-card__label-wrap">
+            <span class="tcp-explore-card__name">{{ section.settings.card_3_title | default: 'SERVEWARE' }}</span>
+            <span class="tcp-explore-card__arrow">&rarr;</span>
+          </div>
+        </a>
+
+        <!-- 4. OBJECTS -->
+        <a href="{{ section.settings.card_4_url | default: '/collections/vessels' }}" class="tcp-explore-card">
+          <div class="tcp-explore-card__media">
+            {% if section.settings.card_4_image != blank %}
+              <img class="tcp-explore-card__img" src="{{ section.settings.card_4_image | image_url: width: 800 }}" alt="Objects" loading="lazy" width="800" height="800">
+            {% else %}
+              <div class="tcp-explore-card__fallback">
+                <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Bottle Vase 1 -->
+                  <path d="M85 95 L85 110 Q65 130 75 165 Q85 180 105 180 Q125 180 135 165 Q145 130 125 110 L125 95 Z" fill="#F4EFE6" stroke="#1F1D1B" stroke-width="1.5"/>
+                  <ellipse cx="105" cy="95" rx="20" ry="6" fill="#EDE4D8" stroke="#A6732E" stroke-width="1.5"/>
+                  <!-- Bottle Vase 2 -->
+                  <path d="M150 115 L150 125 Q135 140 142 165 Q150 178 165 178 Q180 178 188 165 Q195 140 180 125 L180 115 Z" fill="#FAF8F5" stroke="#1F1D1B" stroke-width="1.5"/>
+                  <ellipse cx="165" cy="115" rx="15" ry="5" fill="#EDE4D8" stroke="#A6732E" stroke-width="1.5"/>
+                  <!-- Botanical sprig -->
+                  <path d="M165 115 Q175 60 195 45" stroke="#A6732E" stroke-width="1.5"/>
+                  <circle cx="195" cy="45" r="4" fill="#A6732E"/>
+                  <circle cx="185" cy="65" r="3.5" fill="#A6732E"/>
+                </svg>
+              </div>
+            {% endif %}
+          </div>
+          <div class="tcp-explore-card__label-wrap">
+            <span class="tcp-explore-card__name">{{ section.settings.card_4_title | default: 'OBJECTS' }}</span>
+            <span class="tcp-explore-card__arrow">&rarr;</span>
+          </div>
+        </a>
+      {% endif %}
     </div>
 
   </div>
@@ -285,79 +319,124 @@
 
 {% schema %}
 {
-  "name": "TCP Collections Grid",
+  "name": "TCP Explore Collections",
   "tag": "section",
-  "class": "tcp-collections-section",
+  "class": "tcp-explore-collections-section",
   "settings": [
     {
       "type": "text",
-      "id": "label",
-      "label": "Top label",
-      "default": "CRAFTED FOR RITUAL"
-    },
-    {
-      "type": "text",
       "id": "heading",
-      "label": "Section heading",
-      "default": "Explore By Category"
+      "label": "Section Heading",
+      "default": "EXPLORE OUR COLLECTION"
+    },
+    {
+      "type": "header",
+      "content": "Card 1 - Dinnerware"
     },
     {
       "type": "text",
-      "id": "view_all_text",
-      "label": "View all link text",
-      "default": "View Complete Catalog"
+      "id": "card_1_title",
+      "label": "Card 1 Title",
+      "default": "DINNERWARE"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_1_image",
+      "label": "Card 1 Image"
     },
     {
       "type": "url",
-      "id": "view_all_url",
-      "label": "View all link URL"
+      "id": "card_1_url",
+      "label": "Card 1 Link URL"
+    },
+    {
+      "type": "header",
+      "content": "Card 2 - Linen"
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Card 2 Title",
+      "default": "LINEN"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_2_image",
+      "label": "Card 2 Image"
+    },
+    {
+      "type": "url",
+      "id": "card_2_url",
+      "label": "Card 2 Link URL"
+    },
+    {
+      "type": "header",
+      "content": "Card 3 - Serveware"
+    },
+    {
+      "type": "text",
+      "id": "card_3_title",
+      "label": "Card 3 Title",
+      "default": "SERVEWARE"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_3_image",
+      "label": "Card 3 Image"
+    },
+    {
+      "type": "url",
+      "id": "card_3_url",
+      "label": "Card 3 Link URL"
+    },
+    {
+      "type": "header",
+      "content": "Card 4 - Objects"
+    },
+    {
+      "type": "text",
+      "id": "card_4_title",
+      "label": "Card 4 Title",
+      "default": "OBJECTS"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_4_image",
+      "label": "Card 4 Image"
+    },
+    {
+      "type": "url",
+      "id": "card_4_url",
+      "label": "Card 4 Link URL"
     }
   ],
   "blocks": [
     {
-      "type": "collection_card",
-      "name": "Collection Card",
+      "type": "collection_item",
+      "name": "Collection Item",
       "settings": [
         {
           "type": "text",
-          "id": "tag",
-          "label": "Badge tag",
-          "default": "Legacy 2025"
-        },
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Collection name",
-          "default": "Pushpa Dinner Sets"
-        },
-        {
-          "type": "text",
-          "id": "subtext",
-          "label": "Subtitle / count",
-          "default": "7 Unique Expressions"
+          "id": "title",
+          "label": "Collection Title",
+          "default": "DINNERWARE"
         },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Collection image"
+          "label": "Collection Image"
         },
         {
           "type": "url",
           "id": "link_url",
-          "label": "Collection link URL"
+          "label": "Collection Link URL"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "TCP Collections Grid",
-      "blocks": [
-        { "type": "collection_card", "settings": { "name": "Pushpa Dinner Sets", "tag": "The 7 Expressions", "subtext": "Smriti, Shakti & More", "link_url": "/collections/pushpa" } },
-        { "type": "collection_card", "settings": { "name": "Plates & Bowls", "tag": "Everyday Dining", "subtext": "Individual Dining Essentials", "link_url": "/collections/plates" } },
-        { "type": "collection_card", "settings": { "name": "Serveware & Platters", "tag": "Feasting", "subtext": "Mould-free Centerpieces", "link_url": "/collections/platters" } },
-        { "type": "collection_card", "settings": { "name": "Table Linens & Decor", "tag": "Handloom", "subtext": "Organic Cotton & Ceramic Objects", "link_url": "/collections/linen" } }
-      ]
+      "name": "TCP Explore Collections"
     }
   ]
 }
