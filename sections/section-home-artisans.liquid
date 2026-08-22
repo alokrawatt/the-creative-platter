@@ -1,0 +1,398 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Minimal Modern Artisan Tribute
+  ============================================================
+  - Aesthetic minimal editorial layout celebrating village craftswomen
+  - Soft luxury color scheme, Tan Pearl/Cormorant serif & Sacramento script
+  - 3 Minimalist craft pillars (Mould-free, Village Craftswomen, Slow Craft)
+  - Fully customizable with photo upload, quotes & link
+  Copy into Shopify: sections/section-home-artisans.liquid
+{% endcomment %}
+
+<style>
+  .tcp-artisans {
+    background-color: #FFFFFF;
+    color: #3E3A36;
+    padding: 90px 0;
+    position: relative;
+    border-top: 1px solid #ECE7DF;
+    border-bottom: 1px solid #ECE7DF;
+  }
+
+  .tcp-artisans__inner {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* ── 2-Column Editorial Grid ── */
+  .tcp-artisans__grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  /* ── Left Content ── */
+  .tcp-artisans__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tcp-artisans__eyebrow {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #A6732E;
+    margin-bottom: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tcp-artisans__eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 1px;
+    background: #A6732E;
+  }
+
+  .tcp-artisans__title {
+    font-family: 'Tan Pearl', 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(34px, 4vw, 52px);
+    font-weight: 500;
+    color: #3E3A36;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    margin: 0 0 10px;
+  }
+
+  .tcp-artisans__script {
+    font-family: 'Sacramento', cursive;
+    font-size: clamp(30px, 3.5vw, 42px);
+    font-weight: 400;
+    color: #A6732E;
+    display: block;
+    line-height: 0.95;
+    margin-top: 4px;
+  }
+
+  .tcp-artisans__desc {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14.5px;
+    font-weight: 400;
+    color: #5C5750;
+    line-height: 1.8;
+    margin: 18px 0 32px;
+    max-width: 580px;
+  }
+
+  /* ── 3 Minimal Metric / Trait Items ── */
+  .tcp-artisans__traits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 36px;
+    padding-top: 24px;
+    border-top: 1px solid #E8E2D6;
+  }
+
+  .tcp-artisan-trait {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .tcp-artisan-trait__label {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #3E3A36;
+    line-height: 1.2;
+  }
+
+  .tcp-artisan-trait__text {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11.5px;
+    color: #7A746B;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .tcp-artisans__cta {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #3E3A36;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1.5px solid #3E3A36;
+    padding-bottom: 3px;
+    transition: all 0.25s ease;
+  }
+
+  .tcp-artisans__cta:hover {
+    color: #A6732E;
+    border-color: #A6732E;
+    transform: translateX(3px);
+  }
+
+  /* ── Right Media Tile ── */
+  .tcp-artisans__media {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #EDE6DB;
+    aspect-ratio: 4 / 5;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.05);
+  }
+
+  .tcp-artisans__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tcp-artisans__media:hover .tcp-artisans__img {
+    transform: scale(1.03);
+  }
+
+  /* Minimal Artwork Fallback when no photo is selected */
+  .tcp-artisans__fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 36px;
+    text-align: center;
+    background: linear-gradient(145deg, #F5EFE6 0%, #E8DFD1 100%);
+    position: relative;
+  }
+
+  .tcp-artisans__fallback-symbol {
+    width: 56px;
+    height: 56px;
+    color: #A6732E;
+    margin-bottom: 18px;
+    opacity: 0.85;
+  }
+
+  .tcp-artisans__fallback-quote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 20px;
+    color: #4A4641;
+    line-height: 1.4;
+    max-width: 280px;
+    margin: 0 0 12px;
+  }
+
+  .tcp-artisans__fallback-caption {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #7A746B;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 960px) {
+    .tcp-artisans {
+      padding: 64px 0;
+    }
+    .tcp-artisans__inner {
+      padding: 0 24px;
+    }
+    .tcp-artisans__grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .tcp-artisans__media {
+      max-height: 380px;
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tcp-artisans__traits {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+</style>
+
+<section class="tcp-artisans" id="tcp-artisans-tribute">
+  <div class="tcp-artisans__inner">
+    <div class="tcp-artisans__grid">
+
+      <!-- Left Column: Story & Metrics -->
+      <div class="tcp-artisans__content">
+        <span class="tcp-artisans__eyebrow">
+          {{ section.settings.eyebrow | default: 'The Hands Behind Pushpa' }}
+        </span>
+
+        <h2 class="tcp-artisans__title">
+          {{ section.settings.title | default: 'Shaped by Human Touch.' }}
+          <span class="tcp-artisans__script">{{ section.settings.script_title | default: 'crafted with patience' }}</span>
+        </h2>
+
+        <p class="tcp-artisans__desc">
+          {{ section.settings.description | default: 'Near the quiet outskirts of Gurugram, village craftswomen shape each vessel entirely by hand—no industrial moulds, no identical replicas. Every rim embraces subtle natural variations, carrying the thumbprints and care of the woman who held the clay before it reached your table.' }}
+        </p>
+
+        <!-- 3 Minimalist Value Pills -->
+        <div class="tcp-artisans__traits">
+          <div class="tcp-artisan-trait">
+            <span class="tcp-artisan-trait__label">{{ section.settings.trait_1_title | default: '100% Mould-Free' }}</span>
+            <p class="tcp-artisan-trait__text">{{ section.settings.trait_1_desc | default: 'Hand-pinched & slab formed from recycled clay.' }}</p>
+          </div>
+
+          <div class="tcp-artisan-trait">
+            <span class="tcp-artisan-trait__label">{{ section.settings.trait_2_title | default: 'Village Women' }}</span>
+            <p class="tcp-artisan-trait__text">{{ section.settings.trait_2_desc | default: 'Fair, dignified livelihoods preserving ancient pottery craft.' }}</p>
+          </div>
+
+          <div class="tcp-artisan-trait">
+            <span class="tcp-artisan-trait__label">{{ section.settings.trait_3_title | default: '14 Days Slow Craft' }}</span>
+            <p class="tcp-artisan-trait__text">{{ section.settings.trait_3_desc | default: 'Sun-dried, twice-fired at 1280°C with 24k gold leaf.' }}</p>
+          </div>
+        </div>
+
+        {% if section.settings.cta_text != blank %}
+          <a href="{{ section.settings.cta_url | default: '/pages/story' }}" class="tcp-artisans__cta">
+            {{ section.settings.cta_text }} &rarr;
+          </a>
+        {% endif %}
+      </div>
+
+      <!-- Right Column: Photography or Minimal Aesthetic Tile -->
+      <div class="tcp-artisans__media">
+        {% if section.settings.image != blank %}
+          <img
+            src="{{ section.settings.image | image_url: width: 1200 }}"
+            alt="{{ section.settings.image.alt | default: 'Village artisan shaping stoneware clay' }}"
+            class="tcp-artisans__img"
+            loading="lazy"
+            width="800"
+            height="1000"
+          >
+        {% else %}
+          <div class="tcp-artisans__fallback">
+            <svg class="tcp-artisans__fallback-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <blockquote class="tcp-artisans__fallback-quote">
+              &ldquo;The clay remembers every hand that has held it.&rdquo;
+            </blockquote>
+            <span class="tcp-artisans__fallback-caption">Gurugram Studio Craftswomen</span>
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TCP Artisans Section",
+  "tag": "section",
+  "class": "tcp-artisans-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Tag",
+      "default": "The Hands Behind Pushpa"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Main Heading",
+      "default": "Shaped by Human Touch."
+    },
+    {
+      "type": "text",
+      "id": "script_title",
+      "label": "Script Subtitle",
+      "default": "crafted with patience"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Near the quiet outskirts of Gurugram, village craftswomen shape each vessel entirely by hand—no industrial moulds, no identical replicas. Every rim embraces subtle natural variations, carrying the thumbprints and care of the woman who held the clay before it reached your table."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Artisan Photo (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "trait_1_title",
+      "label": "Pillar 1 Title",
+      "default": "100% Mould-Free"
+    },
+    {
+      "type": "text",
+      "id": "trait_1_desc",
+      "label": "Pillar 1 Subtext",
+      "default": "Hand-pinched & slab formed from recycled clay."
+    },
+    {
+      "type": "text",
+      "id": "trait_2_title",
+      "label": "Pillar 2 Title",
+      "default": "Village Women"
+    },
+    {
+      "type": "text",
+      "id": "trait_2_desc",
+      "label": "Pillar 2 Subtext",
+      "default": "Fair, dignified livelihoods preserving ancient pottery craft."
+    },
+    {
+      "type": "text",
+      "id": "trait_3_title",
+      "label": "Pillar 3 Title",
+      "default": "14 Days Slow Craft"
+    },
+    {
+      "type": "text",
+      "id": "trait_3_desc",
+      "label": "Pillar 3 Subtext",
+      "default": "Sun-dried, twice-fired at 1280°C with 24k gold leaf."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Link Text",
+      "default": "DISCOVER OUR ARTISAN STORY"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA Link URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP Artisans Section"
+    }
+  ]
+}
+{% endschema %}

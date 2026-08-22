@@ -1,163 +1,303 @@
 {% comment %}
   ============================================================
-  THE CREATIVE PLATTER — Gifting & Experiences Split
+  THE CREATIVE PLATTER — Gifting & Experiences 2-Partition Banner
   ============================================================
-  Twin editorial cards for Gifting and Immersive Studio Experiences.
+  - Twin side-by-side full-bleed partition banners
+  - Gifting partition with full background photo & text overlay
+  - Experiences partition with full background photo & text overlay
+  - Soft editorial gradient scrims for perfect legibility
+  - Fully customizable via Shopify Theme Editor
   Copy into Shopify: sections/section-home-gifting-experiences.liquid
 {% endcomment %}
 
 <style>
-  .tcp-split {
-    background-color: var(--tcp-sand, #FBF9F5);
-    padding: 80px 0;
+  .tcp-gifting-exp {
+    background-color: #FFFFFF;
+    padding: 30px 0;
   }
 
-  .tcp-split__inner {
+  .tcp-gifting-exp__inner {
     max-width: 1440px;
     margin: 0 auto;
     padding: 0 40px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 24px;
   }
 
-  .tcp-split__card {
-    background: var(--tcp-white, #FFFFFF);
-    border: 1px solid var(--tcp-border, #E8E2D8);
-    border-radius: 6px;
-    padding: 48px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.4s var(--ease-fluid), box-shadow 0.4s var(--ease-fluid), border-color 0.3s ease;
-  }
-
-  .tcp-split__card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 36px rgba(31, 29, 27, 0.08);
-    border-color: var(--tcp-gold-light, #DFBA5E);
-  }
-
-  .tcp-split__label {
-    font-family: var(--font-sans, sans-serif);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2.2px;
-    text-transform: uppercase;
-    color: var(--tcp-gold, #C29B38);
-    margin-bottom: 12px;
-    display: block;
-  }
-
-  .tcp-split__heading {
-    font-family: var(--font-serif, serif);
-    font-size: clamp(26px, 3vw, 36px);
-    font-weight: 400;
-    color: var(--tcp-dark, #1F1D1B);
-    line-height: 1.2;
-    margin: 0 0 12px;
-  }
-
-  .tcp-split__description {
-    font-family: var(--font-sans, sans-serif);
-    font-size: 14px;
-    color: var(--tcp-muted, #68625B);
-    line-height: 1.7;
-    margin: 0 0 24px;
-  }
-
-  .tcp-split__image-wrap {
-    aspect-ratio: 16 / 9;
+  /* ── Partition Card (Full-Bleed Background Image) ── */
+  .tcp-ge-partition {
+    position: relative;
     border-radius: 4px;
     overflow: hidden;
-    margin-bottom: 28px;
-    background: var(--tcp-stone, #F3EFEA);
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    background-color: #EDE7DC;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
   }
 
-  .tcp-split__image {
+  .tcp-ge-partition:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  /* ── Background Media ── */
+  .tcp-ge-partition__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .tcp-ge-partition__bg-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    object-position: center;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .tcp-split__card:hover .tcp-split__image {
-    transform: scale(1.04);
+  .tcp-ge-partition:hover .tcp-ge-partition__bg-img {
+    transform: scale(1.03);
   }
 
-  .tcp-split__cta {
+  /* Fallback Canvas when no image is uploaded */
+  .tcp-ge-partition__fallback-gifting {
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(ellipse at 75% 50%, rgba(222, 211, 195, 0.8) 0%, transparent 65%),
+      linear-gradient(135deg, #F5EFE6 0%, #EAE0D2 100%);
+  }
+
+  .tcp-ge-partition__fallback-exp {
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(ellipse at 75% 50%, rgba(215, 203, 186, 0.8) 0%, transparent 65%),
+      linear-gradient(135deg, #EFE8DC 0%, #E2D7C7 100%);
+  }
+
+  /* ── Soft Clean Gradient Scrim ── */
+  .tcp-ge-partition__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+      90deg,
+      rgba(248, 245, 240, 0.94) 0%,
+      rgba(248, 245, 240, 0.85) 45%,
+      rgba(248, 245, 240, 0.35) 75%,
+      rgba(248, 245, 240, 0) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* ── Content Container (Overlay on Scrim) ── */
+  .tcp-ge-partition__content {
+    position: relative;
+    z-index: 3;
+    padding: 48px 44px;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  /* ── Eyebrow with Gold Dash ── */
+  .tcp-ge-partition__eyebrow {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #3E3A36;
+    margin-bottom: 14px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-sans, sans-serif);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    color: var(--tcp-dark, #1F1D1B);
-    text-decoration: none;
-    padding-bottom: 3px;
-    border-bottom: 1.5px solid var(--tcp-dark, #1F1D1B);
-    transition: all 0.3s ease;
-    align-self: flex-start;
   }
 
-  .tcp-split__cta:hover {
-    color: var(--tcp-gold, #C29B38);
-    border-bottom-color: var(--tcp-gold, #C29B38);
-    transform: translateX(4px);
+  .tcp-ge-partition__dash {
+    color: #A6732E;
+    font-weight: 400;
+  }
+
+  /* ── Headings ── */
+  .tcp-ge-partition__heading {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(26px, 2.5vw, 34px);
+    font-weight: 500;
+    color: #3E3A36;
+    line-height: 1.22;
+    letter-spacing: -0.3px;
+    margin: 0 0 14px;
+  }
+
+  /* ── Subtitle / Poetic Description ── */
+  .tcp-ge-partition__desc {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13.5px;
+    font-weight: 400;
+    color: #5C5750;
+    line-height: 1.65;
+    margin: 0 0 24px;
+  }
+
+  /* ── Link CTA ── */
+  .tcp-ge-partition__cta {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #3E3A36;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1.5px solid #3E3A36;
+    padding-bottom: 3px;
+    transition: all 0.25s ease;
+  }
+
+  .tcp-ge-partition__cta:hover {
+    color: #A6732E;
+    border-color: #A6732E;
+    transform: translateX(3px);
+  }
+
+  .tcp-ge-partition__cta-arrow {
+    color: #A6732E;
+    transition: transform 0.25s ease;
+  }
+
+  .tcp-ge-partition__cta:hover .tcp-ge-partition__cta-arrow {
+    transform: translateX(2px);
   }
 
   /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .tcp-split__inner {
+  @media (max-width: 960px) {
+    .tcp-gifting-exp__inner {
       grid-template-columns: 1fr;
       gap: 20px;
+      padding: 0 20px;
     }
-    .tcp-split__card {
-      padding: 32px 24px;
+    .tcp-ge-partition {
+      min-height: 320px;
+    }
+    .tcp-ge-partition__content {
+      padding: 36px 28px;
+      max-width: 100%;
+    }
+    .tcp-ge-partition__scrim {
+      background: linear-gradient(
+        90deg,
+        rgba(248, 245, 240, 0.96) 0%,
+        rgba(248, 245, 240, 0.9) 60%,
+        rgba(248, 245, 240, 0.5) 100%
+      );
     }
   }
 </style>
 
-<section class="tcp-split" id="tcp-home-gifting-experiences">
-  <div class="tcp-split__inner">
+<section class="tcp-gifting-exp" id="tcp-gifting-experiences">
+  <div class="tcp-gifting-exp__inner">
 
-    {% for block in section.blocks %}
-      {% if block.type == 'split_card' %}
-        <div class="tcp-split__card" {{ block.shopify_attributes }}>
-          <div>
-            <span class="tcp-split__label">{{ block.settings.label }}</span>
-            <h3 class="tcp-split__heading">{{ block.settings.heading }}</h3>
-            <p class="tcp-split__description">{{ block.settings.description }}</p>
-          </div>
+    <!-- ── 1. Gifting Partition ── -->
+    <div class="tcp-ge-partition">
+      <!-- Full Partition Background Image -->
+      <div class="tcp-ge-partition__bg">
+        {% if section.settings.gifting_image != blank %}
+          <img
+            src="{{ section.settings.gifting_image | image_url: width: 1400 }}"
+            alt="{{ section.settings.gifting_heading | default: 'The Creative Platter Gifting' | escape }}"
+            class="tcp-ge-partition__bg-img"
+            loading="lazy"
+            width="1000"
+            height="700"
+          >
+        {% else %}
+          <div class="tcp-ge-partition__fallback-gifting"></div>
+        {% endif %}
+      </div>
 
-          <div class="tcp-split__image-wrap">
-            {% if block.settings.image != blank %}
-              <img 
-                class="tcp-split__image"
-                src="{{ block.settings.image | image_url: width: 800 }}"
-                alt="{{ block.settings.heading | strip_html }}"
-                loading="lazy"
-                width="800"
-                height="450"
-              >
-            {% else %}
-              <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE6DC 100%);">
-                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" opacity="0.6">
-                  <rect x="10" y="10" width="40" height="40" rx="2" stroke="#C29B38" stroke-width="1.5"/>
-                  <path d="M10 30h40M30 10v40" stroke="#DFBA5E" stroke-width="1.2"/>
-                </svg>
-              </div>
-            {% endif %}
-          </div>
+      <!-- Scrim Overlay -->
+      <div class="tcp-ge-partition__scrim"></div>
 
-          <a href="{{ block.settings.cta_url | default: '#' }}" class="tcp-split__cta">
-            {{ block.settings.cta_text }} &rarr;
+      <!-- Content -->
+      <div class="tcp-ge-partition__content">
+        <span class="tcp-ge-partition__eyebrow">
+          {{ section.settings.gifting_eyebrow | default: 'GIFTING' }}
+          <span class="tcp-ge-partition__dash">—</span>
+        </span>
+
+        <h2 class="tcp-ge-partition__heading">
+          {{ section.settings.gifting_heading | default: 'Thoughtful by design.<br>Made to be remembered.' }}
+        </h2>
+
+        <p class="tcp-ge-partition__desc">
+          {{ section.settings.gifting_desc | default: 'Not just a gift.<br>A gesture that stays with them.' }}
+        </p>
+
+        {% if section.settings.gifting_cta != blank %}
+          <a href="{{ section.settings.gifting_url | default: '/collections/gifting' }}" class="tcp-ge-partition__cta">
+            {{ section.settings.gifting_cta }}
+            <span class="tcp-ge-partition__cta-arrow">&rarr;</span>
           </a>
-        </div>
-      {% endif %}
-    {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- ── 2. Experiences Partition ── -->
+    <div class="tcp-ge-partition">
+      <!-- Full Partition Background Image -->
+      <div class="tcp-ge-partition__bg">
+        {% if section.settings.exp_image != blank %}
+          <img
+            src="{{ section.settings.exp_image | image_url: width: 1400 }}"
+            alt="{{ section.settings.exp_heading | default: 'The Creative Platter Experiences' | escape }}"
+            class="tcp-ge-partition__bg-img"
+            loading="lazy"
+            width="1000"
+            height="700"
+          >
+        {% else %}
+          <div class="tcp-ge-partition__fallback-exp"></div>
+        {% endif %}
+      </div>
+
+      <!-- Scrim Overlay -->
+      <div class="tcp-ge-partition__scrim"></div>
+
+      <!-- Content -->
+      <div class="tcp-ge-partition__content">
+        <span class="tcp-ge-partition__eyebrow">
+          {{ section.settings.exp_eyebrow | default: 'EXPERIENCES' }}
+          <span class="tcp-ge-partition__dash">—</span>
+        </span>
+
+        <h2 class="tcp-ge-partition__heading">
+          {{ section.settings.exp_heading | default: 'Moments that<br>bring us together.' }}
+        </h2>
+
+        <p class="tcp-ge-partition__desc">
+          {{ section.settings.exp_desc | default: 'Workshops, stories and shared rituals around craft and clay.' }}
+        </p>
+
+        {% if section.settings.exp_cta != blank %}
+          <a href="{{ section.settings.exp_url | default: '/pages/experiences' }}" class="tcp-ge-partition__cta">
+            {{ section.settings.exp_cta }}
+            <span class="tcp-ge-partition__cta-arrow">&rarr;</span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
 
   </div>
 </section>
@@ -166,47 +306,88 @@
 {
   "name": "TCP Gifting & Experiences",
   "tag": "section",
-  "class": "tcp-split-section",
-  "blocks": [
+  "class": "tcp-gifting-exp-section",
+  "settings": [
     {
-      "type": "split_card",
-      "name": "Split Card",
-      "limit": 2,
-      "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "CURATED GIFTING" },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Thoughtful by Design. Made to be Remembered." },
-        { "type": "textarea", "id": "description", "label": "Description", "default": "Bespoke gift boxes for weddings, corporate tokens of gratitude, and cherished family milestones." },
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Explore Gifting" },
-        { "type": "url", "id": "cta_url", "label": "CTA URL" }
-      ]
+      "type": "header",
+      "content": "Partition 1: Gifting"
+    },
+    {
+      "type": "image_picker",
+      "id": "gifting_image",
+      "label": "Gifting Background Image (Full Cover)"
+    },
+    {
+      "type": "text",
+      "id": "gifting_eyebrow",
+      "label": "Gifting Eyebrow Tag",
+      "default": "GIFTING"
+    },
+    {
+      "type": "text",
+      "id": "gifting_heading",
+      "label": "Gifting Heading",
+      "default": "Thoughtful by design.<br>Made to be remembered."
+    },
+    {
+      "type": "textarea",
+      "id": "gifting_desc",
+      "label": "Gifting Subtext",
+      "default": "Not just a gift.<br>A gesture that stays with them."
+    },
+    {
+      "type": "text",
+      "id": "gifting_cta",
+      "label": "Gifting CTA Text",
+      "default": "DISCOVER GIFTING"
+    },
+    {
+      "type": "url",
+      "id": "gifting_url",
+      "label": "Gifting Link URL"
+    },
+    {
+      "type": "header",
+      "content": "Partition 2: Experiences"
+    },
+    {
+      "type": "image_picker",
+      "id": "exp_image",
+      "label": "Experiences Background Image (Full Cover)"
+    },
+    {
+      "type": "text",
+      "id": "exp_eyebrow",
+      "label": "Experiences Eyebrow Tag",
+      "default": "EXPERIENCES"
+    },
+    {
+      "type": "text",
+      "id": "exp_heading",
+      "label": "Experiences Heading",
+      "default": "Moments that<br>bring us together."
+    },
+    {
+      "type": "textarea",
+      "id": "exp_desc",
+      "label": "Experiences Subtext",
+      "default": "Workshops, stories and shared rituals around craft and clay."
+    },
+    {
+      "type": "text",
+      "id": "exp_cta",
+      "label": "Experiences CTA Text",
+      "default": "DISCOVER EXPERIENCES"
+    },
+    {
+      "type": "url",
+      "id": "exp_url",
+      "label": "Experiences Link URL"
     }
   ],
   "presets": [
     {
-      "name": "TCP Gifting & Experiences",
-      "blocks": [
-        {
-          "type": "split_card",
-          "settings": {
-            "label": "CURATED GIFTING",
-            "heading": "Thoughtful by Design. Made to be Remembered.",
-            "description": "Bespoke handcrafted gift sets and signature boxes wrapped in natural unbleached cotton.",
-            "cta_text": "Explore Gift Boxes",
-            "cta_url": "/collections/gifting"
-          }
-        },
-        {
-          "type": "split_card",
-          "settings": {
-            "label": "STUDIO EXPERIENCES",
-            "heading": "Shared Rituals Around Clay & Making.",
-            "description": "Engage directly with raw clay, tactile wheel throwing, and sensory tablescaping masterclasses.",
-            "cta_text": "Book An Experience",
-            "cta_url": "/pages/experiences"
-          }
-        }
-      ]
+      "name": "TCP Gifting & Experiences"
     }
   ]
 }

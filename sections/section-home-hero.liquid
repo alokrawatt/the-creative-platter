@@ -2,32 +2,31 @@
   ============================================================
   THE CREATIVE PLATTER — Home Hero Section (Full Background)
   ============================================================
-  Matches the exact editorial typography and styling from reference design:
-  - Large Serif "Pushpa." with gold dot
-  - "The Legacy Collection" (italic serif) + "bespoke dinnerware" (script)
-  - Short gold divider dash
-  - "Crafted in memory." / "Made for your home." / "A legacy you can hold."
-  - "from The Creative Platter" / "Bespoke tableware • Experiences • Advisory"
-  - Solid "EXPLORE COLLECTION →" & Underlined "DESIGN YOUR SET →"
-  - Blends seamlessly with the floating navbar
+  Matches strict first principles:
+  - "bespoke dinnerware" & "A legacy you can hold." in Sacramento font
+  - "creative platter" in Raleway font
+  - "Pushpa" heading in 'Tan Pearl', 'Cormorant Garamond' serif
+  - Grey font color hierarchy (no pure harsh black)
+  - Blends seamlessly with floating transparent navbar
   Copy into Shopify: sections/section-home-hero.liquid
 {% endcomment %}
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Sacramento&display=swap" rel="stylesheet">
 
 <style>
   .tcp-hero {
     position: relative;
-    min-height: 100vh;
+    min-height: calc(100vh - var(--header-height, 82px));
     display: flex;
     align-items: center;
     justify-content: flex-start;
     overflow: hidden;
-    color: #1F1D1B;
-    background-color: #F8F5F0;
+    color: #3E3A36;
+    background-color: #FFFFFF;
+    margin-top: 0 !important;
   }
 
   /* ── Full Background Media ── */
@@ -80,22 +79,22 @@
     {% assign op = section.settings.overlay_opacity | default: 0 %}
     background: linear-gradient(
       90deg,
-      rgba(250, 248, 245, {{ op | times: 0.01 | plus: 0.45 | at_most: 0.9 }}) 0%,
-      rgba(250, 248, 245, {{ op | times: 0.008 | plus: 0.15 | at_most: 0.6 }}) 50%,
+      rgba(250, 248, 245, {{ op | times: 0.01 | plus: 0.42 | at_most: 0.9 }}) 0%,
+      rgba(250, 248, 245, {{ op | times: 0.008 | plus: 0.12 | at_most: 0.6 }}) 50%,
       rgba(250, 248, 245, 0) 100%
     );
     z-index: 2;
     pointer-events: none;
   }
 
-  /* ── Foreground Container (Blended & Positioned Below Navbar) ── */
+  /* ── Foreground Container (Positioned Below Solid Navbar) ── */
   .tcp-hero__container {
     position: relative;
     z-index: 5;
     max-width: 1440px;
     width: 100%;
     margin: 0 auto;
-    padding: calc(var(--header-height, 90px) + 60px) 56px 80px;
+    padding: 48px 56px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -104,21 +103,21 @@
 
   /* ── Editorial Card Container ── */
   .tcp-hero__editorial-card {
-    max-width: 580px;
+    max-width: 560px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
   }
 
-  /* ── Main Heading: Pushpa. ── */
+  /* ── Main Heading: Pushpa. (Tan pearl / Cormorant Garamond, Grey) ── */
   .tcp-hero__main-heading {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(68px, 8.5vw, 116px);
+    font-family: 'Tan Pearl', 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(58px, 7.5vw, 102px);
     font-weight: 500;
-    color: #1A1715;
-    line-height: 0.9;
-    letter-spacing: -1px;
+    color: #3E3A36;
+    line-height: 0.92;
+    letter-spacing: -0.5px;
     margin: 0;
     display: inline-block;
   }
@@ -131,71 +130,73 @@
 
   /* ── Collection Subtitle Lines ── */
   .tcp-hero__collection-lines {
-    margin-top: 14px;
+    margin-top: 12px;
   }
 
   .tcp-hero__legacy-title {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-style: italic;
-    font-size: clamp(24px, 3vw, 34px);
+    font-size: clamp(22px, 2.6vw, 30px);
     font-weight: 400;
-    color: #24201D;
+    color: #4A4641;
     line-height: 1.2;
     margin: 0;
   }
 
+  /* Sacramento script for "bespoke dinnerware" */
   .tcp-hero__bespoke-script {
-    font-family: 'Caveat', 'Sacramento', cursive;
+    font-family: 'Sacramento', cursive;
     font-size: clamp(32px, 4vw, 44px);
-    font-weight: 500;
+    font-weight: 400;
     color: #A6732E;
-    line-height: 1;
-    margin: 4px 0 0;
+    line-height: 0.95;
+    margin: 3px 0 0;
     letter-spacing: 0.5px;
   }
 
   /* ── Short Gold Dash Divider ── */
   .tcp-hero__gold-dash {
-    width: 32px;
+    width: 30px;
     height: 1.5px;
     background: #A6732E;
-    margin: 22px 0 24px;
+    margin: 18px 0 20px;
   }
 
-  /* ── Poetic Quote Block ── */
+  /* ── Poetic Quote Block (Grey) ── */
   .tcp-hero__poetic-block {
-    margin-bottom: 28px;
+    margin-bottom: 22px;
   }
 
   .tcp-hero__poetic-line {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(19px, 2.3vw, 25px);
+    font-size: clamp(17px, 2vw, 22px);
     font-weight: 400;
-    color: #1F1D1B;
+    color: #4A4641;
     line-height: 1.35;
     margin: 0;
   }
 
+  /* Sacramento script for "A legacy you can hold." */
   .tcp-hero__poetic-script {
-    font-family: 'Caveat', 'Sacramento', cursive;
+    font-family: 'Sacramento', cursive;
     font-size: clamp(28px, 3.4vw, 38px);
-    font-weight: 500;
+    font-weight: 400;
     color: #A6732E;
-    line-height: 1.2;
-    margin: 4px 0 0;
+    line-height: 1.1;
+    margin: 3px 0 0;
     letter-spacing: 0.5px;
   }
 
-  /* ── Studio Attribution Block ── */
+  /* ── Studio Attribution Block (Raleway for Creative Platter) ── */
   .tcp-hero__studio-block {
-    margin-bottom: 36px;
+    margin-bottom: 28px;
   }
 
   .tcp-hero__from-line {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 17px;
-    color: #24201D;
-    margin: 0 0 5px;
+    font-size: 16px;
+    color: #4A4641;
+    margin: 0 0 4px;
   }
 
   .tcp-hero__from-line em {
@@ -203,11 +204,18 @@
     margin-right: 3px;
   }
 
+  .tcp-hero__studio-name {
+    font-family: 'Raleway', var(--font-sans, sans-serif);
+    font-weight: 600;
+    color: #3E3A36;
+    letter-spacing: 0.5px;
+  }
+
   .tcp-hero__sub-services {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 500;
-    color: #4A443C;
+    color: #6B665F;
     letter-spacing: 0.3px;
     margin: 0;
   }
@@ -222,7 +230,7 @@
   .tcp-hero__actions-row {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 24px;
     flex-wrap: wrap;
   }
 
@@ -232,22 +240,22 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 1.9px;
     text-transform: uppercase;
-    padding: 14px 28px;
+    padding: 13px 26px;
     border-radius: 0;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     transition: all 0.25s ease;
-    box-shadow: 0 4px 16px rgba(166, 115, 46, 0.28);
+    box-shadow: 0 4px 14px rgba(166, 115, 46, 0.22);
   }
 
   .tcp-hero__btn-solid:hover {
     background: #8C5F22;
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(166, 115, 46, 0.4);
+    box-shadow: 0 6px 18px rgba(166, 115, 46, 0.32);
     color: #FFFFFF;
   }
 
@@ -255,15 +263,15 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 1.9px;
     text-transform: uppercase;
-    color: #1F1D1B;
+    color: #3E3A36;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    border-bottom: 1.5px solid #1F1D1B;
-    padding-bottom: 3px;
+    border-bottom: 1.5px solid #3E3A36;
+    padding-bottom: 2px;
     transition: all 0.25s ease;
   }
 
@@ -276,22 +284,22 @@
   /* ── Responsive Breakpoints ── */
   @media (max-width: 768px) {
     .tcp-hero {
-      min-height: 85vh;
+      min-height: calc(100vh - 72px);
     }
     .tcp-hero__container {
-      padding: calc(var(--header-height, 90px) + 30px) 24px 60px;
+      padding: 36px 20px;
     }
     .tcp-hero__main-heading {
-      font-size: 58px;
+      font-size: 52px;
     }
     .tcp-hero__legacy-title {
-      font-size: 22px;
+      font-size: 20px;
     }
     .tcp-hero__bespoke-script {
       font-size: 28px;
     }
     .tcp-hero__poetic-line {
-      font-size: 18px;
+      font-size: 16px;
     }
     .tcp-hero__poetic-script {
       font-size: 24px;
@@ -299,7 +307,7 @@
     .tcp-hero__actions-row {
       flex-direction: column;
       align-items: flex-start;
-      gap: 16px;
+      gap: 14px;
       width: 100%;
     }
     .tcp-hero__btn-solid {
@@ -356,7 +364,7 @@
       <!-- Small Gold Dash -->
       <div class="tcp-hero__gold-dash"></div>
 
-      <!-- Poetic Lines -->
+      <!-- Poetic Lines (Grey text, Sacramento script) -->
       <div class="tcp-hero__poetic-block">
         <p class="tcp-hero__poetic-line">{{ section.settings.line_1 | default: 'Crafted in memory.' }}</p>
         <p class="tcp-hero__poetic-line">{{ section.settings.line_2 | default: 'Made for your home.' }}</p>
@@ -365,7 +373,10 @@
 
       <!-- Studio Attribution -->
       <div class="tcp-hero__studio-block">
-        <p class="tcp-hero__from-line"><em>from</em> {{ section.settings.studio_name | default: 'The Creative Platter' }}</p>
+        <p class="tcp-hero__from-line">
+          <em>from</em> 
+          <span class="tcp-hero__studio-name">{{ section.settings.studio_name | default: 'The Creative Platter' }}</span>
+        </p>
         <p class="tcp-hero__sub-services">
           {{ section.settings.service_1 | default: 'Bespoke tableware' }} 
           <span class="tcp-hero__service-dot">&bull;</span> 
@@ -376,14 +387,20 @@
       </div>
 
       <!-- Action Buttons -->
-      <div class="tcp-hero__actions-row">
-        <a href="{{ section.settings.cta_primary_url | default: '/collections/pushpa' }}" class="tcp-hero__btn-solid">
-          {{ section.settings.cta_primary_text | default: 'EXPLORE COLLECTION' }} &rarr;
-        </a>
-        <a href="{{ section.settings.cta_secondary_url | default: '/pages/bespoke-b2b' }}" class="tcp-hero__btn-underline">
-          {{ section.settings.cta_secondary_text | default: 'DESIGN YOUR SET' }} &rarr;
-        </a>
-      </div>
+      {% if section.settings.cta_primary_text != blank or section.settings.cta_secondary_text != blank %}
+        <div class="tcp-hero__actions-row">
+          {% if section.settings.cta_primary_text != blank %}
+            <a href="{{ section.settings.cta_primary_url | default: '/collections/pushpa' }}" class="tcp-hero__btn-solid">
+              {{ section.settings.cta_primary_text }} &rarr;
+            </a>
+          {% endif %}
+          {% if section.settings.cta_secondary_text != blank %}
+            <a href="{{ section.settings.cta_secondary_url | default: '/pages/bespoke-b2b' }}" class="tcp-hero__btn-underline">
+              {{ section.settings.cta_secondary_text }} &rarr;
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
 
     </div>
   </div>

@@ -1,40 +1,136 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "tcp_home_hero": {
       "type": "section-home-hero",
-      "settings": {}
+      "settings": {
+        "hero_image": "shopify://shop_images/updated_hero_image.jpg",
+        "overlay_opacity": 40,
+        "hero_image_alt": "The Creative Platter Handcrafted Ceramics",
+        "title": "Pushpa",
+        "legacy_title": "The Legacy Collection",
+        "bespoke_script": "bespoke dinnerware",
+        "line_1": "Crafted in memory.",
+        "line_2": "Made for your home.",
+        "line_3_script": "A legacy you can hold.",
+        "studio_name": "The Creative Platter",
+        "service_1": "Bespoke tableware",
+        "service_2": "Experiences",
+        "service_3": "Advisory",
+        "cta_primary_text": "EXPLORE COLLECTION",
+        "cta_primary_url": "shopify://pages/pushpa-collection",
+        "cta_secondary_text": "",
+        "cta_secondary_url": ""
+      }
     },
     "tcp_home_collections": {
       "type": "section-home-collections",
-      "settings": {}
+      "settings": {
+        "heading": "EXPLORE OUR COLLECTION",
+        "card_1_title": "DINNERWARE",
+        "card_1_image": "shopify://shop_images/Dinnerware.png",
+        "card_1_url": "",
+        "card_2_title": "LINEN",
+        "card_2_image": "shopify://shop_images/linen.png",
+        "card_2_url": "",
+        "card_3_title": "SERVEWARE",
+        "card_3_image": "shopify://shop_images/serveware.png",
+        "card_3_url": "",
+        "card_4_title": "OBJECTS",
+        "card_4_image": "shopify://shop_images/objects.png",
+        "card_4_url": ""
+      }
     },
     "tcp_home_signature_sets": {
       "type": "section-home-signature-sets",
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "label": "PUSHPA LEGACY 2025–26",
+        "heading": "The Seven Expressions",
+        "description": "A dinnerware collection born from memory, shaped by emotion & carried in legacy. Each set embraces raw organic edges, zero material off-cuts, and the quiet beauty of recycled clay.",
+        "cta_text": "View All 7 Expressions",
+        "cta_url": ""
+      }
     },
     "tcp_pushpa_dinner_sets": {
       "type": "section-pushpa-dinner-sets",
+      "disabled": true,
       "settings": {}
+    },
+    "tcp_home_artisans": {
+      "type": "section-home-artisans",
+      "settings": {
+        "eyebrow": "The Hands Behind Pushpa",
+        "title": "Shaped by Human Touch.",
+        "script_title": "crafted with patience",
+        "description": "Near Gurugram’s quiet outskirts, village craftswomen hand-shape every vessel—no moulds, no replicas. Each piece carries natural variations, thumbprints, and the care of the woman who made it.",
+        "image": "shopify://shop_images/artisans.png",
+        "trait_1_title": "100% Mould-Free",
+        "trait_1_desc": "Hand-pinched & slab formed from recycled clay.",
+        "trait_2_title": "Village Women",
+        "trait_2_desc": "Fair, dignified livelihoods preserving ancient pottery craft.",
+        "trait_3_title": "14 Days Slow Craft",
+        "trait_3_desc": "Sun-dried, twice-fired at 1280°C with 24k gold leaf.",
+        "cta_text": "DISCOVER OUR ARTISAN STORY",
+        "cta_url": ""
+      }
     },
     "tcp_home_bespoke_homes": {
       "type": "section-home-bespoke-homes",
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "label": "BESPOKE RESIDENCES",
+        "heading": "Tailored Dinnerware For Your Home",
+        "description": "Defined by restraint and tactile clarity, our bespoke home commissions are shaped through a material-led dialogue. Designed to settle into your home quietly, revealing their character over time.",
+        "cta_text": "Consult With The Studio",
+        "cta_url": ""
+      }
     },
     "tcp_home_bespoke_b2b": {
       "type": "section-home-bespoke-b2b",
-      "settings": {}
-    },
-    "tcp_home_gifting_experiences": {
-      "type": "section-home-gifting-experiences",
-      "settings": {}
+      "settings": {
+        "b2b_image": "shopify://shop_images/bespoke_homepage.png"
+      }
     },
     "tcp_home_material_craft": {
       "type": "section-home-material-craft",
+      "disabled": true,
       "settings": {}
     },
     "tcp_home_on_your_table": {
       "type": "section-home-on-your-table",
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "heading": "On Your Table",
+        "description": "Designed to be used. Loved. Lived with. Ceramic objects that participate quietly in the human ritual of gathering.",
+        "cta_text": "Follow @thecreativeplatter_studio",
+        "cta_url": ""
+      }
+    },
+    "tcp_home_gifting_experiences": {
+      "type": "section-home-gifting-experiences",
+      "settings": {
+        "gifting_image": "shopify://shop_images/gifting.png",
+        "gifting_eyebrow": "GIFTING",
+        "gifting_heading": "Thoughtful by design. Made to be remembered.",
+        "gifting_desc": "Not just a gift.<br>A gesture that stays with them.",
+        "gifting_cta": "DISCOVER GIFTING",
+        "gifting_url": "",
+        "exp_image": "shopify://shop_images/experience.png",
+        "exp_eyebrow": "EXPERIENCES",
+        "exp_heading": "Moments that bring us together.",
+        "exp_desc": "Workshops, stories and shared rituals around craft and clay.",
+        "exp_cta": "DISCOVER EXPERIENCES",
+        "exp_url": ""
+      }
     }
   },
   "order": [
@@ -42,10 +138,11 @@
     "tcp_home_collections",
     "tcp_home_signature_sets",
     "tcp_pushpa_dinner_sets",
+    "tcp_home_artisans",
     "tcp_home_bespoke_homes",
     "tcp_home_bespoke_b2b",
-    "tcp_home_gifting_experiences",
     "tcp_home_material_craft",
-    "tcp_home_on_your_table"
+    "tcp_home_on_your_table",
+    "tcp_home_gifting_experiences"
   ]
 }

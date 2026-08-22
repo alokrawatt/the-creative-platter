@@ -47,6 +47,25 @@
       {%- render 'theme-editor' -%}
     {% endif %}
 
+    <style>
+      :root {
+        --tcp-sand: #FFFFFF !important;
+        --tcp-stone: #FFFFFF !important;
+        --tcp-white: #FFFFFF !important;
+        --tcp-grey-dark: #545454 !important;
+        --tcp-grey-body: #545454 !important;
+        --tcp-grey-muted: #545454 !important;
+        --tcp-gold: #fcce3a !important;
+        --tcp-gold-hover: #e5b92e !important;
+        --tcp-gold-light: #fcce3a !important;
+      }
+      html, body, .page-wrapper, main, #MainContent, .content-for-layout {
+        background-color: #FFFFFF !important;
+        background: #FFFFFF !important;
+        color: #545454;
+      }
+    </style>
+
     {{ content_for_header }}
   </head>
 
