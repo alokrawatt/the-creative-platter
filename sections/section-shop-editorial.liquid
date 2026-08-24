@@ -1,0 +1,2073 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Editorial Shop Experience Page
+  ============================================================
+  Refined Luxury Ceramic & Tableware Shop Experience:
+  1. Full Hero Background with elegant semi-transparent text treatment
+  2. Compact "Our Signature Dinner Sets" Grid (all 5 sets visible in single viewport view)
+  3. Redesigned "Build Your Table" Swatch Cards with Step Pills & Micro-interactions
+  4. Modernized, compact glassmorphic "On Your Table" Showcase Card
+  5. Material & Craft 4-step photographic craft journey
+  6. Gifting partition (50/50 Furoshiki package + Gifting story)
+  7. Dark closing statement banner
+  8. Trust & Values strip
+  Pure White (#FFFFFF) background with #545454 and #fcce3a brand colors.
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Sacramento&display=swap" rel="stylesheet">
+
+<style>
+  .tcp-shop-page {
+    background-color: #FFFFFF !important;
+    color: #545454;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .tcp-shop-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-shop-container {
+      padding: 0 20px;
+    }
+  }
+
+  /* ── 1. Full Background Hero Section ── */
+  .tcp-shop-hero {
+    position: relative;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: #1a1815;
+  }
+
+  .tcp-shop-hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    opacity: 1;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tcp-shop-hero:hover .tcp-shop-hero__bg {
+    transform: scale(1.02);
+  }
+
+  .tcp-shop-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.35) 45%, rgba(0, 0, 0, 0.05) 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  @media (max-width: 800px) {
+    .tcp-shop-hero {
+      min-height: 500px;
+    }
+    .tcp-shop-hero__overlay {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0.1) 100%);
+    }
+  }
+
+  .tcp-shop-hero .tcp-shop-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .tcp-shop-hero__content {
+    position: relative;
+    z-index: 3;
+    max-width: 540px;
+    padding: 80px 0;
+    text-align: left;
+    margin-right: auto;
+    margin-left: 0;
+  }
+
+  .tcp-shop-hero__pill {
+    display: inline-block;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    color: #fcce3a;
+    margin-bottom: 14px;
+    text-align: left;
+  }
+
+  .tcp-shop-hero__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(52px, 6.5vw, 84px);
+    font-weight: 400;
+    line-height: 0.92;
+    color: #FFFFFF;
+    margin: 0 0 4px;
+    letter-spacing: -0.5px;
+    text-align: left;
+  }
+
+  .tcp-shop-hero__title span.dot {
+    color: #fcce3a;
+  }
+
+  .tcp-shop-hero__script {
+    font-family: var(--font-script, 'Sacramento', cursive);
+    font-size: clamp(30px, 4vw, 44px);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.15;
+    display: block;
+    margin-bottom: 18px;
+    text-align: left;
+  }
+
+  .tcp-shop-hero__desc {
+    font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+    font-size: 19px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 440px;
+    margin: 0 0 30px;
+    text-align: left;
+  }
+
+  .tcp-shop-hero__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .tcp-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #A6732E;
+    color: #FFFFFF;
+    padding: 13px 28px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(166, 115, 46, 0.2);
+  }
+
+  .tcp-btn-primary:hover {
+    background: #8C5F22;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(166, 115, 46, 0.3);
+  }
+
+  .tcp-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    padding: 6px 0;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  .tcp-btn-secondary:hover {
+    color: #fcce3a;
+  }
+
+  /* ── 2. Philosophy Quote Banner ── */
+  .tcp-philosophy-banner {
+    padding: 48px 20px;
+    text-align: center;
+    background: #FFFFFF;
+    border-top: 1px solid #F0ECE6;
+    border-bottom: 1px solid #F0ECE6;
+  }
+
+  .tcp-philosophy-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(20px, 2.6vw, 30px);
+    font-weight: 400;
+    line-height: 1.5;
+    color: #383431;
+    max-width: 800px;
+    margin: 0 auto 16px;
+    letter-spacing: -0.2px;
+  }
+
+  .tcp-philosophy-emblem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tcp-philosophy-emblem svg {
+    width: 26px;
+    height: 26px;
+    color: #fcce3a;
+  }
+
+  /* ── 3. Signature Dinner Sets — Editorial Side-by-Side ── */
+  .tcp-sets-section {
+    padding: 80px 0;
+    background: #FFFFFF;
+    border-bottom: 1px solid #F2EFEA;
+  }
+
+  .tcp-sets-emblem {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+  }
+
+  .tcp-sets-emblem svg {
+    width: 30px;
+    height: 30px;
+    color: #A6732E;
+    opacity: 0.7;
+  }
+
+  .tcp-editorial-split {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 50px;
+    align-items: start;
+  }
+
+  @media (max-width: 1024px) {
+    .tcp-editorial-split {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  .tcp-editorial-split--side {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+
+  @media (max-width: 1024px) {
+    .tcp-editorial-split--side {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+  }
+
+  .tcp-editorial-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 10px;
+  }
+
+  .tcp-editorial-info__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 3.2vw, 38px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: #2D2A27;
+    margin: 0 0 16px;
+  }
+
+  .tcp-editorial-info__bar {
+    width: 32px;
+    height: 1.5px;
+    background: #A6732E;
+    margin-bottom: 16px;
+  }
+
+  .tcp-editorial-info__desc {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #5C5650;
+    margin: 0 0 28px;
+  }
+
+  .tcp-editorial-info__link {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #2D2A27;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+
+  .tcp-editorial-info__link:hover {
+    color: #A6732E;
+    gap: 12px;
+  }
+
+  /* 2-Row Mosaic Grid */
+  .tcp-sets-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    grid-template-rows: 240px 240px;
+    gap: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-sets-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 200px 200px 200px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tcp-sets-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+    .tcp-sets-grid .tcp-set-card {
+      min-height: 240px;
+    }
+  }
+
+  .tcp-set-card {
+    position: relative;
+    background: #C8BFB5;
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 3px;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .tcp-set-card--feature {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    height: 100%;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-set-card--feature {
+      grid-column: 1 / -1;
+      height: 280px;
+    }
+  }
+
+  .tcp-set-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .tcp-set-card__img-wrap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .tcp-set-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .tcp-set-card:hover .tcp-set-card__img {
+    transform: scale(1.04);
+  }
+
+  .tcp-set-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(20, 18, 16, 0.6) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 18px 20px;
+    color: #FFFFFF;
+  }
+
+  .tcp-set-card__name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: #FFFFFF;
+    margin: 0 0 3px;
+    line-height: 1.1;
+  }
+
+  .tcp-set-card--feature .tcp-set-card__name {
+    font-size: 28px;
+  }
+
+  .tcp-set-card__tagline {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 0;
+  }
+
+  /* ── 4. Build Your Table — Clean Editorial ── */
+  .tcp-build-section {
+    padding: 70px 0;
+    background: #FFFFFF;
+    border-bottom: 1px solid #F2EFEA;
+    position: relative;
+  }
+
+  .tcp-build-layout {
+    display: grid;
+    grid-template-columns: 195px 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+
+  .tcp-build-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-right: 8px;
+  }
+
+  .tcp-build-info__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(26px, 2.5vw, 34px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: #2D2A27;
+    margin: 0 0 12px;
+  }
+
+  .tcp-build-info__bar {
+    width: 32px;
+    height: 1.5px;
+    background: #A6732E;
+    margin-bottom: 12px;
+  }
+
+  .tcp-build-info__desc {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 13px;
+    line-height: 1.6;
+    color: #5C5650;
+    margin: 0 0 20px;
+  }
+
+  .tcp-build-info__link {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #2D2A27;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+
+  .tcp-build-info__link:hover {
+    color: #A6732E;
+    gap: 12px;
+  }
+
+  .tcp-formula-wrapper {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .tcp-formula-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .tcp-formula-item {
+    flex: 1;
+    text-align: left;
+    min-width: 0;
+    padding: 0 2px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .tcp-formula-item:hover {
+    transform: translateY(-2px);
+  }
+
+  .tcp-formula-item__img-wrap {
+    width: 100%;
+    aspect-ratio: 1.1 / 1;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background: #F6F3EE;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(45, 42, 39, 0.04);
+    border: 1px solid rgba(220, 215, 205, 0.5);
+  }
+
+  .tcp-formula-item__step-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #2D2A27;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(4px);
+    padding: 2px 6px;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    z-index: 2;
+  }
+
+  .tcp-formula-item__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .tcp-formula-item:hover .tcp-formula-item__img {
+    transform: scale(1.04);
+  }
+
+  .tcp-formula-item__title {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    color: #545454;
+    margin: 0 0 2px;
+    white-space: normal;
+    word-break: normal;
+    line-height: 1.3;
+  }
+
+  .tcp-formula-item__sub {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 10.5px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    color: #8E8981;
+    margin: 0;
+    white-space: normal;
+    word-break: normal;
+    line-height: 1.3;
+  }
+
+  .tcp-formula-symbol {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: #B5AFA7;
+    flex-shrink: 0;
+    width: 16px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 42px;
+    user-select: none;
+  }
+
+  .tcp-formula-hint {
+    display: none;
+  }
+
+  /* Tablet & Mobile Breakpoints */
+  @media (max-width: 900px) {
+    .tcp-build-section {
+      padding: 50px 0;
+    }
+
+    .tcp-build-layout {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .tcp-formula-wrapper {
+      position: relative;
+    }
+
+    .tcp-formula-row {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 4px 14px 4px;
+      margin: 0 -15px;
+      padding-left: 15px;
+      padding-right: 15px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .tcp-formula-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tcp-formula-item {
+      flex: 0 0 145px;
+      width: 145px;
+      min-width: 145px;
+      scroll-snap-align: start;
+      padding: 0;
+    }
+
+    .tcp-formula-item__img-wrap {
+      min-height: 130px;
+      margin-bottom: 10px;
+    }
+
+    .tcp-formula-item__title {
+      font-size: 12px;
+      white-space: normal;
+    }
+
+    .tcp-formula-item__sub {
+      font-size: 10.5px;
+      white-space: normal;
+    }
+
+    .tcp-formula-symbol {
+      flex: 0 0 18px;
+      width: 18px;
+      font-size: 22px;
+      margin-top: 55px;
+      display: flex;
+    }
+
+    .tcp-formula-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-sans, sans-serif);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #A6732E;
+      margin-top: 4px;
+    }
+
+    .tcp-formula-hint svg {
+      width: 12px;
+      height: 12px;
+      animation: swipeBounce 1.5s infinite ease-in-out;
+    }
+
+    @keyframes swipeBounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(4px); }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .tcp-formula-item {
+      flex: 0 0 135px;
+      width: 135px;
+      min-width: 135px;
+    }
+
+    .tcp-formula-item__img-wrap {
+      min-height: 120px;
+    }
+
+    .tcp-formula-symbol {
+      flex: 0 0 14px;
+      width: 14px;
+      font-size: 20px;
+      margin-top: 50px;
+    }
+  }
+
+  /* ── 5. Material & Craft Strip ── */
+  .tcp-craft-section {
+    padding: 65px 0;
+    background: #FFFFFF;
+  }
+
+  .tcp-craft-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-craft-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .tcp-craft-card {
+    text-align: left;
+  }
+
+  .tcp-craft-card__img-wrap {
+    width: 100%;
+    aspect-ratio: 1.1 / 1;
+    overflow: hidden;
+    background: #F6F3EE;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  .tcp-craft-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .tcp-craft-card:hover .tcp-craft-card__img {
+    transform: scale(1.04);
+  }
+
+  .tcp-craft-card__title {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    color: #545454;
+    margin: 0;
+  }
+
+  /* ── 6. "On Your Table" — Full-Width Image with Direct Text Overlay ── */
+  .tcp-table-showcase {
+    position: relative;
+    width: 100%;
+    min-height: 450px;
+    background: #2D2A27;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .tcp-table-showcase__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.85;
+  }
+
+  .tcp-table-showcase__content {
+    position: relative;
+    z-index: 2;
+    padding: 60px;
+    max-width: 380px;
+    color: #FFFFFF;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-table-showcase {
+      min-height: 380px;
+    }
+    .tcp-table-showcase__content {
+      padding: 40px 24px;
+      max-width: 300px;
+    }
+  }
+
+  .tcp-table-showcase__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 3.5vw, 38px);
+    font-weight: 400;
+    color: #FFFFFF;
+    margin: 0 0 12px;
+    line-height: 1.15;
+  }
+
+  .tcp-table-showcase__bar {
+    width: 30px;
+    height: 1.5px;
+    background: #A6732E;
+    margin-bottom: 14px;
+  }
+
+  .tcp-table-showcase__desc {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 22px;
+  }
+
+  .tcp-table-showcase__link {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+
+  .tcp-table-showcase__link:hover {
+    color: #fcce3a;
+    gap: 12px;
+  }
+
+  /* ── 7. Gifting — Edge-to-Edge 50/50 Split ── */
+  .tcp-gifting-section {
+    padding: 0;
+    background: #FFFFFF;
+  }
+
+  .tcp-gifting-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: stretch;
+    min-height: 480px;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-gifting-grid {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+  }
+
+  .tcp-gifting-photo__wrap {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    overflow: hidden;
+    background: #E8E0D6;
+  }
+
+  .tcp-gifting-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .tcp-gifting-photo__wrap:hover .tcp-gifting-photo {
+    transform: scale(1.03);
+  }
+
+  .tcp-gifting-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 50px;
+    background: #FAF7F2;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-gifting-content {
+      padding: 40px 24px;
+    }
+  }
+
+  .tcp-gifting-content__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 3.5vw, 38px);
+    font-weight: 400;
+    color: #2D2A27;
+    margin: 0 0 12px;
+  }
+
+  .tcp-gifting-content__bar {
+    width: 30px;
+    height: 1.5px;
+    background: #A6732E;
+    margin-bottom: 16px;
+  }
+
+  .tcp-gifting-content__desc {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 14px;
+    color: #5C5650;
+    line-height: 1.55;
+    margin: 0 0 24px;
+  }
+
+  .tcp-gifting-content__link {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #2D2A27;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+
+  .tcp-gifting-content__link:hover {
+    color: #A6732E;
+    gap: 12px;
+  }
+
+  .tcp-gifting-features {
+    display: flex;
+    gap: 28px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #E5DFD6;
+  }
+
+  @media (max-width: 600px) {
+    .tcp-gifting-features {
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+
+  .tcp-gifting-feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+  }
+
+  .tcp-gifting-feature__icon {
+    width: 28px;
+    height: 28px;
+    color: #A6732E;
+    flex-shrink: 0;
+  }
+
+  .tcp-gifting-feature__text {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #545454;
+    line-height: 1.3;
+  }
+
+  /* ── 8. Dark Closing Statement Banner ── */
+  .tcp-closing-banner {
+    background: #25221F;
+    color: #FFFFFF;
+    padding: 50px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tcp-closing-banner__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+  }
+
+  .tcp-closing-banner__text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(24px, 3.5vw, 38px);
+    font-weight: 400;
+    color: #FFFFFF;
+    margin: 0;
+    letter-spacing: -0.2px;
+  }
+
+  .tcp-closing-banner__btn {
+    background: #A6732E;
+    color: #FFFFFF;
+    padding: 13px 30px;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .tcp-closing-banner__btn:hover {
+    background: #8C5F22;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(166, 115, 46, 0.3);
+  }
+
+  /* ── 9. Trust Badges Strip ── */
+  .tcp-trust-strip {
+    padding: 32px 0;
+    background: #FFFFFF;
+    border-top: 1px solid #ECE7DF;
+    border-bottom: 1px solid #ECE7DF;
+  }
+
+  .tcp-trust-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-trust-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .tcp-trust-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .tcp-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tcp-trust-icon {
+    width: 20px;
+    height: 20px;
+    color: #545454;
+    flex-shrink: 0;
+  }
+
+  .tcp-trust-title {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #545454;
+    line-height: 1.2;
+  }
+
+  .tcp-trust-sub {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 9.5px;
+    color: #8E8981;
+    line-height: 1.2;
+  }
+</style>
+
+<div class="tcp-shop-page">
+
+  <!-- 1. Hero Section with Full Image Background -->
+  <section class="tcp-shop-hero">
+    {% if section.settings.hero_image != blank %}
+      <img
+        src="{{ section.settings.hero_image | image_url: width: 2200 }}"
+        alt="{{ section.settings.hero_image.alt | default: 'Pushpa Legacy Tableware Collection' | escape }}"
+        class="tcp-shop-hero__bg"
+        loading="eager"
+      >
+    {% else %}
+      <img
+        src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=2200&auto=format&fit=crop"
+        alt="Pushpa Legacy Dinner Sets"
+        class="tcp-shop-hero__bg"
+        loading="eager"
+      >
+    {% endif %}
+
+    <div class="tcp-shop-hero__overlay"></div>
+
+    <div class="tcp-shop-container">
+      <div class="tcp-shop-hero__content">
+        <span class="tcp-shop-hero__pill">{{ section.settings.hero_pill | default: 'THE LEGACY COLLECTION' }}</span>
+        <h1 class="tcp-shop-hero__title">
+          {{ section.settings.hero_title | default: 'Pushpa' }}<span class="dot">.</span>
+        </h1>
+        <span class="tcp-shop-hero__script">{{ section.settings.hero_script | default: 'The Legacy Collection' }}</span>
+        <p class="tcp-shop-hero__desc">
+          {{ section.settings.hero_desc | default: 'Crafted in memory. Made for your home.' }}
+        </p>
+        <div class="tcp-shop-hero__actions">
+          {% if section.settings.hero_btn_text != blank %}
+            <a href="{{ section.settings.hero_btn_url | default: '/collections/all' }}" class="tcp-btn-primary">
+              {{ section.settings.hero_btn_text }} &rarr;
+            </a>
+          {% endif %}
+          {% if section.settings.hero_link_text != blank %}
+            <a href="{{ section.settings.hero_link_url | default: '#build-table' }}" class="tcp-btn-secondary">
+              {{ section.settings.hero_link_text }} &rarr;
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Philosophy Quote Banner -->
+  <section class="tcp-philosophy-banner">
+    <div class="tcp-shop-container">
+      <p class="tcp-philosophy-text">
+        {{ section.settings.philosophy_text | default: 'A collection shaped by memory. A tribute to warmth, care and everyday rituals. Born from loss, created to live on at your table.' }}
+      </p>
+      <div class="tcp-philosophy-emblem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Our Signature Dinner Sets -->
+  <section class="tcp-sets-section" id="signature-sets">
+    <div class="tcp-sets-emblem">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+      </svg>
+    </div>
+    <div class="tcp-shop-container">
+      <div class="tcp-editorial-split">
+        <div class="tcp-editorial-info">
+          <h2 class="tcp-editorial-info__title">{{ section.settings.sets_title | default: 'Our Signature Dinner Sets' }}</h2>
+          <div class="tcp-editorial-info__bar"></div>
+          <p class="tcp-editorial-info__desc">
+            {{ section.settings.sets_desc | default: 'Five expressions. Rooted in tradition, designed for today.' }}
+          </p>
+          {% if section.settings.sets_link_text != blank %}
+            <a href="{{ section.settings.sets_link_url | default: '/collections/all' }}" class="tcp-editorial-info__link">
+              {{ section.settings.sets_link_text }} &rarr;
+            </a>
+          {% endif %}
+        </div>
+
+        <div class="tcp-sets-grid">
+          <!-- Card 1: Smriti (Featured Large Card) -->
+          <a href="{{ section.settings.set_1_url | default: '/collections/all' }}" class="tcp-set-card tcp-set-card--feature">
+            <div class="tcp-set-card__img-wrap">
+              {% if section.settings.set_1_image != blank %}
+                <img src="{{ section.settings.set_1_image | image_url: width: 1000 }}" alt="{{ section.settings.set_1_name | default: 'Smriti' | escape }}" class="tcp-set-card__img" loading="lazy">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=1000&auto=format&fit=crop" alt="Smriti Dinner Set" class="tcp-set-card__img" loading="lazy">
+              {% endif %}
+              <div class="tcp-set-card__overlay">
+                <h3 class="tcp-set-card__name">{{ section.settings.set_1_name | default: 'Smriti' }}</h3>
+                <p class="tcp-set-card__tagline">{{ section.settings.set_1_tagline | default: 'Timeless • Soft • Nostalgic' }}</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 2: Mrida -->
+          <a href="{{ section.settings.set_2_url | default: '/collections/all' }}" class="tcp-set-card">
+            <div class="tcp-set-card__img-wrap">
+              {% if section.settings.set_2_image != blank %}
+                <img src="{{ section.settings.set_2_image | image_url: width: 800 }}" alt="{{ section.settings.set_2_name | default: 'Mrida' | escape }}" class="tcp-set-card__img" loading="lazy">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?q=80&w=800&auto=format&fit=crop" alt="Mrida Dinner Set" class="tcp-set-card__img" loading="lazy">
+              {% endif %}
+              <div class="tcp-set-card__overlay">
+                <h3 class="tcp-set-card__name">{{ section.settings.set_2_name | default: 'Mrida' }}</h3>
+                <p class="tcp-set-card__tagline">{{ section.settings.set_2_tagline | default: 'Earthy • Raw • Grounded' }}</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 3: Rekh -->
+          <a href="{{ section.settings.set_3_url | default: '/collections/all' }}" class="tcp-set-card">
+            <div class="tcp-set-card__img-wrap">
+              {% if section.settings.set_3_image != blank %}
+                <img src="{{ section.settings.set_3_image | image_url: width: 800 }}" alt="{{ section.settings.set_3_name | default: 'Rekh' | escape }}" class="tcp-set-card__img" loading="lazy">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1590736969955-71cc94801759?q=80&w=800&auto=format&fit=crop" alt="Rekh Dinner Set" class="tcp-set-card__img" loading="lazy">
+              {% endif %}
+              <div class="tcp-set-card__overlay">
+                <h3 class="tcp-set-card__name">{{ section.settings.set_3_name | default: 'Rekh' }}</h3>
+                <p class="tcp-set-card__tagline">{{ section.settings.set_3_tagline | default: 'Minimal • Modern • Refined' }}</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 4: Viraasat -->
+          <a href="{{ section.settings.set_4_url | default: '/collections/all' }}" class="tcp-set-card">
+            <div class="tcp-set-card__img-wrap">
+              {% if section.settings.set_4_image != blank %}
+                <img src="{{ section.settings.set_4_image | image_url: width: 800 }}" alt="{{ section.settings.set_4_name | default: 'Viraasat' | escape }}" class="tcp-set-card__img" loading="lazy">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1530629013299-6cb10d168419?q=80&w=800&auto=format&fit=crop" alt="Viraasat Dinner Set" class="tcp-set-card__img" loading="lazy">
+              {% endif %}
+              <div class="tcp-set-card__overlay">
+                <h3 class="tcp-set-card__name">{{ section.settings.set_4_name | default: 'Viraasat' }}</h3>
+                <p class="tcp-set-card__tagline">{{ section.settings.set_4_tagline | default: 'Rich • Layered • Celebratory' }}</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 5: Neer -->
+          <a href="{{ section.settings.set_5_url | default: '/collections/all' }}" class="tcp-set-card">
+            <div class="tcp-set-card__img-wrap">
+              {% if section.settings.set_5_image != blank %}
+                <img src="{{ section.settings.set_5_image | image_url: width: 800 }}" alt="{{ section.settings.set_5_name | default: 'Neer' | escape }}" class="tcp-set-card__img" loading="lazy">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop" alt="Neer Dinner Set" class="tcp-set-card__img" loading="lazy">
+              {% endif %}
+              <div class="tcp-set-card__overlay">
+                <h3 class="tcp-set-card__name">{{ section.settings.set_5_name | default: 'Neer' }}</h3>
+                <p class="tcp-set-card__tagline">{{ section.settings.set_5_tagline | default: 'Light • Calm • Everyday' }}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Build Your Table — Clean Editorial -->
+  <section class="tcp-build-section" id="build-table">
+    <div class="tcp-shop-container">
+      <div class="tcp-build-layout">
+        <div class="tcp-build-info">
+          <h2 class="tcp-build-info__title">{{ section.settings.build_title | default: 'Build Your Table' }}</h2>
+          <div class="tcp-build-info__bar"></div>
+          <p class="tcp-build-info__desc">
+            {{ section.settings.build_desc | default: "Mix, match and create a set that's uniquely yours." }}
+          </p>
+          {% if section.settings.build_link_text != blank %}
+            <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-build-info__link">
+              {{ section.settings.build_link_text }} &rarr;
+            </a>
+          {% endif %}
+          <div class="tcp-formula-hint">
+            <span>Swipe steps</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="tcp-formula-wrapper">
+          <div class="tcp-formula-row">
+            <!-- Step 1: Plate -->
+            <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item">
+              <div class="tcp-formula-item__img-wrap">
+                <span class="tcp-formula-item__step-badge">01</span>
+                {% if section.settings.step_1_image != blank %}
+                  <img src="{{ section.settings.step_1_image | image_url: width: 400 }}" alt="Plate" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590736969955-71cc94801759?q=80&w=400&auto=format&fit=crop';">
+                {% else %}
+                  <img src="https://images.unsplash.com/photo-1590736969955-71cc94801759?q=80&w=400&auto=format&fit=crop" alt="Plate" class="tcp-formula-item__img" loading="lazy">
+                {% endif %}
+              </div>
+              <h4 class="tcp-formula-item__title">{{ section.settings.step_1_title | default: 'Plate' }}</h4>
+              {% if section.settings.step_1_sub != blank %}
+                <p class="tcp-formula-item__sub">{{ section.settings.step_1_sub }}</p>
+              {% endif %}
+            </a>
+
+            <div class="tcp-formula-symbol">+</div>
+
+            <!-- Step 2: Bowl -->
+            <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item">
+              <div class="tcp-formula-item__img-wrap">
+                <span class="tcp-formula-item__step-badge">02</span>
+                {% if section.settings.step_2_image != blank %}
+                  <img src="{{ section.settings.step_2_image | image_url: width: 400 }}" alt="Bowl" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=400&auto=format&fit=crop';">
+                {% else %}
+                  <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=400&auto=format&fit=crop" alt="Bowl" class="tcp-formula-item__img" loading="lazy">
+                {% endif %}
+              </div>
+              <h4 class="tcp-formula-item__title">{{ section.settings.step_2_title | default: 'Bowl' }}</h4>
+              {% if section.settings.step_2_sub != blank %}
+                <p class="tcp-formula-item__sub">{{ section.settings.step_2_sub }}</p>
+              {% endif %}
+            </a>
+
+            <div class="tcp-formula-symbol">+</div>
+
+            <!-- Step 3: Linen -->
+            <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item">
+              <div class="tcp-formula-item__img-wrap">
+                <span class="tcp-formula-item__step-badge">03</span>
+                {% if section.settings.step_3_image != blank %}
+                  <img src="{{ section.settings.step_3_image | image_url: width: 400 }}" alt="Linen" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=400&auto=format&fit=crop';">
+                {% else %}
+                  <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=400&auto=format&fit=crop" alt="Linen" class="tcp-formula-item__img" loading="lazy">
+                {% endif %}
+              </div>
+              <h4 class="tcp-formula-item__title">{{ section.settings.step_3_title | default: 'Linen' }}</h4>
+              {% if section.settings.step_3_sub != blank %}
+                <p class="tcp-formula-item__sub">{{ section.settings.step_3_sub }}</p>
+              {% endif %}
+            </a>
+
+            <div class="tcp-formula-symbol">+</div>
+
+            <!-- Step 4: Cutlery -->
+            <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item">
+              <div class="tcp-formula-item__img-wrap">
+                <span class="tcp-formula-item__step-badge">04</span>
+                {% if section.settings.step_4_image != blank %}
+                  <img src="{{ section.settings.step_4_image | image_url: width: 400 }}" alt="Cutlery" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1615865417491-9941019fbc00?q=80&w=400&auto=format&fit=crop';">
+                {% else %}
+                  <img src="https://images.unsplash.com/photo-1615865417491-9941019fbc00?q=80&w=400&auto=format&fit=crop" alt="Cutlery" class="tcp-formula-item__img" loading="lazy">
+                {% endif %}
+              </div>
+              <h4 class="tcp-formula-item__title">{{ section.settings.step_4_title | default: 'Cutlery' }}</h4>
+              {% if section.settings.step_4_sub != blank %}
+                <p class="tcp-formula-item__sub">{{ section.settings.step_4_sub }}</p>
+              {% endif %}
+            </a>
+
+            <div class="tcp-formula-symbol">=</div>
+
+            <!-- Result: Your Set -->
+            <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item tcp-formula-item--result">
+              <div class="tcp-formula-item__img-wrap">
+                <span class="tcp-formula-item__step-badge" style="background:#A6732E;color:#FFF;">FINAL</span>
+                {% if section.settings.step_result_image != blank %}
+                  <img src="{{ section.settings.step_result_image | image_url: width: 400 }}" alt="Your Set" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=400&auto=format&fit=crop';">
+                {% else %}
+                  <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=400&auto=format&fit=crop" alt="Your Set" class="tcp-formula-item__img" loading="lazy">
+                {% endif %}
+              </div>
+              <h4 class="tcp-formula-item__title">{{ section.settings.step_result_title | default: 'Your Set' }}</h4>
+              {% if section.settings.step_result_sub != blank %}
+                <p class="tcp-formula-item__sub">{{ section.settings.step_result_sub }}</p>
+              {% endif %}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Material & Craft Strip -->
+  <section class="tcp-craft-section">
+    <div class="tcp-shop-container">
+      <div class="tcp-editorial-split--side">
+        <div class="tcp-editorial-info">
+          <h2 class="tcp-editorial-info__title">{{ section.settings.craft_title | default: 'Material & Craft' }}</h2>
+          <div class="tcp-editorial-info__bar"></div>
+          <p class="tcp-editorial-info__desc">
+            {{ section.settings.craft_desc | default: 'Thoughtfully chosen materials. Skilled hands. Time-honoured techniques. Every piece is unique.' }}
+          </p>
+          {% if section.settings.craft_link_text != blank %}
+            <a href="{{ section.settings.craft_link_url | default: '/pages/story' }}" class="tcp-editorial-info__link">
+              {{ section.settings.craft_link_text }} &rarr;
+            </a>
+          {% endif %}
+        </div>
+
+        <div class="tcp-craft-grid">
+          <!-- Step 1: Natural Stoneware -->
+          <div class="tcp-craft-card">
+            <div class="tcp-craft-card__img-wrap">
+              {% if section.settings.craft_1_image != blank %}
+                <img src="{{ section.settings.craft_1_image | image_url: width: 500 }}" alt="Natural Stoneware" class="tcp-craft-card__img" loading="lazy">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=500&auto=format&fit=crop" alt="Natural Stoneware" class="tcp-craft-card__img" loading="lazy">
+              {% endif %}
+            </div>
+            <p class="tcp-craft-card__title">{{ section.settings.craft_1_title | default: 'Natural Stoneware' }}</p>
+          </div>
+
+          <!-- Step 2: Hand-applied Glaze -->
+          <div class="tcp-craft-card">
+            <div class="tcp-craft-card__img-wrap">
+              {% if section.settings.craft_2_image != blank %}
+                <img src="{{ section.settings.craft_2_image | image_url: width: 500 }}" alt="Hand-applied Glaze" class="tcp-craft-card__img" loading="lazy">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=500&auto=format&fit=crop" alt="Hand-applied Glaze" class="tcp-craft-card__img" loading="lazy">
+              {% endif %}
+            </div>
+            <p class="tcp-craft-card__title">{{ section.settings.craft_2_title | default: 'Hand-applied Glaze' }}</p>
+          </div>
+
+          <!-- Step 3: Shaped by Hand -->
+          <div class="tcp-craft-card">
+            <div class="tcp-craft-card__img-wrap">
+              {% if section.settings.craft_3_image != blank %}
+                <img src="{{ section.settings.craft_3_image | image_url: width: 500 }}" alt="Shaped by Hand" class="tcp-craft-card__img" loading="lazy">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=500&auto=format&fit=crop" alt="Shaped by Hand" class="tcp-craft-card__img" loading="lazy">
+              {% endif %}
+            </div>
+            <p class="tcp-craft-card__title">{{ section.settings.craft_3_title | default: 'Shaped by Hand' }}</p>
+          </div>
+
+          <!-- Step 4: Fired to Perfection -->
+          <div class="tcp-craft-card">
+            <div class="tcp-craft-card__img-wrap">
+              {% if section.settings.craft_4_image != blank %}
+                <img src="{{ section.settings.craft_4_image | image_url: width: 500 }}" alt="Fired to Perfection" class="tcp-craft-card__img" loading="lazy">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=500&auto=format&fit=crop" alt="Fired to Perfection" class="tcp-craft-card__img" loading="lazy">
+              {% endif %}
+            </div>
+            <p class="tcp-craft-card__title">{{ section.settings.craft_4_title | default: 'Fired to Perfection' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. "On Your Table" — Full-Width Image Overlay -->
+  <section class="tcp-table-showcase">
+    {% if section.settings.showcase_image != blank %}
+      <img src="{{ section.settings.showcase_image | image_url: width: 2000 }}" alt="On Your Table" class="tcp-table-showcase__bg" loading="lazy">
+    {% else %}
+      <img src="https://images.unsplash.com/photo-1615865417491-9941019fbc00?q=80&w=2000&auto=format&fit=crop" alt="On Your Table" class="tcp-table-showcase__bg" loading="lazy">
+    {% endif %}
+
+    <div class="tcp-table-showcase__content">
+      <h3 class="tcp-table-showcase__title">{{ section.settings.showcase_title | default: 'On Your Table' }}</h3>
+      <div class="tcp-table-showcase__bar"></div>
+      <p class="tcp-table-showcase__desc">{{ section.settings.showcase_desc | default: 'Designed to be used. Loved. Lived with.' }}</p>
+      {% if section.settings.showcase_link_text != blank %}
+        <a href="{{ section.settings.showcase_link_url | default: '/pages/story' }}" class="tcp-table-showcase__link">
+          {{ section.settings.showcase_link_text }} &rarr;
+        </a>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- 7. Gifting — Edge-to-Edge 50/50 Split -->
+  <section class="tcp-gifting-section">
+    <div class="tcp-gifting-grid">
+      <div class="tcp-gifting-photo__wrap">
+        {% if section.settings.gifting_image != blank %}
+          <img src="{{ section.settings.gifting_image | image_url: width: 1200 }}" alt="Gifting Pushpa Dinnerware" class="tcp-gifting-photo" loading="lazy">
+        {% else %}
+          <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1200&auto=format&fit=crop" alt="Gifting Pushpa Dinnerware" class="tcp-gifting-photo" loading="lazy">
+        {% endif %}
+      </div>
+
+      <div class="tcp-gifting-content">
+        <h2 class="tcp-gifting-content__title">{{ section.settings.gifting_title | default: 'Gifting' }}</h2>
+        <div class="tcp-gifting-content__bar"></div>
+        <p class="tcp-gifting-content__desc">{{ section.settings.gifting_desc | default: 'Not just a gift. A gesture that stays.' }}</p>
+        {% if section.settings.gifting_link_text != blank %}
+          <a href="{{ section.settings.gifting_link_url | default: '/collections/gifting' }}" class="tcp-gifting-content__link">
+            {{ section.settings.gifting_link_text }} &rarr;
+          </a>
+        {% endif %}
+
+        <div class="tcp-gifting-features">
+          <div class="tcp-gifting-feature">
+            <svg class="tcp-gifting-feature__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 13h18"/><path d="M7.5 4a2.5 2.5 0 015 0c0 1.5-2.5 4-2.5 4s-2.5-2.5-2.5-4z"/><path d="M16.5 4a2.5 2.5 0 00-5 0c0 1.5 2.5 4 2.5 4s2.5-2.5 2.5-4z"/></svg>
+            <span class="tcp-gifting-feature__text">Thoughtful<br>Packaging</span>
+          </div>
+          <div class="tcp-gifting-feature">
+            <svg class="tcp-gifting-feature__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            <span class="tcp-gifting-feature__text">Gift Note<br>Available</span>
+          </div>
+          <div class="tcp-gifting-feature">
+            <svg class="tcp-gifting-feature__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            <span class="tcp-gifting-feature__text">Nationwide<br>Delivery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Dark Closing Statement Banner -->
+  <section class="tcp-closing-banner">
+    <div class="tcp-closing-banner__inner">
+      <h3 class="tcp-closing-banner__text">{{ section.settings.closing_title | default: 'Bring Pushpa to your table.' }}</h3>
+      {% if section.settings.closing_btn_text != blank %}
+        <a href="{{ section.settings.closing_btn_url | default: '/collections/all' }}" class="tcp-closing-banner__btn">
+          {{ section.settings.closing_btn_text }} &rarr;
+        </a>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- 9. Trust Badges Strip -->
+  <section class="tcp-trust-strip">
+    <div class="tcp-shop-container">
+      <div class="tcp-trust-grid">
+        <div class="tcp-trust-item">
+          <svg class="tcp-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div>
+            <div class="tcp-trust-title">Handmade</div>
+            <div class="tcp-trust-sub">in India</div>
+          </div>
+        </div>
+
+        <div class="tcp-trust-item">
+          <svg class="tcp-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><circle cx="12" cy="12" r="4"/></svg>
+          <div>
+            <div class="tcp-trust-title">Dishwasher</div>
+            <div class="tcp-trust-sub">Safe</div>
+          </div>
+        </div>
+
+        <div class="tcp-trust-item">
+          <svg class="tcp-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <div>
+            <div class="tcp-trust-title">Lead-free</div>
+            <div class="tcp-trust-sub">Glaze</div>
+          </div>
+        </div>
+
+        <div class="tcp-trust-item">
+          <svg class="tcp-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M12 6v6l4 2"/></svg>
+          <div>
+            <div class="tcp-trust-title">Food</div>
+            <div class="tcp-trust-sub">Safe</div>
+          </div>
+        </div>
+
+        <div class="tcp-trust-item">
+          <svg class="tcp-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          <div>
+            <div class="tcp-trust-title">Secure Payments</div>
+            <div class="tcp-trust-sub">100% safe & secure</div>
+          </div>
+        </div>
+
+        <div class="tcp-trust-item">
+          <svg class="tcp-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          <div>
+            <div class="tcp-trust-title">Easy Returns</div>
+            <div class="tcp-trust-sub">Hassle-free within 7 days</div>
+          </div>
+        </div>
+
+        <div class="tcp-trust-item">
+          <svg class="tcp-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          <div>
+            <div class="tcp-trust-title">Worldwide Shipping</div>
+            <div class="tcp-trust-sub">Delivering beauty</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "TCP Editorial Shop Page",
+  "tag": "section",
+  "class": "tcp-shop-editorial-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "1. Hero Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Full Background Image"
+    },
+    {
+      "type": "text",
+      "id": "hero_pill",
+      "label": "Hero Pill Tag",
+      "default": "THE LEGACY COLLECTION"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "Pushpa"
+    },
+    {
+      "type": "text",
+      "id": "hero_script",
+      "label": "Hero Script Subtitle",
+      "default": "The Legacy Collection"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_desc",
+      "label": "Hero Description",
+      "default": "Crafted in memory. Made for your home."
+    },
+    {
+      "type": "text",
+      "id": "hero_btn_text",
+      "label": "Hero Primary Button Text",
+      "default": "SHOP THE COLLECTION"
+    },
+    {
+      "type": "url",
+      "id": "hero_btn_url",
+      "label": "Hero Primary Button URL"
+    },
+    {
+      "type": "text",
+      "id": "hero_link_text",
+      "label": "Hero Secondary Link Text",
+      "default": "DESIGN YOUR SET"
+    },
+    {
+      "type": "url",
+      "id": "hero_link_url",
+      "label": "Hero Secondary Link URL"
+    },
+    {
+      "type": "header",
+      "content": "2. Philosophy Quote Banner"
+    },
+    {
+      "type": "textarea",
+      "id": "philosophy_text",
+      "label": "Philosophy Text",
+      "default": "A collection shaped by memory. A tribute to warmth, care and everyday rituals. Born from loss, created to live on at your table."
+    },
+    {
+      "type": "header",
+      "content": "3. Signature Dinner Sets Mosaic"
+    },
+    {
+      "type": "text",
+      "id": "sets_title",
+      "label": "Sets Heading",
+      "default": "Our Signature Dinner Sets"
+    },
+    {
+      "type": "textarea",
+      "id": "sets_desc",
+      "label": "Sets Description",
+      "default": "Five expressions. Rooted in tradition, designed for today."
+    },
+    {
+      "type": "text",
+      "id": "sets_link_text",
+      "label": "Sets Link Text",
+      "default": "EXPLORE ALL COLLECTIONS"
+    },
+    {
+      "type": "url",
+      "id": "sets_link_url",
+      "label": "Sets Link URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "set_1_image",
+      "label": "Set 1 Image (Smriti - Featured)"
+    },
+    {
+      "type": "text",
+      "id": "set_1_name",
+      "label": "Set 1 Name",
+      "default": "Smriti"
+    },
+    {
+      "type": "text",
+      "id": "set_1_tagline",
+      "label": "Set 1 Tagline",
+      "default": "Timeless • Soft • Nostalgic"
+    },
+    {
+      "type": "url",
+      "id": "set_1_url",
+      "label": "Set 1 Link URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "set_2_image",
+      "label": "Set 2 Image (Mrida)"
+    },
+    {
+      "type": "text",
+      "id": "set_2_name",
+      "label": "Set 2 Name",
+      "default": "Mrida"
+    },
+    {
+      "type": "text",
+      "id": "set_2_tagline",
+      "label": "Set 2 Tagline",
+      "default": "Earthy • Raw • Grounded"
+    },
+    {
+      "type": "url",
+      "id": "set_2_url",
+      "label": "Set 2 Link URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "set_3_image",
+      "label": "Set 3 Image (Rekh)"
+    },
+    {
+      "type": "text",
+      "id": "set_3_name",
+      "label": "Set 3 Name",
+      "default": "Rekh"
+    },
+    {
+      "type": "text",
+      "id": "set_3_tagline",
+      "label": "Set 3 Tagline",
+      "default": "Minimal • Modern • Refined"
+    },
+    {
+      "type": "url",
+      "id": "set_3_url",
+      "label": "Set 3 Link URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "set_4_image",
+      "label": "Set 4 Image (Viraasat)"
+    },
+    {
+      "type": "text",
+      "id": "set_4_name",
+      "label": "Set 4 Name",
+      "default": "Viraasat"
+    },
+    {
+      "type": "text",
+      "id": "set_4_tagline",
+      "label": "Set 4 Tagline",
+      "default": "Rich • Layered • Celebratory"
+    },
+    {
+      "type": "url",
+      "id": "set_4_url",
+      "label": "Set 4 Link URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "set_5_image",
+      "label": "Set 5 Image (Neer)"
+    },
+    {
+      "type": "text",
+      "id": "set_5_name",
+      "label": "Set 5 Name",
+      "default": "Neer"
+    },
+    {
+      "type": "text",
+      "id": "set_5_tagline",
+      "label": "Set 5 Tagline",
+      "default": "Light • Calm • Everyday"
+    },
+    {
+      "type": "url",
+      "id": "set_5_url",
+      "label": "Set 5 Link URL"
+    },
+    {
+      "type": "header",
+      "content": "4. Build Your Table Formula"
+    },
+    {
+      "type": "text",
+      "id": "build_title",
+      "label": "Build Heading",
+      "default": "Build Your Table"
+    },
+    {
+      "type": "textarea",
+      "id": "build_desc",
+      "label": "Build Description",
+      "default": "Mix, match and create a set that's uniquely yours."
+    },
+    {
+      "type": "text",
+      "id": "build_link_text",
+      "label": "Build Link Text",
+      "default": "START BUILDING"
+    },
+    {
+      "type": "url",
+      "id": "build_link_url",
+      "label": "Build Link URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_1_image",
+      "label": "Step 1 Image (Plate)"
+    },
+    {
+      "type": "text",
+      "id": "step_1_title",
+      "label": "Step 1 Title",
+      "default": "Plate"
+    },
+    {
+      "type": "text",
+      "id": "step_1_sub",
+      "label": "Step 1 Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_2_image",
+      "label": "Step 2 Image (Bowl)"
+    },
+    {
+      "type": "text",
+      "id": "step_2_title",
+      "label": "Step 2 Title",
+      "default": "Bowl"
+    },
+    {
+      "type": "text",
+      "id": "step_2_sub",
+      "label": "Step 2 Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_3_image",
+      "label": "Step 3 Image (Linen)"
+    },
+    {
+      "type": "text",
+      "id": "step_3_title",
+      "label": "Step 3 Title",
+      "default": "Linen"
+    },
+    {
+      "type": "text",
+      "id": "step_3_sub",
+      "label": "Step 3 Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_4_image",
+      "label": "Step 4 Image (Cutlery)"
+    },
+    {
+      "type": "text",
+      "id": "step_4_title",
+      "label": "Step 4 Title",
+      "default": "Cutlery"
+    },
+    {
+      "type": "text",
+      "id": "step_4_sub",
+      "label": "Step 4 Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_result_image",
+      "label": "Result Image (Your Set)"
+    },
+    {
+      "type": "text",
+      "id": "step_result_title",
+      "label": "Result Title",
+      "default": "Your Set"
+    },
+    {
+      "type": "text",
+      "id": "step_result_sub",
+      "label": "Result Subtitle"
+    },
+    {
+      "type": "header",
+      "content": "5. Material & Craft"
+    },
+    {
+      "type": "text",
+      "id": "craft_title",
+      "label": "Craft Heading",
+      "default": "Material & Craft"
+    },
+    {
+      "type": "textarea",
+      "id": "craft_desc",
+      "label": "Craft Description",
+      "default": "Thoughtfully chosen materials. Skilled hands. Time-honoured techniques. Every piece is unique."
+    },
+    {
+      "type": "text",
+      "id": "craft_link_text",
+      "label": "Craft Link Text",
+      "default": "OUR CRAFT"
+    },
+    {
+      "type": "url",
+      "id": "craft_link_url",
+      "label": "Craft Link URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "craft_1_image",
+      "label": "Craft 1 Image"
+    },
+    {
+      "type": "text",
+      "id": "craft_1_title",
+      "label": "Craft 1 Title",
+      "default": "Natural Stoneware"
+    },
+    {
+      "type": "image_picker",
+      "id": "craft_2_image",
+      "label": "Craft 2 Image"
+    },
+    {
+      "type": "text",
+      "id": "craft_2_title",
+      "label": "Craft 2 Title",
+      "default": "Hand-applied Glaze"
+    },
+    {
+      "type": "image_picker",
+      "id": "craft_3_image",
+      "label": "Craft 3 Image"
+    },
+    {
+      "type": "text",
+      "id": "craft_3_title",
+      "label": "Craft 3 Title",
+      "default": "Shaped by Hand"
+    },
+    {
+      "type": "image_picker",
+      "id": "craft_4_image",
+      "label": "Craft 4 Image"
+    },
+    {
+      "type": "text",
+      "id": "craft_4_title",
+      "label": "Craft 4 Title",
+      "default": "Fired to Perfection"
+    },
+    {
+      "type": "header",
+      "content": "6. On Your Table Showcase"
+    },
+    {
+      "type": "image_picker",
+      "id": "showcase_image",
+      "label": "Showcase Background Image"
+    },
+    {
+      "type": "text",
+      "id": "showcase_title",
+      "label": "Showcase Title",
+      "default": "On Your Table"
+    },
+    {
+      "type": "textarea",
+      "id": "showcase_desc",
+      "label": "Showcase Description",
+      "default": "Designed to be used. Loved. Lived with."
+    },
+    {
+      "type": "text",
+      "id": "showcase_link_text",
+      "label": "Showcase Link Text",
+      "default": "SEE IT IN HOMES"
+    },
+    {
+      "type": "url",
+      "id": "showcase_link_url",
+      "label": "Showcase Link URL"
+    },
+    {
+      "type": "header",
+      "content": "7. Gifting Partition"
+    },
+    {
+      "type": "image_picker",
+      "id": "gifting_image",
+      "label": "Gifting Image"
+    },
+    {
+      "type": "text",
+      "id": "gifting_title",
+      "label": "Gifting Title",
+      "default": "Gifting"
+    },
+    {
+      "type": "textarea",
+      "id": "gifting_desc",
+      "label": "Gifting Description",
+      "default": "Not just a gift. A gesture that stays."
+    },
+    {
+      "type": "text",
+      "id": "gifting_link_text",
+      "label": "Gifting Link Text",
+      "default": "EXPLORE GIFTING"
+    },
+    {
+      "type": "url",
+      "id": "gifting_link_url",
+      "label": "Gifting Link URL"
+    },
+    {
+      "type": "header",
+      "content": "8. Closing Statement Banner"
+    },
+    {
+      "type": "text",
+      "id": "closing_title",
+      "label": "Closing Heading",
+      "default": "Bring Pushpa to your table."
+    },
+    {
+      "type": "text",
+      "id": "closing_btn_text",
+      "label": "Closing Button Text",
+      "default": "SHOP THE COLLECTION"
+    },
+    {
+      "type": "url",
+      "id": "closing_btn_url",
+      "label": "Closing Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP Editorial Shop Page"
+    }
+  ]
+}
+{% endschema %}

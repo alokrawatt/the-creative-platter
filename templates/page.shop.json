@@ -1,0 +1,93 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "tcp_shop_editorial": {
+      "type": "section-shop-editorial",
+      "settings": {
+        "hero_image": "shopify://shop_images/hero_image_32af9b08-13b4-4618-abd4-292f68468d7b.png",
+        "hero_pill": "THE LEGACY COLLECTION",
+        "hero_title": "Pushpa",
+        "hero_script": "The Legacy Collection",
+        "hero_desc": "Crafted in memory. Made for your home.",
+        "hero_btn_text": "SHOP THE COLLECTION",
+        "hero_btn_url": "",
+        "hero_link_text": "DESIGN YOUR SET",
+        "hero_link_url": "",
+        "philosophy_text": "A collection shaped by memory. A tribute to warmth, care and everyday rituals. Born from loss, created to live on at your table.",
+        "sets_title": "Our Signature Dinner Sets",
+        "sets_desc": "Five expressions. Rooted in tradition, designed for today.",
+        "sets_link_text": "EXPLORE ALL COLLECTIONS",
+        "sets_link_url": "",
+        "set_1_name": "Smriti",
+        "set_1_tagline": "Timeless • Soft • Nostalgic",
+        "set_1_url": "",
+        "set_2_image": "shopify://shop_images/objects.png",
+        "set_2_name": "Mrida",
+        "set_2_tagline": "Earthy • Raw • Grounded",
+        "set_2_url": "",
+        "set_3_image": "shopify://shop_images/Dinnerware.png",
+        "set_3_name": "Rekh",
+        "set_3_tagline": "Minimal • Modern • Refined",
+        "set_3_url": "",
+        "set_4_image": "shopify://shop_images/serveware.png",
+        "set_4_name": "Viraasat",
+        "set_4_tagline": "Rich • Layered • Celebratory",
+        "set_4_url": "",
+        "set_5_image": "shopify://shop_images/teapot-with-oriental-characters.jpg",
+        "set_5_name": "Neer",
+        "set_5_tagline": "Light • Calm • Everyday",
+        "set_5_url": "",
+        "build_title": "Build Your Table",
+        "build_desc": "Mix, match and create a set that's uniquely yours.",
+        "build_link_text": "START BUILDING",
+        "build_link_url": "",
+        "step_1_image": "shopify://shop_images/serveware.png",
+        "step_1_title": "Plate",
+        "step_1_sub": "Choose your style",
+        "step_2_image": "shopify://shop_images/objects.png",
+        "step_2_title": "Bowl",
+        "step_2_sub": "Choose your style",
+        "step_3_image": "shopify://shop_images/linen.png",
+        "step_3_title": "Linen",
+        "step_3_sub": "Choose your style",
+        "step_4_image": "shopify://shop_images/objects.png",
+        "step_4_title": "Cutlery",
+        "step_4_sub": "Choose your style",
+        "step_result_title": "Your Set",
+        "step_result_sub": "Beautifully yours",
+        "craft_title": "Material & Craft",
+        "craft_desc": "Thoughtfully chosen materials. Skilled hands. Time-honoured techniques. Every piece is unique.",
+        "craft_link_text": "OUR CRAFT",
+        "craft_link_url": "",
+        "craft_1_title": "Natural Stoneware",
+        "craft_2_title": "Hand-applied Glaze",
+        "craft_3_title": "Shaped by Hand",
+        "craft_4_title": "Fired to Perfection",
+        "showcase_image": "shopify://shop_images/bespoke_homepage.png",
+        "showcase_title": "On Your Table",
+        "showcase_desc": "Designed to be used. Loved. Lived with.",
+        "showcase_link_text": "SEE IT IN HOMES",
+        "showcase_link_url": "",
+        "gifting_image": "shopify://shop_images/gifting-copy.png",
+        "gifting_title": "Gifting",
+        "gifting_desc": "Not just a gift. A gesture that stays.",
+        "gifting_link_text": "EXPLORE GIFTING",
+        "gifting_link_url": "",
+        "closing_title": "Bring Pushpa to your table.",
+        "closing_btn_text": "SHOP THE COLLECTION",
+        "closing_btn_url": ""
+      }
+    }
+  },
+  "order": [
+    "tcp_shop_editorial"
+  ]
+}

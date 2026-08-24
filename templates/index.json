@@ -65,24 +65,6 @@
       "disabled": true,
       "settings": {}
     },
-    "tcp_home_artisans": {
-      "type": "section-home-artisans",
-      "settings": {
-        "eyebrow": "The Hands Behind Pushpa",
-        "title": "Shaped by Human Touch.",
-        "script_title": "crafted with patience",
-        "description": "Near Gurugram’s quiet outskirts, village craftswomen hand-shape every vessel—no moulds, no replicas. Each piece carries natural variations, thumbprints, and the care of the woman who made it.",
-        "image": "shopify://shop_images/artisans.png",
-        "trait_1_title": "100% Mould-Free",
-        "trait_1_desc": "Hand-pinched & slab formed from recycled clay.",
-        "trait_2_title": "Village Women",
-        "trait_2_desc": "Fair, dignified livelihoods preserving ancient pottery craft.",
-        "trait_3_title": "14 Days Slow Craft",
-        "trait_3_desc": "Sun-dried, twice-fired at 1280°C with 24k gold leaf.",
-        "cta_text": "DISCOVER OUR ARTISAN STORY",
-        "cta_url": ""
-      }
-    },
     "tcp_home_bespoke_homes": {
       "type": "section-home-bespoke-homes",
       "disabled": true,
@@ -115,6 +97,24 @@
         "cta_url": ""
       }
     },
+    "tcp_home_artisans": {
+      "type": "section-home-artisans",
+      "settings": {
+        "eyebrow": "The Hands Behind Pushpa",
+        "title": "Shaped by Human Touch.",
+        "script_title": "crafted with patience",
+        "description": "Near Gurugram’s quiet outskirts, village craftswomen hand-shape every vessel—no moulds, no replicas. Each piece carries natural variations, thumbprints, and the care of the woman who made it.",
+        "image": "shopify://shop_images/artisans.png",
+        "trait_1_title": "100% Mould-Free",
+        "trait_1_desc": "Hand-pinched & slab formed from recycled clay.",
+        "trait_2_title": "Village Women",
+        "trait_2_desc": "Fair, dignified livelihoods preserving ancient pottery craft.",
+        "trait_3_title": "14 Days Slow Craft",
+        "trait_3_desc": "Sun-dried, twice-fired at 1280°C with 24k gold leaf.",
+        "cta_text": "DISCOVER OUR ARTISAN STORY",
+        "cta_url": ""
+      }
+    },
     "tcp_home_gifting_experiences": {
       "type": "section-home-gifting-experiences",
       "settings": {
@@ -138,11 +138,11 @@
     "tcp_home_collections",
     "tcp_home_signature_sets",
     "tcp_pushpa_dinner_sets",
-    "tcp_home_artisans",
     "tcp_home_bespoke_homes",
     "tcp_home_bespoke_b2b",
     "tcp_home_material_craft",
     "tcp_home_on_your_table",
+    "tcp_home_artisans",
     "tcp_home_gifting_experiences"
   ]
 }

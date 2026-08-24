@@ -11,91 +11,208 @@
   Copy into Shopify: sections/section-pushpa-dinner-sets.liquid
 {% endcomment %}
 
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Sacramento&display=swap" rel="stylesheet">
+
 <style>
-  .tcp-pushpa-page {
-    background-color: #FFFFFF;
-    color: var(--tcp-dark, #1F1D1B);
-    font-family: var(--font-sans, sans-serif);
-    overflow: hidden;
+  :root {
+    --tcp-sand: #FFFFFF;
+    --tcp-stone: #FFFFFF;
+    --tcp-white: #FFFFFF;
+    --tcp-grey-dark: #545454;
+    --tcp-grey-body: #545454;
+    --tcp-grey-muted: #8E8981;
+    --tcp-gold: #fcce3a;
+    --tcp-gold-hover: #e5b92e;
+    --tcp-gold-accent: #A6732E;
+    --tcp-border: #ECE7DF;
+
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-brand: 'Raleway', sans-serif;
+    --font-script: 'Sacramento', cursive;
+    --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* ── Hero ── */
+  .tcp-pushpa-page {
+    background-color: #FFFFFF !important;
+    color: #545454;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .tcp-pushpa-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-pushpa-container {
+      padding: 0 20px;
+    }
+  }
+
+  /* ── 1. Full Background Hero Section (Copied from Shop) ── */
   .tcp-pushpa-hero {
     position: relative;
-    min-height: 540px;
+    min-height: 600px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: radial-gradient(circle at center, #FFFFFF 0%, #FAF6EE 50%, #EDE5D8 100%);
-    padding: 80px 40px;
-    border-bottom: 1px solid var(--tcp-border, #E8E2D8);
+    overflow: hidden;
+    background-color: #1a1815;
   }
 
-  .tcp-pushpa-hero__wash {
+  .tcp-pushpa-hero__bg {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 650px;
-    height: 650px;
-    background: radial-gradient(circle, rgba(223, 186, 94, 0.22) 0%, rgba(194, 155, 56, 0.08) 50%, transparent 75%);
-    border-radius: 50%;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    opacity: 1;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tcp-pushpa-hero:hover .tcp-pushpa-hero__bg {
+    transform: scale(1.02);
+  }
+
+  .tcp-pushpa-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.35) 45%, rgba(0, 0, 0, 0.05) 100%);
+    z-index: 2;
     pointer-events: none;
-    filter: blur(40px);
+  }
+
+  @media (max-width: 800px) {
+    .tcp-pushpa-hero {
+      min-height: 500px;
+    }
+    .tcp-pushpa-hero__overlay {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0.1) 100%);
+    }
+  }
+
+  .tcp-pushpa-hero .tcp-pushpa-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
   }
 
   .tcp-pushpa-hero__content {
     position: relative;
-    z-index: 2;
-    max-width: 800px;
-    margin: 0 auto;
+    z-index: 3;
+    max-width: 540px;
+    padding: 80px 0;
+    text-align: left;
+    margin-right: auto;
+    margin-left: 0;
   }
 
-  .tcp-pushpa-hero__prefix {
-    font-family: var(--font-script, 'Sacramento', cursive);
-    font-size: 42px;
-    color: var(--tcp-gold, #C29B38);
-    display: block;
-    margin-bottom: 2px;
+  .tcp-pushpa-hero__pill {
+    display: inline-block;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: #fcce3a;
+    margin-bottom: 16px;
+    text-align: left;
   }
 
   .tcp-pushpa-hero__title {
-    font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: clamp(56px, 7vw, 92px);
     font-weight: 400;
-    line-height: 0.95;
-    color: var(--tcp-dark, #1F1D1B);
-    margin: 0 0 16px;
+    line-height: 1;
+    color: #FFFFFF;
+    margin: 0 0 18px;
     letter-spacing: -0.5px;
+    text-align: left;
   }
 
   .tcp-pushpa-hero__caps {
-    font-family: var(--font-sans, sans-serif);
+    display: block;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 8px;
+    text-align: left;
+  }
+
+  .tcp-pushpa-hero__desc {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 440px;
+    margin: 0 0 32px;
+    text-align: left;
+  }
+
+  .tcp-pushpa-hero__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .tcp-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #fcce3a;
+    color: #FFFFFF;
+    padding: 14px 30px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 3.5px;
+    letter-spacing: 2.2px;
     text-transform: uppercase;
-    color: var(--tcp-brown, #352922);
-    margin-bottom: 20px;
-    display: block;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(252, 206, 58, 0.35);
+    border-radius: 2px;
   }
 
-  .tcp-pushpa-hero__divider {
-    width: 48px;
-    height: 1.5px;
-    background: var(--tcp-gold, #C29B38);
-    margin: 0 auto 24px;
+  .tcp-btn-primary:hover {
+    background: #e5b92e;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 22px rgba(252, 206, 58, 0.45);
   }
 
-  .tcp-pushpa-hero__concept {
-    font-family: var(--font-serif, serif);
-    font-size: 24px;
-    font-style: italic;
-    color: var(--tcp-muted, #68625B);
-    line-height: 1.5;
-    max-width: 640px;
-    margin: 0 auto 32px;
+  .tcp-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    padding: 6px 0;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  .tcp-btn-secondary:hover {
+    color: #fcce3a;
   }
 
   /* ── Dedicated Tribute Section ── */
@@ -366,17 +483,47 @@
 </style>
 
 <div class="tcp-pushpa-page" id="tcp-pushpa-page-root">
-  <!-- Hero Section -->
+  <!-- Hero Section with Full Image Background (Copied from Shop) -->
   <section class="tcp-pushpa-hero">
-    <div class="tcp-pushpa-hero__wash"></div>
-    <div class="tcp-pushpa-hero__content">
-      <span class="tcp-pushpa-hero__prefix">the</span>
-      <h1 class="tcp-pushpa-hero__title">Pushpa</h1>
-      <span class="tcp-pushpa-hero__caps">THE LEGACY DINNER COLLECTION 2025–26</span>
-      <div class="tcp-pushpa-hero__divider"></div>
-      <p class="tcp-pushpa-hero__concept">
-        &ldquo;A dinnerware collection born from memory, shaped by emotion &amp; carried in legacy. Pushpa is a timeless tribute to my mother’s essence and the quiet strength she left behind.&rdquo;
-      </p>
+    {% if section.settings.hero_image != blank %}
+      <img
+        src="{{ section.settings.hero_image | image_url: width: 2200 }}"
+        alt="{{ section.settings.hero_image.alt | default: 'Pushpa Legacy Tableware Collection' | escape }}"
+        class="tcp-pushpa-hero__bg"
+        loading="eager"
+      >
+    {% else %}
+      <img
+        src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=2200&auto=format&fit=crop"
+        alt="Pushpa Legacy Dinner Sets"
+        class="tcp-pushpa-hero__bg"
+        loading="eager"
+      >
+    {% endif %}
+
+    <div class="tcp-pushpa-hero__overlay"></div>
+
+    <div class="tcp-pushpa-container">
+      <div class="tcp-pushpa-hero__content">
+        <span class="tcp-pushpa-hero__pill">{{ section.settings.hero_pill | default: 'INTRODUCING' }}</span>
+        <h1 class="tcp-pushpa-hero__title">{{ section.settings.hero_title | default: 'Pushpa' }}</h1>
+        <span class="tcp-pushpa-hero__caps">{{ section.settings.hero_caps | default: 'THE LEGACY DINNER COLLECTION' }}</span>
+        <p class="tcp-pushpa-hero__desc">
+          {{ section.settings.hero_desc | default: 'Seven designs. Seven expressions.' }}
+        </p>
+        <div class="tcp-pushpa-hero__actions">
+          {% if section.settings.hero_btn_text != blank %}
+            <a href="{{ section.settings.hero_btn_url | default: '#expressions' }}" class="tcp-btn-primary">
+              {{ section.settings.hero_btn_text }} &rarr;
+            </a>
+          {% endif %}
+          {% if section.settings.hero_link_text != blank %}
+            <a href="{{ section.settings.hero_link_url | default: '/pages/story' }}" class="tcp-btn-secondary">
+              {{ section.settings.hero_link_text }} &rarr;
+            </a>
+          {% endif %}
+        </div>
+      </div>
     </div>
   </section>
 
@@ -609,6 +756,64 @@
   "tag": "section",
   "class": "tcp-pushpa-section",
   "settings": [
+    {
+      "type": "header",
+      "content": "1. Hero Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Background Image"
+    },
+    {
+      "type": "text",
+      "id": "hero_pill",
+      "label": "Hero Eyebrow (Pill)",
+      "default": "INTRODUCING"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "Pushpa"
+    },
+    {
+      "type": "text",
+      "id": "hero_caps",
+      "label": "Hero Subtitle (All-Caps)",
+      "default": "THE LEGACY DINNER COLLECTION"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_desc",
+      "label": "Hero Tagline / Description",
+      "default": "Seven designs. Seven expressions."
+    },
+    {
+      "type": "text",
+      "id": "hero_btn_text",
+      "label": "Hero Primary Button Text",
+      "default": "DISCOVER PUSHPA"
+    },
+    {
+      "type": "url",
+      "id": "hero_btn_url",
+      "label": "Hero Primary Button URL"
+    },
+    {
+      "type": "text",
+      "id": "hero_link_text",
+      "label": "Hero Secondary Link Text"
+    },
+    {
+      "type": "url",
+      "id": "hero_link_url",
+      "label": "Hero Secondary Link URL"
+    },
+    {
+      "type": "header",
+      "content": "2. Expression Images"
+    },
     { "type": "image_picker", "id": "smriti_img", "label": "Smriti set image" },
     { "type": "image_picker", "id": "shakti_img", "label": "Shakti set image" },
     { "type": "image_picker", "id": "shringaar_img", "label": "Shringaar set image" }

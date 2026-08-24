@@ -1,437 +1,428 @@
 {% comment %}
   ============================================================
-  THE CREATIVE PLATTER — Build Your Table Customizer
+  THE CREATIVE PLATTER — Build Your Table Section
   ============================================================
-  Interactive tablescape customizer inspired by Nicobar D2C
-  rituals: Dinner Plate + Quarter Plate + Katori Bowl + Linen.
+  Clean editorial formula cards:
+  Plate + Bowl + Linen + Cutlery = Your Set
+  Matching Material & Craft card style and typography.
   Copy into Shopify: sections/section-home-build-table.liquid
 {% endcomment %}
 
 <style>
-  .tcp-build {
-    background-color: var(--tcp-white, #FFFFFF);
-    padding: 100px 0;
+  .tcp-build-section {
+    padding: 70px 0;
+    background: #FFFFFF;
+    border-bottom: 1px solid #F2EFEA;
     position: relative;
-    overflow: hidden;
   }
 
-  .tcp-build__inner {
-    max-width: 1440px;
+  .tcp-build-container {
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 40px;
   }
 
-  .tcp-build__header {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto 56px;
-  }
-
-  .tcp-build__label {
-    font-family: var(--font-sans, sans-serif);
-    font-size: 10.5px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--tcp-gold, #C29B38);
-    display: block;
-    margin-bottom: 8px;
-  }
-
-  .tcp-build__title {
-    font-family: var(--font-serif, serif);
-    font-size: clamp(34px, 4.5vw, 52px);
-    font-weight: 400;
-    color: var(--tcp-dark, #1F1D1B);
-    line-height: 1.1;
-    margin: 0 0 16px;
-  }
-
-  .tcp-build__subtitle {
-    font-family: var(--font-sans, sans-serif);
-    font-size: 15px;
-    color: var(--tcp-muted, #68625B);
-    line-height: 1.7;
-  }
-
-  /* ── Interactive Builder Layout ── */
-  .tcp-build__builder-grid {
+  .tcp-build-layout {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 48px;
+    grid-template-columns: 195px 1fr;
+    gap: 36px;
     align-items: center;
-    background: var(--tcp-sand, #FBF9F5);
-    border: 1px solid var(--tcp-border, #E8E2D8);
-    border-radius: 6px;
-    padding: 48px;
   }
 
-  /* ── Left: Interactive Layer Selectors ── */
-  .tcp-build__steps {
+  .tcp-build-info {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    justify-content: flex-start;
+    padding-right: 8px;
   }
 
-  .tcp-build__step-row {
-    background: var(--tcp-white, #FFFFFF);
-    border: 1px solid var(--tcp-border, #E8E2D8);
-    border-radius: 4px;
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    transition: all 0.3s var(--ease-fluid);
+  .tcp-build-info__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(26px, 2.5vw, 34px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: #2D2A27;
+    margin: 0 0 12px;
   }
 
-  .tcp-build__step-row:hover,
-  .tcp-build__step-row.is-selected {
-    border-color: var(--tcp-gold, #C29B38);
-    box-shadow: 0 4px 16px rgba(194, 155, 56, 0.12);
-  }
-
-  .tcp-build__step-row.is-selected {
-    background: var(--tcp-warm-card, #FAF7F2);
-  }
-
-  .tcp-build__step-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .tcp-build__step-num {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--tcp-stone, #F3EFEA);
-    color: var(--tcp-dark, #1F1D1B);
-    font-size: 11px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  }
-
-  .tcp-build__step-row.is-selected .tcp-build__step-num {
-    background: var(--tcp-gold, #C29B38);
-    color: #FFFFFF;
-  }
-
-  .tcp-build__step-info h4 {
-    font-family: var(--font-serif, serif);
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--tcp-dark, #1F1D1B);
-    margin: 0 0 2px;
-  }
-
-  .tcp-build__step-info p {
-    font-family: var(--font-sans, sans-serif);
-    font-size: 12px;
-    color: var(--tcp-muted, #68625B);
-    margin: 0;
-  }
-
-  .tcp-build__step-toggle {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--tcp-brown, #352922);
-  }
-
-  .tcp-build__checkbox {
-    width: 20px;
-    height: 20px;
-    border: 1.5px solid var(--tcp-border-dark, #C9BFB0);
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #FFF;
-    transition: all 0.2s ease;
-  }
-
-  .tcp-build__step-row.is-selected .tcp-build__checkbox {
-    background: var(--tcp-gold, #C29B38);
-    border-color: var(--tcp-gold, #C29B38);
-    color: #FFF;
-  }
-
-  /* ── Right: Live Visual Tablescape Stack ── */
-  .tcp-build__preview-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .tcp-build__visual-stack {
-    position: relative;
-    width: 320px;
-    height: 320px;
-    margin: 0 auto 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Layered Plates Animation */
-  .tcp-stack-layer {
-    position: absolute;
-    border-radius: 50%;
-    transition: transform 0.6s var(--ease-fluid), opacity 0.4s ease;
-    box-shadow: 0 10px 24px rgba(31, 29, 27, 0.12);
-  }
-
-  .tcp-stack-layer--charger {
-    width: 280px;
-    height: 280px;
-    background: #F4EFE6;
-    border: 3px solid #C29B38;
-    z-index: 1;
-  }
-
-  .tcp-stack-layer--dinner {
-    width: 220px;
-    height: 220px;
-    background: #FAF8F4;
-    border: 2px solid #DFBA5E;
-    z-index: 2;
-  }
-
-  .tcp-stack-layer--side {
-    width: 160px;
-    height: 160px;
-    background: #F4EFE6;
-    border: 2px solid #C29B38;
-    z-index: 3;
-  }
-
-  .tcp-stack-layer--katori {
-    width: 100px;
-    height: 100px;
-    background: #FFFFFF;
-    border: 2px solid #DFBA5E;
-    z-index: 4;
-  }
-
-  .tcp-build__summary-box {
-    width: 100%;
-    background: var(--tcp-white, #FFFFFF);
-    border: 1px solid var(--tcp-border, #E8E2D8);
-    border-radius: 4px;
-    padding: 24px;
-    text-align: left;
-  }
-
-  .tcp-build__summary-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+  .tcp-build-info__bar {
+    width: 32px;
+    height: 1.5px;
+    background: #A6732E;
     margin-bottom: 12px;
   }
 
-  .tcp-build__summary-title {
-    font-family: var(--font-serif, serif);
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--tcp-dark, #1F1D1B);
+  .tcp-build-info__desc {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13px;
+    line-height: 1.6;
+    color: #5C5650;
+    margin: 0 0 20px;
   }
 
-  .tcp-build__summary-count {
-    font-family: var(--font-sans, sans-serif);
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--tcp-gold-hover, #A8822B);
-  }
-
-  .tcp-build__action-btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-family: var(--font-sans, sans-serif);
-    font-size: 11px;
+  .tcp-build-info__link {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10.5px;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #FFFFFF;
-    background: var(--tcp-dark, #1F1D1B);
-    padding: 14px;
+    color: #2D2A27;
     text-decoration: none;
-    border-radius: 2px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s var(--ease-fluid);
-    margin-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease, gap 0.2s ease;
   }
 
-  .tcp-build__action-btn:hover {
-    background: var(--tcp-gold, #C29B38);
+  .tcp-build-info__link:hover {
+    color: #A6732E;
+    gap: 12px;
   }
 
-  /* ── Responsive ── */
-  @media (max-width: 1024px) {
-    .tcp-build__builder-grid {
-      grid-template-columns: 1fr;
-      padding: 32px;
+  .tcp-formula-wrapper {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .tcp-formula-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .tcp-formula-item {
+    flex: 1;
+    text-align: left;
+    min-width: 0;
+    padding: 0 2px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .tcp-formula-item:hover {
+    transform: translateY(-2px);
+  }
+
+  .tcp-formula-item__img-wrap {
+    width: 100%;
+    aspect-ratio: 1.1 / 1;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background: #F6F3EE;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(45, 42, 39, 0.04);
+    border: 1px solid rgba(220, 215, 205, 0.5);
+  }
+
+  .tcp-formula-item__step-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #2D2A27;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(4px);
+    padding: 2px 6px;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    z-index: 2;
+  }
+
+  .tcp-formula-item__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .tcp-formula-item:hover .tcp-formula-item__img {
+    transform: scale(1.04);
+  }
+
+  .tcp-formula-item__title {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    color: #545454;
+    margin: 0 0 2px;
+    white-space: normal;
+    word-break: normal;
+    line-height: 1.3;
+  }
+
+  .tcp-formula-item__sub {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10.5px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    color: #8E8981;
+    margin: 0;
+    white-space: normal;
+    word-break: normal;
+    line-height: 1.3;
+  }
+
+  .tcp-formula-symbol {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: #B5AFA7;
+    flex-shrink: 0;
+    width: 16px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 42px;
+    user-select: none;
+  }
+
+  .tcp-formula-hint {
+    display: none;
+  }
+
+  /* Tablet & Mobile Breakpoints */
+  @media (max-width: 900px) {
+    .tcp-build-section {
+      padding: 50px 0;
     }
-  }
 
-  @media (max-width: 600px) {
-    .tcp-build {
-      padding: 60px 0;
-    }
-    .tcp-build__inner {
+    .tcp-build-container {
       padding: 0 20px;
     }
-    .tcp-build__builder-grid {
-      padding: 20px;
+
+    .tcp-build-layout {
+      grid-template-columns: 1fr;
+      gap: 28px;
     }
-    .tcp-build__visual-stack {
-      width: 240px;
-      height: 240px;
+
+    .tcp-formula-wrapper {
+      position: relative;
     }
-    .tcp-stack-layer--charger { width: 220px; height: 220px; }
-    .tcp-stack-layer--dinner { width: 170px; height: 170px; }
-    .tcp-stack-layer--side { width: 120px; height: 120px; }
-    .tcp-stack-layer--katori { width: 80px; height: 80px; }
+
+    .tcp-formula-row {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 4px 14px 4px;
+      margin: 0 -15px;
+      padding-left: 15px;
+      padding-right: 15px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .tcp-formula-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tcp-formula-item {
+      flex: 0 0 145px;
+      width: 145px;
+      min-width: 145px;
+      scroll-snap-align: start;
+      padding: 0;
+    }
+
+    .tcp-formula-item__img-wrap {
+      min-height: 130px;
+      margin-bottom: 10px;
+    }
+
+    .tcp-formula-item__title {
+      font-size: 11.5px;
+      white-space: normal;
+    }
+
+    .tcp-formula-item__sub {
+      font-size: 10.5px;
+      white-space: normal;
+    }
+
+    .tcp-formula-symbol {
+      flex: 0 0 18px;
+      width: 18px;
+      font-size: 22px;
+      margin-top: 55px;
+      display: flex;
+    }
+
+    .tcp-formula-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #A6732E;
+      margin-top: 4px;
+    }
+
+    .tcp-formula-hint svg {
+      width: 12px;
+      height: 12px;
+      animation: swipeBounce 1.5s infinite ease-in-out;
+    }
+
+    @keyframes swipeBounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(4px); }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .tcp-formula-item {
+      flex: 0 0 135px;
+      width: 135px;
+      min-width: 135px;
+    }
+
+    .tcp-formula-item__img-wrap {
+      min-height: 120px;
+    }
+
+    .tcp-formula-symbol {
+      flex: 0 0 14px;
+      width: 14px;
+      font-size: 20px;
+      margin-top: 50px;
+    }
   }
 </style>
 
-<section class="tcp-build" id="tcp-build-table">
-  <div class="tcp-build__inner">
-    <div class="tcp-build__header">
-      <span class="tcp-build__label">{{ section.settings.label | default: 'BESPOKE RITUAL' }}</span>
-      <h2 class="tcp-build__title">{{ section.settings.heading | default: 'Build Your Tablescape' }}</h2>
-      <p class="tcp-build__subtitle">
-        {{ section.settings.description | default: 'Mix & match organic handcrafted elements to curate a dining ritual that settles quietly into your home.' }}
-      </p>
-    </div>
-
-    <div class="tcp-build__builder-grid">
-      <!-- Left: Interactive Selectors -->
-      <div class="tcp-build__steps" id="tcp-build-steps">
-        <div class="tcp-build__step-row is-selected" data-layer="charger">
-          <div class="tcp-build__step-left">
-            <span class="tcp-build__step-num">1</span>
-            <div class="tcp-build__step-info">
-              <h4>Pushpa Smriti Base Charger (11.5")</h4>
-              <p>Mould-free raw contour with 24k gold leaf rim accent</p>
-            </div>
-          </div>
-          <div class="tcp-build__step-toggle">
-            <span class="tcp-build__checkbox">&check;</span>
-          </div>
-        </div>
-
-        <div class="tcp-build__step-row is-selected" data-layer="dinner">
-          <div class="tcp-build__step-left">
-            <span class="tcp-build__step-num">2</span>
-            <div class="tcp-build__step-info">
-              <h4>Shakti Stoneware Dinner Plate (10")</h4>
-              <p>Architectural weight, crackle glaze tactile surface</p>
-            </div>
-          </div>
-          <div class="tcp-build__step-toggle">
-            <span class="tcp-build__checkbox">&check;</span>
-          </div>
-        </div>
-
-        <div class="tcp-build__step-row is-selected" data-layer="side">
-          <div class="tcp-build__step-left">
-            <span class="tcp-build__step-num">3</span>
-            <div class="tcp-build__step-info">
-              <h4>Shringaar Salad &amp; Side Plate (7.5")</h4>
-              <p>Delicate hand-pinched contour with gold brushwork</p>
-            </div>
-          </div>
-          <div class="tcp-build__step-toggle">
-            <span class="tcp-build__checkbox">&check;</span>
-          </div>
-        </div>
-
-        <div class="tcp-build__step-row is-selected" data-layer="katori">
-          <div class="tcp-build__step-left">
-            <span class="tcp-build__step-num">4</span>
-            <div class="tcp-build__step-info">
-              <h4>Karuna Tasting &amp; Katori Bowl (4.5")</h4>
-              <p>Organic nesting bowl shaped by Gurugram women artisans</p>
-            </div>
-          </div>
-          <div class="tcp-build__step-toggle">
-            <span class="tcp-build__checkbox">&check;</span>
-          </div>
+<section class="tcp-build-section" id="tcp-build-table">
+  <div class="tcp-build-container">
+    <div class="tcp-build-layout">
+      <div class="tcp-build-info">
+        <h2 class="tcp-build-info__title">{{ section.settings.build_title | default: 'Build Your Table' }}</h2>
+        <div class="tcp-build-info__bar"></div>
+        <p class="tcp-build-info__desc">
+          {{ section.settings.build_desc | default: "Mix, match and create a set that's uniquely yours." }}
+        </p>
+        {% if section.settings.build_link_text != blank %}
+          <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-build-info__link">
+            {{ section.settings.build_link_text }} &rarr;
+          </a>
+        {% endif %}
+        <div class="tcp-formula-hint">
+          <span>Swipe steps</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </div>
       </div>
 
-      <!-- Right: Live Stack Preview -->
-      <div class="tcp-build__preview-panel">
-        <div class="tcp-build__visual-stack" id="tcp-visual-stack">
-          <div class="tcp-stack-layer tcp-stack-layer--charger" id="layer-charger"></div>
-          <div class="tcp-stack-layer tcp-stack-layer--dinner" id="layer-dinner"></div>
-          <div class="tcp-stack-layer tcp-stack-layer--side" id="layer-side"></div>
-          <div class="tcp-stack-layer tcp-stack-layer--katori" id="layer-katori"></div>
-        </div>
+      <div class="tcp-formula-wrapper">
+        <div class="tcp-formula-row">
+          <!-- Step 1: Plate -->
+          <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item">
+            <div class="tcp-formula-item__img-wrap">
+              <span class="tcp-formula-item__step-badge">01</span>
+              {% if section.settings.step_1_image != blank %}
+                <img src="{{ section.settings.step_1_image | image_url: width: 400 }}" alt="Plate" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590736969955-71cc94801759?q=80&w=400&auto=format&fit=crop';">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1590736969955-71cc94801759?q=80&w=400&auto=format&fit=crop" alt="Plate" class="tcp-formula-item__img" loading="lazy">
+              {% endif %}
+            </div>
+            <h4 class="tcp-formula-item__title">{{ section.settings.step_1_title | default: 'Plate' }}</h4>
+            {% if section.settings.step_1_sub != blank %}
+              <p class="tcp-formula-item__sub">{{ section.settings.step_1_sub }}</p>
+            {% endif %}
+          </a>
 
-        <div class="tcp-build__summary-box">
-          <div class="tcp-build__summary-header">
-            <span class="tcp-build__summary-title">Custom Curated Setting</span>
-            <span class="tcp-build__summary-count" id="tcp-build-count">4 Selected Elements</span>
-          </div>
-          <p style="font-size:12px; color:var(--tcp-muted); margin:0 0 16px;">
-            Crafted from recycled ceramic clay, zero waste, high fired at 1280°C. Safe for dishwasher and microwave.
-          </p>
-          <a href="/cart/add" class="tcp-build__action-btn" id="tcp-build-cta">
-            <span>Curate This Tablescape &rarr;</span>
+          <div class="tcp-formula-symbol">+</div>
+
+          <!-- Step 2: Bowl -->
+          <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item">
+            <div class="tcp-formula-item__img-wrap">
+              <span class="tcp-formula-item__step-badge">02</span>
+              {% if section.settings.step_2_image != blank %}
+                <img src="{{ section.settings.step_2_image | image_url: width: 400 }}" alt="Bowl" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=400&auto=format&fit=crop';">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=400&auto=format&fit=crop" alt="Bowl" class="tcp-formula-item__img" loading="lazy">
+              {% endif %}
+            </div>
+            <h4 class="tcp-formula-item__title">{{ section.settings.step_2_title | default: 'Bowl' }}</h4>
+            {% if section.settings.step_2_sub != blank %}
+              <p class="tcp-formula-item__sub">{{ section.settings.step_2_sub }}</p>
+            {% endif %}
+          </a>
+
+          <div class="tcp-formula-symbol">+</div>
+
+          <!-- Step 3: Linen -->
+          <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item">
+            <div class="tcp-formula-item__img-wrap">
+              <span class="tcp-formula-item__step-badge">03</span>
+              {% if section.settings.step_3_image != blank %}
+                <img src="{{ section.settings.step_3_image | image_url: width: 400 }}" alt="Linen" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=400&auto=format&fit=crop';">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=400&auto=format&fit=crop" alt="Linen" class="tcp-formula-item__img" loading="lazy">
+              {% endif %}
+            </div>
+            <h4 class="tcp-formula-item__title">{{ section.settings.step_3_title | default: 'Linen' }}</h4>
+            {% if section.settings.step_3_sub != blank %}
+              <p class="tcp-formula-item__sub">{{ section.settings.step_3_sub }}</p>
+            {% endif %}
+          </a>
+
+          <div class="tcp-formula-symbol">+</div>
+
+          <!-- Step 4: Cutlery -->
+          <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item">
+            <div class="tcp-formula-item__img-wrap">
+              <span class="tcp-formula-item__step-badge">04</span>
+              {% if section.settings.step_4_image != blank %}
+                <img src="{{ section.settings.step_4_image | image_url: width: 400 }}" alt="Cutlery" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1615865417491-9941019fbc00?q=80&w=400&auto=format&fit=crop';">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1615865417491-9941019fbc00?q=80&w=400&auto=format&fit=crop" alt="Cutlery" class="tcp-formula-item__img" loading="lazy">
+              {% endif %}
+            </div>
+            <h4 class="tcp-formula-item__title">{{ section.settings.step_4_title | default: 'Cutlery' }}</h4>
+            {% if section.settings.step_4_sub != blank %}
+              <p class="tcp-formula-item__sub">{{ section.settings.step_4_sub }}</p>
+            {% endif %}
+          </a>
+
+          <div class="tcp-formula-symbol">=</div>
+
+          <!-- Result: Your Set -->
+          <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item tcp-formula-item--result">
+            <div class="tcp-formula-item__img-wrap">
+              <span class="tcp-formula-item__step-badge" style="background:#A6732E;color:#FFF;">FINAL</span>
+              {% if section.settings.step_result_image != blank %}
+                <img src="{{ section.settings.step_result_image | image_url: width: 400 }}" alt="Your Set" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=400&auto=format&fit=crop';">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=400&auto=format&fit=crop" alt="Your Set" class="tcp-formula-item__img" loading="lazy">
+              {% endif %}
+            </div>
+            <h4 class="tcp-formula-item__title">{{ section.settings.step_result_title | default: 'Your Set' }}</h4>
+            {% if section.settings.step_result_sub != blank %}
+              <p class="tcp-formula-item__sub">{{ section.settings.step_result_sub }}</p>
+            {% endif %}
           </a>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<script>
-  (function() {
-    const stepRows = document.querySelectorAll('.tcp-build__step-row');
-    const countEl = document.getElementById('tcp-build-count');
-
-    stepRows.forEach(row => {
-      row.addEventListener('click', () => {
-        const layer = row.getAttribute('data-layer');
-        const targetLayer = document.getElementById('layer-' + layer);
-        
-        row.classList.toggle('is-selected');
-        const checkbox = row.querySelector('.tcp-build__checkbox');
-
-        if (row.classList.contains('is-selected')) {
-          checkbox.innerHTML = '&check;';
-          if (targetLayer) {
-            targetLayer.style.opacity = '1';
-            targetLayer.style.transform = 'scale(1)';
-          }
-        } else {
-          checkbox.innerHTML = '';
-          if (targetLayer) {
-            targetLayer.style.opacity = '0';
-            targetLayer.style.transform = 'scale(0.8)';
-          }
-        }
-
-        const selectedCount = document.querySelectorAll('.tcp-build__step-row.is-selected').length;
-        if (countEl) {
-          countEl.textContent = selectedCount + ' Selected Element' + (selectedCount === 1 ? '' : 's');
-        }
-      });
-    });
-  })();
-</script>
 
 {% schema %}
 {
@@ -441,21 +432,106 @@
   "settings": [
     {
       "type": "text",
-      "id": "label",
-      "label": "Top label",
-      "default": "BESPOKE RITUAL"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Section heading",
-      "default": "Build Your Tablescape"
+      "id": "build_title",
+      "label": "Build Heading",
+      "default": "Build Your Table"
     },
     {
       "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "Mix & match organic handcrafted elements to curate a dining ritual that settles quietly into your home."
+      "id": "build_desc",
+      "label": "Build Description",
+      "default": "Mix, match and create a set that's uniquely yours."
+    },
+    {
+      "type": "text",
+      "id": "build_link_text",
+      "label": "Build Link Text",
+      "default": "START BUILDING"
+    },
+    {
+      "type": "url",
+      "id": "build_link_url",
+      "label": "Build Link URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_1_image",
+      "label": "Step 1 Image (Plate)"
+    },
+    {
+      "type": "text",
+      "id": "step_1_title",
+      "label": "Step 1 Title",
+      "default": "Plate"
+    },
+    {
+      "type": "text",
+      "id": "step_1_sub",
+      "label": "Step 1 Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_2_image",
+      "label": "Step 2 Image (Bowl)"
+    },
+    {
+      "type": "text",
+      "id": "step_2_title",
+      "label": "Step 2 Title",
+      "default": "Bowl"
+    },
+    {
+      "type": "text",
+      "id": "step_2_sub",
+      "label": "Step 2 Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_3_image",
+      "label": "Step 3 Image (Linen)"
+    },
+    {
+      "type": "text",
+      "id": "step_3_title",
+      "label": "Step 3 Title",
+      "default": "Linen"
+    },
+    {
+      "type": "text",
+      "id": "step_3_sub",
+      "label": "Step 3 Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_4_image",
+      "label": "Step 4 Image (Cutlery)"
+    },
+    {
+      "type": "text",
+      "id": "step_4_title",
+      "label": "Step 4 Title",
+      "default": "Cutlery"
+    },
+    {
+      "type": "text",
+      "id": "step_4_sub",
+      "label": "Step 4 Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_result_image",
+      "label": "Result Image (Your Set)"
+    },
+    {
+      "type": "text",
+      "id": "step_result_title",
+      "label": "Result Title",
+      "default": "Your Set"
+    },
+    {
+      "type": "text",
+      "id": "step_result_sub",
+      "label": "Result Subtitle"
     }
   ],
   "presets": [
