@@ -1,0 +1,129 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Pushpa Dedication & Tribute Section
+  ============================================================
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  .tcp-pushpa-tribute {
+    background: #FFFFFF;
+    padding: 85px 0;
+    border-bottom: 1px solid #ECE7DF;
+  }
+
+  .tcp-pushpa-tribute__inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 40px;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-pushpa-tribute {
+      padding: 60px 0;
+    }
+    .tcp-pushpa-tribute__inner {
+      padding: 0 20px;
+    }
+  }
+
+  .tcp-pushpa-tribute__label {
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #A6732E;
+    display: block;
+    margin-bottom: 18px;
+  }
+
+  .tcp-pushpa-tribute__quote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(26px, 3.5vw, 38px);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.35;
+    color: #2D2A27;
+    margin: 0 0 28px;
+    letter-spacing: -0.3px;
+  }
+
+  .tcp-pushpa-tribute__bar {
+    width: 36px;
+    height: 1.5px;
+    background: #A6732E;
+    margin: 0 auto 28px;
+  }
+
+  .tcp-pushpa-tribute__body {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 15px;
+    color: #5C5650;
+    line-height: 1.85;
+    text-align: justify;
+    text-align-last: center;
+    margin: 0 auto;
+    max-width: 820px;
+  }
+</style>
+
+<section class="tcp-pushpa-tribute" id="tcp-pushpa-tribute-root">
+  <div class="tcp-pushpa-tribute__inner">
+    <span class="tcp-pushpa-tribute__label">{{ section.settings.tribute_label | default: 'THE DEDICATION & CONCEPT' }}</span>
+    <h2 class="tcp-pushpa-tribute__quote">
+      “{{ section.settings.tribute_quote | default: 'Memory enters life through the things we touch, use and cherish.' }}”
+    </h2>
+    <div class="tcp-pushpa-tribute__bar"></div>
+    <div class="tcp-pushpa-tribute__body">
+      {% if section.settings.tribute_body != blank %}
+        {{ section.settings.tribute_body }}
+      {% else %}
+        <p>
+          The collection is dedicated to my mother, <strong>Pushpa</strong>, an artist and entrepreneur whom I lost a few years ago. It is an expression of the enduring presence of someone who may no longer be physically present, but whose memory continues to live through the objects we create.
+        </p>
+        <br>
+        <p>
+          <strong>Smriti</strong> explores how memory can be translated into objects that become part of everyday rituals. The collection deliberately embraces the raw and organic character of clay, rather than pursuing industrial uniformity. Each object retains subtle variations in form, contour, texture, and edge. These are not imperfections to be corrected, but traces of the material and the maker's hand.
+        </p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pushpa — Dedication",
+  "tag": "section",
+  "class": "tcp-pushpa-tribute-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tribute_label",
+      "label": "Eyebrow Label",
+      "default": "THE DEDICATION & CONCEPT"
+    },
+    {
+      "type": "textarea",
+      "id": "tribute_quote",
+      "label": "Quote Heading",
+      "default": "Memory enters life through the things we touch, use and cherish."
+    },
+    {
+      "type": "richtext",
+      "id": "tribute_body",
+      "label": "Tribute Story Content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pushpa — Dedication"
+    }
+  ]
+}
+{% endschema %}

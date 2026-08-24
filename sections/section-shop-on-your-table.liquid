@@ -1,0 +1,224 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Shop On Your Table Showcase
+  ============================================================
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  .tcp-table-showcase {
+    position: relative;
+    width: 100%;
+    min-height: 520px;
+    background: #1A1815;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .tcp-table-showcase__bg-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .tcp-table-showcase__bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tcp-table-showcase:hover .tcp-table-showcase__bg {
+    transform: scale(1.03);
+  }
+
+  .tcp-table-showcase__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.3) 100%);
+    pointer-events: none;
+  }
+
+  .tcp-table-showcase__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    width: 100%;
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-table-showcase {
+      min-height: 440px;
+    }
+    .tcp-table-showcase__container {
+      padding: 40px 20px;
+    }
+  }
+
+  .tcp-table-showcase__card {
+    background: rgba(22, 20, 18, 0.78);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
+    border-radius: 6px;
+    padding: 44px 40px;
+    max-width: 440px;
+    color: #FFFFFF;
+  }
+
+  @media (max-width: 480px) {
+    .tcp-table-showcase__card {
+      padding: 32px 24px;
+      max-width: 100%;
+    }
+  }
+
+  .tcp-table-showcase__pill {
+    display: inline-block;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    color: #fcce3a;
+    margin-bottom: 12px;
+  }
+
+  .tcp-table-showcase__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(32px, 3.8vw, 44px);
+    font-weight: 400;
+    color: #FFFFFF;
+    margin: 0 0 14px;
+    line-height: 1.12;
+    letter-spacing: -0.3px;
+  }
+
+  .tcp-table-showcase__bar {
+    width: 36px;
+    height: 1.5px;
+    background: #fcce3a;
+    margin-bottom: 18px;
+  }
+
+  .tcp-table-showcase__desc {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 28px;
+  }
+
+  .tcp-table-showcase__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #A6732E;
+    color: #FFFFFF;
+    padding: 13px 26px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(166, 115, 46, 0.25);
+    border-radius: 2px;
+  }
+
+  .tcp-table-showcase__btn:hover {
+    background: #8C5F22;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(166, 115, 46, 0.4);
+  }
+</style>
+
+<section class="tcp-table-showcase" id="tcp-on-your-table-root">
+  <div class="tcp-table-showcase__bg-wrap">
+    {% if section.settings.showcase_image != blank %}
+      <img src="{{ section.settings.showcase_image | image_url: width: 2200 }}" alt="{{ section.settings.showcase_title | default: 'On Your Table' | escape }}" class="tcp-table-showcase__bg" loading="lazy">
+    {% else %}
+      <img src="https://images.unsplash.com/photo-1615865417491-9941019fbc00?q=80&w=2200&auto=format&fit=crop" alt="On Your Table" class="tcp-table-showcase__bg" loading="lazy">
+    {% endif %}
+    <div class="tcp-table-showcase__overlay"></div>
+  </div>
+
+  <div class="tcp-table-showcase__container">
+    <div class="tcp-table-showcase__card">
+      <span class="tcp-table-showcase__pill">{{ section.settings.showcase_pill | default: 'IN REAL HOMES & LIVING SPACES' }}</span>
+      <h3 class="tcp-table-showcase__title">{{ section.settings.showcase_title | default: 'On Your Table' }}</h3>
+      <div class="tcp-table-showcase__bar"></div>
+      <p class="tcp-table-showcase__desc">{{ section.settings.showcase_desc | default: 'Designed to be used. Loved. Lived with. Handcrafted ceramics that participate quietly in the human ritual of gathering.' }}</p>
+      {% if section.settings.showcase_link_text != blank %}
+        <a href="{{ section.settings.showcase_link_url | default: '/pages/story' }}" class="tcp-table-showcase__btn">
+          {{ section.settings.showcase_link_text }} &rarr;
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop — On Your Table",
+  "tag": "section",
+  "class": "tcp-shop-on-your-table-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "showcase_image",
+      "label": "Showcase Background Image"
+    },
+    {
+      "type": "text",
+      "id": "showcase_pill",
+      "label": "Eyebrow Pill",
+      "default": "IN REAL HOMES & LIVING SPACES"
+    },
+    {
+      "type": "text",
+      "id": "showcase_title",
+      "label": "Heading",
+      "default": "On Your Table"
+    },
+    {
+      "type": "textarea",
+      "id": "showcase_desc",
+      "label": "Description",
+      "default": "Designed to be used. Loved. Lived with. Handcrafted ceramics that participate quietly in the human ritual of gathering."
+    },
+    {
+      "type": "text",
+      "id": "showcase_link_text",
+      "label": "Button Text",
+      "default": "SEE IT IN HOMES"
+    },
+    {
+      "type": "url",
+      "id": "showcase_link_url",
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop — On Your Table"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,442 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Shop Signature Sets Section
+  ============================================================
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  .tcp-sets-section {
+    padding: 80px 0;
+    background: #FFFFFF;
+    border-bottom: 1px solid #F2EFEA;
+  }
+
+  .tcp-sets-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-sets-container {
+      padding: 0 20px;
+    }
+  }
+
+  .tcp-sets-emblem {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  .tcp-sets-emblem svg {
+    width: 24px;
+    height: 24px;
+    color: #A6732E;
+  }
+
+  .tcp-editorial-split {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 48px;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 1024px) {
+    .tcp-editorial-split {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  .tcp-editorial-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 10px;
+  }
+
+  .tcp-editorial-info__pill {
+    display: inline-block;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    color: #A6732E;
+    margin-bottom: 12px;
+  }
+
+  .tcp-editorial-info__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 3.2vw, 38px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: #2D2A27;
+    margin: 0 0 16px;
+    letter-spacing: -0.3px;
+  }
+
+  .tcp-editorial-info__bar {
+    width: 32px;
+    height: 1.5px;
+    background: #A6732E;
+    margin-bottom: 16px;
+  }
+
+  .tcp-editorial-info__desc {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #5C5650;
+    margin: 0 0 28px;
+  }
+
+  .tcp-editorial-info__link {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #2D2A27;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+
+  .tcp-editorial-info__link:hover {
+    color: #A6732E;
+    gap: 12px;
+  }
+
+  /* 2-Row Mosaic Grid */
+  .tcp-sets-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    grid-template-rows: 240px 240px;
+    gap: 14px;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-sets-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 200px 200px 200px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tcp-sets-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+    .tcp-sets-grid .tcp-set-card {
+      min-height: 240px;
+    }
+  }
+
+  .tcp-set-card {
+    position: relative;
+    background: #EDE9E3;
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 4px;
+    box-shadow: 0 4px 14px rgba(45, 42, 39, 0.06);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  }
+
+  .tcp-set-card--feature {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    height: 100%;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-set-card--feature {
+      grid-column: 1 / -1;
+      height: 280px;
+    }
+  }
+
+  .tcp-set-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(45, 42, 39, 0.16);
+  }
+
+  .tcp-set-card__img-wrap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .tcp-set-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tcp-set-card:hover .tcp-set-card__img {
+    transform: scale(1.05);
+  }
+
+  .tcp-set-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 35%, rgba(20, 18, 16, 0.75) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px 22px;
+    color: #FFFFFF;
+    transition: background 0.3s ease;
+  }
+
+  .tcp-set-card:hover .tcp-set-card__overlay {
+    background: linear-gradient(180deg, transparent 25%, rgba(20, 18, 16, 0.85) 100%);
+  }
+
+  .tcp-set-card__name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: #FFFFFF;
+    margin: 0 0 4px;
+    line-height: 1.1;
+    letter-spacing: -0.2px;
+  }
+
+  .tcp-set-card--feature .tcp-set-card__name {
+    font-size: 28px;
+  }
+
+  .tcp-set-card__tagline {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+  }
+
+  .tcp-set-card__badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #1A1815;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(4px);
+    padding: 3px 8px;
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+  }
+
+  .tcp-set-card--feature .tcp-set-card__badge {
+    background: #fcce3a;
+    color: #1A1815;
+  }
+</style>
+
+<section class="tcp-sets-section" id="tcp-signature-sets-root">
+  <div class="tcp-sets-emblem">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+    </svg>
+  </div>
+  <div class="tcp-sets-container">
+    <div class="tcp-editorial-split">
+      <div class="tcp-editorial-info">
+        <span class="tcp-editorial-info__pill">{{ section.settings.sets_pill | default: 'HANDCRAFTED CURATIONS' }}</span>
+        <h2 class="tcp-editorial-info__title">{{ section.settings.sets_title | default: 'Our Signature Dinner Sets' }}</h2>
+        <div class="tcp-editorial-info__bar"></div>
+        <p class="tcp-editorial-info__desc">
+          {{ section.settings.sets_desc | default: 'Five expressions. Rooted in tradition, designed for today.' }}
+        </p>
+        {% if section.settings.sets_link_text != blank %}
+          <a href="{{ section.settings.sets_link_url | default: '/collections/all' }}" class="tcp-editorial-info__link">
+            {{ section.settings.sets_link_text }} &rarr;
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="tcp-sets-grid">
+        <!-- Card 1: Smriti (Featured Large Card) -->
+        <a href="{{ section.settings.set_1_url | default: '/collections/all' }}" class="tcp-set-card tcp-set-card--feature">
+          <span class="tcp-set-card__badge">FLAGSHIP</span>
+          <div class="tcp-set-card__img-wrap">
+            {% if section.settings.set_1_image != blank %}
+              <img src="{{ section.settings.set_1_image | image_url: width: 1000 }}" alt="{{ section.settings.set_1_name | default: 'Smriti' | escape }}" class="tcp-set-card__img" loading="lazy">
+            {% else %}
+              <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=1000&auto=format&fit=crop" alt="Smriti Dinner Set" class="tcp-set-card__img" loading="lazy">
+            {% endif %}
+            <div class="tcp-set-card__overlay">
+              <h3 class="tcp-set-card__name">{{ section.settings.set_1_name | default: 'Smriti' }}</h3>
+              <p class="tcp-set-card__tagline">{{ section.settings.set_1_tagline | default: 'Timeless • Soft • Nostalgic' }}</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 2: Mrida -->
+        <a href="{{ section.settings.set_2_url | default: '/collections/all' }}" class="tcp-set-card">
+          <div class="tcp-set-card__img-wrap">
+            {% if section.settings.set_2_image != blank %}
+              <img src="{{ section.settings.set_2_image | image_url: width: 800 }}" alt="{{ section.settings.set_2_name | default: 'Mrida' | escape }}" class="tcp-set-card__img" loading="lazy">
+            {% else %}
+              <img src="https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?q=80&w=800&auto=format&fit=crop" alt="Mrida Dinner Set" class="tcp-set-card__img" loading="lazy">
+            {% endif %}
+            <div class="tcp-set-card__overlay">
+              <h3 class="tcp-set-card__name">{{ section.settings.set_2_name | default: 'Mrida' }}</h3>
+              <p class="tcp-set-card__tagline">{{ section.settings.set_2_tagline | default: 'Earthy • Raw • Grounded' }}</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 3: Rekh -->
+        <a href="{{ section.settings.set_3_url | default: '/collections/all' }}" class="tcp-set-card">
+          <div class="tcp-set-card__img-wrap">
+            {% if section.settings.set_3_image != blank %}
+              <img src="{{ section.settings.set_3_image | image_url: width: 800 }}" alt="{{ section.settings.set_3_name | default: 'Rekh' | escape }}" class="tcp-set-card__img" loading="lazy">
+            {% else %}
+              <img src="https://images.unsplash.com/photo-1590736969955-71cc94801759?q=80&w=800&auto=format&fit=crop" alt="Rekh Dinner Set" class="tcp-set-card__img" loading="lazy">
+            {% endif %}
+            <div class="tcp-set-card__overlay">
+              <h3 class="tcp-set-card__name">{{ section.settings.set_3_name | default: 'Rekh' }}</h3>
+              <p class="tcp-set-card__tagline">{{ section.settings.set_3_tagline | default: 'Minimal • Modern • Refined' }}</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 4: Viraasat -->
+        <a href="{{ section.settings.set_4_url | default: '/collections/all' }}" class="tcp-set-card">
+          <div class="tcp-set-card__img-wrap">
+            {% if section.settings.set_4_image != blank %}
+              <img src="{{ section.settings.set_4_image | image_url: width: 800 }}" alt="{{ section.settings.set_4_name | default: 'Viraasat' | escape }}" class="tcp-set-card__img" loading="lazy">
+            {% else %}
+              <img src="https://images.unsplash.com/photo-1530629013299-6cb10d168419?q=80&w=800&auto=format&fit=crop" alt="Viraasat Dinner Set" class="tcp-set-card__img" loading="lazy">
+            {% endif %}
+            <div class="tcp-set-card__overlay">
+              <h3 class="tcp-set-card__name">{{ section.settings.set_4_name | default: 'Viraasat' }}</h3>
+              <p class="tcp-set-card__tagline">{{ section.settings.set_4_tagline | default: 'Rich • Layered • Celebratory' }}</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 5: Neer -->
+        <a href="{{ section.settings.set_5_url | default: '/collections/all' }}" class="tcp-set-card">
+          <div class="tcp-set-card__img-wrap">
+            {% if section.settings.set_5_image != blank %}
+              <img src="{{ section.settings.set_5_image | image_url: width: 800 }}" alt="{{ section.settings.set_5_name | default: 'Neer' | escape }}" class="tcp-set-card__img" loading="lazy">
+            {% else %}
+              <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop" alt="Neer Dinner Set" class="tcp-set-card__img" loading="lazy">
+            {% endif %}
+            <div class="tcp-set-card__overlay">
+              <h3 class="tcp-set-card__name">{{ section.settings.set_5_name | default: 'Neer' }}</h3>
+              <p class="tcp-set-card__tagline">{{ section.settings.set_5_tagline | default: 'Light • Calm • Everyday' }}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop — Signature Sets",
+  "tag": "section",
+  "class": "tcp-shop-signature-sets-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "sets_pill",
+      "label": "Eyebrow Pill",
+      "default": "HANDCRAFTED CURATIONS"
+    },
+    {
+      "type": "text",
+      "id": "sets_title",
+      "label": "Section Heading",
+      "default": "Our Signature Dinner Sets"
+    },
+    {
+      "type": "textarea",
+      "id": "sets_desc",
+      "label": "Description",
+      "default": "Five expressions. Rooted in tradition, designed for today."
+    },
+    {
+      "type": "text",
+      "id": "sets_link_text",
+      "label": "Link Text",
+      "default": "EXPLORE ALL COLLECTIONS"
+    },
+    {
+      "type": "url",
+      "id": "sets_link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "header",
+      "content": "Set 1: Smriti (Featured Large)"
+    },
+    { "type": "image_picker", "id": "set_1_image", "label": "Set 1 Image" },
+    { "type": "text", "id": "set_1_name", "label": "Set 1 Name", "default": "Smriti" },
+    { "type": "text", "id": "set_1_tagline", "label": "Set 1 Tagline", "default": "Timeless • Soft • Nostalgic" },
+    { "type": "url", "id": "set_1_url", "label": "Set 1 URL" },
+    {
+      "type": "header",
+      "content": "Set 2: Mrida"
+    },
+    { "type": "image_picker", "id": "set_2_image", "label": "Set 2 Image" },
+    { "type": "text", "id": "set_2_name", "label": "Set 2 Name", "default": "Mrida" },
+    { "type": "text", "id": "set_2_tagline", "label": "Set 2 Tagline", "default": "Earthy • Raw • Grounded" },
+    { "type": "url", "id": "set_2_url", "label": "Set 2 URL" },
+    {
+      "type": "header",
+      "content": "Set 3: Rekh"
+    },
+    { "type": "image_picker", "id": "set_3_image", "label": "Set 3 Image" },
+    { "type": "text", "id": "set_3_name", "label": "Set 3 Name", "default": "Rekh" },
+    { "type": "text", "id": "set_3_tagline", "label": "Set 3 Tagline", "default": "Minimal • Modern • Refined" },
+    { "type": "url", "id": "set_3_url", "label": "Set 3 URL" },
+    {
+      "type": "header",
+      "content": "Set 4: Viraasat"
+    },
+    { "type": "image_picker", "id": "set_4_image", "label": "Set 4 Image" },
+    { "type": "text", "id": "set_4_name", "label": "Set 4 Name", "default": "Viraasat" },
+    { "type": "text", "id": "set_4_tagline", "label": "Set 4 Tagline", "default": "Rich • Layered • Celebratory" },
+    { "type": "url", "id": "set_4_url", "label": "Set 4 URL" },
+    {
+      "type": "header",
+      "content": "Set 5: Neer"
+    },
+    { "type": "image_picker", "id": "set_5_image", "label": "Set 5 Image" },
+    { "type": "text", "id": "set_5_name", "label": "Set 5 Name", "default": "Neer" },
+    { "type": "text", "id": "set_5_tagline", "label": "Set 5 Tagline", "default": "Light • Calm • Everyday" },
+    { "type": "url", "id": "set_5_url", "label": "Set 5 URL" }
+  ],
+  "presets": [
+    {
+      "name": "Shop — Signature Sets"
+    }
+  ]
+}
+{% endschema %}

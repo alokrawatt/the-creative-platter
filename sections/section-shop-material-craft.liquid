@@ -1,0 +1,340 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Shop Material & Craft Section
+  ============================================================
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  .tcp-craft-section {
+    padding: 75px 0;
+    background: #FFFFFF;
+    border-bottom: 1px solid #F2EFEA;
+  }
+
+  .tcp-craft-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-craft-container {
+      padding: 0 20px;
+    }
+  }
+
+  .tcp-editorial-split--side {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  @media (max-width: 1024px) {
+    .tcp-editorial-split--side {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+  }
+
+  .tcp-craft-editorial-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 10px;
+  }
+
+  .tcp-craft-editorial-info__pill {
+    display: inline-block;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    color: #A6732E;
+    margin-bottom: 12px;
+  }
+
+  .tcp-craft-editorial-info__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 3.2vw, 38px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: #2D2A27;
+    margin: 0 0 16px;
+    letter-spacing: -0.3px;
+  }
+
+  .tcp-craft-editorial-info__bar {
+    width: 32px;
+    height: 1.5px;
+    background: #A6732E;
+    margin-bottom: 16px;
+  }
+
+  .tcp-craft-editorial-info__desc {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #5C5650;
+    margin: 0 0 28px;
+  }
+
+  .tcp-craft-editorial-info__link {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #2D2A27;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+
+  .tcp-craft-editorial-info__link:hover {
+    color: #A6732E;
+    gap: 12px;
+  }
+
+  .tcp-craft-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-craft-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+  }
+
+  .tcp-craft-card {
+    text-align: left;
+    transition: transform 0.3s ease;
+  }
+
+  .tcp-craft-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .tcp-craft-card__img-wrap {
+    width: 100%;
+    aspect-ratio: 1.1 / 1;
+    overflow: hidden;
+    background: #F6F3EE;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    position: relative;
+    border: 1px solid rgba(220, 215, 205, 0.5);
+    box-shadow: 0 2px 8px rgba(45, 42, 39, 0.04);
+  }
+
+  .tcp-craft-card__badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #1A1815;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(4px);
+    padding: 2px 6px;
+    border-radius: 2px;
+    z-index: 2;
+  }
+
+  .tcp-craft-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tcp-craft-card:hover .tcp-craft-card__img {
+    transform: scale(1.05);
+  }
+
+  .tcp-craft-card__title {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    color: #545454;
+    margin: 0;
+    line-height: 1.3;
+  }
+</style>
+
+<section class="tcp-craft-section" id="tcp-material-craft-root">
+  <div class="tcp-craft-container">
+    <div class="tcp-editorial-split--side">
+      <div class="tcp-craft-editorial-info">
+        <span class="tcp-craft-editorial-info__pill">{{ section.settings.craft_pill | default: 'METICULOUS PROCESS' }}</span>
+        <h2 class="tcp-craft-editorial-info__title">{{ section.settings.craft_title | default: 'Material & Craft' }}</h2>
+        <div class="tcp-craft-editorial-info__bar"></div>
+        <p class="tcp-craft-editorial-info__desc">
+          {{ section.settings.craft_desc | default: 'Thoughtfully chosen materials. Skilled hands. Time-honoured techniques. Every piece is unique.' }}
+        </p>
+        {% if section.settings.craft_link_text != blank %}
+          <a href="{{ section.settings.craft_link_url | default: '/pages/story' }}" class="tcp-craft-editorial-info__link">
+            {{ section.settings.craft_link_text }} &rarr;
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="tcp-craft-grid">
+        <!-- Step 1: Natural Stoneware -->
+        <div class="tcp-craft-card">
+          <div class="tcp-craft-card__img-wrap">
+            <span class="tcp-craft-card__badge">01</span>
+            {% if section.settings.craft_1_image != blank %}
+              <img src="{{ section.settings.craft_1_image | image_url: width: 500 }}" alt="Natural Stoneware" class="tcp-craft-card__img" loading="lazy">
+            {% else %}
+              <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=500&auto=format&fit=crop" alt="Natural Stoneware" class="tcp-craft-card__img" loading="lazy">
+            {% endif %}
+          </div>
+          <p class="tcp-craft-card__title">{{ section.settings.craft_1_title | default: 'Natural Stoneware' }}</p>
+        </div>
+
+        <!-- Step 2: Hand-applied Glaze -->
+        <div class="tcp-craft-card">
+          <div class="tcp-craft-card__img-wrap">
+            <span class="tcp-craft-card__badge">02</span>
+            {% if section.settings.craft_2_image != blank %}
+              <img src="{{ section.settings.craft_2_image | image_url: width: 500 }}" alt="Hand-applied Glaze" class="tcp-craft-card__img" loading="lazy">
+            {% else %}
+              <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=500&auto=format&fit=crop" alt="Hand-applied Glaze" class="tcp-craft-card__img" loading="lazy">
+            {% endif %}
+          </div>
+          <p class="tcp-craft-card__title">{{ section.settings.craft_2_title | default: 'Hand-applied Glaze' }}</p>
+        </div>
+
+        <!-- Step 3: Shaped by Hand -->
+        <div class="tcp-craft-card">
+          <div class="tcp-craft-card__img-wrap">
+            <span class="tcp-craft-card__badge">03</span>
+            {% if section.settings.craft_3_image != blank %}
+              <img src="{{ section.settings.craft_3_image | image_url: width: 500 }}" alt="Shaped by Hand" class="tcp-craft-card__img" loading="lazy">
+            {% else %}
+              <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=500&auto=format&fit=crop" alt="Shaped by Hand" class="tcp-craft-card__img" loading="lazy">
+            {% endif %}
+          </div>
+          <p class="tcp-craft-card__title">{{ section.settings.craft_3_title | default: 'Shaped by Hand' }}</p>
+        </div>
+
+        <!-- Step 4: Fired to Perfection -->
+        <div class="tcp-craft-card">
+          <div class="tcp-craft-card__img-wrap">
+            <span class="tcp-craft-card__badge">04</span>
+            {% if section.settings.craft_4_image != blank %}
+              <img src="{{ section.settings.craft_4_image | image_url: width: 500 }}" alt="Fired to Perfection" class="tcp-craft-card__img" loading="lazy">
+            {% else %}
+              <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=500&auto=format&fit=crop" alt="Fired to Perfection" class="tcp-craft-card__img" loading="lazy">
+            {% endif %}
+          </div>
+          <p class="tcp-craft-card__title">{{ section.settings.craft_4_title | default: 'Fired to Perfection' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop — Material & Craft",
+  "tag": "section",
+  "class": "tcp-shop-material-craft-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "craft_pill",
+      "label": "Eyebrow Pill",
+      "default": "METICULOUS PROCESS"
+    },
+    {
+      "type": "text",
+      "id": "craft_title",
+      "label": "Craft Heading",
+      "default": "Material & Craft"
+    },
+    {
+      "type": "textarea",
+      "id": "craft_desc",
+      "label": "Craft Description",
+      "default": "Thoughtfully chosen materials. Skilled hands. Time-honoured techniques. Every piece is unique."
+    },
+    {
+      "type": "text",
+      "id": "craft_link_text",
+      "label": "Craft Link Text",
+      "default": "OUR CRAFT"
+    },
+    {
+      "type": "url",
+      "id": "craft_link_url",
+      "label": "Craft Link URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "craft_1_image",
+      "label": "Craft 1 Image"
+    },
+    {
+      "type": "text",
+      "id": "craft_1_title",
+      "label": "Craft 1 Title",
+      "default": "Natural Stoneware"
+    },
+    {
+      "type": "image_picker",
+      "id": "craft_2_image",
+      "label": "Craft 2 Image"
+    },
+    {
+      "type": "text",
+      "id": "craft_2_title",
+      "label": "Craft 2 Title",
+      "default": "Hand-applied Glaze"
+    },
+    {
+      "type": "image_picker",
+      "id": "craft_3_image",
+      "label": "Craft 3 Image"
+    },
+    {
+      "type": "text",
+      "id": "craft_3_title",
+      "label": "Craft 3 Title",
+      "default": "Shaped by Hand"
+    },
+    {
+      "type": "image_picker",
+      "id": "craft_4_image",
+      "label": "Craft 4 Image"
+    },
+    {
+      "type": "text",
+      "id": "craft_4_title",
+      "label": "Craft 4 Title",
+      "default": "Fired to Perfection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop — Material & Craft"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,539 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Shop Build Your Table Section
+  ============================================================
+{% endcomment %}
+
+<style>
+  .tcp-build-section {
+    padding: 70px 0;
+    background: #FFFFFF;
+    border-bottom: 1px solid #F2EFEA;
+    position: relative;
+  }
+
+  .tcp-build-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .tcp-build-layout {
+    display: grid;
+    grid-template-columns: 195px 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+
+  .tcp-build-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-right: 8px;
+  }
+
+  .tcp-build-info__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(26px, 2.5vw, 34px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: #2D2A27;
+    margin: 0 0 12px;
+  }
+
+  .tcp-build-info__bar {
+    width: 32px;
+    height: 1.5px;
+    background: #A6732E;
+    margin-bottom: 12px;
+  }
+
+  .tcp-build-info__desc {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13px;
+    line-height: 1.6;
+    color: #5C5650;
+    margin: 0 0 20px;
+  }
+
+  .tcp-build-info__link {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #2D2A27;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+
+  .tcp-build-info__link:hover {
+    color: #A6732E;
+    gap: 12px;
+  }
+
+  .tcp-formula-wrapper {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .tcp-formula-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .tcp-formula-item {
+    flex: 1;
+    text-align: left;
+    min-width: 0;
+    padding: 0 2px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .tcp-formula-item:hover {
+    transform: translateY(-2px);
+  }
+
+  .tcp-formula-item__img-wrap {
+    width: 100%;
+    aspect-ratio: 1.1 / 1;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background: #F6F3EE;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(45, 42, 39, 0.04);
+    border: 1px solid rgba(220, 215, 205, 0.5);
+  }
+
+  .tcp-formula-item__step-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #2D2A27;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(4px);
+    padding: 2px 6px;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    z-index: 2;
+  }
+
+  .tcp-formula-item__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .tcp-formula-item:hover .tcp-formula-item__img {
+    transform: scale(1.04);
+  }
+
+  .tcp-formula-item__title {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    color: #545454;
+    margin: 0 0 2px;
+    white-space: normal;
+    word-break: normal;
+    line-height: 1.3;
+  }
+
+  .tcp-formula-item__sub {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10.5px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    color: #8E8981;
+    margin: 0;
+    white-space: normal;
+    word-break: normal;
+    line-height: 1.3;
+  }
+
+  .tcp-formula-symbol {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: #B5AFA7;
+    flex-shrink: 0;
+    width: 16px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 42px;
+    user-select: none;
+  }
+
+  .tcp-formula-hint {
+    display: none;
+  }
+
+  /* Tablet & Mobile Breakpoints */
+  @media (max-width: 900px) {
+    .tcp-build-section {
+      padding: 50px 0;
+    }
+
+    .tcp-build-container {
+      padding: 0 20px;
+    }
+
+    .tcp-build-layout {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .tcp-formula-wrapper {
+      position: relative;
+    }
+
+    .tcp-formula-row {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 4px 14px 4px;
+      margin: 0 -15px;
+      padding-left: 15px;
+      padding-right: 15px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .tcp-formula-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tcp-formula-item {
+      flex: 0 0 145px;
+      width: 145px;
+      min-width: 145px;
+      scroll-snap-align: start;
+      padding: 0;
+    }
+
+    .tcp-formula-item__img-wrap {
+      min-height: 130px;
+      margin-bottom: 10px;
+    }
+
+    .tcp-formula-item__title {
+      font-size: 11.5px;
+      white-space: normal;
+    }
+
+    .tcp-formula-item__sub {
+      font-size: 10.5px;
+      white-space: normal;
+    }
+
+    .tcp-formula-symbol {
+      flex: 0 0 18px;
+      width: 18px;
+      font-size: 22px;
+      margin-top: 55px;
+      display: flex;
+    }
+
+    .tcp-formula-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #A6732E;
+      margin-top: 4px;
+    }
+
+    .tcp-formula-hint svg {
+      width: 12px;
+      height: 12px;
+      animation: swipeBounce 1.5s infinite ease-in-out;
+    }
+
+    @keyframes swipeBounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(4px); }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .tcp-formula-item {
+      flex: 0 0 135px;
+      width: 135px;
+      min-width: 135px;
+    }
+
+    .tcp-formula-item__img-wrap {
+      min-height: 120px;
+    }
+
+    .tcp-formula-symbol {
+      flex: 0 0 14px;
+      width: 14px;
+      font-size: 20px;
+      margin-top: 50px;
+    }
+  }
+</style>
+
+<section class="tcp-build-section" id="build-table">
+  <div class="tcp-build-container">
+    <div class="tcp-build-layout">
+      <div class="tcp-build-info">
+        <h2 class="tcp-build-info__title">{{ section.settings.build_title | default: 'Build Your Table' }}</h2>
+        <div class="tcp-build-info__bar"></div>
+        <p class="tcp-build-info__desc">
+          {{ section.settings.build_desc | default: "Mix, match and create a set that's uniquely yours." }}
+        </p>
+        {% if section.settings.build_link_text != blank %}
+          <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-build-info__link">
+            {{ section.settings.build_link_text }} &rarr;
+          </a>
+        {% endif %}
+        <div class="tcp-formula-hint">
+          <span>Swipe steps</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="tcp-formula-wrapper">
+        <div class="tcp-formula-row">
+          <!-- Step 1: Plate -->
+          <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item">
+            <div class="tcp-formula-item__img-wrap">
+              <span class="tcp-formula-item__step-badge">01</span>
+              {% if section.settings.step_1_image != blank %}
+                <img src="{{ section.settings.step_1_image | image_url: width: 400 }}" alt="Plate" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590736969955-71cc94801759?q=80&w=400&auto=format&fit=crop';">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1590736969955-71cc94801759?q=80&w=400&auto=format&fit=crop" alt="Plate" class="tcp-formula-item__img" loading="lazy">
+              {% endif %}
+            </div>
+            <h4 class="tcp-formula-item__title">{{ section.settings.step_1_title | default: 'Plate' }}</h4>
+            {% if section.settings.step_1_sub != blank %}
+              <p class="tcp-formula-item__sub">{{ section.settings.step_1_sub }}</p>
+            {% endif %}
+          </a>
+
+          <div class="tcp-formula-symbol">+</div>
+
+          <!-- Step 2: Bowl -->
+          <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item">
+            <div class="tcp-formula-item__img-wrap">
+              <span class="tcp-formula-item__step-badge">02</span>
+              {% if section.settings.step_2_image != blank %}
+                <img src="{{ section.settings.step_2_image | image_url: width: 400 }}" alt="Bowl" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=400&auto=format&fit=crop';">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=400&auto=format&fit=crop" alt="Bowl" class="tcp-formula-item__img" loading="lazy">
+              {% endif %}
+            </div>
+            <h4 class="tcp-formula-item__title">{{ section.settings.step_2_title | default: 'Bowl' }}</h4>
+            {% if section.settings.step_2_sub != blank %}
+              <p class="tcp-formula-item__sub">{{ section.settings.step_2_sub }}</p>
+            {% endif %}
+          </a>
+
+          <div class="tcp-formula-symbol">+</div>
+
+          <!-- Step 3: Linen -->
+          <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item">
+            <div class="tcp-formula-item__img-wrap">
+              <span class="tcp-formula-item__step-badge">03</span>
+              {% if section.settings.step_3_image != blank %}
+                <img src="{{ section.settings.step_3_image | image_url: width: 400 }}" alt="Linen" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=400&auto=format&fit=crop';">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=400&auto=format&fit=crop" alt="Linen" class="tcp-formula-item__img" loading="lazy">
+              {% endif %}
+            </div>
+            <h4 class="tcp-formula-item__title">{{ section.settings.step_3_title | default: 'Linen' }}</h4>
+            {% if section.settings.step_3_sub != blank %}
+              <p class="tcp-formula-item__sub">{{ section.settings.step_3_sub }}</p>
+            {% endif %}
+          </a>
+
+          <div class="tcp-formula-symbol">+</div>
+
+          <!-- Step 4: Cutlery -->
+          <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item">
+            <div class="tcp-formula-item__img-wrap">
+              <span class="tcp-formula-item__step-badge">04</span>
+              {% if section.settings.step_4_image != blank %}
+                <img src="{{ section.settings.step_4_image | image_url: width: 400 }}" alt="Cutlery" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1615865417491-9941019fbc00?q=80&w=400&auto=format&fit=crop';">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1615865417491-9941019fbc00?q=80&w=400&auto=format&fit=crop" alt="Cutlery" class="tcp-formula-item__img" loading="lazy">
+              {% endif %}
+            </div>
+            <h4 class="tcp-formula-item__title">{{ section.settings.step_4_title | default: 'Cutlery' }}</h4>
+            {% if section.settings.step_4_sub != blank %}
+              <p class="tcp-formula-item__sub">{{ section.settings.step_4_sub }}</p>
+            {% endif %}
+          </a>
+
+          <div class="tcp-formula-symbol">=</div>
+
+          <!-- Result: Your Set -->
+          <a href="{{ section.settings.build_link_url | default: '/collections/dinner-sets' }}" class="tcp-formula-item tcp-formula-item--result">
+            <div class="tcp-formula-item__img-wrap">
+              <span class="tcp-formula-item__step-badge" style="background:#A6732E;color:#FFF;">FINAL</span>
+              {% if section.settings.step_result_image != blank %}
+                <img src="{{ section.settings.step_result_image | image_url: width: 400 }}" alt="Your Set" class="tcp-formula-item__img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=400&auto=format&fit=crop';">
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=400&auto=format&fit=crop" alt="Your Set" class="tcp-formula-item__img" loading="lazy">
+              {% endif %}
+            </div>
+            <h4 class="tcp-formula-item__title">{{ section.settings.step_result_title | default: 'Your Set' }}</h4>
+            {% if section.settings.step_result_sub != blank %}
+              <p class="tcp-formula-item__sub">{{ section.settings.step_result_sub }}</p>
+            {% endif %}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop — Build Your Table",
+  "tag": "section",
+  "class": "tcp-shop-build-table-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "build_title",
+      "label": "Build Heading",
+      "default": "Build Your Table"
+    },
+    {
+      "type": "textarea",
+      "id": "build_desc",
+      "label": "Build Description",
+      "default": "Mix, match and create a set that's uniquely yours."
+    },
+    {
+      "type": "text",
+      "id": "build_link_text",
+      "label": "Build Link Text",
+      "default": "START BUILDING"
+    },
+    {
+      "type": "url",
+      "id": "build_link_url",
+      "label": "Build Link URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_1_image",
+      "label": "Step 1 Image (Plate)"
+    },
+    {
+      "type": "text",
+      "id": "step_1_title",
+      "label": "Step 1 Title",
+      "default": "Plate"
+    },
+    {
+      "type": "text",
+      "id": "step_1_sub",
+      "label": "Step 1 Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_2_image",
+      "label": "Step 2 Image (Bowl)"
+    },
+    {
+      "type": "text",
+      "id": "step_2_title",
+      "label": "Step 2 Title",
+      "default": "Bowl"
+    },
+    {
+      "type": "text",
+      "id": "step_2_sub",
+      "label": "Step 2 Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_3_image",
+      "label": "Step 3 Image (Linen)"
+    },
+    {
+      "type": "text",
+      "id": "step_3_title",
+      "label": "Step 3 Title",
+      "default": "Linen"
+    },
+    {
+      "type": "text",
+      "id": "step_3_sub",
+      "label": "Step 3 Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_4_image",
+      "label": "Step 4 Image (Cutlery)"
+    },
+    {
+      "type": "text",
+      "id": "step_4_title",
+      "label": "Step 4 Title",
+      "default": "Cutlery"
+    },
+    {
+      "type": "text",
+      "id": "step_4_sub",
+      "label": "Step 4 Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_result_image",
+      "label": "Result Image (Your Set)"
+    },
+    {
+      "type": "text",
+      "id": "step_result_title",
+      "label": "Result Title",
+      "default": "Your Set"
+    },
+    {
+      "type": "text",
+      "id": "step_result_sub",
+      "label": "Result Subtitle"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop — Build Your Table"
+    }
+  ]
+}
+{% endschema %}

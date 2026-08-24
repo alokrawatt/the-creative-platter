@@ -1,0 +1,111 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Shop Philosophy Banner
+  ============================================================
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  .tcp-philosophy-banner {
+    padding: 60px 20px;
+    text-align: center;
+    background: #FAF8F5;
+    border-top: 1px solid #EFEAE3;
+    border-bottom: 1px solid #EFEAE3;
+    position: relative;
+  }
+
+  .tcp-philosophy-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .tcp-philosophy-pill {
+    display: inline-block;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #A6732E;
+    margin-bottom: 16px;
+  }
+
+  .tcp-philosophy-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(22px, 2.8vw, 32px);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #2D2A27;
+    margin: 0 auto 20px;
+    letter-spacing: -0.2px;
+  }
+
+  .tcp-philosophy-emblem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .tcp-philosophy-emblem__line {
+    width: 30px;
+    height: 1px;
+    background: rgba(166, 115, 46, 0.4);
+  }
+
+  .tcp-philosophy-emblem svg {
+    width: 18px;
+    height: 18px;
+    color: #A6732E;
+  }
+</style>
+
+<section class="tcp-philosophy-banner" id="tcp-philosophy-banner-root">
+  <div class="tcp-philosophy-container">
+    <span class="tcp-philosophy-pill">{{ section.settings.philosophy_pill | default: 'STUDIO PHILOSOPHY' }}</span>
+    <p class="tcp-philosophy-text">
+      “{{ section.settings.philosophy_text | default: 'A collection shaped by memory. A tribute to warmth, care and everyday rituals. Born from loss, created to live on at your table.' }}”
+    </p>
+    <div class="tcp-philosophy-emblem">
+      <span class="tcp-philosophy-emblem__line"></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+      </svg>
+      <span class="tcp-philosophy-emblem__line"></span>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop — Philosophy Quote",
+  "tag": "section",
+  "class": "tcp-shop-philosophy-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "philosophy_pill",
+      "label": "Eyebrow Pill",
+      "default": "STUDIO PHILOSOPHY"
+    },
+    {
+      "type": "textarea",
+      "id": "philosophy_text",
+      "label": "Philosophy Text",
+      "default": "A collection shaped by memory. A tribute to warmth, care and everyday rituals. Born from loss, created to live on at your table."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop — Philosophy Quote"
+    }
+  ]
+}
+{% endschema %}

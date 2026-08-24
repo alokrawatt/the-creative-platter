@@ -1,11 +1,60 @@
 {
   "sections": {
-    "tcp_pushpa": {
-      "type": "section-pushpa-dinner-sets",
-      "settings": {}
+    "tcp_pushpa_hero": {
+      "type": "section-pushpa-hero",
+      "settings": {
+        "hero_pill": "INTRODUCING",
+        "hero_title": "Pushpa",
+        "hero_caps": "THE LEGACY DINNER COLLECTION",
+        "hero_desc": "Seven designs. Seven expressions.",
+        "hero_btn_text": "DISCOVER PUSHPA",
+        "hero_btn_url": "#expressions",
+        "hero_link_text": "",
+        "hero_link_url": ""
+      }
+    },
+    "tcp_pushpa_tribute": {
+      "type": "section-pushpa-tribute",
+      "settings": {
+        "tribute_label": "THE DEDICATION & CONCEPT",
+        "tribute_quote": "Memory enters life through the things we touch, use and cherish."
+      }
+    },
+    "tcp_pushpa_expressions": {
+      "type": "section-pushpa-expressions",
+      "settings": {
+        "expressions_pill": "THE SEVEN EXPRESSIONS",
+        "expressions_title": "Seven Expressions of Legacy",
+        "smriti_name": "Smriti",
+        "smriti_tagline": "Memory & Remembrance",
+        "shakti_name": "Shakti",
+        "shakti_tagline": "Quiet Strength",
+        "shringaar_name": "Shringaar",
+        "shringaar_tagline": "Adornment & Grace",
+        "sneha_name": "Sneha",
+        "sneha_tagline": "Affection & Warmth",
+        "sammaan_name": "Sammaan",
+        "sammaan_tagline": "Honor & Legacy",
+        "aaradhya_name": "Aaradhya",
+        "aaradhya_tagline": "Devotion & Ritual",
+        "karuna_name": "Karuna",
+        "karuna_tagline": "Compassion & Care"
+      }
+    },
+    "tcp_pushpa_craft": {
+      "type": "section-pushpa-craft-quote",
+      "settings": {
+        "craft_pill": "ZERO WASTE & COMMUNITY CRAFT",
+        "craft_heading": "NOTHING IS CUT AWAY. NOTHING IS DISCARDED.",
+        "craft_btn_text": "DISCOVER OUR STORY",
+        "craft_btn_url": "/pages/story"
+      }
     }
   },
   "order": [
-    "tcp_pushpa"
+    "tcp_pushpa_hero",
+    "tcp_pushpa_tribute",
+    "tcp_pushpa_expressions",
+    "tcp_pushpa_craft"
   ]
 }

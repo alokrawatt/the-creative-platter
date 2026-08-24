@@ -1,16 +1,7 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "tcp_shop_editorial": {
-      "type": "section-shop-editorial",
+    "tcp_shop_hero": {
+      "type": "section-shop-hero",
       "settings": {
         "hero_image": "shopify://shop_images/hero_image_32af9b08-13b4-4618-abd4-292f68468d7b.png",
         "hero_pill": "THE LEGACY COLLECTION",
@@ -20,8 +11,18 @@
         "hero_btn_text": "SHOP THE COLLECTION",
         "hero_btn_url": "",
         "hero_link_text": "DESIGN YOUR SET",
-        "hero_link_url": "",
-        "philosophy_text": "A collection shaped by memory. A tribute to warmth, care and everyday rituals. Born from loss, created to live on at your table.",
+        "hero_link_url": ""
+      }
+    },
+    "tcp_shop_philosophy": {
+      "type": "section-shop-philosophy",
+      "settings": {
+        "philosophy_text": "A collection shaped by memory. A tribute to warmth, care and everyday rituals. Born from loss, created to live on at your table."
+      }
+    },
+    "tcp_shop_signature_sets": {
+      "type": "section-shop-signature-sets",
+      "settings": {
         "sets_title": "Our Signature Dinner Sets",
         "sets_desc": "Five expressions. Rooted in tradition, designed for today.",
         "sets_link_text": "EXPLORE ALL COLLECTIONS",
@@ -44,25 +45,35 @@
         "set_5_image": "shopify://shop_images/teapot-with-oriental-characters.jpg",
         "set_5_name": "Neer",
         "set_5_tagline": "Light • Calm • Everyday",
-        "set_5_url": "",
+        "set_5_url": ""
+      }
+    },
+    "tcp_shop_build_table": {
+      "type": "section-shop-build-table",
+      "settings": {
         "build_title": "Build Your Table",
         "build_desc": "Mix, match and create a set that's uniquely yours.",
         "build_link_text": "START BUILDING",
         "build_link_url": "",
         "step_1_image": "shopify://shop_images/serveware.png",
         "step_1_title": "Plate",
-        "step_1_sub": "Choose your style",
+        "step_1_sub": "",
         "step_2_image": "shopify://shop_images/objects.png",
         "step_2_title": "Bowl",
-        "step_2_sub": "Choose your style",
+        "step_2_sub": "",
         "step_3_image": "shopify://shop_images/linen.png",
         "step_3_title": "Linen",
-        "step_3_sub": "Choose your style",
+        "step_3_sub": "",
         "step_4_image": "shopify://shop_images/objects.png",
         "step_4_title": "Cutlery",
-        "step_4_sub": "Choose your style",
+        "step_4_sub": "",
         "step_result_title": "Your Set",
-        "step_result_sub": "Beautifully yours",
+        "step_result_sub": "Beautifully yours"
+      }
+    },
+    "tcp_shop_material_craft": {
+      "type": "section-shop-material-craft",
+      "settings": {
         "craft_title": "Material & Craft",
         "craft_desc": "Thoughtfully chosen materials. Skilled hands. Time-honoured techniques. Every piece is unique.",
         "craft_link_text": "OUR CRAFT",
@@ -70,24 +81,51 @@
         "craft_1_title": "Natural Stoneware",
         "craft_2_title": "Hand-applied Glaze",
         "craft_3_title": "Shaped by Hand",
-        "craft_4_title": "Fired to Perfection",
+        "craft_4_title": "Fired to Perfection"
+      }
+    },
+    "tcp_shop_on_your_table": {
+      "type": "section-shop-on-your-table",
+      "settings": {
         "showcase_image": "shopify://shop_images/bespoke_homepage.png",
         "showcase_title": "On Your Table",
         "showcase_desc": "Designed to be used. Loved. Lived with.",
         "showcase_link_text": "SEE IT IN HOMES",
-        "showcase_link_url": "",
+        "showcase_link_url": ""
+      }
+    },
+    "tcp_shop_gifting": {
+      "type": "section-shop-gifting",
+      "settings": {
         "gifting_image": "shopify://shop_images/gifting-copy.png",
         "gifting_title": "Gifting",
         "gifting_desc": "Not just a gift. A gesture that stays.",
         "gifting_link_text": "EXPLORE GIFTING",
-        "gifting_link_url": "",
+        "gifting_link_url": ""
+      }
+    },
+    "tcp_shop_closing_banner": {
+      "type": "section-shop-closing-banner",
+      "settings": {
         "closing_title": "Bring Pushpa to your table.",
         "closing_btn_text": "SHOP THE COLLECTION",
         "closing_btn_url": ""
       }
+    },
+    "tcp_shop_trust": {
+      "type": "section-shop-trust",
+      "settings": {}
     }
   },
   "order": [
-    "tcp_shop_editorial"
+    "tcp_shop_hero",
+    "tcp_shop_philosophy",
+    "tcp_shop_signature_sets",
+    "tcp_shop_build_table",
+    "tcp_shop_material_craft",
+    "tcp_shop_on_your_table",
+    "tcp_shop_gifting",
+    "tcp_shop_closing_banner",
+    "tcp_shop_trust"
   ]
 }

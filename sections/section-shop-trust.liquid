@@ -1,0 +1,198 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Shop Trust Badges Strip
+  ============================================================
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  .tcp-trust-strip {
+    background: #FAF8F5;
+    border-top: 1px solid #ECE7DF;
+    border-bottom: 1px solid #ECE7DF;
+    padding: 28px 0;
+  }
+
+  .tcp-trust-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-trust-container {
+      padding: 0 20px;
+    }
+  }
+
+  .tcp-trust-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 1024px) {
+    .tcp-trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .tcp-trust-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+
+  .tcp-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tcp-trust-icon-wrap {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(166, 115, 46, 0.09);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .tcp-trust-icon {
+    width: 16px;
+    height: 16px;
+    color: #A6732E;
+  }
+
+  .tcp-trust-title {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #2D2A27;
+    line-height: 1.2;
+  }
+
+  .tcp-trust-sub {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10px;
+    color: #8E8981;
+    line-height: 1.2;
+  }
+</style>
+
+<section class="tcp-trust-strip" id="tcp-trust-strip-root">
+  <div class="tcp-trust-container">
+    <div class="tcp-trust-grid">
+      <div class="tcp-trust-item">
+        <div class="tcp-trust-icon-wrap">
+          <svg class="tcp-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <div class="tcp-trust-title">{{ section.settings.trait_1_title | default: 'Handmade' }}</div>
+          <div class="tcp-trust-sub">{{ section.settings.trait_1_sub | default: 'in India' }}</div>
+        </div>
+      </div>
+
+      <div class="tcp-trust-item">
+        <div class="tcp-trust-icon-wrap">
+          <svg class="tcp-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><circle cx="12" cy="12" r="4"/></svg>
+        </div>
+        <div>
+          <div class="tcp-trust-title">{{ section.settings.trait_2_title | default: 'Dishwasher' }}</div>
+          <div class="tcp-trust-sub">{{ section.settings.trait_2_sub | default: 'Safe' }}</div>
+        </div>
+      </div>
+
+      <div class="tcp-trust-item">
+        <div class="tcp-trust-icon-wrap">
+          <svg class="tcp-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <div class="tcp-trust-title">{{ section.settings.trait_3_title | default: 'Lead-free' }}</div>
+          <div class="tcp-trust-sub">{{ section.settings.trait_3_sub | default: 'Glaze' }}</div>
+        </div>
+      </div>
+
+      <div class="tcp-trust-item">
+        <div class="tcp-trust-icon-wrap">
+          <svg class="tcp-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <div class="tcp-trust-title">{{ section.settings.trait_4_title | default: 'Food' }}</div>
+          <div class="tcp-trust-sub">{{ section.settings.trait_4_sub | default: 'Safe' }}</div>
+        </div>
+      </div>
+
+      <div class="tcp-trust-item">
+        <div class="tcp-trust-icon-wrap">
+          <svg class="tcp-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <div>
+          <div class="tcp-trust-title">{{ section.settings.trait_5_title | default: 'Secure Payments' }}</div>
+          <div class="tcp-trust-sub">{{ section.settings.trait_5_sub | default: '100% safe & secure' }}</div>
+        </div>
+      </div>
+
+      <div class="tcp-trust-item">
+        <div class="tcp-trust-icon-wrap">
+          <svg class="tcp-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+        </div>
+        <div>
+          <div class="tcp-trust-title">{{ section.settings.trait_6_title | default: 'Easy Returns' }}</div>
+          <div class="tcp-trust-sub">{{ section.settings.trait_6_sub | default: 'Hassle-free within 7 days' }}</div>
+        </div>
+      </div>
+
+      <div class="tcp-trust-item">
+        <div class="tcp-trust-icon-wrap">
+          <svg class="tcp-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <div>
+          <div class="tcp-trust-title">{{ section.settings.trait_7_title | default: 'Worldwide Shipping' }}</div>
+          <div class="tcp-trust-sub">{{ section.settings.trait_7_sub | default: 'Delivering beauty' }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop — Trust Strip",
+  "tag": "section",
+  "class": "tcp-shop-trust-section",
+  "settings": [
+    { "type": "text", "id": "trait_1_title", "label": "Trait 1 Title", "default": "Handmade" },
+    { "type": "text", "id": "trait_1_sub", "label": "Trait 1 Subtitle", "default": "in India" },
+    { "type": "text", "id": "trait_2_title", "label": "Trait 2 Title", "default": "Dishwasher" },
+    { "type": "text", "id": "trait_2_sub", "label": "Trait 2 Subtitle", "default": "Safe" },
+    { "type": "text", "id": "trait_3_title", "label": "Trait 3 Title", "default": "Lead-free" },
+    { "type": "text", "id": "trait_3_sub", "label": "Trait 3 Subtitle", "default": "Glaze" },
+    { "type": "text", "id": "trait_4_title", "label": "Trait 4 Title", "default": "Food" },
+    { "type": "text", "id": "trait_4_sub", "label": "Trait 4 Subtitle", "default": "Safe" },
+    { "type": "text", "id": "trait_5_title", "label": "Trait 5 Title", "default": "Secure Payments" },
+    { "type": "text", "id": "trait_5_sub", "label": "Trait 5 Subtitle", "default": "100% safe & secure" },
+    { "type": "text", "id": "trait_6_title", "label": "Trait 6 Title", "default": "Easy Returns" },
+    { "type": "text", "id": "trait_6_sub", "label": "Trait 6 Subtitle", "default": "Hassle-free within 7 days" },
+    { "type": "text", "id": "trait_7_title", "label": "Trait 7 Title", "default": "Worldwide Shipping" },
+    { "type": "text", "id": "trait_7_sub", "label": "Trait 7 Subtitle", "default": "Delivering beauty" }
+  ],
+  "presets": [
+    {
+      "name": "Shop — Trust Strip"
+    }
+  ]
+}
+{% endschema %}

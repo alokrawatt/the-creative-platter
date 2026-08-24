@@ -1,0 +1,159 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Pushpa Craft & Village Impact Section
+  ============================================================
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  .tcp-pushpa-craft-quote {
+    background: radial-gradient(circle at 85% 50%, rgba(252, 206, 58, 0.12) 0%, transparent 55%),
+                radial-gradient(circle at 15% 50%, rgba(166, 115, 46, 0.08) 0%, transparent 50%),
+                #181614;
+    color: #FFFFFF;
+    padding: 85px 40px;
+    text-align: center;
+    border-top: 1px solid rgba(252, 206, 58, 0.25);
+    border-bottom: 1px solid rgba(252, 206, 58, 0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tcp-pushpa-craft-quote__inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-pushpa-craft-quote {
+      padding: 60px 20px;
+    }
+  }
+
+  .tcp-pushpa-craft-quote__pill {
+    display: inline-block;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fcce3a;
+    margin-bottom: 16px;
+  }
+
+  .tcp-pushpa-craft-quote h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 400;
+    color: #FFFFFF;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+  }
+
+  .tcp-pushpa-craft-quote__bar {
+    width: 36px;
+    height: 1.5px;
+    background: #fcce3a;
+    margin: 0 auto 20px;
+  }
+
+  .tcp-pushpa-craft-quote p {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 14.5px;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.85;
+    margin: 0 auto 28px;
+    max-width: 760px;
+  }
+
+  .tcp-pushpa-craft-quote__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fcce3a;
+    color: #1A1815;
+    padding: 13px 30px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 18px rgba(252, 206, 58, 0.35);
+    border-radius: 2px;
+  }
+
+  .tcp-pushpa-craft-quote__btn:hover {
+    background: #e5b92e;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(252, 206, 58, 0.5);
+  }
+</style>
+
+<section class="tcp-pushpa-craft-quote" id="tcp-pushpa-craft-root">
+  <div class="tcp-pushpa-craft-quote__inner">
+    <span class="tcp-pushpa-craft-quote__pill">{{ section.settings.craft_pill | default: 'ZERO WASTE &amp; COMMUNITY CRAFT' }}</span>
+    <h3>{{ section.settings.craft_heading | default: 'NOTHING IS CUT AWAY. NOTHING IS DISCARDED.' }}</h3>
+    <div class="tcp-pushpa-craft-quote__bar"></div>
+    <p>
+      {{ section.settings.craft_body | default: 'The Creative Platter works through a village-based studio near Gurugram, creating opportunities for local women artisans to participate directly in contemporary ceramic design. By connecting their skills with thoughtful form, we keep handmade craftsmanship economically sustainable and deeply revered.' }}
+    </p>
+    {% if section.settings.craft_btn_text != blank %}
+      <a href="{{ section.settings.craft_btn_url | default: '/pages/story' }}" class="tcp-pushpa-craft-quote__btn">
+        {{ section.settings.craft_btn_text }} &rarr;
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pushpa — Craft & Impact",
+  "tag": "section",
+  "class": "tcp-pushpa-craft-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "craft_pill",
+      "label": "Eyebrow Pill",
+      "default": "ZERO WASTE & COMMUNITY CRAFT"
+    },
+    {
+      "type": "text",
+      "id": "craft_heading",
+      "label": "Heading",
+      "default": "NOTHING IS CUT AWAY. NOTHING IS DISCARDED."
+    },
+    {
+      "type": "textarea",
+      "id": "craft_body",
+      "label": "Body Description",
+      "default": "The Creative Platter works through a village-based studio near Gurugram, creating opportunities for local women artisans to participate directly in contemporary ceramic design. By connecting their skills with thoughtful form, we keep handmade craftsmanship economically sustainable and deeply revered."
+    },
+    {
+      "type": "text",
+      "id": "craft_btn_text",
+      "label": "Button Text",
+      "default": "DISCOVER OUR STORY"
+    },
+    {
+      "type": "url",
+      "id": "craft_btn_url",
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pushpa — Craft & Impact"
+    }
+  ]
+}
+{% endschema %}

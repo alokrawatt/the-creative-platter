@@ -1,0 +1,491 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Pushpa 7 Expressions Section
+  ============================================================
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  .tcp-pushpa-expressions {
+    padding: 90px 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-pushpa-expressions {
+      padding: 60px 20px;
+    }
+  }
+
+  .tcp-pushpa-expressions__header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .tcp-pushpa-expressions__pill {
+    display: inline-block;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #A6732E;
+    margin-bottom: 12px;
+  }
+
+  .tcp-pushpa-expressions__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(34px, 4.5vw, 48px);
+    font-weight: 400;
+    color: #2D2A27;
+    margin: 0 0 12px;
+    letter-spacing: -0.3px;
+  }
+
+  .tcp-pushpa-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    background: #FFFFFF;
+    border: 1px solid #ECE7DF;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 18px rgba(45, 42, 39, 0.04);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  }
+
+  .tcp-pushpa-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(45, 42, 39, 0.08);
+  }
+
+  .tcp-pushpa-item:nth-child(even) .tcp-pushpa-item__media {
+    order: 2;
+  }
+
+  .tcp-pushpa-item:nth-child(even) .tcp-pushpa-item__content {
+    order: 1;
+  }
+
+  .tcp-pushpa-item__media {
+    position: relative;
+    aspect-ratio: 4 / 3.4;
+    background: #F6F3EE;
+    overflow: hidden;
+  }
+
+  .tcp-pushpa-item__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tcp-pushpa-item:hover .tcp-pushpa-item__img {
+    transform: scale(1.04);
+  }
+
+  .tcp-pushpa-item__badge-gold {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(31, 29, 27, 0.88);
+    backdrop-filter: blur(8px);
+    color: #fcce3a;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    z-index: 2;
+  }
+
+  .tcp-pushpa-item__content {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 1024px) {
+    .tcp-pushpa-item {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .tcp-pushpa-item:nth-child(even) .tcp-pushpa-item__media {
+      order: 1;
+    }
+    .tcp-pushpa-item:nth-child(even) .tcp-pushpa-item__content {
+      order: 2;
+    }
+    .tcp-pushpa-item__content {
+      padding: 32px 24px;
+    }
+  }
+
+  .tcp-pushpa-item__head-group {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .tcp-pushpa-item__name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 34px;
+    font-weight: 500;
+    color: #2D2A27;
+    line-height: 1;
+    letter-spacing: -0.2px;
+  }
+
+  .tcp-pushpa-item__hindi {
+    font-size: 20px;
+    color: #A6732E;
+    font-weight: 500;
+  }
+
+  .tcp-pushpa-item__tagline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    font-style: italic;
+    color: #8E8981;
+    margin-bottom: 18px;
+  }
+
+  .tcp-pushpa-item__desc {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 14px;
+    color: #5C5650;
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+
+  .tcp-pushpa-item__specs-pill {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .tcp-pushpa-spec-tag {
+    background: #FAF8F5;
+    border: 1px solid #ECE7DF;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #545454;
+  }
+
+  .tcp-pushpa-item__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background: #2D2A27;
+    padding: 13px 26px;
+    text-decoration: none;
+    border-radius: 2px;
+    box-shadow: 0 4px 12px rgba(45, 42, 39, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  .tcp-pushpa-item__btn:hover {
+    background: #A6732E;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(166, 115, 46, 0.35);
+  }
+</style>
+
+<section class="tcp-pushpa-expressions" id="expressions">
+  <div class="tcp-pushpa-expressions__header">
+    <span class="tcp-pushpa-expressions__pill">{{ section.settings.expressions_pill | default: 'THE SEVEN EXPRESSIONS' }}</span>
+    <h2 class="tcp-pushpa-expressions__title">{{ section.settings.expressions_title | default: 'Seven Expressions of Legacy' }}</h2>
+  </div>
+
+  <!-- 1. Smriti -->
+  <div class="tcp-pushpa-item">
+    <div class="tcp-pushpa-item__media">
+      <span class="tcp-pushpa-item__badge-gold">Flagship Legacy Set</span>
+      {% if section.settings.smriti_img != blank %}
+        <img class="tcp-pushpa-item__img" src="{{ section.settings.smriti_img | image_url: width: 900 }}" alt="Smriti Dinner Set" loading="lazy">
+      {% else %}
+        <img class="tcp-pushpa-item__img" src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=900&auto=format&fit=crop" alt="Smriti Dinner Set" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="tcp-pushpa-item__content">
+      <div class="tcp-pushpa-item__head-group">
+        <h3 class="tcp-pushpa-item__name">{{ section.settings.smriti_name | default: 'Smriti' }}</h3>
+        <span class="tcp-pushpa-item__hindi">(स्मृति)</span>
+      </div>
+      <p class="tcp-pushpa-item__tagline">&ldquo;{{ section.settings.smriti_tagline | default: 'Memory & Remembrance' }}&rdquo;</p>
+      <p class="tcp-pushpa-item__desc">
+        {{ section.settings.smriti_desc | default: "Symbolizes cherished memories and the everlasting presence of mother's teachings, even in her absence. Mould-free recycled clay, raw contour edges, and 24k gold leaf brushwork." }}
+      </p>
+      <div class="tcp-pushpa-item__specs-pill">
+        <span class="tcp-pushpa-spec-tag">Charger Plate 11.5"</span>
+        <span class="tcp-pushpa-spec-tag">Dinner Plate 10"</span>
+        <span class="tcp-pushpa-spec-tag">Katori Bowl 4.5"</span>
+        <span class="tcp-pushpa-spec-tag">24k Gold Rim</span>
+      </div>
+      <a href="{{ section.settings.smriti_url | default: '/products/smriti-dinner-set' }}" class="tcp-pushpa-item__btn">Order Smriti Set &rarr;</a>
+    </div>
+  </div>
+
+  <!-- 2. Shakti -->
+  <div class="tcp-pushpa-item">
+    <div class="tcp-pushpa-item__media">
+      {% if section.settings.shakti_img != blank %}
+        <img class="tcp-pushpa-item__img" src="{{ section.settings.shakti_img | image_url: width: 900 }}" alt="Shakti Dinner Set" loading="lazy">
+      {% else %}
+        <img class="tcp-pushpa-item__img" src="https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?q=80&w=900&auto=format&fit=crop" alt="Shakti Dinner Set" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="tcp-pushpa-item__content">
+      <div class="tcp-pushpa-item__head-group">
+        <h3 class="tcp-pushpa-item__name">{{ section.settings.shakti_name | default: 'Shakti' }}</h3>
+        <span class="tcp-pushpa-item__hindi">(शक्ति)</span>
+      </div>
+      <p class="tcp-pushpa-item__tagline">&ldquo;{{ section.settings.shakti_tagline | default: 'Quiet Strength' }}&rdquo;</p>
+      <p class="tcp-pushpa-item__desc">
+        {{ section.settings.shakti_desc | default: 'Grounded architectural weight, earthy raw clay finish, high-fired at 1280°C for daily resilience. Embodies the quiet fortitude left behind in spirit.' }}
+      </p>
+      <div class="tcp-pushpa-item__specs-pill">
+        <span class="tcp-pushpa-spec-tag">Dinner Plate 10.5"</span>
+        <span class="tcp-pushpa-spec-tag">Pasta Bowl 8"</span>
+        <span class="tcp-pushpa-spec-tag">Stoneware Rim</span>
+      </div>
+      <a href="{{ section.settings.shakti_url | default: '/products/shakti-dinner-set' }}" class="tcp-pushpa-item__btn">Order Shakti Set &rarr;</a>
+    </div>
+  </div>
+
+  <!-- 3. Shringaar -->
+  <div class="tcp-pushpa-item">
+    <div class="tcp-pushpa-item__media">
+      {% if section.settings.shringaar_img != blank %}
+        <img class="tcp-pushpa-item__img" src="{{ section.settings.shringaar_img | image_url: width: 900 }}" alt="Shringaar Set" loading="lazy">
+      {% else %}
+        <img class="tcp-pushpa-item__img" src="https://images.unsplash.com/photo-1590736969955-71cc94801759?q=80&w=900&auto=format&fit=crop" alt="Shringaar Dinner Set" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="tcp-pushpa-item__content">
+      <div class="tcp-pushpa-item__head-group">
+        <h3 class="tcp-pushpa-item__name">{{ section.settings.shringaar_name | default: 'Shringaar' }}</h3>
+        <span class="tcp-pushpa-item__hindi">(शृंगार)</span>
+      </div>
+      <p class="tcp-pushpa-item__tagline">&ldquo;{{ section.settings.shringaar_tagline | default: 'Adornment & Grace' }}&rdquo;</p>
+      <p class="tcp-pushpa-item__desc">
+        {{ section.settings.shringaar_desc | default: 'Refined organic curves, luminous crackle glaze, and delicate gold-brushed lip. An ode to graceful ceremonial dining and festive gathering.' }}
+      </p>
+      <div class="tcp-pushpa-item__specs-pill">
+        <span class="tcp-pushpa-spec-tag">Side Plate 7.5"</span>
+        <span class="tcp-pushpa-spec-tag">Sharing Dish 9"</span>
+        <span class="tcp-pushpa-spec-tag">Crackle Glaze</span>
+      </div>
+      <a href="{{ section.settings.shringaar_url | default: '/products/shringaar-dinner-set' }}" class="tcp-pushpa-item__btn">Order Shringaar Set &rarr;</a>
+    </div>
+  </div>
+
+  <!-- 4. Sneha -->
+  <div class="tcp-pushpa-item">
+    <div class="tcp-pushpa-item__media">
+      {% if section.settings.sneha_img != blank %}
+        <img class="tcp-pushpa-item__img" src="{{ section.settings.sneha_img | image_url: width: 900 }}" alt="Sneha Set" loading="lazy">
+      {% else %}
+        <img class="tcp-pushpa-item__img" src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=900&auto=format&fit=crop" alt="Sneha Dinner Set" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="tcp-pushpa-item__content">
+      <div class="tcp-pushpa-item__head-group">
+        <h3 class="tcp-pushpa-item__name">{{ section.settings.sneha_name | default: 'Sneha' }}</h3>
+        <span class="tcp-pushpa-item__hindi">(स्नेह)</span>
+      </div>
+      <p class="tcp-pushpa-item__tagline">&ldquo;{{ section.settings.sneha_tagline | default: 'Affection & Warmth' }}&rdquo;</p>
+      <p class="tcp-pushpa-item__desc">
+        {{ section.settings.sneha_desc | default: 'Soft tactile curves, warm cream tone, and intimate sharing bowls designed for warmth and comfort at the family table.' }}
+      </p>
+      <div class="tcp-pushpa-item__specs-pill">
+        <span class="tcp-pushpa-spec-tag">Soup Bowl 6"</span>
+        <span class="tcp-pushpa-spec-tag">Serving Bowl 8"</span>
+        <span class="tcp-pushpa-spec-tag">Comfort Rim</span>
+      </div>
+      <a href="{{ section.settings.sneha_url | default: '/products/sneha-dinner-set' }}" class="tcp-pushpa-item__btn">Order Sneha Set &rarr;</a>
+    </div>
+  </div>
+
+  <!-- 5. Sammaan -->
+  <div class="tcp-pushpa-item">
+    <div class="tcp-pushpa-item__media">
+      {% if section.settings.sammaan_img != blank %}
+        <img class="tcp-pushpa-item__img" src="{{ section.settings.sammaan_img | image_url: width: 900 }}" alt="Sammaan Set" loading="lazy">
+      {% else %}
+        <img class="tcp-pushpa-item__img" src="https://images.unsplash.com/photo-1530629013299-6cb10d168419?q=80&w=900&auto=format&fit=crop" alt="Sammaan Dinner Set" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="tcp-pushpa-item__content">
+      <div class="tcp-pushpa-item__head-group">
+        <h3 class="tcp-pushpa-item__name">{{ section.settings.sammaan_name | default: 'Sammaan' }}</h3>
+        <span class="tcp-pushpa-item__hindi">(सम्मान)</span>
+      </div>
+      <p class="tcp-pushpa-item__tagline">&ldquo;{{ section.settings.sammaan_tagline | default: 'Honor & Legacy' }}&rdquo;</p>
+      <p class="tcp-pushpa-item__desc">
+        {{ section.settings.sammaan_desc | default: 'Regal proportion, commanding banquet scale, and timeless ceremonial presence. Created for honoring guests and memorable feasting.' }}
+      </p>
+      <div class="tcp-pushpa-item__specs-pill">
+        <span class="tcp-pushpa-spec-tag">Banquet Charger 12"</span>
+        <span class="tcp-pushpa-spec-tag">Center Platter 14"</span>
+        <span class="tcp-pushpa-spec-tag">Gold Accent</span>
+      </div>
+      <a href="{{ section.settings.sammaan_url | default: '/products/sammaan-dinner-set' }}" class="tcp-pushpa-item__btn">Order Sammaan Set &rarr;</a>
+    </div>
+  </div>
+
+  <!-- 6. Aaradhya -->
+  <div class="tcp-pushpa-item">
+    <div class="tcp-pushpa-item__media">
+      {% if section.settings.aaradhya_img != blank %}
+        <img class="tcp-pushpa-item__img" src="{{ section.settings.aaradhya_img | image_url: width: 900 }}" alt="Aaradhya Set" loading="lazy">
+      {% else %}
+        <img class="tcp-pushpa-item__img" src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=900&auto=format&fit=crop" alt="Aaradhya Dinner Set" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="tcp-pushpa-item__content">
+      <div class="tcp-pushpa-item__head-group">
+        <h3 class="tcp-pushpa-item__name">{{ section.settings.aaradhya_name | default: 'Aaradhya' }}</h3>
+        <span class="tcp-pushpa-item__hindi">(आराध्या)</span>
+      </div>
+      <p class="tcp-pushpa-item__tagline">&ldquo;{{ section.settings.aaradhya_tagline | default: 'Devotion & Ritual' }}&rdquo;</p>
+      <p class="tcp-pushpa-item__desc">
+        {{ section.settings.aaradhya_desc | default: 'Deep meditative vessel profile, sacred geometry, and smooth hand-burnished lip designed for thoughtful everyday nourishment.' }}
+      </p>
+      <div class="tcp-pushpa-item__specs-pill">
+        <span class="tcp-pushpa-spec-tag">Deep Platter 10"</span>
+        <span class="tcp-pushpa-spec-tag">Curry Dish 7"</span>
+        <span class="tcp-pushpa-spec-tag">High Fired</span>
+      </div>
+      <a href="{{ section.settings.aaradhya_url | default: '/products/aaradhya-dinner-set' }}" class="tcp-pushpa-item__btn">Order Aaradhya Set &rarr;</a>
+    </div>
+  </div>
+
+  <!-- 7. Karuna -->
+  <div class="tcp-pushpa-item">
+    <div class="tcp-pushpa-item__media">
+      {% if section.settings.karuna_img != blank %}
+        <img class="tcp-pushpa-item__img" src="{{ section.settings.karuna_img | image_url: width: 900 }}" alt="Karuna Set" loading="lazy">
+      {% else %}
+        <img class="tcp-pushpa-item__img" src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=900&auto=format&fit=crop" alt="Karuna Dinner Set" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="tcp-pushpa-item__content">
+      <div class="tcp-pushpa-item__head-group">
+        <h3 class="tcp-pushpa-item__name">{{ section.settings.karuna_name | default: 'Karuna' }}</h3>
+        <span class="tcp-pushpa-item__hindi">(करुणा)</span>
+      </div>
+      <p class="tcp-pushpa-item__tagline">&ldquo;{{ section.settings.karuna_tagline | default: 'Compassion & Care' }}&rdquo;</p>
+      <p class="tcp-pushpa-item__desc">
+        {{ section.settings.karuna_desc | default: 'Gentle nesting bowls, soft rounded lip, and comforting everyday tactile touch. A versatile essential for mindful solitary pauses and shared family spreads.' }}
+      </p>
+      <div class="tcp-pushpa-item__specs-pill">
+        <span class="tcp-pushpa-spec-tag">Nesting Bowl Set (3 Pcs)</span>
+        <span class="tcp-pushpa-spec-tag">Tasting Dish 4"</span>
+        <span class="tcp-pushpa-spec-tag">Tactile Rim</span>
+      </div>
+      <a href="{{ section.settings.karuna_url | default: '/products/karuna-dinner-set' }}" class="tcp-pushpa-item__btn">Order Karuna Set &rarr;</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pushpa — 7 Expressions",
+  "tag": "section",
+  "class": "tcp-pushpa-expressions-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "expressions_pill",
+      "label": "Eyebrow Pill",
+      "default": "THE SEVEN EXPRESSIONS"
+    },
+    {
+      "type": "text",
+      "id": "expressions_title",
+      "label": "Section Title",
+      "default": "Seven Expressions of Legacy"
+    },
+    { "type": "header", "content": "1. Smriti" },
+    { "type": "image_picker", "id": "smriti_img", "label": "Smriti Image" },
+    { "type": "text", "id": "smriti_name", "label": "Smriti Name", "default": "Smriti" },
+    { "type": "text", "id": "smriti_tagline", "label": "Smriti Tagline", "default": "Memory & Remembrance" },
+    { "type": "textarea", "id": "smriti_desc", "label": "Smriti Description" },
+    { "type": "url", "id": "smriti_url", "label": "Smriti Product URL" },
+
+    { "type": "header", "content": "2. Shakti" },
+    { "type": "image_picker", "id": "shakti_img", "label": "Shakti Image" },
+    { "type": "text", "id": "shakti_name", "label": "Shakti Name", "default": "Shakti" },
+    { "type": "text", "id": "shakti_tagline", "label": "Shakti Tagline", "default": "Quiet Strength" },
+    { "type": "textarea", "id": "shakti_desc", "label": "Shakti Description" },
+    { "type": "url", "id": "shakti_url", "label": "Shakti Product URL" },
+
+    { "type": "header", "content": "3. Shringaar" },
+    { "type": "image_picker", "id": "shringaar_img", "label": "Shringaar Image" },
+    { "type": "text", "id": "shringaar_name", "label": "Shringaar Name", "default": "Shringaar" },
+    { "type": "text", "id": "shringaar_tagline", "label": "Shringaar Tagline", "default": "Adornment & Grace" },
+    { "type": "textarea", "id": "shringaar_desc", "label": "Shringaar Description" },
+    { "type": "url", "id": "shringaar_url", "label": "Shringaar Product URL" },
+
+    { "type": "header", "content": "4. Sneha" },
+    { "type": "image_picker", "id": "sneha_img", "label": "Sneha Image" },
+    { "type": "text", "id": "sneha_name", "label": "Sneha Name", "default": "Sneha" },
+    { "type": "text", "id": "sneha_tagline", "label": "Sneha Tagline", "default": "Affection & Warmth" },
+    { "type": "textarea", "id": "sneha_desc", "label": "Sneha Description" },
+    { "type": "url", "id": "sneha_url", "label": "Sneha Product URL" },
+
+    { "type": "header", "content": "5. Sammaan" },
+    { "type": "image_picker", "id": "sammaan_img", "label": "Sammaan Image" },
+    { "type": "text", "id": "sammaan_name", "label": "Sammaan Name", "default": "Sammaan" },
+    { "type": "text", "id": "sammaan_tagline", "label": "Sammaan Tagline", "default": "Honor & Legacy" },
+    { "type": "textarea", "id": "sammaan_desc", "label": "Sammaan Description" },
+    { "type": "url", "id": "sammaan_url", "label": "Sammaan Product URL" },
+
+    { "type": "header", "content": "6. Aaradhya" },
+    { "type": "image_picker", "id": "aaradhya_img", "label": "Aaradhya Image" },
+    { "type": "text", "id": "aaradhya_name", "label": "Aaradhya Name", "default": "Aaradhya" },
+    { "type": "text", "id": "aaradhya_tagline", "label": "Aaradhya Tagline", "default": "Devotion & Ritual" },
+    { "type": "textarea", "id": "aaradhya_desc", "label": "Aaradhya Description" },
+    { "type": "url", "id": "aaradhya_url", "label": "Aaradhya Product URL" },
+
+    { "type": "header", "content": "7. Karuna" },
+    { "type": "image_picker", "id": "karuna_img", "label": "Karuna Image" },
+    { "type": "text", "id": "karuna_name", "label": "Karuna Name", "default": "Karuna" },
+    { "type": "text", "id": "karuna_tagline", "label": "Karuna Tagline", "default": "Compassion & Care" },
+    { "type": "textarea", "id": "karuna_desc", "label": "Karuna Description" },
+    { "type": "url", "id": "karuna_url", "label": "Karuna Product URL" }
+  ],
+  "presets": [
+    {
+      "name": "Pushpa — 7 Expressions"
+    }
+  ]
+}
+{% endschema %}
