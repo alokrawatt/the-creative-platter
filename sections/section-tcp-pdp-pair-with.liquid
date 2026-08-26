@@ -1,0 +1,394 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — PDP "Pair it with" Recommendations
+  ============================================================
+  5-column complementary product grid featuring tableware pairings.
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  #tcp-pdp-pair-{{ section.id }} {
+    --tcp-gold-bright: #fcce3a;
+    --tcp-accent-gold: #A6732E;
+    --tcp-charcoal: #2D2A27;
+    --tcp-stone-bg: #FAF7F2;
+    --tcp-border-subtle: #E8E2D8;
+    
+    background-color: #FFFFFF;
+    border-top: 1px solid var(--tcp-border-subtle);
+    padding-top: {{ section.settings.padding_top | default: 60 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 70 }}px;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .tcp-pdp-pair__container {
+    max-width: {{ section.settings.container_width | default: 1440 }}px;
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-pdp-pair__container {
+      padding: 0 20px;
+    }
+  }
+
+  .tcp-pdp-pair__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  .tcp-pdp-pair__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 3.2vw, 36px);
+    font-weight: 400;
+    color: var(--tcp-charcoal);
+    margin: 0;
+    letter-spacing: -0.3px;
+  }
+
+  .tcp-pdp-pair__view-all {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--tcp-charcoal);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s ease;
+  }
+
+  .tcp-pdp-pair__view-all:hover {
+    color: var(--tcp-accent-gold);
+  }
+
+  /* 5-Column Grid */
+  .tcp-pdp-pair__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 1100px) {
+    .tcp-pdp-pair__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tcp-pdp-pair__grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 14px;
+      padding-bottom: 12px;
+      scrollbar-width: none;
+    }
+    .tcp-pdp-pair__grid::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  /* Card */
+  .tcp-pdp-pair-card {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    group: true;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-pdp-pair-card {
+      width: 170px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+    }
+  }
+
+  .tcp-pdp-pair-card__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--tcp-stone-bg);
+    overflow: hidden;
+    border-radius: 2px;
+    border: 1px solid var(--tcp-border-subtle);
+  }
+
+  .tcp-pdp-pair-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tcp-pdp-pair-card:hover .tcp-pdp-pair-card__img {
+    transform: scale(1.05);
+  }
+
+  .tcp-pdp-pair-card__wishlist {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8E8981;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 2;
+  }
+
+  .tcp-pdp-pair-card__wishlist:hover {
+    color: var(--tcp-accent-gold);
+    transform: scale(1.1);
+  }
+
+  .tcp-pdp-pair-card__content {
+    margin-top: 12px;
+  }
+
+  .tcp-pdp-pair-card__name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--tcp-charcoal);
+    margin: 0 0 4px;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tcp-pdp-pair-card:hover .tcp-pdp-pair-card__name {
+    color: var(--tcp-accent-gold);
+  }
+
+  .tcp-pdp-pair-card__price {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    color: #545454;
+    margin: 0;
+  }
+
+  .tcp-pdp-pair-card__fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 45%, #FAF7F2 0%, #E8E0D2 100%);
+  }
+
+  .tcp-pdp-pair-card__fallback svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.5;
+  }
+</style>
+
+<section id="tcp-pdp-pair-{{ section.id }}" class="tcp-pdp-pair-section">
+  <div class="tcp-pdp-pair__container">
+    
+    <div class="tcp-pdp-pair__header">
+      <h2 class="tcp-pdp-pair__title">{{ section.settings.heading | default: 'Pair it with' }}</h2>
+      <a href="{{ section.settings.view_all_url | default: '/collections/all' }}" class="tcp-pdp-pair__view-all">
+        {{ section.settings.view_all_text | default: 'VIEW ALL' }} &rarr;
+      </a>
+    </div>
+
+    <div class="tcp-pdp-pair__grid">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {%- assign card_url = block.settings.product_url | default: '/collections/all' -%}
+          <a href="{{ card_url }}" class="tcp-pdp-pair-card" {{ block.shopify_attributes }}>
+            <div class="tcp-pdp-pair-card__media">
+              <button type="button" class="tcp-pdp-pair-card__wishlist" aria-label="Add to wishlist">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </button>
+
+              {% if block.settings.image != blank %}
+                <img
+                  src="{{ block.settings.image | image_url: width: 600 }}"
+                  alt="{{ block.settings.title | escape }}"
+                  class="tcp-pdp-pair-card__img"
+                  loading="lazy"
+                >
+              {% else %}
+                <div class="tcp-pdp-pair-card__fallback">
+                  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="35" fill="#F4ECE0" stroke="#A6732E" stroke-width="1.5"/>
+                    <circle cx="50" cy="50" r="24" fill="#EDE4D6" stroke="#A6732E" stroke-width="1"/>
+                  </svg>
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="tcp-pdp-pair-card__content">
+              <h3 class="tcp-pdp-pair-card__name">{{ block.settings.title | default: 'Quiet Bowl' }}</h3>
+              <p class="tcp-pdp-pair-card__price">{{ block.settings.price | default: '₹1,150' }}</p>
+            </div>
+          </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TCP PDP — Pair It With",
+  "tag": "section",
+  "class": "tcp-pdp-pair-section-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Pair it with"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View All Text",
+      "default": "VIEW ALL"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "View All Link URL"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1200,
+      "max": 1600,
+      "step": 40,
+      "unit": "px",
+      "label": "Container Width",
+      "default": 1440
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 70
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pair_item",
+      "name": "Paired Product",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title",
+          "default": "Quiet Bowl"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Product Price",
+          "default": "₹1,150"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Image"
+        },
+        {
+          "type": "url",
+          "id": "product_url",
+          "label": "Product Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP PDP — Pair It With",
+      "blocks": [
+        {
+          "type": "pair_item",
+          "settings": {
+            "title": "Quiet Bowl",
+            "price": "₹1,150",
+            "product_url": "/collections/all"
+          }
+        },
+        {
+          "type": "pair_item",
+          "settings": {
+            "title": "Curve Side Plate",
+            "price": "₹950",
+            "product_url": "/collections/all"
+          }
+        },
+        {
+          "type": "pair_item",
+          "settings": {
+            "title": "Sand Mug",
+            "price": "₹850",
+            "product_url": "/collections/all"
+          }
+        },
+        {
+          "type": "pair_item",
+          "settings": {
+            "title": "Linen Napkin (Set of 2)",
+            "price": "₹750",
+            "product_url": "/collections/all"
+          }
+        },
+        {
+          "type": "pair_item",
+          "settings": {
+            "title": "Brass Dessert Spoon",
+            "price": "₹650",
+            "product_url": "/collections/all"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

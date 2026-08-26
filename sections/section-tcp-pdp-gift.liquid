@@ -1,0 +1,351 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — PDP "Make It a Gift" Upsell Section
+  ============================================================
+  Left: Artisan eco gift wrap presentation & copy
+  Right: Interactive checkbox (Gift Wrap + ₹150) & Handwritten note textarea
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  #tcp-pdp-gift-{{ section.id }} {
+    --tcp-gold-bright: #fcce3a;
+    --tcp-accent-gold: #A6732E;
+    --tcp-charcoal: #2D2A27;
+    --tcp-stone-bg: #FAF7F2;
+    --tcp-border-subtle: #EAE4D9;
+    
+    background-color: #FFFFFF;
+    padding-top: {{ section.settings.padding_top | default: 20 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 50 }}px;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .tcp-pdp-gift__container {
+    max-width: {{ section.settings.container_width | default: 1440 }}px;
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-pdp-gift__container {
+      padding: 0 20px;
+    }
+  }
+
+  .tcp-pdp-gift__card {
+    background-color: var(--tcp-stone-bg);
+    border: 1px solid var(--tcp-border-subtle);
+    border-radius: 4px;
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: 260px 1fr 1.35fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  @media (max-width: 1024px) {
+    .tcp-pdp-gift__card {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 28px 24px;
+    }
+  }
+
+  /* Image */
+  .tcp-pdp-gift__media {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 2px;
+    overflow: hidden;
+    background: #EDE6DA;
+    border: 1px solid var(--tcp-border-subtle);
+  }
+
+  .tcp-pdp-gift__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .tcp-pdp-gift__fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 50%, #F5EFE4 0%, #E3D9C8 100%);
+  }
+
+  .tcp-pdp-gift__fallback svg {
+    width: 60%;
+    height: 60%;
+  }
+
+  /* Info */
+  .tcp-pdp-gift__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tcp-pdp-gift__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 3vw, 36px);
+    font-weight: 400;
+    color: var(--tcp-charcoal);
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+
+  .tcp-pdp-gift__desc {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13.5px;
+    color: #6E6862;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Form Controls */
+  .tcp-pdp-gift__form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: #FFFFFF;
+    padding: 22px;
+    border-radius: 4px;
+    border: 1px solid var(--tcp-border-subtle);
+  }
+
+  .tcp-pdp-gift__checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13px;
+    color: var(--tcp-charcoal);
+    font-weight: 500;
+    user-select: none;
+  }
+
+  .tcp-pdp-gift__checkbox-row input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--tcp-charcoal);
+    cursor: pointer;
+  }
+
+  .tcp-pdp-gift__textarea-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .tcp-pdp-gift__textarea {
+    width: 100%;
+    min-height: 70px;
+    border: 1px solid var(--tcp-border-subtle);
+    border-radius: 2px;
+    padding: 10px 12px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 12.5px;
+    color: var(--tcp-charcoal);
+    background: #FAF7F2;
+    resize: none;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .tcp-pdp-gift__textarea:focus {
+    border-color: var(--tcp-accent-gold);
+    background: #FFFFFF;
+  }
+
+  .tcp-pdp-gift__counter {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10.5px;
+    color: #9A948D;
+    text-align: right;
+  }
+</style>
+
+<section id="tcp-pdp-gift-{{ section.id }}" class="tcp-pdp-gift-section">
+  <div class="tcp-pdp-gift__container">
+    <div class="tcp-pdp-gift__card">
+      
+      {% comment %} Image Media {% endcomment %}
+      <div class="tcp-pdp-gift__media">
+        {% if section.settings.image != blank %}
+          <img
+            src="{{ section.settings.image | image_url: width: 600 }}"
+            alt="{{ section.settings.heading | escape }}"
+            class="tcp-pdp-gift__img"
+            loading="lazy"
+          >
+        {% else %}
+          <div class="tcp-pdp-gift__fallback">
+            <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="30" y="30" width="100" height="70" rx="3" fill="#FAF6EE" stroke="#A6732E" stroke-width="1.8"/>
+              <line x1="80" y1="30" x2="80" y2="100" stroke="#A6732E" stroke-width="1.5"/>
+              <line x1="30" y1="65" x2="130" y2="65" stroke="#A6732E" stroke-width="1.5"/>
+              <path d="M65 20 C65 28 80 32 80 32 C80 32 95 28 95 20 C95 12 80 12 80 20 C80 12 65 12 65 20 Z" fill="#fcce3a" stroke="#A6732E" stroke-width="1.2"/>
+            </svg>
+          </div>
+        {% endif %}
+      </div>
+
+      {% comment %} Text Content {% endcomment %}
+      <div class="tcp-pdp-gift__info">
+        <h3 class="tcp-pdp-gift__title">{{ section.settings.heading | default: 'Make it a gift' }}</h3>
+        <p class="tcp-pdp-gift__desc">{{ section.settings.description | default: 'Add gift wrap and a personal note.' }}</p>
+      </div>
+
+      {% comment %} Form Inputs {% endcomment %}
+      <div class="tcp-pdp-gift__form">
+        <label class="tcp-pdp-gift__checkbox-row">
+          <input type="checkbox" id="tcp-gift-wrap-check" checked>
+          <span>{{ section.settings.wrap_label | default: 'Add gift wrap' }} &bull; {{ section.settings.wrap_price | default: '+ ₹150' }}</span>
+        </label>
+
+        <label class="tcp-pdp-gift__checkbox-row">
+          <input type="checkbox" id="tcp-gift-note-check">
+          <span>{{ section.settings.note_label | default: 'Add a handwritten note' }}</span>
+        </label>
+
+        <div class="tcp-pdp-gift__textarea-wrap">
+          <textarea
+            id="tcp-gift-note-input"
+            maxlength="120"
+            placeholder="{{ section.settings.placeholder_text | default: 'Write your note here...' }}"
+            class="tcp-pdp-gift__textarea"
+          ></textarea>
+          <div class="tcp-pdp-gift__counter"><span id="tcp-gift-char-count">0</span> / 120</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    function initGiftSection(secEl) {
+      if (!secEl) return;
+      const noteInput = secEl.querySelector('#tcp-gift-note-input');
+      const charCount = secEl.querySelector('#tcp-gift-char-count');
+      const noteCheck = secEl.querySelector('#tcp-gift-note-check');
+      const wrapCheck = secEl.querySelector('#tcp-gift-wrap-check');
+
+      if (noteInput && charCount) {
+        noteInput.addEventListener('input', () => {
+          charCount.textContent = noteInput.value.length;
+          if (noteInput.value.length > 0 && noteCheck) {
+            noteCheck.checked = true;
+          }
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.tcp-pdp-gift-section').forEach(initGiftSection);
+    });
+    document.addEventListener('shopify:section:load', (e) => {
+      const sec = e.target.querySelector('.tcp-pdp-gift-section');
+      if (sec) initGiftSection(sec);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "TCP PDP — Make It a Gift",
+  "tag": "section",
+  "class": "tcp-pdp-gift-section-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Make it a gift"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Add gift wrap and a personal note."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Gift Packaging Image"
+    },
+    {
+      "type": "text",
+      "id": "wrap_label",
+      "label": "Gift Wrap Checkbox Label",
+      "default": "Add gift wrap"
+    },
+    {
+      "type": "text",
+      "id": "wrap_price",
+      "label": "Gift Wrap Price Note",
+      "default": "+ ₹150"
+    },
+    {
+      "type": "text",
+      "id": "note_label",
+      "label": "Handwritten Note Checkbox Label",
+      "default": "Add a handwritten note"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": "Textarea Placeholder",
+      "default": "Write your note here..."
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1200,
+      "max": 1600,
+      "step": 40,
+      "unit": "px",
+      "label": "Container Width",
+      "default": 1440
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 50
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP PDP — Make It a Gift"
+    }
+  ]
+}
+{% endschema %}

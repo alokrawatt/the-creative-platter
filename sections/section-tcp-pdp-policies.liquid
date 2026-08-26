@@ -1,0 +1,230 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — PDP Policies Highlights Section
+  ============================================================
+  3-column policy overview: Shipping, Returns, Care.
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Raleway:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+<style>
+  #tcp-pdp-policies-{{ section.id }} {
+    --tcp-gold-bright: #fcce3a;
+    --tcp-accent-gold: #A6732E;
+    --tcp-charcoal: #2D2A27;
+    --tcp-stone-bg: #FAF7F2;
+    --tcp-border-subtle: #EAE4D9;
+    
+    background-color: #FFFFFF;
+    border-top: 1px solid var(--tcp-border-subtle);
+    padding-top: {{ section.settings.padding_top | default: 40 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 50 }}px;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .tcp-pdp-policies__container {
+    max-width: {{ section.settings.container_width | default: 1440 }}px;
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-pdp-policies__container {
+      padding: 0 20px;
+    }
+  }
+
+  .tcp-pdp-policies__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-pdp-policies__grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+
+  .tcp-pdp-policy-card {
+    padding: 24px 28px;
+    border: 1px solid var(--tcp-border-subtle);
+    border-radius: 2px;
+    background: #FFFFFF;
+    transition: border-color 0.2s ease;
+  }
+
+  .tcp-pdp-policy-card:hover {
+    border-color: var(--tcp-accent-gold);
+  }
+
+  .tcp-pdp-policy-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .tcp-pdp-policy-card__title {
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--tcp-charcoal);
+    margin: 0;
+  }
+
+  .tcp-pdp-policy-card__icon {
+    font-size: 11px;
+    color: #8E8981;
+  }
+
+  .tcp-pdp-policy-card__desc {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: #6A6560;
+    margin: 0;
+  }
+</style>
+
+<section id="tcp-pdp-policies-{{ section.id }}" class="tcp-pdp-policies-section">
+  <div class="tcp-pdp-policies__container">
+    <div class="tcp-pdp-policies__grid">
+      
+      {% comment %} Policy 1: Shipping {% endcomment %}
+      <div class="tcp-pdp-policy-card">
+        <div class="tcp-pdp-policy-card__header">
+          <h4 class="tcp-pdp-policy-card__title">{{ section.settings.pol_1_title | default: 'SHIPPING' }}</h4>
+          <span class="tcp-pdp-policy-card__icon">&or;</span>
+        </div>
+        <p class="tcp-pdp-policy-card__desc">
+          {{ section.settings.pol_1_desc | default: 'Orders are dispatched within 2–3 working days. Delivery within 5–7 working days across India.' }}
+        </p>
+      </div>
+
+      {% comment %} Policy 2: Returns {% endcomment %}
+      <div class="tcp-pdp-policy-card">
+        <div class="tcp-pdp-policy-card__header">
+          <h4 class="tcp-pdp-policy-card__title">{{ section.settings.pol_2_title | default: 'RETURNS' }}</h4>
+          <span class="tcp-pdp-policy-card__icon">&or;</span>
+        </div>
+        <p class="tcp-pdp-policy-card__desc">
+          {{ section.settings.pol_2_desc | default: 'We accept returns within 7 days of delivery if the product is damaged or defective.' }}
+        </p>
+      </div>
+
+      {% comment %} Policy 3: Care {% endcomment %}
+      <div class="tcp-pdp-policy-card">
+        <div class="tcp-pdp-policy-card__header">
+          <h4 class="tcp-pdp-policy-card__title">{{ section.settings.pol_3_title | default: 'CARE' }}</h4>
+          <span class="tcp-pdp-policy-card__icon">&or;</span>
+        </div>
+        <p class="tcp-pdp-policy-card__desc">
+          {{ section.settings.pol_3_desc | default: 'Use mild detergent and a soft sponge. Each piece is made to last with mindful care.' }}
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TCP PDP — Policies Bar",
+  "tag": "section",
+  "class": "tcp-pdp-policies-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Policy 1"
+    },
+    {
+      "type": "text",
+      "id": "pol_1_title",
+      "label": "Policy 1 Title",
+      "default": "SHIPPING"
+    },
+    {
+      "type": "textarea",
+      "id": "pol_1_desc",
+      "label": "Policy 1 Description",
+      "default": "Orders are dispatched within 2–3 working days. Delivery within 5–7 working days across India."
+    },
+    {
+      "type": "header",
+      "content": "Policy 2"
+    },
+    {
+      "type": "text",
+      "id": "pol_2_title",
+      "label": "Policy 2 Title",
+      "default": "RETURNS"
+    },
+    {
+      "type": "textarea",
+      "id": "pol_2_desc",
+      "label": "Policy 2 Description",
+      "default": "We accept returns within 7 days of delivery if the product is damaged or defective."
+    },
+    {
+      "type": "header",
+      "content": "Policy 3"
+    },
+    {
+      "type": "text",
+      "id": "pol_3_title",
+      "label": "Policy 3 Title",
+      "default": "CARE"
+    },
+    {
+      "type": "textarea",
+      "id": "pol_3_desc",
+      "label": "Policy 3 Description",
+      "default": "Use mild detergent and a soft sponge. Each piece is made to last with mindful care."
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1200,
+      "max": 1600,
+      "step": 40,
+      "unit": "px",
+      "label": "Container Width",
+      "default": 1440
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 50
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP PDP — Policies Bar"
+    }
+  ]
+}
+{% endschema %}

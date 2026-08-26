@@ -1,0 +1,248 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — PDP Closing Banner & Sticky ATC
+  ============================================================
+  Dark luxury closing banner with pottery spread & Add to Cart button.
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  #tcp-pdp-close-{{ section.id }} {
+    --tcp-gold-bright: #fcce3a;
+    --tcp-accent-gold: #A6732E;
+    
+    background: radial-gradient(circle at 20% 50%, rgba(252, 206, 58, 0.08) 0%, transparent 60%),
+                #181614;
+    color: #FFFFFF;
+    padding: 44px 0;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(252, 206, 58, 0.2);
+    box-sizing: border-box;
+  }
+
+  .tcp-pdp-close__container {
+    max-width: {{ section.settings.container_width | default: 1440 }}px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 36px;
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-pdp-close__container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      gap: 24px;
+    }
+  }
+
+  /* Left Image Preview */
+  .tcp-pdp-close__media {
+    width: 140px;
+    height: 90px;
+    border-radius: 2px;
+    overflow: hidden;
+    background: #25221F;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-pdp-close__media {
+      display: none;
+    }
+  }
+
+  .tcp-pdp-close__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .tcp-pdp-close__fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tcp-pdp-close__fallback svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.4;
+  }
+
+  /* Center Content */
+  .tcp-pdp-close__content {
+    flex: 1;
+  }
+
+  .tcp-pdp-close__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 400;
+    color: #FFFFFF;
+    margin: 0 0 6px;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+
+  .tcp-pdp-close__title span.dot {
+    color: var(--tcp-gold-bright);
+  }
+
+  .tcp-pdp-close__desc {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+  }
+
+  /* Action Button */
+  .tcp-pdp-close__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #A6732E;
+    color: #FFFFFF;
+    padding: 16px 36px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(166, 115, 46, 0.35);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .tcp-pdp-close__btn:hover {
+    background: #8C5F22;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(166, 115, 46, 0.5);
+  }
+</style>
+
+<section id="tcp-pdp-close-{{ section.id }}" class="tcp-pdp-close-section">
+  <div class="tcp-pdp-close__container">
+    
+    {% comment %} Left Media {% endcomment %}
+    <div class="tcp-pdp-close__media">
+      {% if product.featured_media != blank %}
+        <img
+          src="{{ product.featured_media | image_url: width: 300 }}"
+          alt="{{ product.title | escape }}"
+          class="tcp-pdp-close__img"
+          loading="lazy"
+        >
+      {% else %}
+        <div class="tcp-pdp-close__fallback">
+          <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="30" rx="35" ry="18" fill="#2A2622" stroke="#A6732E" stroke-width="1.5"/>
+          </svg>
+        </div>
+      {% endif %}
+    </div>
+
+    {% comment %} Content Text {% endcomment %}
+    <div class="tcp-pdp-close__content">
+      <h3 class="tcp-pdp-close__title">
+        {{ section.settings.heading | default: 'Bring this to your table' }}<span class="dot">.</span>
+      </h3>
+      <p class="tcp-pdp-close__desc">
+        {{ section.settings.description | default: 'Timeless design. Everyday beauty.' }}
+      </p>
+    </div>
+
+    {% comment %} Add to Cart Trigger {% endcomment %}
+    <div>
+      <button type="button" class="tcp-pdp-close__btn" id="tcp-bottom-atc-btn">
+        ADD TO CART &mdash; {{ product.selected_or_first_available_variant.price | default: 125000 | money }}
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  (function() {
+    function initClosingBanner(secEl) {
+      if (!secEl) return;
+      const bottomBtn = secEl.querySelector('#tcp-bottom-atc-btn');
+      if (bottomBtn) {
+        bottomBtn.addEventListener('click', () => {
+          const mainAtcBtn = document.querySelector('#tcp-atc-btn');
+          if (mainAtcBtn) {
+            mainAtcBtn.click();
+          } else {
+            const form = document.querySelector('#tcp-product-form');
+            if (form) form.submit();
+          }
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.tcp-pdp-close-section').forEach(initClosingBanner);
+    });
+    document.addEventListener('shopify:section:load', (e) => {
+      const sec = e.target.querySelector('.tcp-pdp-close-section');
+      if (sec) initClosingBanner(sec);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "TCP PDP — Closing Banner",
+  "tag": "section",
+  "class": "tcp-pdp-close-section-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bring this to your table"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Subtext Description",
+      "default": "Timeless design. Everyday beauty."
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1200,
+      "max": 1600,
+      "step": 40,
+      "unit": "px",
+      "label": "Container Width",
+      "default": 1440
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP PDP — Closing Banner"
+    }
+  ]
+}
+{% endschema %}

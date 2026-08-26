@@ -1,0 +1,327 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — PDP Studio Trust & Durability Badges
+  ============================================================
+  5-column icon bar on warm sand container:
+  Handmade, Dishwasher Safe, Food Safe, Microwave Safe, Sustainable.
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  #tcp-pdp-trust-{{ section.id }} {
+    --tcp-gold-bright: #fcce3a;
+    --tcp-accent-gold: #A6732E;
+    --tcp-charcoal: #2D2A27;
+    --tcp-stone-bg: #FAF7F2;
+    --tcp-border-subtle: #EAE4D9;
+    
+    background-color: #FFFFFF;
+    padding-top: {{ section.settings.padding_top | default: 20 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 50 }}px;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .tcp-pdp-trust__container {
+    max-width: {{ section.settings.container_width | default: 1440 }}px;
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-pdp-trust__container {
+      padding: 0 20px;
+    }
+  }
+
+  .tcp-pdp-trust__box {
+    background-color: var(--tcp-stone-bg);
+    border: 1px solid var(--tcp-border-subtle);
+    border-radius: 4px;
+    padding: 32px 24px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    align-items: center;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-pdp-trust__box {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .tcp-pdp-trust__box {
+      grid-template-columns: 1fr;
+      padding: 24px 16px;
+    }
+  }
+
+  .tcp-pdp-trust__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 0 10px;
+  }
+
+  /* Divider line between desktop columns */
+  .tcp-pdp-trust__item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 15%;
+    height: 70%;
+    width: 1px;
+    background-color: var(--tcp-border-subtle);
+  }
+
+  @media (max-width: 900px) {
+    .tcp-pdp-trust__item:not(:last-child)::after {
+      display: none;
+    }
+  }
+
+  .tcp-pdp-trust__icon-wrap {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--tcp-accent-gold);
+    margin-bottom: 12px;
+  }
+
+  .tcp-pdp-trust__icon-wrap svg {
+    width: 26px;
+    height: 26px;
+    stroke-width: 1.5;
+  }
+
+  .tcp-pdp-trust__label {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--tcp-charcoal);
+    margin: 0 0 4px;
+  }
+
+  .tcp-pdp-trust__subtext {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px;
+    line-height: 1.4;
+    color: #7A746D;
+    margin: 0;
+  }
+</style>
+
+<section id="tcp-pdp-trust-{{ section.id }}" class="tcp-pdp-trust-section">
+  <div class="tcp-pdp-trust__container">
+    <div class="tcp-pdp-trust__box">
+      
+      {% comment %} Badge 1: Handmade {% endcomment %}
+      <div class="tcp-pdp-trust__item">
+        <div class="tcp-pdp-trust__icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+        <h4 class="tcp-pdp-trust__label">{{ section.settings.badge_1_title | default: 'Handmade' }}</h4>
+        <p class="tcp-pdp-trust__subtext">{{ section.settings.badge_1_desc | default: 'Crafted by skilled artisans in small batches.' }}</p>
+      </div>
+
+      {% comment %} Badge 2: Dishwasher Safe {% endcomment %}
+      <div class="tcp-pdp-trust__item">
+        <div class="tcp-pdp-trust__icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="18" rx="2"/>
+            <line x1="2" y1="8" x2="22" y2="8"/>
+            <circle cx="8" cy="14" r="2"/>
+            <circle cx="16" cy="14" r="2"/>
+          </svg>
+        </div>
+        <h4 class="tcp-pdp-trust__label">{{ section.settings.badge_2_title | default: 'Dishwasher Safe' }}</h4>
+        <p class="tcp-pdp-trust__subtext">{{ section.settings.badge_2_desc | default: 'Everyday use with ease.' }}</p>
+      </div>
+
+      {% comment %} Badge 3: Food Safe {% endcomment %}
+      <div class="tcp-pdp-trust__item">
+        <div class="tcp-pdp-trust__icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+            <line x1="9" y1="9" x2="9.01" y2="9"/>
+            <line x1="15" y1="9" x2="15.01" y2="9"/>
+          </svg>
+        </div>
+        <h4 class="tcp-pdp-trust__label">{{ section.settings.badge_3_title | default: 'Food Safe' }}</h4>
+        <p class="tcp-pdp-trust__subtext">{{ section.settings.badge_3_desc | default: 'Lead-free and toxin-free glazes.' }}</p>
+      </div>
+
+      {% comment %} Badge 4: Microwave Safe {% endcomment %}
+      <div class="tcp-pdp-trust__item">
+        <div class="tcp-pdp-trust__icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <line x1="17" y1="4" x2="17" y2="20"/>
+            <circle cx="19.5" cy="8" r="1"/>
+            <circle cx="19.5" cy="12" r="1"/>
+            <circle cx="19.5" cy="16" r="1"/>
+            <path d="M6 10c1 0 1 2 2 2s1-2 2-2 1 2 2 2"/>
+            <path d="M6 14c1 0 1 2 2 2s1-2 2-2 1 2 2 2"/>
+          </svg>
+        </div>
+        <h4 class="tcp-pdp-trust__label">{{ section.settings.badge_4_title | default: 'Microwave Safe' }}</h4>
+        <p class="tcp-pdp-trust__subtext">{{ section.settings.badge_4_desc | default: 'Heat food with confidence.' }}</p>
+      </div>
+
+      {% comment %} Badge 5: Sustainable {% endcomment %}
+      <div class="tcp-pdp-trust__item">
+        <div class="tcp-pdp-trust__icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a9 9 0 0 1 9 9c0 4.97-4.03 9-9 9s-9-4.03-9-9a9 9 0 0 1 9-9z"/>
+            <path d="M12 7v10"/>
+            <path d="M8 11c1.5-2 4-2 4 0"/>
+            <path d="M16 13c-1.5 2-4 2-4 0"/>
+          </svg>
+        </div>
+        <h4 class="tcp-pdp-trust__label">{{ section.settings.badge_5_title | default: 'Sustainable' }}</h4>
+        <p class="tcp-pdp-trust__subtext">{{ section.settings.badge_5_desc | default: 'Thoughtfully made responsibly.' }}</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TCP PDP — Trust Badges",
+  "tag": "section",
+  "class": "tcp-pdp-trust-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Badge 1"
+    },
+    {
+      "type": "text",
+      "id": "badge_1_title",
+      "label": "Badge 1 Title",
+      "default": "Handmade"
+    },
+    {
+      "type": "text",
+      "id": "badge_1_desc",
+      "label": "Badge 1 Subtext",
+      "default": "Crafted by skilled artisans in small batches."
+    },
+    {
+      "type": "header",
+      "content": "Badge 2"
+    },
+    {
+      "type": "text",
+      "id": "badge_2_title",
+      "label": "Badge 2 Title",
+      "default": "Dishwasher Safe"
+    },
+    {
+      "type": "text",
+      "id": "badge_2_desc",
+      "label": "Badge 2 Subtext",
+      "default": "Everyday use with ease."
+    },
+    {
+      "type": "header",
+      "content": "Badge 3"
+    },
+    {
+      "type": "text",
+      "id": "badge_3_title",
+      "label": "Badge 3 Title",
+      "default": "Food Safe"
+    },
+    {
+      "type": "text",
+      "id": "badge_3_desc",
+      "label": "Badge 3 Subtext",
+      "default": "Lead-free and toxin-free glazes."
+    },
+    {
+      "type": "header",
+      "content": "Badge 4"
+    },
+    {
+      "type": "text",
+      "id": "badge_4_title",
+      "label": "Badge 4 Title",
+      "default": "Microwave Safe"
+    },
+    {
+      "type": "text",
+      "id": "badge_4_desc",
+      "label": "Badge 4 Subtext",
+      "default": "Heat food with confidence."
+    },
+    {
+      "type": "header",
+      "content": "Badge 5"
+    },
+    {
+      "type": "text",
+      "id": "badge_5_title",
+      "label": "Badge 5 Title",
+      "default": "Sustainable"
+    },
+    {
+      "type": "text",
+      "id": "badge_5_desc",
+      "label": "Badge 5 Subtext",
+      "default": "Thoughtfully made responsibly."
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1200,
+      "max": 1600,
+      "step": 40,
+      "unit": "px",
+      "label": "Container Width",
+      "default": 1440
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 50
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP PDP — Trust Badges"
+    }
+  ]
+}
+{% endschema %}
