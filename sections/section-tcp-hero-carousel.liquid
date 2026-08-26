@@ -1,0 +1,1219 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Luxury Editorial Hero Carousel
+  ============================================================
+  Premium, high-impact hero slideshow with fluid transitions,
+  cinematic Ken-Burns zoom, responsive typography hierarchy,
+  dual CTAs, autoplay progress bars, touch/swipe support,
+  and instant theme customizer block navigation.
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Sacramento&display=swap" rel="stylesheet">
+
+<style>
+  #tcp-hero-carousel-{{ section.id }} {
+    --tcp-carousel-height-desk: {{ section.settings.height_desktop | default: '85vh' }};
+    --tcp-carousel-height-mob: {{ section.settings.height_mobile | default: '80vh' }};
+    --tcp-accent-gold: #A6732E;
+    --tcp-gold-bright: #fcce3a;
+    --tcp-gold-hover: #8C5F22;
+    
+    position: relative;
+    width: 100%;
+    height: var(--tcp-carousel-height-desk);
+    min-height: 520px;
+    overflow: hidden;
+    background-color: #121110;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    #tcp-hero-carousel-{{ section.id }} {
+      height: var(--tcp-carousel-height-mob);
+      min-height: 480px;
+    }
+  }
+
+  /* ── Slides Container ── */
+  .tcp-carousel__track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* ── Individual Slide ── */
+  .tcp-carousel__slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity {{ section.settings.transition_speed | default: 900 }}ms cubic-bezier(0.25, 1, 0.5, 1),
+                visibility {{ section.settings.transition_speed | default: 900 }}ms cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .tcp-carousel__slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+  }
+
+  /* ── Slide Background Media & Animation ── */
+  .tcp-carousel__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .tcp-carousel__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transform: scale(1.0);
+    transition: transform {{ section.settings.autoplay_speed | default: 7 }}s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  {% if section.settings.enable_ken_burns %}
+    .tcp-carousel__slide.is-active .tcp-carousel__img {
+      transform: scale(1.06);
+    }
+  {% endif %}
+
+  .tcp-carousel__img--desktop {
+    display: block;
+  }
+  .tcp-carousel__img--mobile {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-carousel__img--desktop.has-mobile-img {
+      display: none;
+    }
+    .tcp-carousel__img--mobile {
+      display: block;
+    }
+  }
+
+  /* Fallback Artisanal Canvas when no photo uploaded */
+  .tcp-carousel__fallback {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tcp-carousel__fallback--1 {
+    background: radial-gradient(circle at 75% 45%, #E9DEC9 0%, #C4B59D 45%, #1D1B18 100%);
+  }
+  .tcp-carousel__fallback--2 {
+    background: radial-gradient(circle at 30% 50%, #FAF6EE 0%, #D8CEBE 55%, #181614 100%);
+  }
+  .tcp-carousel__fallback--3 {
+    background: radial-gradient(circle at 60% 60%, #EFE8DC 0%, #BDAB92 50%, #151412 100%);
+  }
+
+  .tcp-carousel__fallback svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.22;
+  }
+
+  /* ── Directional Gradient Overlays ── */
+  .tcp-carousel__overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .tcp-carousel__overlay--left {
+    background: linear-gradient(
+      90deg,
+      rgba(18, 17, 16, 0.88) 0%,
+      rgba(18, 17, 16, 0.65) 45%,
+      rgba(18, 17, 16, 0.15) 75%,
+      rgba(18, 17, 16, 0) 100%
+    );
+  }
+
+  .tcp-carousel__overlay--right {
+    background: linear-gradient(
+      270deg,
+      rgba(18, 17, 16, 0.88) 0%,
+      rgba(18, 17, 16, 0.65) 45%,
+      rgba(18, 17, 16, 0.15) 75%,
+      rgba(18, 17, 16, 0) 100%
+    );
+  }
+
+  .tcp-carousel__overlay--center {
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(18, 17, 16, 0.72) 0%,
+      rgba(18, 17, 16, 0.45) 50%,
+      rgba(18, 17, 16, 0.2) 100%
+    );
+  }
+
+  .tcp-carousel__overlay--light {
+    background: linear-gradient(
+      90deg,
+      rgba(250, 248, 245, 0.94) 0%,
+      rgba(250, 248, 245, 0.72) 48%,
+      rgba(250, 248, 245, 0) 100%
+    );
+  }
+
+  @media (max-width: 768px) {
+    .tcp-carousel__overlay--left,
+    .tcp-carousel__overlay--right,
+    .tcp-carousel__overlay--center {
+      background: linear-gradient(
+        180deg,
+        rgba(18, 17, 16, 0.3) 0%,
+        rgba(18, 17, 16, 0.6) 40%,
+        rgba(18, 17, 16, 0.92) 100%
+      );
+    }
+    .tcp-carousel__overlay--light {
+      background: linear-gradient(
+        180deg,
+        rgba(250, 248, 245, 0.3) 0%,
+        rgba(250, 248, 245, 0.8) 45%,
+        rgba(250, 248, 245, 0.98) 100%
+      );
+    }
+  }
+
+  /* ── Foreground Slide Content ── */
+  .tcp-carousel__container {
+    position: relative;
+    z-index: 5;
+    max-width: {{ section.settings.container_width | default: 1440 }}px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 60px 64px;
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-carousel__container {
+      padding: 40px 24px 80px;
+    }
+  }
+
+  .tcp-carousel__card {
+    max-width: 620px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+
+  /* Alignment Variants */
+  .tcp-carousel__container--left {
+    justify-content: flex-start;
+  }
+  .tcp-carousel__container--left .tcp-carousel__card {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .tcp-carousel__container--center {
+    justify-content: center;
+  }
+  .tcp-carousel__container--center .tcp-carousel__card {
+    align-items: center;
+    text-align: center;
+  }
+
+  .tcp-carousel__container--right {
+    justify-content: flex-end;
+  }
+  .tcp-carousel__container--right .tcp-carousel__card {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-carousel__container {
+      justify-content: center !important;
+      align-items: flex-end;
+      height: 100%;
+    }
+    .tcp-carousel__card {
+      align-items: center !important;
+      text-align: center !important;
+      max-width: 100%;
+    }
+  }
+
+  /* ── Staggered Entrance Animations ── */
+  .tcp-carousel__slide .tcp-carousel__eyebrow,
+  .tcp-carousel__slide .tcp-carousel__title,
+  .tcp-carousel__slide .tcp-carousel__script,
+  .tcp-carousel__slide .tcp-carousel__desc,
+  .tcp-carousel__slide .tcp-carousel__actions {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tcp-carousel__slide.is-active .tcp-carousel__eyebrow {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.15s;
+  }
+  .tcp-carousel__slide.is-active .tcp-carousel__script {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.25s;
+  }
+  .tcp-carousel__slide.is-active .tcp-carousel__title {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.35s;
+  }
+  .tcp-carousel__slide.is-active .tcp-carousel__desc {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.45s;
+  }
+  .tcp-carousel__slide.is-active .tcp-carousel__actions {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.55s;
+  }
+
+  /* ── Typography Styling ── */
+  /* Eyebrow Pill */
+  .tcp-carousel__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3.2px;
+    text-transform: uppercase;
+    color: var(--tcp-gold-bright);
+    margin-bottom: 12px;
+  }
+
+  .tcp-carousel__eyebrow-dash {
+    width: 20px;
+    height: 1.5px;
+    background-color: var(--tcp-gold-bright);
+    display: inline-block;
+  }
+
+  /* Cursive Accent */
+  .tcp-carousel__script {
+    font-family: var(--font-script, 'Sacramento', cursive);
+    font-size: clamp(26px, 3.5vw, 38px);
+    color: var(--tcp-gold-bright);
+    line-height: 1.1;
+    margin-bottom: 6px;
+    display: block;
+    text-transform: none;
+    font-weight: 400;
+  }
+
+  /* Display Title */
+  .tcp-carousel__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(38px, 6.2vw, {{ section.settings.title_size_desktop | default: 72 }}px);
+    font-weight: 400;
+    line-height: 0.96;
+    letter-spacing: -0.5px;
+    margin: 0 0 16px;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .tcp-carousel__title--sans {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: clamp(28px, 4.5vw, 54px);
+    line-height: 1.1;
+  }
+
+  .tcp-carousel__title span.dot {
+    color: var(--tcp-gold-bright);
+  }
+
+  /* Description */
+  .tcp-carousel__desc {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: clamp(13px, 1.4vw, 15px);
+    font-weight: 400;
+    line-height: 1.65;
+    margin: 0 0 26px;
+    max-width: 520px;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+  }
+
+  /* ── CTA Action Buttons ── */
+  .tcp-carousel__actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-carousel__actions {
+      justify-content: center;
+      gap: 12px;
+    }
+  }
+
+  /* Primary Button (Solid Gold) */
+  .tcp-carousel__btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #fcce3a;
+    color: #1A1815;
+    padding: 15px 34px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 6px 24px rgba(252, 206, 58, 0.35);
+    border-radius: 2px;
+    white-space: nowrap;
+    border: 1px solid #fcce3a;
+  }
+
+  .tcp-carousel__btn-primary:hover {
+    background: #e5b92e;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(252, 206, 58, 0.5);
+  }
+
+  /* Secondary Link / Button */
+  .tcp-carousel__btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    padding: 14px 28px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .tcp-carousel__btn-secondary--underline {
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1.5px solid currentColor;
+    border-radius: 0;
+  }
+
+  .tcp-carousel__btn-secondary--underline:hover {
+    color: var(--tcp-gold-bright) !important;
+    border-bottom-color: var(--tcp-gold-bright);
+    transform: translateY(-1px);
+  }
+
+  .tcp-carousel__btn-secondary--ghost {
+    border: 1px solid currentColor;
+  }
+
+  .tcp-carousel__btn-secondary--ghost:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* ── Navigation Arrows ── */
+  .tcp-carousel__nav {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-carousel__nav {
+      display: none;
+    }
+  }
+
+  .tcp-carousel__arrow {
+    pointer-events: auto;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(26, 24, 22, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tcp-carousel__arrow:hover {
+    background: #fcce3a;
+    border-color: #fcce3a;
+    color: #181614;
+    transform: scale(1.08);
+    box-shadow: 0 4px 20px rgba(252, 206, 58, 0.4);
+  }
+
+  .tcp-carousel__arrow svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.2s ease;
+  }
+
+  .tcp-carousel__arrow--prev:hover svg {
+    transform: translateX(-2px);
+  }
+  .tcp-carousel__arrow--next:hover svg {
+    transform: translateX(2px);
+  }
+
+  /* ── Editorial Pagination & Progress Bar ── */
+  .tcp-carousel__controls {
+    position: absolute;
+    bottom: 28px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    max-width: {{ section.settings.container_width | default: 1440 }}px;
+    margin: 0 auto;
+    padding: 0 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-carousel__controls {
+      padding: 0 24px;
+      bottom: 18px;
+      justify-content: center;
+    }
+  }
+
+  /* Progress Line Bars */
+  .tcp-carousel__dots {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    pointer-events: auto;
+  }
+
+  .tcp-carousel__dot {
+    position: relative;
+    width: 48px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: width 0.3s ease, background 0.3s ease;
+    border: none;
+    padding: 0;
+  }
+
+  .tcp-carousel__dot:hover {
+    background: rgba(255, 255, 255, 0.55);
+  }
+
+  .tcp-carousel__dot-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: #fcce3a;
+    border-radius: 2px;
+  }
+
+  .tcp-carousel__dot.is-active .tcp-carousel__dot-progress {
+    width: 100%;
+    transition: width {{ section.settings.autoplay_speed | default: 7 }}s linear;
+  }
+
+  .tcp-carousel__dot.is-active {
+    width: 72px;
+  }
+
+  /* Slide Counter (01 / 03) */
+  .tcp-carousel__counter {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.85);
+    pointer-events: auto;
+  }
+
+  .tcp-carousel__counter-curr {
+    color: #fcce3a;
+  }
+  .tcp-carousel__counter-divider {
+    opacity: 0.4;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-carousel__counter {
+      display: none;
+    }
+  }
+</style>
+
+<section
+  id="tcp-hero-carousel-{{ section.id }}"
+  class="tcp-hero-carousel-section"
+  data-autoplay="{{ section.settings.enable_autoplay }}"
+  data-speed="{{ section.settings.autoplay_speed | default: 7 | times: 1000 }}"
+  data-total-slides="{{ section.blocks.size }}"
+>
+  <div class="tcp-carousel__track">
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        {%- assign is_dark = block.settings.text_color_mode | default: 'light' -%}
+        {%- assign font_style = block.settings.title_font_style | default: 'serif' -%}
+        <div
+          class="tcp-carousel__slide {% if forloop.first %}is-active{% endif %}"
+          data-slide-index="{{ forloop.index0 }}"
+          {{ block.shopify_attributes }}
+          style="
+            --slide-text-color: {% if is_dark == 'dark' %}#2D2A27{% else %}#FFFFFF{% endif %};
+            --slide-desc-color: {% if is_dark == 'dark' %}#545454{% else %}rgba(255, 255, 255, 0.88){% endif %};
+          "
+        >
+          {% comment %} Background Media {% endcomment %}
+          <div class="tcp-carousel__media">
+            {% if block.settings.image_desktop != blank %}
+              <img
+                src="{{ block.settings.image_desktop | image_url: width: 2600 }}"
+                srcset="
+                  {{ block.settings.image_desktop | image_url: width: 900 }} 900w,
+                  {{ block.settings.image_desktop | image_url: width: 1600 }} 1600w,
+                  {{ block.settings.image_desktop | image_url: width: 2200 }} 2200w,
+                  {{ block.settings.image_desktop | image_url: width: 2800 }} 2800w
+                "
+                sizes="100vw"
+                alt="{{ block.settings.title | escape }}"
+                class="tcp-carousel__img tcp-carousel__img--desktop {% if block.settings.image_mobile != blank %}has-mobile-img{% endif %}"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              >
+              {% if block.settings.image_mobile != blank %}
+                <img
+                  src="{{ block.settings.image_mobile | image_url: width: 1000 }}"
+                  alt="{{ block.settings.title | escape }}"
+                  class="tcp-carousel__img tcp-carousel__img--mobile"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                >
+              {% endif %}
+            {% else %}
+              {% comment %} Studio Staging Fallbacks {% endcomment %}
+              <div class="tcp-carousel__fallback tcp-carousel__fallback--{{ forloop.index0 | modulo: 3 | plus: 1 }}">
+                <svg viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <ellipse cx="1100" cy="420" rx="260" ry="260" fill="#FAF6EE" stroke="#A6732E" stroke-width="4"/>
+                  <ellipse cx="920" cy="500" rx="180" ry="180" fill="#EFE8DC" stroke="#A6732E" stroke-width="3"/>
+                  <path d="M1100 240 Q1180 420 1100 600" stroke="#fcce3a" stroke-width="3" stroke-linecap="round"/>
+                  <circle cx="920" cy="500" r="12" fill="#fcce3a"/>
+                  <circle cx="650" cy="550" r="60" fill="#FAF6EE" stroke="#A6732E" stroke-width="2"/>
+                </svg>
+              </div>
+            {% endif %}
+          </div>
+
+          {% comment %} Gradient Directional Overlay {% endcomment %}
+          <div class="tcp-carousel__overlay tcp-carousel__overlay--{{ block.settings.overlay_style | default: 'left' }}"></div>
+
+          {% comment %} Foreground Content {% endcomment %}
+          <div class="tcp-carousel__container tcp-carousel__container--{{ block.settings.content_alignment | default: 'left' }}">
+            <div class="tcp-carousel__card" style="color: var(--slide-text-color);">
+              
+              {% if block.settings.eyebrow != blank %}
+                <div class="tcp-carousel__eyebrow">
+                  <span class="tcp-carousel__eyebrow-dash"></span>
+                  <span>{{ block.settings.eyebrow }}</span>
+                </div>
+              {% endif %}
+
+              {% if block.settings.script_subtitle != blank %}
+                <span class="tcp-carousel__script">{{ block.settings.script_subtitle }}</span>
+              {% endif %}
+
+              {% if block.settings.title != blank %}
+                <h1 class="tcp-carousel__title {% if font_style == 'sans' %}tcp-carousel__title--sans{% endif %}">
+                  {{ block.settings.title }}{% if block.settings.show_gold_dot %}<span class="dot">.</span>{% endif %}
+                </h1>
+              {% endif %}
+
+              {% if block.settings.description != blank %}
+                <p class="tcp-carousel__desc" style="color: var(--slide-desc-color);">
+                  {{ block.settings.description }}
+                </p>
+              {% endif %}
+
+              {% if block.settings.btn_1_text != blank or block.settings.btn_2_text != blank %}
+                <div class="tcp-carousel__actions">
+                  {% if block.settings.btn_1_text != blank %}
+                    <a href="{{ block.settings.btn_1_url | default: '/collections/all' }}" class="tcp-carousel__btn-primary">
+                      {{ block.settings.btn_1_text }} &rarr;
+                    </a>
+                  {% endif %}
+
+                  {% if block.settings.btn_2_text != blank %}
+                    <a
+                      href="{{ block.settings.btn_2_url | default: '/pages/story' }}"
+                      class="tcp-carousel__btn-secondary tcp-carousel__btn-secondary--{{ block.settings.btn_2_style | default: 'underline' }}"
+                      style="color: var(--slide-text-color);"
+                    >
+                      {{ block.settings.btn_2_text }} &rarr;
+                    </a>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  {% comment %} Prev/Next Navigation Arrows {% endcomment %}
+  {% if section.settings.show_arrows and section.blocks.size > 1 %}
+    <div class="tcp-carousel__nav">
+      <button type="button" class="tcp-carousel__arrow tcp-carousel__arrow--prev" aria-label="Previous Slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <button type="button" class="tcp-carousel__arrow tcp-carousel__arrow--next" aria-label="Next Slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  {% endif %}
+
+  {% comment %} Pagination Controls & Counter {% endcomment %}
+  {% if section.blocks.size > 1 %}
+    <div class="tcp-carousel__controls">
+      <div class="tcp-carousel__dots" role="tablist">
+        {% for block in section.blocks %}
+          <button
+            type="button"
+            class="tcp-carousel__dot {% if forloop.first %}is-active{% endif %}"
+            data-target-slide="{{ forloop.index0 }}"
+            role="tab"
+            aria-label="Go to slide {{ forloop.index }}"
+          >
+            <span class="tcp-carousel__dot-progress"></span>
+          </button>
+        {% endfor %}
+      </div>
+
+      <div class="tcp-carousel__counter">
+        <span class="tcp-carousel__counter-curr">01</span>
+        <span class="tcp-carousel__counter-divider">/</span>
+        <span class="tcp-carousel__counter-total">0{{ section.blocks.size }}</span>
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+<script>
+  (function() {
+    function initTcpHeroCarousel(sectionElement) {
+      if (!sectionElement) return;
+      
+      const track = sectionElement.querySelector('.tcp-carousel__track');
+      const slides = sectionElement.querySelectorAll('.tcp-carousel__slide');
+      const dots = sectionElement.querySelectorAll('.tcp-carousel__dot');
+      const prevBtn = sectionElement.querySelector('.tcp-carousel__arrow--prev');
+      const nextBtn = sectionElement.querySelector('.tcp-carousel__arrow--next');
+      const counterCurr = sectionElement.querySelector('.tcp-carousel__counter-curr');
+      
+      if (!slides.length) return;
+
+      const isAutoplay = sectionElement.dataset.autoplay === 'true';
+      const autoplaySpeed = parseInt(sectionElement.dataset.speed, 10) || 7000;
+      let currentIndex = 0;
+      let timer = null;
+      let isPaused = false;
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      function goToSlide(index) {
+        if (index < 0) {
+          index = slides.length - 1;
+        } else if (index >= slides.length) {
+          index = 0;
+        }
+
+        slides.forEach((slide, i) => {
+          if (i === index) {
+            slide.classList.add('is-active');
+          } else {
+            slide.classList.remove('is-active');
+          }
+        });
+
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.add('is-active');
+          } else {
+            dot.classList.remove('is-active');
+          }
+        });
+
+        if (counterCurr) {
+          counterCurr.textContent = index < 9 ? `0${index + 1}` : `${index + 1}`;
+        }
+
+        currentIndex = index;
+        resetAutoplay();
+      }
+
+      function nextSlide() {
+        goToSlide(currentIndex + 1);
+      }
+
+      function prevSlide() {
+        goToSlide(currentIndex - 1);
+      }
+
+      function startAutoplay() {
+        if (!isAutoplay || slides.length <= 1) return;
+        clearInterval(timer);
+        timer = setInterval(() => {
+          if (!isPaused) {
+            nextSlide();
+          }
+        }, autoplaySpeed);
+      }
+
+      function resetAutoplay() {
+        if (isAutoplay && slides.length > 1) {
+          startAutoplay();
+        }
+      }
+
+      // Event Listeners
+      if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+      if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const target = parseInt(dot.dataset.targetSlide, 10);
+          goToSlide(target);
+        });
+      });
+
+      // Pause on Hover
+      sectionElement.addEventListener('mouseenter', () => { isPaused = true; });
+      sectionElement.addEventListener('mouseleave', () => { isPaused = false; });
+
+      // Touch & Swipe Support
+      sectionElement.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      sectionElement.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+
+      function handleSwipe() {
+        const threshold = 40;
+        if (touchEndX < touchStartX - threshold) {
+          nextSlide();
+        } else if (touchEndX > touchStartX + threshold) {
+          prevSlide();
+        }
+      }
+
+      // Start initial
+      goToSlide(0);
+
+      // Keyboard Arrow Navigation
+      sectionElement.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+      });
+
+      // Theme Editor Event Support
+      document.addEventListener('shopify:block:select', (event) => {
+        if (event.target && event.target.closest(`#tcp-hero-carousel-${sectionElement.id.replace('tcp-hero-carousel-', '')}`)) {
+          const slideElement = event.target.closest('.tcp-carousel__slide');
+          if (slideElement) {
+            const idx = parseInt(slideElement.dataset.slideIndex, 10);
+            goToSlide(idx);
+            isPaused = true;
+          }
+        }
+      });
+
+      document.addEventListener('shopify:block:deselect', () => {
+        isPaused = false;
+      });
+    }
+
+    // Initialize all carousels on page
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.tcp-hero-carousel-section').forEach(initTcpHeroCarousel);
+    });
+
+    // Support section reloads in Shopify Customizer
+    document.addEventListener('shopify:section:load', (event) => {
+      const section = event.target.querySelector('.tcp-hero-carousel-section');
+      if (section) {
+        initTcpHeroCarousel(section);
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "TCP Hero Carousel",
+  "tag": "section",
+  "class": "tcp-hero-carousel-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Carousel Height & Dimensions"
+    },
+    {
+      "type": "select",
+      "id": "height_desktop",
+      "label": "Desktop Carousel Height",
+      "options": [
+        { "value": "100vh", "label": "Full Screen (100vh)" },
+        { "value": "85vh", "label": "Large (85vh - Recommended)" },
+        { "value": "70vh", "label": "Medium (70vh)" },
+        { "value": "600px", "label": "Fixed (600px)" },
+        { "value": "520px", "label": "Compact (520px)" }
+      ],
+      "default": "85vh"
+    },
+    {
+      "type": "select",
+      "id": "height_mobile",
+      "label": "Mobile Carousel Height",
+      "options": [
+        { "value": "90vh", "label": "Full Screen Mobile (90vh)" },
+        { "value": "80vh", "label": "Large (80vh - Recommended)" },
+        { "value": "65vh", "label": "Medium (65vh)" },
+        { "value": "480px", "label": "Compact (480px)" }
+      ],
+      "default": "80vh"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1200,
+      "max": 1600,
+      "step": 40,
+      "unit": "px",
+      "label": "Content Container Max Width",
+      "default": 1440
+    },
+    {
+      "type": "header",
+      "content": "Autoplay & Motion Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Enable Auto-Advance",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "label": "Slide Duration (Seconds)",
+      "default": 7
+    },
+    {
+      "type": "range",
+      "id": "transition_speed",
+      "min": 500,
+      "max": 1500,
+      "step": 100,
+      "unit": "ms",
+      "label": "Crossfade Transition Duration",
+      "default": 900
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_ken_burns",
+      "label": "Enable Cinematic Subtle Zoom (Ken Burns)",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Navigation & Indicators"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show Desktop Arrow Navigation",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "min": 44,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "label": "Default Display Title Size (Desktop)",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Carousel Slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Slide Imagery"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_desktop",
+          "label": "Desktop Background Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Mobile Background Image (Optional)"
+        },
+        {
+          "type": "select",
+          "id": "overlay_style",
+          "label": "Vignette & Gradient Overlay",
+          "options": [
+            { "value": "left", "label": "Dark Fade on Left (Best for Left Text)" },
+            { "value": "right", "label": "Dark Fade on Right (Best for Right Text)" },
+            { "value": "center", "label": "Cinematic Center Vignette" },
+            { "value": "light", "label": "Warm Sand / Light Overlay" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "text_color_mode",
+          "label": "Text Color Scheme",
+          "options": [
+            { "value": "light", "label": "White / Light Text (For Dark Imagery)" },
+            { "value": "dark", "label": "Charcoal Text (For Warm Sand Imagery)" }
+          ],
+          "default": "light"
+        },
+        {
+          "type": "header",
+          "content": "Editorial Typography & Copy"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow Badge",
+          "default": "THE PUSHPA LEGACY 2025–26"
+        },
+        {
+          "type": "text",
+          "id": "script_subtitle",
+          "label": "Cursive Accent Subtitle (Sacramento)",
+          "default": "crafted with patience"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Display Title",
+          "default": "Where Art Meets the Table"
+        },
+        {
+          "type": "select",
+          "id": "title_font_style",
+          "label": "Title Typography Style",
+          "options": [
+            { "value": "serif", "label": "Editorial Serif (Cormorant Garamond)" },
+            { "value": "sans", "label": "Modern Bold Sans (Plus Jakarta)" }
+          ],
+          "default": "serif"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_gold_dot",
+          "label": "Show Gold Period Dot (.)",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Slide Narrative / Description",
+          "default": "Hand-formed, twice-fired stoneware crafted with patience and memory. Designed to shape how we gather, pause, and inhabit space."
+        },
+        {
+          "type": "select",
+          "id": "content_alignment",
+          "label": "Content Placement (Desktop)",
+          "options": [
+            { "value": "left", "label": "Left Aligned" },
+            { "value": "center", "label": "Center Aligned" },
+            { "value": "right", "label": "Right Aligned" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "header",
+          "content": "Primary Action (CTA 1)"
+        },
+        {
+          "type": "text",
+          "id": "btn_1_text",
+          "label": "Primary Button Text",
+          "default": "EXPLORE COLLECTION"
+        },
+        {
+          "type": "url",
+          "id": "btn_1_url",
+          "label": "Primary Button URL"
+        },
+        {
+          "type": "header",
+          "content": "Secondary Action (CTA 2)"
+        },
+        {
+          "type": "text",
+          "id": "btn_2_text",
+          "label": "Secondary Link Text",
+          "default": "OUR CRAFT STORY"
+        },
+        {
+          "type": "url",
+          "id": "btn_2_url",
+          "label": "Secondary Link URL"
+        },
+        {
+          "type": "select",
+          "id": "btn_2_style",
+          "label": "Secondary Link Style",
+          "options": [
+            { "value": "underline", "label": "Editorial Underline Link" },
+            { "value": "ghost", "label": "Ghost Outline Button" }
+          ],
+          "default": "underline"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP Hero Carousel",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "THE PUSHPA LEGACY 2025–26",
+            "script_subtitle": "crafted in memory",
+            "title": "Where Art Meets the Table",
+            "description": "Hand-formed, twice-fired stoneware crafted with patience and memory. Designed for the everyday ritual of dining.",
+            "btn_1_text": "EXPLORE COLLECTION",
+            "btn_1_url": "/pages/pushpa-collection",
+            "btn_2_text": "OUR STORY",
+            "btn_2_url": "/pages/story",
+            "overlay_style": "left",
+            "content_alignment": "left"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "BESPOKE DINNERWARE",
+            "script_subtitle": "tactile & timeless",
+            "title": "Objects Shaped for Ritual",
+            "description": "Plates, bowls, and curated tableware designed to settle quietly into the home, revealing their beauty through daily use.",
+            "btn_1_text": "SHOP DINNER SETS",
+            "btn_1_url": "/collections/dinner-sets",
+            "btn_2_text": "CUSTOM COMMISSIONS",
+            "btn_2_url": "/pages/bespoke-b2b",
+            "overlay_style": "left",
+            "content_alignment": "left"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "HOSPITALITY & SPATIAL",
+            "script_subtitle": "village artisan studio",
+            "title": "Crafted with Village Women",
+            "description": "Every piece supports long-term artisan collaboration, honoring female craftsmanship as contemporary design practice.",
+            "btn_1_text": "EXPLORE EXPERIENCES",
+            "btn_1_url": "/pages/experiences",
+            "btn_2_text": "MEET THE FOUNDER",
+            "btn_2_url": "/pages/story",
+            "overlay_style": "left",
+            "content_alignment": "left"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
