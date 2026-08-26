@@ -785,8 +785,8 @@
         <div class="tcp-header__nav-spacer"></div>
 
         <nav class="tcp-nav-centered" aria-label="Main Navigation">
-          {% if header_links != blank and header_links.size > 0 %}
-            {% for link in header_links %}
+          {% if section.settings.menu != blank and section.settings.menu != 'main-menu' and linklists[section.settings.menu].links.size > 0 %}
+            {% for link in linklists[section.settings.menu].links %}
               {% if link.links != blank %}
                 <div class="tcp-nav__item tcp-nav__item--has-dropdown">
                   <a href="{{ link.url }}" class="tcp-nav__link">
@@ -808,14 +808,87 @@
               {% endif %}
             {% endfor %}
           {% else %}
-            <!-- Fallback Default Links -->
-            <div class="tcp-nav__item"><a href="/collections/all" class="tcp-nav__link">SHOP</a></div>
-            <div class="tcp-nav__item"><a href="/pages/story" class="tcp-nav__link">STORY</a></div>
-            <div class="tcp-nav__item"><a href="/collections/dinner-sets" class="tcp-nav__link">BESPOKE (HOMES)</a></div>
-            <div class="tcp-nav__item"><a href="/pages/bespoke-b2b" class="tcp-nav__link">BESPOKE (B2B)</a></div>
-            <div class="tcp-nav__item"><a href="/collections/gifting" class="tcp-nav__link">GIFTING</a></div>
-            <div class="tcp-nav__item"><a href="/pages/experiences" class="tcp-nav__link">EXPERIENCES</a></div>
-            <div class="tcp-nav__item"><a href="/blogs/news" class="tcp-nav__link">JOURNAL</a></div>
+            <!-- Curated Navigation Menu -->
+            <div class="tcp-nav__item tcp-nav__item--has-dropdown">
+              <a href="/pages/shop" class="tcp-nav__link">
+                SHOP
+                <svg class="tcp-nav__caret" width="8" height="5" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <div class="tcp-dropdown">
+                <a href="/collections/all" class="tcp-dropdown__link">All Collections</a>
+                <a href="/pages/pushpa" class="tcp-dropdown__link">Pushpa Collection</a>
+                <a href="/collections/dinner-sets" class="tcp-dropdown__link">Signature Dinner Sets</a>
+                <a href="/collections/all" class="tcp-dropdown__link">Tableware</a>
+                <a href="/collections/all" class="tcp-dropdown__link">Serveware</a>
+                <a href="/collections/all" class="tcp-dropdown__link">Drinkware</a>
+                <a href="/collections/all" class="tcp-dropdown__link">Linen &amp; Decor</a>
+              </div>
+            </div>
+
+            <div class="tcp-nav__item tcp-nav__item--has-dropdown">
+              <a href="/pages/story" class="tcp-nav__link">
+                STORY
+                <svg class="tcp-nav__caret" width="8" height="5" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <div class="tcp-dropdown">
+                <a href="/pages/story" class="tcp-dropdown__link">Philosophy</a>
+                <a href="/pages/story" class="tcp-dropdown__link">The Craft</a>
+                <a href="/pages/story" class="tcp-dropdown__link">Social Impact</a>
+                <a href="/pages/story" class="tcp-dropdown__link">The Studio</a>
+              </div>
+            </div>
+
+            <div class="tcp-nav__item tcp-nav__item--has-dropdown">
+              <a href="/collections/dinner-sets" class="tcp-nav__link">
+                BESPOKE (HOMES)
+                <svg class="tcp-nav__caret" width="8" height="5" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <div class="tcp-dropdown">
+                <a href="/collections/dinner-sets" class="tcp-dropdown__link">Private Residences</a>
+                <a href="/collections/dinner-sets" class="tcp-dropdown__link">Tablescape Architecture</a>
+                <a href="/pages/story" class="tcp-dropdown__link">Commission Process</a>
+              </div>
+            </div>
+
+            <div class="tcp-nav__item tcp-nav__item--has-dropdown">
+              <a href="/pages/bespoke-b2b" class="tcp-nav__link">
+                BESPOKE (B2B)
+                <svg class="tcp-nav__caret" width="8" height="5" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <div class="tcp-dropdown">
+                <a href="/pages/bespoke-b2b" class="tcp-dropdown__link">Restaurants &amp; Cafes</a>
+                <a href="/pages/bespoke-b2b" class="tcp-dropdown__link">Hospitality &amp; Hotels</a>
+                <a href="/pages/bespoke-b2b" class="tcp-dropdown__link">Corporate Gifting</a>
+              </div>
+            </div>
+
+            <div class="tcp-nav__item tcp-nav__item--has-dropdown">
+              <a href="/collections/gifting" class="tcp-nav__link">
+                GIFTING
+                <svg class="tcp-nav__caret" width="8" height="5" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <div class="tcp-dropdown">
+                <a href="/collections/gifting" class="tcp-dropdown__link">Curated Gift Sets</a>
+                <a href="/collections/gifting" class="tcp-dropdown__link">Festive Boxes</a>
+                <a href="/collections/gifting" class="tcp-dropdown__link">Bespoke Packaging</a>
+              </div>
+            </div>
+
+            <div class="tcp-nav__item tcp-nav__item--has-dropdown">
+              <a href="/pages/experiences" class="tcp-nav__link">
+                EXPERIENCES
+                <svg class="tcp-nav__caret" width="8" height="5" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <div class="tcp-dropdown">
+                <a href="/pages/experiences" class="tcp-dropdown__link">Dining Rituals</a>
+                <a href="/pages/experiences" class="tcp-dropdown__link">Studio Visits</a>
+                <a href="/pages/experiences" class="tcp-dropdown__link">Supper Clubs</a>
+              </div>
+            </div>
+
+            <div class="tcp-nav__item">
+              <a href="/blogs/news" class="tcp-nav__link">JOURNAL</a>
+            </div>
           {% endif %}
         </nav>
 
@@ -877,8 +950,8 @@
   </div>
   <div class="tcp-mobile-drawer__body">
     <ul class="tcp-mobile-nav-list" style="list-style: none; padding: 0; margin: 0;">
-      {% if header_links != blank and header_links.size > 0 %}
-        {% for link in header_links %}
+      {% if section.settings.menu != blank and section.settings.menu != 'main-menu' and linklists[section.settings.menu].links.size > 0 %}
+        {% for link in linklists[section.settings.menu].links %}
           {% if link.links != blank %}
             <li class="tcp-mobile-nav-item">
               <div class="tcp-mobile-nav-row">
@@ -900,13 +973,99 @@
           {% endif %}
         {% endfor %}
       {% else %}
-        <li class="tcp-mobile-nav-item"><a href="/collections/all" class="tcp-mobile-nav-link">Shop</a></li>
-        <li class="tcp-mobile-nav-item"><a href="/pages/story" class="tcp-mobile-nav-link">Story</a></li>
-        <li class="tcp-mobile-nav-item"><a href="/collections/dinner-sets" class="tcp-mobile-nav-link">Bespoke (Homes)</a></li>
-        <li class="tcp-mobile-nav-item"><a href="/pages/bespoke-b2b" class="tcp-mobile-nav-link">Bespoke (B2B)</a></li>
-        <li class="tcp-mobile-nav-item"><a href="/collections/gifting" class="tcp-mobile-nav-link">Gifting</a></li>
-        <li class="tcp-mobile-nav-item"><a href="/pages/experiences" class="tcp-mobile-nav-link">Experiences</a></li>
-        <li class="tcp-mobile-nav-item"><a href="/blogs/news" class="tcp-mobile-nav-link">Journal</a></li>
+        <!-- Curated Mobile Navigation -->
+        <li class="tcp-mobile-nav-item">
+          <div class="tcp-mobile-nav-row">
+            <a href="/pages/shop" class="tcp-mobile-nav-link">Shop</a>
+            <button type="button" class="tcp-mobile-sub-toggle" aria-label="Toggle Shop menu">
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <ul class="tcp-mobile-sub-list" style="display: none;">
+            <li><a href="/collections/all" class="tcp-mobile-sub-link">All Collections</a></li>
+            <li><a href="/pages/pushpa" class="tcp-mobile-sub-link">Pushpa Collection</a></li>
+            <li><a href="/collections/dinner-sets" class="tcp-mobile-sub-link">Signature Dinner Sets</a></li>
+            <li><a href="/collections/all" class="tcp-mobile-sub-link">Tableware</a></li>
+            <li><a href="/collections/all" class="tcp-mobile-sub-link">Serveware</a></li>
+            <li><a href="/collections/all" class="tcp-mobile-sub-link">Drinkware</a></li>
+            <li><a href="/collections/all" class="tcp-mobile-sub-link">Linen &amp; Decor</a></li>
+          </ul>
+        </li>
+
+        <li class="tcp-mobile-nav-item">
+          <div class="tcp-mobile-nav-row">
+            <a href="/pages/story" class="tcp-mobile-nav-link">Story</a>
+            <button type="button" class="tcp-mobile-sub-toggle" aria-label="Toggle Story menu">
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <ul class="tcp-mobile-sub-list" style="display: none;">
+            <li><a href="/pages/story" class="tcp-mobile-sub-link">Philosophy</a></li>
+            <li><a href="/pages/story" class="tcp-mobile-sub-link">The Craft</a></li>
+            <li><a href="/pages/story" class="tcp-mobile-sub-link">Social Impact</a></li>
+            <li><a href="/pages/story" class="tcp-mobile-sub-link">The Studio</a></li>
+          </ul>
+        </li>
+
+        <li class="tcp-mobile-nav-item">
+          <div class="tcp-mobile-nav-row">
+            <a href="/collections/dinner-sets" class="tcp-mobile-nav-link">Bespoke (Homes)</a>
+            <button type="button" class="tcp-mobile-sub-toggle" aria-label="Toggle Bespoke Homes menu">
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <ul class="tcp-mobile-sub-list" style="display: none;">
+            <li><a href="/collections/dinner-sets" class="tcp-mobile-sub-link">Private Residences</a></li>
+            <li><a href="/collections/dinner-sets" class="tcp-mobile-sub-link">Tablescape Architecture</a></li>
+            <li><a href="/pages/story" class="tcp-mobile-sub-link">Commission Process</a></li>
+          </ul>
+        </li>
+
+        <li class="tcp-mobile-nav-item">
+          <div class="tcp-mobile-nav-row">
+            <a href="/pages/bespoke-b2b" class="tcp-mobile-nav-link">Bespoke (B2B)</a>
+            <button type="button" class="tcp-mobile-sub-toggle" aria-label="Toggle Bespoke B2B menu">
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <ul class="tcp-mobile-sub-list" style="display: none;">
+            <li><a href="/pages/bespoke-b2b" class="tcp-mobile-sub-link">Restaurants &amp; Cafes</a></li>
+            <li><a href="/pages/bespoke-b2b" class="tcp-mobile-sub-link">Hospitality &amp; Hotels</a></li>
+            <li><a href="/pages/bespoke-b2b" class="tcp-mobile-sub-link">Corporate Gifting</a></li>
+          </ul>
+        </li>
+
+        <li class="tcp-mobile-nav-item">
+          <div class="tcp-mobile-nav-row">
+            <a href="/collections/gifting" class="tcp-mobile-nav-link">Gifting</a>
+            <button type="button" class="tcp-mobile-sub-toggle" aria-label="Toggle Gifting menu">
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <ul class="tcp-mobile-sub-list" style="display: none;">
+            <li><a href="/collections/gifting" class="tcp-mobile-sub-link">Curated Gift Sets</a></li>
+            <li><a href="/collections/gifting" class="tcp-mobile-sub-link">Festive Boxes</a></li>
+            <li><a href="/collections/gifting" class="tcp-mobile-sub-link">Bespoke Packaging</a></li>
+          </ul>
+        </li>
+
+        <li class="tcp-mobile-nav-item">
+          <div class="tcp-mobile-nav-row">
+            <a href="/pages/experiences" class="tcp-mobile-nav-link">Experiences</a>
+            <button type="button" class="tcp-mobile-sub-toggle" aria-label="Toggle Experiences menu">
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <ul class="tcp-mobile-sub-list" style="display: none;">
+            <li><a href="/pages/experiences" class="tcp-mobile-sub-link">Dining Rituals</a></li>
+            <li><a href="/pages/experiences" class="tcp-mobile-sub-link">Studio Visits</a></li>
+            <li><a href="/pages/experiences" class="tcp-mobile-sub-link">Supper Clubs</a></li>
+          </ul>
+        </li>
+
+        <li class="tcp-mobile-nav-item">
+          <a href="/blogs/news" class="tcp-mobile-nav-link">Journal</a>
+        </li>
       {% endif %}
     </ul>
     <div style="border-top: 1px solid rgba(0,0,0,0.08); padding-top: 16px; margin-top: 16px; display: flex; flex-direction: column; gap: 12px;">

@@ -1,0 +1,807 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Category & Offerings Grid Section
+  ============================================================
+  Fully customizable & editable category showcase grid for any page.
+  Matches editorial reference design with 8 core brand offerings.
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Sacramento&display=swap" rel="stylesheet">
+
+<style>
+  #tcp-cat-grid-{{ section.id }} {
+    --tcp-grid-bg: {{ section.settings.bg_color | default: '#FFFFFF' }};
+    --tcp-card-bg: {{ section.settings.card_bg_color | default: '#F7F4EE' }};
+    --tcp-text-color: {{ section.settings.text_color | default: '#2D2A27' }};
+    --tcp-accent-gold: #A6732E;
+    --tcp-gold-bright: #fcce3a;
+    --tcp-gold-hover: #8C5F22;
+    --tcp-border-color: #ECE7DF;
+    
+    background-color: var(--tcp-grid-bg);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .tcp-cat-grid__container {
+    max-width: {{ section.settings.container_width | default: '1440' }}px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-cat-grid__container {
+      padding: 0 20px;
+    }
+    #tcp-cat-grid-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  }
+
+  /* ── Header ── */
+  .tcp-cat-grid__header {
+    margin-bottom: {{ section.settings.header_spacing | default: 40 }}px;
+    text-align: {{ section.settings.header_alignment | default: 'left' }};
+  }
+
+  .tcp-cat-grid__eyebrow-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .tcp-cat-grid__eyebrow {
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--tcp-accent-gold);
+    margin: 0;
+  }
+
+  .tcp-cat-grid__dash {
+    width: 24px;
+    height: 1.5px;
+    background: var(--tcp-accent-gold);
+    display: inline-block;
+  }
+
+  .tcp-cat-grid__title {
+    font-family: {% if section.settings.heading_font == 'serif' %}'Cormorant Garamond', Georgia, serif{% else %}var(--font-sans, 'Plus Jakarta Sans', sans-serif){% endif %};
+    font-size: {% if section.settings.heading_font == 'serif' %}clamp(28px, 3.5vw, 42px){% else %}clamp(20px, 2.5vw, 28px){% endif %};
+    font-weight: {% if section.settings.heading_font == 'serif' %}400{% else %}700{% endif %};
+    letter-spacing: {% if section.settings.heading_font == 'serif' %}-0.5px{% else %}1px{% endif %};
+    color: var(--tcp-text-color);
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+
+  .tcp-cat-grid__title span.dot {
+    color: var(--tcp-gold-bright);
+  }
+
+  .tcp-cat-grid__subtitle {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 14px;
+    color: #7A746D;
+    margin: 0;
+    max-width: 650px;
+    line-height: 1.6;
+    {% if section.settings.header_alignment == 'center' %}
+      margin-left: auto;
+      margin-right: auto;
+    {% endif %}
+  }
+
+  /* ── Grid Layout ── */
+  .tcp-cat-grid__items {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_desktop | default: 4 }}, 1fr);
+    gap: {{ section.settings.grid_gap_desktop | default: '28px' }};
+  }
+
+  @media (max-width: 1100px) {
+    .tcp-cat-grid__items {
+      grid-template-columns: repeat({{ section.settings.columns_tablet | default: 3 }}, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tcp-cat-grid__items {
+      grid-template-columns: repeat({{ section.settings.columns_mobile | default: 2 }}, 1fr);
+      gap: {{ section.settings.grid_gap_mobile | default: '16px' }};
+    }
+  }
+
+  @media (max-width: 480px) {
+    {% if section.settings.columns_mobile == '1' %}
+      .tcp-cat-grid__items {
+        grid-template-columns: 1fr;
+      }
+    {% endif %}
+  }
+
+  /* ── Category Card ── */
+  .tcp-cat-card {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    group: true;
+    background: transparent;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tcp-cat-card:hover {
+    {% if section.settings.hover_lift %}
+      transform: translateY(-4px);
+    {% endif %}
+  }
+
+  /* Card Media Box */
+  .tcp-cat-card__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: {{ section.settings.card_aspect_ratio | default: '1 / 1' }};
+    overflow: hidden;
+    background-color: var(--tcp-card-bg);
+    border-radius: {{ section.settings.card_border_radius | default: 0 }}px;
+    border: 1px solid rgba(236, 231, 223, 0.7);
+    box-sizing: border-box;
+  }
+
+  .tcp-cat-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  }
+
+  .tcp-cat-card:hover .tcp-cat-card__img {
+    transform: scale(1.05);
+  }
+
+  /* Fallback Graphic */
+  .tcp-cat-card__fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 45%, #FBF8F2 0%, #EFE9DE 100%);
+    position: relative;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+
+  .tcp-cat-card__fallback svg {
+    width: 65%;
+    height: 65%;
+    max-width: 140px;
+    max-height: 140px;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tcp-cat-card:hover .tcp-cat-card__fallback svg {
+    transform: scale(1.08);
+  }
+
+  /* Card Badge */
+  .tcp-cat-card__badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(8px);
+    color: #1F1D1B;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    border: 1px solid rgba(252, 206, 58, 0.4);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    z-index: 2;
+  }
+
+  /* Card Content / Label */
+  .tcp-cat-card__content {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: {{ section.settings.card_text_alignment | default: 'flex-start' }};
+    gap: 8px;
+    text-align: {{ section.settings.card_text_alignment | default: 'left' }};
+  }
+
+  .tcp-cat-card__title {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: {{ section.settings.card_title_size | default: 12 }}px;
+    font-weight: 700;
+    letter-spacing: {{ section.settings.card_title_spacing | default: '2px' }};
+    text-transform: uppercase;
+    color: var(--tcp-text-color);
+    margin: 0;
+    transition: color 0.25s ease;
+    line-height: 1.3;
+  }
+
+  .tcp-cat-card:hover .tcp-cat-card__title {
+    color: var(--tcp-accent-gold);
+  }
+
+  .tcp-cat-card__arrow {
+    color: var(--tcp-accent-gold);
+    font-size: 14px;
+    line-height: 1;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+    display: {% if section.settings.show_card_arrows %}inline-block{% else %}none{% endif %};
+  }
+
+  .tcp-cat-card:hover .tcp-cat-card__arrow {
+    transform: translateX(4px);
+    color: var(--tcp-gold-hover);
+  }
+
+  .tcp-cat-card__subtext {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px;
+    color: #8E8981;
+    margin-top: 3px;
+    letter-spacing: 0.3px;
+    display: block;
+  }
+
+  /* Bottom View All Link (Optional) */
+  .tcp-cat-grid__footer {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .tcp-cat-grid__footer-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #2D2A27;
+    text-decoration: none;
+    padding: 12px 28px;
+    border: 1px solid #ECE7DF;
+    background: #FAF7F2;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .tcp-cat-grid__footer-btn:hover {
+    background: #fcce3a;
+    border-color: #fcce3a;
+    color: #1A1815;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(252, 206, 58, 0.3);
+  }
+</style>
+
+<section id="tcp-cat-grid-{{ section.id }}" class="tcp-cat-grid-section">
+  <div class="tcp-cat-grid__container">
+    
+    {% comment %} Section Header {% endcomment %}
+    {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
+      <div class="tcp-cat-grid__header">
+        {% if section.settings.eyebrow != blank %}
+          <div class="tcp-cat-grid__eyebrow-wrap">
+            <span class="tcp-cat-grid__dash"></span>
+            <span class="tcp-cat-grid__eyebrow">{{ section.settings.eyebrow }}</span>
+          </div>
+        {% endif %}
+        
+        {% if section.settings.heading != blank %}
+          <h2 class="tcp-cat-grid__title">
+            {{ section.settings.heading }}<span class="dot">.</span>
+          </h2>
+        {% endif %}
+        
+        {% if section.settings.subtitle != blank %}
+          <p class="tcp-cat-grid__subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% comment %} Category Grid {% endcomment %}
+    <div class="tcp-cat-grid__items">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {%- assign card_url = block.settings.link_url | default: '/collections/all' -%}
+          <a href="{{ card_url }}" class="tcp-cat-card" {{ block.shopify_attributes }}>
+            <div class="tcp-cat-card__media">
+              {% if block.settings.badge != blank %}
+                <span class="tcp-cat-card__badge">{{ block.settings.badge }}</span>
+              {% endif %}
+
+              {% if block.settings.image != blank %}
+                <img
+                  src="{{ block.settings.image | image_url: width: 800 }}"
+                  srcset="
+                    {{ block.settings.image | image_url: width: 400 }} 400w,
+                    {{ block.settings.image | image_url: width: 600 }} 600w,
+                    {{ block.settings.image | image_url: width: 800 }} 800w
+                  "
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                  alt="{{ block.settings.title | escape }}"
+                  class="tcp-cat-card__img"
+                  loading="lazy"
+                >
+              {% else %}
+                <!-- Fallback Artisan Stoneware SVGs tailored per category index -->
+                <div class="tcp-cat-card__fallback">
+                  {% case forloop.index0 | modulo: 8 %}
+                    {% when 0 %}
+                      {% comment %} Dinnerware / Plates {% endcomment %}
+                      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="70" fill="#F7F3EB" stroke="#A6732E" stroke-width="2"/>
+                        <circle cx="100" cy="100" r="54" fill="#EFE8DC" stroke="#A6732E" stroke-width="1.2" stroke-dasharray="3 3"/>
+                        <circle cx="100" cy="100" r="30" fill="#FAF6EE" stroke="#A6732E" stroke-width="1.5"/>
+                        <path d="M100 85C95 95 95 105 100 115" stroke="#A6732E" stroke-width="1.5" stroke-linecap="round"/>
+                        <circle cx="100" cy="82" r="3" fill="#fcce3a"/>
+                      </svg>
+                    {% when 1 %}
+                      {% comment %} Signature Sets {% endcomment %}
+                      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="80" cy="95" rx="55" ry="55" fill="#EFE8DC" stroke="#A6732E" stroke-width="1.5"/>
+                        <ellipse cx="120" cy="105" rx="48" ry="48" fill="#F7F3EB" stroke="#A6732E" stroke-width="2"/>
+                        <path d="M120 75 Q128 95 120 115 Q112 95 120 75" fill="#A6732E" opacity="0.35"/>
+                        <circle cx="80" cy="80" r="4" fill="#fcce3a"/>
+                      </svg>
+                    {% when 2 %}
+                      {% comment %} Serveware & Platters {% endcomment %}
+                      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="100" cy="100" rx="72" ry="42" fill="#F7F3EB" stroke="#A6732E" stroke-width="2"/>
+                        <ellipse cx="100" cy="100" rx="56" ry="30" fill="#EFE8DC" stroke="#A6732E" stroke-width="1.2"/>
+                        <path d="M70 100 Q100 88 130 100" stroke="#fcce3a" stroke-width="2" stroke-linecap="round"/>
+                      </svg>
+                    {% when 3 %}
+                      {% comment %} Mugs & Kulhars {% endcomment %}
+                      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M75 75 L80 135 Q100 142 120 135 L125 75 Z" fill="#F7F3EB" stroke="#A6732E" stroke-width="2"/>
+                        <path d="M125 88 C140 88 140 120 123 122" stroke="#A6732E" stroke-width="2" stroke-linecap="round"/>
+                        <ellipse cx="100" cy="75" rx="25" ry="7" fill="#EFE8DC" stroke="#A6732E" stroke-width="1.5"/>
+                        <circle cx="100" cy="105" r="4" fill="#fcce3a"/>
+                      </svg>
+                    {% when 4 %}
+                      {% comment %} Decor & Lanterns / Vases {% endcomment %}
+                      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M85 60 L115 60 L125 140 L75 140 Z" fill="#F7F3EB" stroke="#A6732E" stroke-width="2"/>
+                        <rect x="90" y="48" width="20" height="12" rx="2" fill="#EFE8DC" stroke="#A6732E" stroke-width="1.5"/>
+                        <circle cx="100" cy="100" r="8" fill="#fcce3a" opacity="0.6"/>
+                        <path d="M100 92 Q105 100 100 108" stroke="#A6732E" stroke-width="1.5"/>
+                      </svg>
+                    {% when 5 %}
+                      {% comment %} Linen & Textiles {% endcomment %}
+                      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="55" y="65" width="90" height="70" rx="3" fill="#F7F3EB" stroke="#A6732E" stroke-width="2"/>
+                        <line x1="55" y1="85" x2="145" y2="85" stroke="#EFE8DC" stroke-width="2"/>
+                        <line x1="55" y1="115" x2="145" y2="115" stroke="#EFE8DC" stroke-width="2"/>
+                        <path d="M75 100 Q100 90 125 100" stroke="#fcce3a" stroke-width="1.5"/>
+                      </svg>
+                    {% when 6 %}
+                      {% comment %} Barware {% endcomment %}
+                      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M82 65 L118 65 L112 110 Q100 118 88 110 Z" fill="#F7F3EB" stroke="#A6732E" stroke-width="2"/>
+                        <line x1="100" y1="114" x2="100" y2="145" stroke="#A6732E" stroke-width="2"/>
+                        <ellipse cx="100" cy="145" rx="18" ry="4" fill="#EFE8DC" stroke="#A6732E" stroke-width="1.5"/>
+                        <circle cx="100" cy="85" r="4" fill="#fcce3a"/>
+                      </svg>
+                    {% when 7 %}
+                      {% comment %} Bespoke / Gifting {% endcomment %}
+                      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="65" y="75" width="70" height="65" rx="2" fill="#F7F3EB" stroke="#A6732E" stroke-width="2"/>
+                        <line x1="100" y1="75" x2="100" y2="140" stroke="#A6732E" stroke-width="1.5"/>
+                        <line x1="65" y1="105" x2="135" y2="105" stroke="#A6732E" stroke-width="1.5"/>
+                        <path d="M85 62 C85 70 100 75 100 75 C100 75 115 70 115 62 C115 55 100 55 100 62 C100 55 85 55 85 62 Z" fill="#fcce3a" stroke="#A6732E" stroke-width="1.2"/>
+                      </svg>
+                  {% endcase %}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="tcp-cat-card__content">
+              <span class="tcp-cat-card__title">{{ block.settings.title | default: 'COLLECTION' }}</span>
+              <span class="tcp-cat-card__arrow">&rarr;</span>
+            </div>
+
+            {% if block.settings.subtext != blank %}
+              <span class="tcp-cat-card__subtext">{{ block.settings.subtext }}</span>
+            {% endif %}
+          </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    {% comment %} Section Footer CTA (Optional) {% endcomment %}
+    {% if section.settings.footer_btn_text != blank %}
+      <div class="tcp-cat-grid__footer">
+        <a href="{{ section.settings.footer_btn_url | default: '/collections/all' }}" class="tcp-cat-grid__footer-btn">
+          {{ section.settings.footer_btn_text }} &rarr;
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TCP Category Grid",
+  "tag": "section",
+  "class": "tcp-category-grid-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header & Section Titles"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "CURATED OFFERINGS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Explore by Category"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading Font Style",
+      "options": [
+        { "value": "serif", "label": "Editorial Serif (Cormorant)" },
+        { "value": "sans", "label": "Modern Sans (Plus Jakarta)" }
+      ],
+      "default": "sans"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle / Description",
+      "default": "Functional stoneware and bespoke tableware designed for everyday rituals."
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header Alignment",
+      "options": [
+        { "value": "left", "label": "Left Aligned" },
+        { "value": "center", "label": "Center Aligned" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Space Below Header",
+      "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Grid & Column Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on Desktop",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_tablet",
+      "label": "Columns on Tablet",
+      "options": [
+        { "value": "2", "label": "2 Columns" },
+        { "value": "3", "label": "3 Columns" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on Mobile",
+      "options": [
+        { "value": "1", "label": "1 Column (Full Width)" },
+        { "value": "2", "label": "2 Columns (Grid)" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "grid_gap_desktop",
+      "label": "Grid Gap (Desktop)",
+      "options": [
+        { "value": "16px", "label": "Tight (16px)" },
+        { "value": "24px", "label": "Medium (24px)" },
+        { "value": "32px", "label": "Wide (32px)" },
+        { "value": "40px", "label": "Extra Wide (40px)" }
+      ],
+      "default": "24px"
+    },
+    {
+      "type": "header",
+      "content": "Card Styling & Appearance"
+    },
+    {
+      "type": "select",
+      "id": "card_aspect_ratio",
+      "label": "Card Image Aspect Ratio",
+      "options": [
+        { "value": "1 / 1", "label": "Square (1:1)" },
+        { "value": "4 / 5", "label": "Portrait (4:5)" },
+        { "value": "3 / 4", "label": "Portrait (3:4)" },
+        { "value": "4 / 3", "label": "Landscape (4:3)" }
+      ],
+      "default": "1 / 1"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 16,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Corner Radius",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Card Title Font Size",
+      "default": 11
+    },
+    {
+      "type": "select",
+      "id": "card_title_spacing",
+      "label": "Card Title Letter Spacing",
+      "options": [
+        { "value": "1px", "label": "1px" },
+        { "value": "2px", "label": "2px (Standard)" },
+        { "value": "3px", "label": "3px (Wide Editorial)" }
+      ],
+      "default": "2px"
+    },
+    {
+      "type": "select",
+      "id": "card_text_alignment",
+      "label": "Card Label Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left Aligned" },
+        { "value": "center", "label": "Centered" }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_card_arrows",
+      "label": "Show Arrow Next to Title",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hover_lift",
+      "label": "Enable Subtle Lift on Hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors & Padding"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Image Background",
+      "default": "#F7F4EE"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#2D2A27"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1200,
+      "max": 1600,
+      "step": 40,
+      "unit": "px",
+      "label": "Max Container Width",
+      "default": 1440
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 140,
+      "step": 10,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 140,
+      "step": 10,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Footer Link (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "footer_btn_text",
+      "label": "Footer Button Text"
+    },
+    {
+      "type": "url",
+      "id": "footer_btn_url",
+      "label": "Footer Button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_card",
+      "name": "Category Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title",
+          "default": "KITCHEN & DINING"
+        },
+        {
+          "type": "text",
+          "id": "subtext",
+          "label": "Subtext / Description (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge Label (Optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category Image"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Category Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP Category Grid",
+      "blocks": [
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "KITCHEN & DINING",
+            "link_url": "/collections/all"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "SIGNATURE DINNER SETS",
+            "link_url": "/pages/pushpa-collection"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "SERVEWARE & PLATTERS",
+            "link_url": "/collections/all"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "MUGS & KULHARS",
+            "link_url": "/collections/all"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "SPATIAL OBJECTS & DECOR",
+            "link_url": "/collections/all"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "LINEN & TEXTILES",
+            "link_url": "/collections/all"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "BARWARE & ENTERTAINING",
+            "link_url": "/collections/all"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "BESPOKE & HOSPITALITY",
+            "link_url": "/pages/bespoke-b2b"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

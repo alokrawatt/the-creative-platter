@@ -1,0 +1,631 @@
+{% comment %}
+  ============================================================
+  THE CREATIVE PLATTER — Editorial Feature Banner Section
+  ============================================================
+  Full-width panoramic spotlight banner with directional vignette/gradient
+  and customizable editorial typography. Matches Image 2 reference.
+{% endcomment %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Sacramento&display=swap" rel="stylesheet">
+
+<style>
+  #tcp-feat-banner-{{ section.id }} {
+    --tcp-banner-height-desk: {{ section.settings.banner_height_desktop }}px;
+    --tcp-banner-height-mob: {{ section.settings.banner_height_mobile }}px;
+    --tcp-text-color: {{ section.settings.text_color | default: '#FFFFFF' }};
+    --tcp-gold-bright: #fcce3a;
+    --tcp-accent-gold: #A6732E;
+    
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: {{ section.settings.bg_color | default: '#1A1816' }};
+    box-sizing: border-box;
+  }
+
+  .tcp-feat-banner__wrapper {
+    position: relative;
+    width: 100%;
+    min-height: var(--tcp-banner-height-desk);
+    display: flex;
+    align-items: {{ section.settings.vertical_alignment | default: 'center' }};
+    justify-content: {{ section.settings.horizontal_alignment | default: 'flex-end' }};
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-feat-banner__wrapper {
+      min-height: var(--tcp-banner-height-mob);
+      justify-content: center;
+      align-items: flex-end;
+    }
+  }
+
+  /* ── Background Media ── */
+  .tcp-feat-banner__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .tcp-feat-banner__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ section.settings.image_position | default: 'center center' }};
+    display: block;
+  }
+
+  .tcp-feat-banner__img--desktop {
+    display: block;
+  }
+  .tcp-feat-banner__img--mobile {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    {% if section.settings.image_mobile != blank %}
+      .tcp-feat-banner__img--desktop {
+        display: none;
+      }
+      .tcp-feat-banner__img--mobile {
+        display: block;
+      }
+    {% endif %}
+  }
+
+  /* Fallback Graphic Table Spread */
+  .tcp-feat-banner__fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 35% 50%, #ECE4D8 0%, #D8CEBE 50%, #201D1A 100%);
+  }
+
+  .tcp-feat-banner__fallback svg {
+    width: 100%;
+    height: 100%;
+    opacity: 0.35;
+  }
+
+  /* ── Gradient Overlay ── */
+  .tcp-feat-banner__overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    {% case section.settings.gradient_style %}
+      {% when 'gradient_right' %}
+        background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 40%, rgba(18, 17, 16, {{ section.settings.overlay_opacity | divided_by: 100.0 }}) 80%, rgba(18, 17, 16, {{ section.settings.overlay_opacity | plus: 15 | at_most: 98 | divided_by: 100.0 }}) 100%);
+      {% when 'gradient_left' %}
+        background: linear-gradient(to left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 40%, rgba(18, 17, 16, {{ section.settings.overlay_opacity | divided_by: 100.0 }}) 80%, rgba(18, 17, 16, {{ section.settings.overlay_opacity | plus: 15 | at_most: 98 | divided_by: 100.0 }}) 100%);
+      {% when 'gradient_bottom' %}
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, rgba(18, 17, 16, {{ section.settings.overlay_opacity | divided_by: 100.0 }}) 100%);
+      {% when 'radial_vignette' %}
+        background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 40%, rgba(18, 17, 16, {{ section.settings.overlay_opacity | divided_by: 100.0 }}) 100%);
+      {% when 'solid_tint' %}
+        background-color: rgba(18, 17, 16, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+      {% else %}
+        background: linear-gradient(to right, rgba(0, 0, 0, 0) 30%, rgba(18, 17, 16, {{ section.settings.overlay_opacity | divided_by: 100.0 }}) 100%);
+    {% endcase %}
+  }
+
+  @media (max-width: 768px) {
+    .tcp-feat-banner__overlay {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 0%, rgba(18, 17, 16, 0.6) 50%, rgba(18, 17, 16, 0.92) 100%);
+    }
+  }
+
+  /* ── Content Container ── */
+  .tcp-feat-banner__container {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: {{ section.settings.container_width | default: '1440' }}px;
+    margin: 0 auto;
+    padding: 40px 60px;
+    display: flex;
+    justify-content: {{ section.settings.horizontal_alignment | default: 'flex-end' }};
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 900px) {
+    .tcp-feat-banner__container {
+      padding: 30px 24px;
+      justify-content: center;
+    }
+  }
+
+  .tcp-feat-banner__box {
+    max-width: {{ section.settings.content_max_width | default: 520 }}px;
+    text-align: {{ section.settings.text_alignment | default: 'left' }};
+    color: var(--tcp-text-color);
+  }
+
+  @media (max-width: 768px) {
+    .tcp-feat-banner__box {
+      text-align: center;
+      max-width: 100%;
+    }
+  }
+
+  /* Eyebrow */
+  .tcp-feat-banner__eyebrow {
+    display: inline-block;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--tcp-gold-bright);
+    margin-bottom: 12px;
+  }
+
+  /* Headline */
+  .tcp-feat-banner__title {
+    font-family: {% if section.settings.heading_font == 'serif' %}'Cormorant Garamond', Georgia, serif{% else %}var(--font-sans, 'Plus Jakarta Sans', sans-serif){% endif %};
+    font-size: clamp(28px, 4.5vw, {{ section.settings.heading_size_desktop | default: 48 }}px);
+    font-weight: {% if section.settings.heading_font == 'serif' %}400{% else %}700{% endif %};
+    letter-spacing: {% if section.settings.heading_font == 'serif' %}-0.5px{% else %}2.5px{% endif %};
+    text-transform: uppercase;
+    color: var(--tcp-text-color);
+    margin: 0 0 16px;
+    line-height: 1.1;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .tcp-feat-banner__title span.dot {
+    color: var(--tcp-gold-bright);
+  }
+
+  /* Script Subtitle (Optional) */
+  .tcp-feat-banner__script {
+    font-family: var(--font-script, 'Sacramento', cursive);
+    font-size: 28px;
+    color: var(--tcp-gold-bright);
+    display: block;
+    margin-bottom: 8px;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  /* Description */
+  .tcp-feat-banner__desc {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 22px;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Action Buttons / Links */
+  .tcp-feat-banner__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-feat-banner__actions {
+      justify-content: center;
+    }
+  }
+
+  /* Minimalist Underline Link (Matches Reference Image 2) */
+  .tcp-feat-banner__link-underline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--tcp-text-color);
+    text-decoration: none;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid var(--tcp-text-color);
+    transition: all 0.3s ease;
+  }
+
+  .tcp-feat-banner__link-underline:hover {
+    color: var(--tcp-gold-bright);
+    border-bottom-color: var(--tcp-gold-bright);
+    transform: translateY(-1px);
+  }
+
+  /* Solid Button */
+  .tcp-feat-banner__btn-solid {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--tcp-gold-bright);
+    color: #1A1815;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 13px 30px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 18px rgba(252, 206, 58, 0.35);
+  }
+
+  .tcp-feat-banner__btn-solid:hover {
+    background-color: #e5b92e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(252, 206, 58, 0.5);
+  }
+
+  /* Ghost Button */
+  .tcp-feat-banner__btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: transparent;
+    color: #FFFFFF;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 26px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .tcp-feat-banner__btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #FFFFFF;
+  }
+</style>
+
+<section id="tcp-feat-banner-{{ section.id }}" class="tcp-feat-banner-section">
+  <div class="tcp-feat-banner__wrapper">
+    
+    {% comment %} Background Media {% endcomment %}
+    <div class="tcp-feat-banner__media">
+      {% if section.settings.image_desktop != blank %}
+        <img
+          src="{{ section.settings.image_desktop | image_url: width: 2400 }}"
+          srcset="
+            {{ section.settings.image_desktop | image_url: width: 800 }} 800w,
+            {{ section.settings.image_desktop | image_url: width: 1400 }} 1400w,
+            {{ section.settings.image_desktop | image_url: width: 2000 }} 2000w,
+            {{ section.settings.image_desktop | image_url: width: 2600 }} 2600w
+          "
+          sizes="100vw"
+          alt="{{ section.settings.heading | escape }}"
+          class="tcp-feat-banner__img tcp-feat-banner__img--desktop"
+          loading="lazy"
+        >
+        {% if section.settings.image_mobile != blank %}
+          <img
+            src="{{ section.settings.image_mobile | image_url: width: 1000 }}"
+            alt="{{ section.settings.heading | escape }}"
+            class="tcp-feat-banner__img tcp-feat-banner__img--mobile"
+            loading="lazy"
+          >
+        {% endif %}
+      {% else %}
+        {% comment %} Fallback Artisanal Studio Staging Graphic {% endcomment %}
+        <div class="tcp-feat-banner__fallback">
+          <svg viewBox="0 0 1200 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="1200" height="500" fill="#1D1B18"/>
+            <ellipse cx="250" cy="320" rx="140" ry="140" fill="#FAF6EE" stroke="#A6732E" stroke-width="3"/>
+            <ellipse cx="480" cy="280" rx="170" ry="170" fill="#EFE8DC" stroke="#A6732E" stroke-width="4"/>
+            <rect x="520" y="240" width="220" height="130" rx="4" fill="#FAF6EE" stroke="#A6732E" stroke-width="3"/>
+            <circle cx="160" cy="360" r="50" fill="#EDE4D8" stroke="#A6732E" stroke-width="2"/>
+            <ellipse cx="880" cy="310" rx="110" ry="60" fill="#FAF6EE" stroke="#fcce3a" stroke-width="2.5"/>
+          </svg>
+        </div>
+      {% endif %}
+    </div>
+
+    {% comment %} Directional Gradient Overlay {% endcomment %}
+    <div class="tcp-feat-banner__overlay"></div>
+
+    {% comment %} Foreground Content Box {% endcomment %}
+    <div class="tcp-feat-banner__container">
+      <div class="tcp-feat-banner__box">
+        
+        {% if section.settings.eyebrow != blank %}
+          <span class="tcp-feat-banner__eyebrow">{{ section.settings.eyebrow }}</span>
+        {% endif %}
+
+        {% if section.settings.script_text != blank %}
+          <span class="tcp-feat-banner__script">{{ section.settings.script_text }}</span>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="tcp-feat-banner__title">
+            {{ section.settings.heading }}{% if section.settings.show_gold_dot %}<span class="dot">.</span>{% endif %}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <p class="tcp-feat-banner__desc">{{ section.settings.description }}</p>
+        {% endif %}
+
+        {% if section.settings.link_text != blank or section.settings.secondary_btn_text != blank %}
+          <div class="tcp-feat-banner__actions">
+            {% if section.settings.link_text != blank %}
+              {% if section.settings.cta_style == 'underline' %}
+                <a href="{{ section.settings.link_url | default: '/collections/all' }}" class="tcp-feat-banner__link-underline">
+                  {{ section.settings.link_text }} &rarr;
+                </a>
+              {% elsif section.settings.cta_style == 'solid' %}
+                <a href="{{ section.settings.link_url | default: '/collections/all' }}" class="tcp-feat-banner__btn-solid">
+                  {{ section.settings.link_text }} &rarr;
+                </a>
+              {% else %}
+                <a href="{{ section.settings.link_url | default: '/collections/all' }}" class="tcp-feat-banner__btn-ghost">
+                  {{ section.settings.link_text }} &rarr;
+                </a>
+              {% endif %}
+            {% endif %}
+
+            {% if section.settings.secondary_btn_text != blank %}
+              <a href="{{ section.settings.secondary_btn_url | default: '/pages/pushpa-collection' }}" class="tcp-feat-banner__btn-ghost">
+                {{ section.settings.secondary_btn_text }}
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TCP Feature Banner",
+  "tag": "section",
+  "class": "tcp-feature-banner-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content & Typography"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow / Badge Text",
+      "default": "STUDIO SPOTLIGHT"
+    },
+    {
+      "type": "text",
+      "id": "script_text",
+      "label": "Cursive Script Subtitle (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "KITCHEN & DINING"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading Font Style",
+      "options": [
+        { "value": "sans", "label": "Modern Sans (Plus Jakarta / Clean)" },
+        { "value": "serif", "label": "Editorial Serif (Cormorant Garamond)" }
+      ],
+      "default": "sans"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 28,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 48
+    },
+    {
+      "type": "checkbox",
+      "id": "show_gold_dot",
+      "label": "Show Gold Period Dot (.)",
+      "default": false
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description Text",
+      "default": "Handcrafted tableware and dining objects shaped for the art of hospitality and home ritual."
+    },
+    {
+      "type": "header",
+      "content": "Call to Action (CTA)"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Primary Link / Button Text",
+      "default": "VIEW ALL"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Primary Link URL"
+    },
+    {
+      "type": "select",
+      "id": "cta_style",
+      "label": "Primary CTA Style",
+      "options": [
+        { "value": "underline", "label": "Minimalist Underlined Link (Matches Reference 2)" },
+        { "value": "solid", "label": "Solid Gold Button" },
+        { "value": "ghost", "label": "Ghost Outline Button" }
+      ],
+      "default": "underline"
+    },
+    {
+      "type": "text",
+      "id": "secondary_btn_text",
+      "label": "Secondary Button Text (Optional)"
+    },
+    {
+      "type": "url",
+      "id": "secondary_btn_url",
+      "label": "Secondary Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Background Imagery & Overlay"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile Background Image (Optional)"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Focal Point",
+      "options": [
+        { "value": "center center", "label": "Center" },
+        { "value": "left center", "label": "Left" },
+        { "value": "right center", "label": "Right" },
+        { "value": "center top", "label": "Top" },
+        { "value": "center bottom", "label": "Bottom" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "select",
+      "id": "gradient_style",
+      "label": "Gradient / Vignette Style",
+      "options": [
+        { "value": "gradient_right", "label": "Dark Fade on Right (Matches Reference 2)" },
+        { "value": "gradient_left", "label": "Dark Fade on Left" },
+        { "value": "gradient_bottom", "label": "Dark Fade on Bottom" },
+        { "value": "radial_vignette", "label": "Radial Edge Vignette" },
+        { "value": "solid_tint", "label": "Even Dark Overlay" }
+      ],
+      "default": "gradient_right"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 95,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay Darkness Opacity",
+      "default": 75
+    },
+    {
+      "type": "header",
+      "content": "Layout & Sizing"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_alignment",
+      "label": "Content Placement (Desktop)",
+      "options": [
+        { "value": "flex-end", "label": "Right Aligned (Matches Reference 2)" },
+        { "value": "flex-start", "label": "Left Aligned" },
+        { "value": "center", "label": "Centered" }
+      ],
+      "default": "flex-end"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "banner_height_desktop",
+      "min": 300,
+      "max": 700,
+      "step": 20,
+      "unit": "px",
+      "label": "Banner Height (Desktop)",
+      "default": 480
+    },
+    {
+      "type": "range",
+      "id": "banner_height_mobile",
+      "min": 200,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Banner Height (Mobile)",
+      "default": 360
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 360,
+      "max": 700,
+      "step": 20,
+      "unit": "px",
+      "label": "Content Box Max Width",
+      "default": 520
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1200,
+      "max": 1600,
+      "step": 40,
+      "unit": "px",
+      "label": "Max Container Width",
+      "default": 1440
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TCP Feature Banner",
+      "settings": {
+        "eyebrow": "COLLECTION SPOTLIGHT",
+        "heading": "KITCHEN & DINING",
+        "description": "Handcrafted tableware and dining objects shaped for the art of hospitality and home ritual.",
+        "link_text": "VIEW ALL",
+        "link_url": "/collections/all",
+        "cta_style": "underline",
+        "gradient_style": "gradient_right"
+      }
+    }
+  ]
+}
+{% endschema %}
