@@ -585,7 +585,6 @@
               <div class="tcp-acclaim-card" {{ block.shopify_attributes }}>
             {% endif %}
 
-              {% comment %} Publication Logo or Title {% endcomment %}
               {% if block.settings.logo != blank %}
                 <div class="tcp-acclaim-card__logo-wrap">
                   <img
@@ -615,6 +614,85 @@
               </div>
             {% endif %}
           {% endfor %}
+        {% else %}
+          {% comment %} Render from Section Settings (Default 4 Platforms) {% endcomment %}
+          
+          {% comment %} Platform 1: Vogue {% endcomment %}
+          {% if section.settings.p1_link != blank %}
+            <a href="{{ section.settings.p1_link }}" target="_blank" rel="noopener noreferrer" class="tcp-acclaim-card">
+          {% else %}
+            <div class="tcp-acclaim-card">
+          {% endif %}
+            {% if section.settings.p1_logo != blank %}
+              <div class="tcp-acclaim-card__logo-wrap">
+                <img src="{{ section.settings.p1_logo | image_url: width: 360 }}" alt="{{ section.settings.p1_title }}" class="tcp-acclaim-card__logo-img" loading="lazy">
+              </div>
+            {% else %}
+              <h3 class="tcp-acclaim-card__name">{{ section.settings.p1_title | default: 'VOGUE' }}</h3>
+            {% endif %}
+            <p class="tcp-acclaim-card__text">{{ section.settings.p1_quote | default: 'Featured for contemporary Indian ceramic language & mindful dining aesthetics.' }}</p>
+            {% if section.settings.p1_link != blank %}
+              <span class="tcp-acclaim-card__link">READ FEATURE &rarr;</span>
+            {% endif %}
+          {% if section.settings.p1_link != blank %}</a>{% else %}</div>{% endif %}
+
+          {% comment %} Platform 2: Conde Nast {% endcomment %}
+          {% if section.settings.p2_link != blank %}
+            <a href="{{ section.settings.p2_link }}" target="_blank" rel="noopener noreferrer" class="tcp-acclaim-card">
+          {% else %}
+            <div class="tcp-acclaim-card">
+          {% endif %}
+            {% if section.settings.p2_logo != blank %}
+              <div class="tcp-acclaim-card__logo-wrap">
+                <img src="{{ section.settings.p2_logo | image_url: width: 360 }}" alt="{{ section.settings.p2_title }}" class="tcp-acclaim-card__logo-img" loading="lazy">
+              </div>
+            {% else %}
+              <h3 class="tcp-acclaim-card__name">{{ section.settings.p2_title | default: 'CONDÉ NAST' }}</h3>
+            {% endif %}
+            <p class="tcp-acclaim-card__text">{{ section.settings.p2_quote | default: 'Celebrated for bespoke hospitality tableware and curated resort collections.' }}</p>
+            {% if section.settings.p2_link != blank %}
+              <span class="tcp-acclaim-card__link">READ FEATURE &rarr;</span>
+            {% endif %}
+          {% if section.settings.p2_link != blank %}</a>{% else %}</div>{% endif %}
+
+          {% comment %} Platform 3: The Hindu {% endcomment %}
+          {% if section.settings.p3_link != blank %}
+            <a href="{{ section.settings.p3_link }}" target="_blank" rel="noopener noreferrer" class="tcp-acclaim-card">
+          {% else %}
+            <div class="tcp-acclaim-card">
+          {% endif %}
+            {% if section.settings.p3_logo != blank %}
+              <div class="tcp-acclaim-card__logo-wrap">
+                <img src="{{ section.settings.p3_logo | image_url: width: 360 }}" alt="{{ section.settings.p3_title }}" class="tcp-acclaim-card__logo-img" loading="lazy">
+              </div>
+            {% else %}
+              <h3 class="tcp-acclaim-card__name">{{ section.settings.p3_title | default: 'THE HINDU' }}</h3>
+            {% endif %}
+            <p class="tcp-acclaim-card__text">{{ section.settings.p3_quote | default: 'Highlighted for social impact craft and empowering Gurugram village women makers.' }}</p>
+            {% if section.settings.p3_link != blank %}
+              <span class="tcp-acclaim-card__link">READ FEATURE &rarr;</span>
+            {% endif %}
+          {% if section.settings.p3_link != blank %}</a>{% else %}</div>{% endif %}
+
+          {% comment %} Platform 4: Today's Home {% endcomment %}
+          {% if section.settings.p4_link != blank %}
+            <a href="{{ section.settings.p4_link }}" target="_blank" rel="noopener noreferrer" class="tcp-acclaim-card">
+          {% else %}
+            <div class="tcp-acclaim-card">
+          {% endif %}
+            {% if section.settings.p4_logo != blank %}
+              <div class="tcp-acclaim-card__logo-wrap">
+                <img src="{{ section.settings.p4_logo | image_url: width: 360 }}" alt="{{ section.settings.p4_title }}" class="tcp-acclaim-card__logo-img" loading="lazy">
+              </div>
+            {% else %}
+              <h3 class="tcp-acclaim-card__name">{{ section.settings.p4_title | default: "TODAY'S HOME" }}</h3>
+            {% endif %}
+            <p class="tcp-acclaim-card__text">{{ section.settings.p4_quote | default: 'Showcased for architectural stoneware and soulful everyday rituals.' }}</p>
+            {% if section.settings.p4_link != blank %}
+              <span class="tcp-acclaim-card__link">READ FEATURE &rarr;</span>
+            {% endif %}
+          {% if section.settings.p4_link != blank %}</a>{% else %}</div>{% endif %}
+
         {% endif %}
       </div>
 
@@ -776,7 +854,7 @@
     },
     {
       "type": "header",
-      "content": "Editorial Acclaim (White Luxury Look)"
+      "content": "Editorial Acclaim (Header Settings)"
     },
     {
       "type": "text",
@@ -797,6 +875,114 @@
       "default": "Showcased across leading cultural and design platforms for contemporary craft language."
     },
     {
+      "type": "header",
+      "content": "Editorial Acclaim — Platform 1 (VOGUE)"
+    },
+    {
+      "type": "image_picker",
+      "id": "p1_logo",
+      "label": "Platform 1 Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "p1_title",
+      "label": "Platform 1 Name",
+      "default": "VOGUE"
+    },
+    {
+      "type": "textarea",
+      "id": "p1_quote",
+      "label": "Platform 1 Quote / Blurb",
+      "default": "Featured for contemporary Indian ceramic language & mindful dining aesthetics."
+    },
+    {
+      "type": "url",
+      "id": "p1_link",
+      "label": "Platform 1 Article Link"
+    },
+    {
+      "type": "header",
+      "content": "Editorial Acclaim — Platform 2 (CONDÉ NAST)"
+    },
+    {
+      "type": "image_picker",
+      "id": "p2_logo",
+      "label": "Platform 2 Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "p2_title",
+      "label": "Platform 2 Name",
+      "default": "CONDÉ NAST"
+    },
+    {
+      "type": "textarea",
+      "id": "p2_quote",
+      "label": "Platform 2 Quote / Blurb",
+      "default": "Celebrated for bespoke hospitality tableware and curated resort collections."
+    },
+    {
+      "type": "url",
+      "id": "p2_link",
+      "label": "Platform 2 Article Link"
+    },
+    {
+      "type": "header",
+      "content": "Editorial Acclaim — Platform 3 (THE HINDU)"
+    },
+    {
+      "type": "image_picker",
+      "id": "p3_logo",
+      "label": "Platform 3 Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "p3_title",
+      "label": "Platform 3 Name",
+      "default": "THE HINDU"
+    },
+    {
+      "type": "textarea",
+      "id": "p3_quote",
+      "label": "Platform 3 Quote / Blurb",
+      "default": "Highlighted for social impact craft and empowering Gurugram village women makers."
+    },
+    {
+      "type": "url",
+      "id": "p3_link",
+      "label": "Platform 3 Article Link"
+    },
+    {
+      "type": "header",
+      "content": "Editorial Acclaim — Platform 4 (TODAY'S HOME)"
+    },
+    {
+      "type": "image_picker",
+      "id": "p4_logo",
+      "label": "Platform 4 Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "p4_title",
+      "label": "Platform 4 Name",
+      "default": "TODAY'S HOME"
+    },
+    {
+      "type": "textarea",
+      "id": "p4_quote",
+      "label": "Platform 4 Quote / Blurb",
+      "default": "Showcased for architectural stoneware and soulful everyday rituals."
+    },
+    {
+      "type": "url",
+      "id": "p4_link",
+      "label": "Platform 4 Article Link"
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
       "type": "range",
       "id": "container_width",
       "min": 1200,
@@ -810,66 +996,36 @@
   "blocks": [
     {
       "type": "acclaim_item",
-      "name": "Press / Acclaim Card",
+      "name": "Additional Acclaim Card",
       "settings": [
         {
           "type": "image_picker",
           "id": "logo",
-          "label": "Publication Logo Image (Optional)"
+          "label": "Publication Logo Image"
         },
         {
           "type": "text",
           "id": "title",
           "label": "Publication Name",
-          "default": "VOGUE"
+          "default": "ARCHITECTURAL DIGEST"
         },
         {
           "type": "textarea",
           "id": "quote",
           "label": "Review Quote / Description",
-          "default": "Featured for contemporary Indian ceramic language & mindful dining aesthetics."
+          "default": "Featured for sculptural craft and bespoke dining objects."
         },
         {
           "type": "url",
           "id": "article_url",
-          "label": "Article / Press Link URL (Optional)"
+          "label": "Article / Press Link URL"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "TCP Studio Story",
-      "blocks": [
-        {
-          "type": "acclaim_item",
-          "settings": {
-            "title": "VOGUE",
-            "quote": "Featured for contemporary Indian ceramic language & mindful dining aesthetics."
-          }
-        },
-        {
-          "type": "acclaim_item",
-          "settings": {
-            "title": "CONDÉ NAST",
-            "quote": "Celebrated for bespoke hospitality tableware and curated resort collections."
-          }
-        },
-        {
-          "type": "acclaim_item",
-          "settings": {
-            "title": "THE HINDU",
-            "quote": "Highlighted for social impact craft and empowering Gurugram village women makers."
-          }
-        },
-        {
-          "type": "acclaim_item",
-          "settings": {
-            "title": "TODAY'S HOME",
-            "quote": "Showcased for architectural stoneware and soulful everyday rituals."
-          }
-        }
-      ]
+      "name": "TCP Studio Story"
     }
   ]
 }

@@ -2,7 +2,39 @@
   "sections": {
     "tcp_story": {
       "type": "section-story",
-      "settings": {}
+      "settings": {
+        "hero_eyebrow": "THE CREATIVE PLATTER STUDIO",
+        "hero_title": "Where Art Meets the Table",
+        "hero_script": "crafted to be felt, not just seen",
+        "hero_quote": "We design for bespoke ritual. For everyday acts of eating, gathering, pausing, and inhabiting space. Art enters life through use.",
+        "ch1_eyebrow": "THE PRACTICE & CONCEPT",
+        "ch1_title": "Crafted to be felt, not just seen.",
+        "ch1_text_1": "The Creative Platter is a design studio working with clay and mixed materials—wood, metal, and stone—to create functional objects across multiple scales. The studio’s practice spans tableware and dinner sets to spatial objects, furniture, and sculptural installations.",
+        "ch1_quote": "Our work moves from the table outward, shaping how people interact with objects, food, and one another.",
+        "ch1_text_2": "All pieces are produced through hands-on techniques, using non-toxic, food-safe materials, and are microwave and dishwasher safe. High-fired at 1260–1280°C, the work balances durability with individuality.",
+        "ch2_eyebrow": "THE PUSHPA LEGACY",
+        "ch2_title": "In Loving Memory of Pushpa",
+        "ch2_text_1": "The collection is dedicated to Pushpa, an artist and entrepreneur whose spirit lives through every vessel we shape. Smriti explores how memory transforms into living objects that participate in daily nourishment.",
+        "ch2_quote": "NOTHING IS CUT AWAY. NOTHING IS DISCARDED. THE FORM FOLLOWS THE MATERIAL.",
+        "ch2_text_2": "Recycled clay is reworked rather than discarded, with zero material cut-offs, preserving the raw organic character of the clay.",
+        "ch3_eyebrow": "FOUNDER & COMMUNITY",
+        "ch3_title": "Amankshii Rawatt • Social Impact",
+        "ch3_text_1": "Amankshii Rawatt founded The Creative Platter to explore how art can exist within everyday life. Her multidisciplinary background informs a practice rooted in material sensitivity, restraint, and human rhythm.",
+        "ch3_quote": "At The Creative Platter, we honour the vision of village women, as a social impact enterprise.",
+        "ch3_text_2": "Production takes place in a village-based studio environment near Gurugram, working closely with women artisans. The focus lies on skill, continuity, and long-term collaboration allowing craft to function as a contemporary design practice.",
+        "acclaim_eyebrow": "EDITORIAL ACCLAIM",
+        "acclaim_title": "Recognised by Leading Design Platforms",
+        "acclaim_subtitle": "Showcased across leading cultural and design platforms for contemporary craft language.",
+        "p1_title": "VOGUE",
+        "p1_quote": "Featured for contemporary Indian ceramic language & mindful dining aesthetics.",
+        "p2_title": "CONDÉ NAST",
+        "p2_quote": "Celebrated for bespoke hospitality tableware and curated resort collections.",
+        "p3_title": "THE HINDU",
+        "p3_quote": "Highlighted for social impact craft and empowering Gurugram village women makers.",
+        "p4_title": "TODAY'S HOME",
+        "p4_quote": "Showcased for architectural stoneware and soulful everyday rituals.",
+        "container_width": 1440
+      }
     }
   },
   "order": [
