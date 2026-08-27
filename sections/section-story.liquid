@@ -1,351 +1,875 @@
 {% comment %}
   ============================================================
-  THE CREATIVE PLATTER — The Studio Story
+  THE CREATIVE PLATTER — The Studio Story Section
   ============================================================
-  Pushpa dedication, Founder Amankshii Rawatt, Gurugram village
-  women impact, materials practice, recognition & press.
-  Copy into Shopify: sections/section-story.liquid
+  Fully customizable Story Page aligning with workflow_rules.md:
+  - Hero Section with editorial quote & typography
+  - Chapter 1: The Practice & Material Philosophy (Clay, Metal, Wood, Stone)
+  - Chapter 2: The Pushpa Legacy Collection (Smriti, zero cut-offs)
+  - Chapter 3: Founder Amankshii Rawatt & Gurugram Village Women Impact
+  - Chapter 4: Editorial Acclaim (LUXURY WHITE BACKGROUND with Publication Logo Uploads)
 {% endcomment %}
 
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Sacramento&display=swap" rel="stylesheet">
+
 <style>
-  .tcp-story-page {
+  #tcp-story-{{ section.id }} {
+    --tcp-gold-bright: #fcce3a;
+    --tcp-accent-gold: #A6732E;
+    --tcp-gold-hover: #8C5F22;
+    --tcp-stone-bg: #FAF7F2;
+    --tcp-border-subtle: #ECE7DF;
+    --tcp-charcoal: #2D2A27;
+    --tcp-body-grey: #545454;
+    
     background-color: #FFFFFF;
-    color: var(--tcp-dark, #1F1D1B);
-    font-family: var(--font-sans, sans-serif);
+    color: var(--tcp-charcoal);
+    position: relative;
+    box-sizing: border-box;
   }
 
-  /* ── Hero ── */
+  .tcp-story__container {
+    max-width: {{ section.settings.container_width | default: 1440 }}px;
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .tcp-story__container {
+      padding: 0 20px;
+    }
+  }
+
+  /* ── 1. Hero Banner ── */
   .tcp-story-hero {
     position: relative;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 90px 40px 100px;
     text-align: center;
-    background: radial-gradient(circle at center, #FFFFFF 0%, #FAF6EE 50%, #EDE6DA 100%);
-    padding: 80px 40px;
-    border-bottom: 1px solid var(--tcp-border, #E8E2D8);
+    background: radial-gradient(circle at center, #FFFFFF 0%, #FAF7F2 60%, #EFE9DE 100%);
+    border-bottom: 1px solid var(--tcp-border-subtle);
   }
 
   .tcp-story-hero__inner {
-    max-width: 840px;
+    max-width: 860px;
     margin: 0 auto;
   }
 
-  .tcp-story-hero__label {
-    font-size: 10.5px;
+  .tcp-story-hero__eyebrow-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .tcp-story-hero__dash {
+    width: 24px;
+    height: 1.5px;
+    background: var(--tcp-accent-gold);
+    display: inline-block;
+  }
+
+  .tcp-story-hero__eyebrow {
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 3px;
+    letter-spacing: 3.5px;
     text-transform: uppercase;
-    color: var(--tcp-gold, #C29B38);
-    display: block;
-    margin-bottom: 16px;
+    color: var(--tcp-accent-gold);
   }
 
   .tcp-story-hero__title {
-    font-family: var(--font-serif, serif);
-    font-size: clamp(40px, 5.5vw, 68px);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(42px, 5.8vw, 70px);
     font-weight: 400;
     line-height: 1.05;
-    color: var(--tcp-dark, #1F1D1B);
-    margin: 0 0 20px;
+    letter-spacing: -0.5px;
+    color: var(--tcp-charcoal);
+    margin: 0 0 16px;
+  }
+
+  .tcp-story-hero__title span.dot {
+    color: var(--tcp-gold-bright);
+  }
+
+  .tcp-story-hero__script {
+    font-family: var(--font-script, 'Sacramento', cursive);
+    font-size: clamp(28px, 3.6vw, 40px);
+    color: var(--tcp-accent-gold);
+    display: block;
+    margin-bottom: 14px;
   }
 
   .tcp-story-hero__quote {
-    font-family: var(--font-serif, serif);
-    font-size: 22px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(20px, 2.4vw, 24px);
     font-style: italic;
-    color: var(--tcp-muted, #68625B);
-    line-height: 1.5;
+    color: var(--tcp-body-grey);
+    line-height: 1.55;
+    margin: 0;
   }
 
-  /* ── Chapters ── */
+  /* ── 2. Story Chapters ── */
   .tcp-story-chapter {
     padding: 100px 0;
-    border-bottom: 1px solid var(--tcp-border, #E8E2D8);
+    border-bottom: 1px solid var(--tcp-border-subtle);
   }
 
-  .tcp-story-chapter__inner {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 40px;
+  .tcp-story-chapter--alt {
+    background-color: var(--tcp-stone-bg);
+  }
+
+  .tcp-story-chapter__grid {
     display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    gap: 60px;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 72px;
     align-items: center;
   }
 
-  .tcp-story-chapter:nth-child(even) {
-    background: var(--tcp-white, #FFFFFF);
+  .tcp-story-chapter--reverse .tcp-story-chapter__grid {
+    grid-template-columns: 1.15fr 1fr;
   }
 
-  .tcp-story-chapter:nth-child(even) .tcp-story-chapter__inner {
-    grid-template-columns: 1.1fr 1fr;
+  @media (max-width: 1024px) {
+    .tcp-story-chapter {
+      padding: 60px 0;
+    }
+    .tcp-story-chapter__grid {
+      grid-template-columns: 1fr !important;
+      gap: 36px;
+    }
+    .tcp-story-chapter--reverse .tcp-story-chapter__media {
+      order: 1 !important;
+    }
+    .tcp-story-chapter--reverse .tcp-story-chapter__content {
+      order: 2 !important;
+    }
   }
 
-  .tcp-story-chapter:nth-child(even) .tcp-story-chapter__media {
-    order: 1;
+  .tcp-story-chapter__eyebrow-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
   }
 
-  .tcp-story-chapter:nth-child(even) .tcp-story-chapter__content {
-    order: 2;
-  }
-
-  .tcp-story-chapter__label {
+  .tcp-story-chapter__eyebrow {
+    font-family: var(--font-brand, 'Raleway', sans-serif);
     font-size: 10.5px;
     font-weight: 700;
-    letter-spacing: 2.5px;
+    letter-spacing: 2.8px;
     text-transform: uppercase;
-    color: var(--tcp-gold, #C29B38);
-    display: block;
-    margin-bottom: 12px;
+    color: var(--tcp-accent-gold);
   }
 
   .tcp-story-chapter__title {
-    font-family: var(--font-serif, serif);
-    font-size: clamp(32px, 4vw, 46px);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(32px, 4.2vw, 48px);
     font-weight: 400;
-    color: var(--tcp-dark, #1F1D1B);
-    line-height: 1.15;
-    margin: 0 0 20px;
+    color: var(--tcp-charcoal);
+    line-height: 1.12;
+    margin: 0 0 16px;
+    letter-spacing: -0.3px;
   }
 
   .tcp-story-chapter__text {
-    font-size: 15px;
-    color: var(--tcp-muted, #68625B);
-    line-height: 1.85;
-    margin-bottom: 20px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 14.5px;
+    color: var(--tcp-body-grey);
+    line-height: 1.8;
+    margin: 0 0 20px;
   }
 
   .tcp-story-chapter__quote {
-    font-family: var(--font-serif, serif);
-    font-size: 20px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 21px;
     font-style: italic;
-    color: var(--tcp-brown, #352922);
-    border-left: 2px solid var(--tcp-gold, #C29B38);
+    color: var(--tcp-charcoal);
+    border-left: 2px solid var(--tcp-accent-gold);
     padding-left: 20px;
-    margin: 28px 0;
+    margin: 24px 0;
+    line-height: 1.45;
   }
 
   .tcp-story-chapter__media {
     position: relative;
-    border-radius: 6px;
+    border-radius: 4px;
     overflow: hidden;
-    aspect-ratio: 4 / 3.5;
-    background: var(--tcp-stone, #F3EFEA);
-    box-shadow: 0 16px 40px rgba(31, 29, 27, 0.08);
+    aspect-ratio: 4 / 3.2;
+    background: #EFE9DE;
+    border: 1px solid var(--tcp-border-subtle);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.05);
   }
 
   .tcp-story-chapter__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* ── Recognition & Press Grid ── */
-  .tcp-story-press {
-    background: var(--tcp-brown, #352922);
-    color: var(--tcp-sand, #FBF9F5);
-    padding: 100px 0;
+  .tcp-story-chapter__media:hover .tcp-story-chapter__img {
+    transform: scale(1.03);
+  }
+
+  .tcp-story-chapter__fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 60% 40%, #FAF8F4 0%, #EDE6DC 100%);
+  }
+
+  .tcp-story-chapter__fallback svg {
+    width: 55%;
+    height: 55%;
+    opacity: 0.35;
+  }
+
+  /* ── 3. Editorial Acclaim Section (WHITE LUXURY LOOK) ── */
+  .tcp-story-acclaim {
+    background-color: #FFFFFF;
+    padding: 100px 0 110px;
+    position: relative;
+    border-top: 1px solid var(--tcp-border-subtle);
+  }
+
+  .tcp-story-acclaim__header {
     text-align: center;
+    max-width: 760px;
+    margin: 0 auto 60px;
   }
 
-  .tcp-story-press__inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
+  .tcp-story-acclaim__eyebrow-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
   }
 
-  .tcp-story-press__title {
-    font-family: var(--font-serif, serif);
-    font-size: clamp(32px, 4vw, 48px);
-    color: #FFFFFF;
-    margin: 0 0 16px;
+  .tcp-story-acclaim__eyebrow {
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3.2px;
+    text-transform: uppercase;
+    color: var(--tcp-accent-gold);
   }
 
-  .tcp-story-press__grid {
+  .tcp-story-acclaim__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(34px, 4.5vw, 50px);
+    font-weight: 400;
+    color: var(--tcp-charcoal);
+    line-height: 1.15;
+    margin: 0 0 14px;
+    letter-spacing: -0.5px;
+  }
+
+  .tcp-story-acclaim__title span.dot {
+    color: var(--tcp-gold-bright);
+  }
+
+  .tcp-story-acclaim__subtitle {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 14.5px;
+    color: var(--tcp-body-grey);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Acclaim Cards Grid */
+  .tcp-story-acclaim__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-    margin-top: 56px;
+    gap: 28px;
   }
 
-  .tcp-press-box {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    padding: 32px 24px;
-    text-align: center;
-  }
-
-  .tcp-press-box h4 {
-    font-family: var(--font-serif, serif);
-    font-size: 22px;
-    letter-spacing: 2px;
-    color: var(--tcp-gold-light, #DFBA5E);
-    margin: 0 0 10px;
-  }
-
-  .tcp-press-box p {
-    font-size: 12.5px;
-    color: rgba(251, 249, 245, 0.75);
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  /* ── Responsive ── */
-  @media (max-width: 1024px) {
-    .tcp-story-chapter__inner {
-      grid-template-columns: 1fr !important;
-      gap: 40px;
-    }
-    .tcp-story-chapter__media {
-      order: 1 !important;
-    }
-    .tcp-story-chapter__content {
-      order: 2 !important;
-    }
-    .tcp-story-press__grid {
+  @media (max-width: 1100px) {
+    .tcp-story-acclaim__grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
     }
   }
 
   @media (max-width: 600px) {
-    .tcp-story-hero {
-      padding: 60px 20px;
+    .tcp-story-acclaim {
+      padding: 60px 0 70px;
     }
-    .tcp-story-chapter {
-      padding: 60px 0;
-    }
-    .tcp-story-chapter__inner {
-      padding: 0 20px;
-    }
-    .tcp-story-press__grid {
+    .tcp-story-acclaim__grid {
       grid-template-columns: 1fr;
+      gap: 18px;
     }
+  }
+
+  /* Luxury Acclaim Card */
+  .tcp-acclaim-card {
+    background: #FFFFFF;
+    border: 1px solid var(--tcp-border-subtle);
+    border-radius: 4px;
+    padding: 36px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+  }
+
+  .tcp-acclaim-card:hover {
+    background: var(--tcp-stone-bg);
+    border-color: var(--tcp-accent-gold);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(166, 115, 46, 0.12);
+  }
+
+  /* Publication Logo Slot */
+  .tcp-acclaim-card__logo-wrap {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    max-width: 180px;
+  }
+
+  .tcp-acclaim-card__logo-img {
+    max-height: 40px;
+    max-width: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.85;
+    transition: all 0.3s ease;
+  }
+
+  .tcp-acclaim-card:hover .tcp-acclaim-card__logo-img {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.04);
+  }
+
+  /* Publication Text Heading (when no logo or as typography headline) */
+  .tcp-acclaim-card__name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--tcp-accent-gold);
+    margin: 0 0 14px;
+    line-height: 1.1;
+    transition: color 0.2s ease;
+  }
+
+  .tcp-acclaim-card:hover .tcp-acclaim-card__name {
+    color: var(--tcp-gold-hover);
+  }
+
+  .tcp-acclaim-card__text {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13px;
+    color: #6A6560;
+    line-height: 1.65;
+    margin: 0 0 18px;
+    flex-grow: 1;
+  }
+
+  .tcp-acclaim-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-brand, 'Raleway', sans-serif);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--tcp-charcoal);
+    transition: all 0.2s ease;
+  }
+
+  .tcp-acclaim-card:hover .tcp-acclaim-card__link {
+    color: var(--tcp-accent-gold);
   }
 </style>
 
-<div class="tcp-story-page" id="tcp-story-page-root">
-  <!-- Hero -->
+<div class="tcp-story-page" id="tcp-story-{{ section.id }}">
+  
+  {% comment %} 1. Hero Banner {% endcomment %}
   <section class="tcp-story-hero">
     <div class="tcp-story-hero__inner">
-      <span class="tcp-story-hero__label">THE CREATIVE PLATTER STUDIO</span>
-      <h1 class="tcp-story-hero__title">Where Art Meets the Table</h1>
+      <div class="tcp-story-hero__eyebrow-wrap">
+        <span class="tcp-story-hero__dash"></span>
+        <span class="tcp-story-hero__eyebrow">{{ section.settings.hero_eyebrow | default: 'THE CREATIVE PLATTER STUDIO' }}</span>
+        <span class="tcp-story-hero__dash"></span>
+      </div>
+
+      <h1 class="tcp-story-hero__title">
+        {{ section.settings.hero_title | default: 'Where Art Meets the Table' }}<span class="dot">.</span>
+      </h1>
+
+      {% if section.settings.hero_script != blank %}
+        <span class="tcp-story-hero__script">{{ section.settings.hero_script }}</span>
+      {% endif %}
+
       <p class="tcp-story-hero__quote">
-        &ldquo;We design for bespoke ritual. For everyday acts of eating, gathering, pausing, and inhabiting space. Art enters life through use.&rdquo;
+        &ldquo;{{ section.settings.hero_quote | default: 'We design for bespoke ritual. For everyday acts of eating, gathering, pausing, and inhabiting space. Art enters life through use.' }}&rdquo;
       </p>
     </div>
   </section>
 
-  <!-- Chapter 1: The Practice & Concept -->
+  {% comment %} 2. Chapter 1: The Practice & Philosophy {% endcomment %}
   <section class="tcp-story-chapter">
-    <div class="tcp-story-chapter__inner">
-      <div class="tcp-story-chapter__content">
-        <span class="tcp-story-chapter__label">THE PHILOSOPHY</span>
-        <h2 class="tcp-story-chapter__title">Crafted to be felt, not just seen.</h2>
-        <p class="tcp-story-chapter__text">
-          The Creative Platter is a design studio working with clay and mixed materials—wood, metal, and stone—to create functional objects across multiple scales. The studio’s practice spans tableware and dinner sets to spatial objects, furniture, and sculptural installations.
-        </p>
-        <div class="tcp-story-chapter__quote">
-          &ldquo;Our work moves from the table outward, shaping how people interact with objects, food, and one another.&rdquo;
+    <div class="tcp-story__container">
+      <div class="tcp-story-chapter__grid">
+        <div class="tcp-story-chapter__content">
+          <div class="tcp-story-chapter__eyebrow-wrap">
+            <span class="tcp-story-chapter__eyebrow">{{ section.settings.ch1_eyebrow | default: 'THE PRACTICE &amp; CONCEPT' }}</span>
+          </div>
+          <h2 class="tcp-story-chapter__title">{{ section.settings.ch1_title | default: 'Crafted to be felt, not just seen.' }}</h2>
+          <p class="tcp-story-chapter__text">
+            {{ section.settings.ch1_text_1 | default: 'The Creative Platter is a design studio working with clay and mixed materials—wood, metal, and stone—to create functional objects across multiple scales. The studio’s practice spans tableware and dinner sets to spatial objects, furniture, and sculptural installations.' }}
+          </p>
+          {% if section.settings.ch1_quote != blank %}
+            <div class="tcp-story-chapter__quote">
+              &ldquo;{{ section.settings.ch1_quote }}&rdquo;
+            </div>
+          {% endif %}
+          <p class="tcp-story-chapter__text">
+            {{ section.settings.ch1_text_2 | default: 'All pieces are produced through hands-on techniques, using non-toxic, food-safe materials, and are microwave and dishwasher safe. High-fired at 1260–1280°C, the work balances durability with individuality.' }}
+          </p>
         </div>
-        <p class="tcp-story-chapter__text">
-          All pieces are produced through hands-on techniques, using non-toxic, food-safe materials, and are microwave and dishwasher safe. High-fired at 1260–1280°C, the work balances durability with individuality.
-        </p>
-      </div>
-      <div class="tcp-story-chapter__media">
-        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE6DC 100%);">
-          <svg width="140" height="140" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="54" stroke="#C29B38" stroke-width="2"/><circle cx="70" cy="70" r="36" stroke="#1F1D1B" stroke-width="1.2"/></svg>
+
+        <div class="tcp-story-chapter__media">
+          {% if section.settings.ch1_image != blank %}
+            <img
+              src="{{ section.settings.ch1_image | image_url: width: 1200 }}"
+              alt="{{ section.settings.ch1_title | escape }}"
+              class="tcp-story-chapter__img"
+              loading="lazy"
+            >
+          {% else %}
+            <div class="tcp-story-chapter__fallback">
+              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="75" fill="#FAF6EE" stroke="#A6732E" stroke-width="2"/>
+                <circle cx="100" cy="100" r="50" fill="#EFE8DC" stroke="#A6732E" stroke-width="1.5"/>
+              </svg>
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Chapter 2: The Pushpa Legacy -->
-  <section class="tcp-story-chapter">
-    <div class="tcp-story-chapter__inner">
-      <div class="tcp-story-chapter__media">
-        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE6DC 100%);">
-          <svg width="140" height="140" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="50" stroke="#DFBA5E" stroke-width="2.5" stroke-dasharray="16 4"/><path d="M50 70 Q70 50 90 70 T110 70" stroke="#C29B38" stroke-width="2" fill="none"/></svg>
+  {% comment %} 3. Chapter 2: The Pushpa Legacy Collection {% endcomment %}
+  <section class="tcp-story-chapter tcp-story-chapter--alt tcp-story-chapter--reverse">
+    <div class="tcp-story__container">
+      <div class="tcp-story-chapter__grid">
+        <div class="tcp-story-chapter__media">
+          {% if section.settings.ch2_image != blank %}
+            <img
+              src="{{ section.settings.ch2_image | image_url: width: 1200 }}"
+              alt="{{ section.settings.ch2_title | escape }}"
+              class="tcp-story-chapter__img"
+              loading="lazy"
+            >
+          {% else %}
+            <div class="tcp-story-chapter__fallback">
+              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="100" cy="100" rx="70" ry="70" fill="#FAF6EE" stroke="#A6732E" stroke-width="2.5" stroke-dasharray="8 4"/>
+                <path d="M70 100 Q100 70 130 100" stroke="#fcce3a" stroke-width="2" fill="none"/>
+              </svg>
+            </div>
+          {% endif %}
         </div>
-      </div>
-      <div class="tcp-story-chapter__content">
-        <span class="tcp-story-chapter__label">THE LEGACY COLLECTION</span>
-        <h2 class="tcp-story-chapter__title">In Loving Memory of Pushpa</h2>
-        <p class="tcp-story-chapter__text">
-          The collection is dedicated to Pushpa, an artist and entrepreneur whose spirit lives through every vessel we shape. <strong>Smriti</strong> explores how memory transforms into living objects that participate in daily nourishment.
-        </p>
-        <div class="tcp-story-chapter__quote">
-          &ldquo;NOTHING IS CUT AWAY. NOTHING IS DISCARDED. THE FORM FOLLOWS THE MATERIAL.&rdquo;
+
+        <div class="tcp-story-chapter__content">
+          <div class="tcp-story-chapter__eyebrow-wrap">
+            <span class="tcp-story-chapter__eyebrow">{{ section.settings.ch2_eyebrow | default: 'THE PUSHPA LEGACY' }}</span>
+          </div>
+          <h2 class="tcp-story-chapter__title">{{ section.settings.ch2_title | default: 'In Loving Memory of Pushpa' }}</h2>
+          <p class="tcp-story-chapter__text">
+            {{ section.settings.ch2_text_1 | default: 'The collection is dedicated to Pushpa, an artist and entrepreneur whose spirit lives through every vessel we shape. Smriti explores how memory transforms into living objects that participate in daily nourishment.' }}
+          </p>
+          {% if section.settings.ch2_quote != blank %}
+            <div class="tcp-story-chapter__quote">
+              &ldquo;{{ section.settings.ch2_quote }}&rdquo;
+            </div>
+          {% endif %}
+          <p class="tcp-story-chapter__text">
+            {{ section.settings.ch2_text_2 | default: 'Recycled clay is reworked rather than discarded, with zero material cut-offs, preserving the raw organic character of the clay.' }}
+          </p>
         </div>
-        <p class="tcp-story-chapter__text">
-          Recycled clay is reworked rather than discarded, with zero material cut-offs, preserving the raw organic character of the clay.
-        </p>
       </div>
     </div>
   </section>
 
-  <!-- Chapter 3: Founder & Gurugram Village Impact -->
+  {% comment %} 4. Chapter 3: Founder & Gurugram Village Impact {% endcomment %}
   <section class="tcp-story-chapter" id="impact">
-    <div class="tcp-story-chapter__inner">
-      <div class="tcp-story-chapter__content">
-        <span class="tcp-story-chapter__label">FOUNDER &amp; COMMUNITY</span>
-        <h2 class="tcp-story-chapter__title">Amankshii Rawatt &bull; Social Impact</h2>
-        <p class="tcp-story-chapter__text">
-          Amankshii Rawatt founded The Creative Platter to explore how art can exist within everyday life. Her multidisciplinary background informs a practice rooted in material sensitivity, restraint, and human rhythm.
-        </p>
-        <div class="tcp-story-chapter__quote">
-          &ldquo;At The Creative Platter, we honour the vision of village women, as a social impact enterprise.&rdquo;
+    <div class="tcp-story__container">
+      <div class="tcp-story-chapter__grid">
+        <div class="tcp-story-chapter__content">
+          <div class="tcp-story-chapter__eyebrow-wrap">
+            <span class="tcp-story-chapter__eyebrow">{{ section.settings.ch3_eyebrow | default: 'FOUNDER &amp; COMMUNITY' }}</span>
+          </div>
+          <h2 class="tcp-story-chapter__title">{{ section.settings.ch3_title | default: 'Amankshii Rawatt • Social Impact' }}</h2>
+          <p class="tcp-story-chapter__text">
+            {{ section.settings.ch3_text_1 | default: 'Amankshii Rawatt founded The Creative Platter to explore how art can exist within everyday life. Her multidisciplinary background informs a practice rooted in material sensitivity, restraint, and human rhythm.' }}
+          </p>
+          {% if section.settings.ch3_quote != blank %}
+            <div class="tcp-story-chapter__quote">
+              &ldquo;{{ section.settings.ch3_quote }}&rdquo;
+            </div>
+          {% endif %}
+          <p class="tcp-story-chapter__text">
+            {{ section.settings.ch3_text_2 | default: 'Production takes place in a village-based studio environment near Gurugram, working closely with women artisans. The focus lies on skill, continuity, and long-term collaboration allowing craft to function as a contemporary design practice.' }}
+          </p>
         </div>
-        <p class="tcp-story-chapter__text">
-          Production takes place in a village-based studio near Gurugram, creating skilled livelihoods for local craftswomen and keeping handmade craftsmanship economically vibrant.
-        </p>
-      </div>
-      <div class="tcp-story-chapter__media">
-        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle, #FAF8F4 0%, #EDE6DC 100%);">
-          <svg width="140" height="140" viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="48" stroke="#C29B38" stroke-width="1.5"/><circle cx="70" cy="70" r="30" stroke="#DFBA5E" stroke-width="1.5"/></svg>
+
+        <div class="tcp-story-chapter__media">
+          {% if section.settings.ch3_image != blank %}
+            <img
+              src="{{ section.settings.ch3_image | image_url: width: 1200 }}"
+              alt="{{ section.settings.ch3_title | escape }}"
+              class="tcp-story-chapter__img"
+              loading="lazy"
+            >
+          {% else %}
+            <div class="tcp-story-chapter__fallback">
+              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="70" fill="#FAF6EE" stroke="#A6732E" stroke-width="2"/>
+                <circle cx="100" cy="100" r="45" fill="#EFE8DC" stroke="#fcce3a" stroke-width="2"/>
+              </svg>
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Press Accolades -->
-  <section class="tcp-story-press">
-    <div class="tcp-story-press__inner">
-      <span class="tcp-story-hero__label" style="color:var(--tcp-gold-light);">EDITORIAL ACCLAIM</span>
-      <h2 class="tcp-story-press__title">Recognised by Leading Design Platforms</h2>
-      <div class="tcp-story-press__grid">
-        <div class="tcp-press-box">
-          <h4>VOGUE</h4>
-          <p>Featured for contemporary Indian ceramic language &amp; mindful dining aesthetics.</p>
+  {% comment %} 5. Chapter 4: Editorial Acclaim (WHITE LUXURY DESIGN) {% endcomment %}
+  <section class="tcp-story-acclaim">
+    <div class="tcp-story__container">
+      
+      <div class="tcp-story-acclaim__header">
+        <div class="tcp-story-acclaim__eyebrow-wrap">
+          <span class="tcp-story-hero__dash"></span>
+          <span class="tcp-story-acclaim__eyebrow">{{ section.settings.acclaim_eyebrow | default: 'EDITORIAL ACCLAIM' }}</span>
+          <span class="tcp-story-hero__dash"></span>
         </div>
-        <div class="tcp-press-box">
-          <h4>CONDÉ NAST</h4>
-          <p>Celebrated for bespoke hospitality tableware and curated resort collections.</p>
-        </div>
-        <div class="tcp-press-box">
-          <h4>THE HINDU</h4>
-          <p>Highlighted for social impact craft and empowering Gurugram village women makers.</p>
-        </div>
-        <div class="tcp-press-box">
-          <h4>TODAY'S HOME</h4>
-          <p>Showcased for architectural stoneware and soulful everyday rituals.</p>
-        </div>
+        
+        <h2 class="tcp-story-acclaim__title">
+          {{ section.settings.acclaim_title | default: 'Recognised by Leading Design Platforms' }}<span class="dot">.</span>
+        </h2>
+        
+        {% if section.settings.acclaim_subtitle != blank %}
+          <p class="tcp-story-acclaim__subtitle">{{ section.settings.acclaim_subtitle }}</p>
+        {% endif %}
       </div>
+
+      <div class="tcp-story-acclaim__grid">
+        {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+            {%- assign card_url = block.settings.article_url -%}
+            {% if card_url != blank %}
+              <a href="{{ card_url }}" target="_blank" rel="noopener noreferrer" class="tcp-acclaim-card" {{ block.shopify_attributes }}>
+            {% else %}
+              <div class="tcp-acclaim-card" {{ block.shopify_attributes }}>
+            {% endif %}
+
+              {% comment %} Publication Logo or Title {% endcomment %}
+              {% if block.settings.logo != blank %}
+                <div class="tcp-acclaim-card__logo-wrap">
+                  <img
+                    src="{{ block.settings.logo | image_url: width: 360 }}"
+                    alt="{{ block.settings.title | escape }}"
+                    class="tcp-acclaim-card__logo-img"
+                    loading="lazy"
+                  >
+                </div>
+              {% else %}
+                <h3 class="tcp-acclaim-card__name">{{ block.settings.title | default: 'PUBLICATION' }}</h3>
+              {% endif %}
+
+              <p class="tcp-acclaim-card__text">
+                {{ block.settings.quote | default: 'Featured for contemporary ceramic design and mindful dining aesthetics.' }}
+              </p>
+
+              {% if card_url != blank %}
+                <span class="tcp-acclaim-card__link">
+                  READ FEATURE &rarr;
+                </span>
+              {% endif %}
+
+            {% if card_url != blank %}
+              </a>
+            {% else %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+
     </div>
   </section>
+
 </div>
 
 {% schema %}
 {
   "name": "TCP Studio Story",
   "tag": "section",
-  "class": "tcp-story-section",
-  "settings": [],
+  "class": "tcp-story-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Banner"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Hero Eyebrow",
+      "default": "THE CREATIVE PLATTER STUDIO"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "Where Art Meets the Table"
+    },
+    {
+      "type": "text",
+      "id": "hero_script",
+      "label": "Hero Cursive Subtitle",
+      "default": "crafted to be felt, not just seen"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_quote",
+      "label": "Hero Quote",
+      "default": "We design for bespoke ritual. For everyday acts of eating, gathering, pausing, and inhabiting space. Art enters life through use."
+    },
+    {
+      "type": "header",
+      "content": "Chapter 1 — The Practice"
+    },
+    {
+      "type": "text",
+      "id": "ch1_eyebrow",
+      "label": "Chapter 1 Eyebrow",
+      "default": "THE PRACTICE & CONCEPT"
+    },
+    {
+      "type": "text",
+      "id": "ch1_title",
+      "label": "Chapter 1 Title",
+      "default": "Crafted to be felt, not just seen."
+    },
+    {
+      "type": "textarea",
+      "id": "ch1_text_1",
+      "label": "Chapter 1 Paragraph 1",
+      "default": "The Creative Platter is a design studio working with clay and mixed materials—wood, metal, and stone—to create functional objects across multiple scales. The studio’s practice spans tableware and dinner sets to spatial objects, furniture, and sculptural installations."
+    },
+    {
+      "type": "text",
+      "id": "ch1_quote",
+      "label": "Chapter 1 Italic Quote",
+      "default": "Our work moves from the table outward, shaping how people interact with objects, food, and one another."
+    },
+    {
+      "type": "textarea",
+      "id": "ch1_text_2",
+      "label": "Chapter 1 Paragraph 2",
+      "default": "All pieces are produced through hands-on techniques, using non-toxic, food-safe materials, and are microwave and dishwasher safe. High-fired at 1260–1280°C, the work balances durability with individuality."
+    },
+    {
+      "type": "image_picker",
+      "id": "ch1_image",
+      "label": "Chapter 1 Image"
+    },
+    {
+      "type": "header",
+      "content": "Chapter 2 — The Pushpa Legacy"
+    },
+    {
+      "type": "text",
+      "id": "ch2_eyebrow",
+      "label": "Chapter 2 Eyebrow",
+      "default": "THE PUSHPA LEGACY"
+    },
+    {
+      "type": "text",
+      "id": "ch2_title",
+      "label": "Chapter 2 Title",
+      "default": "In Loving Memory of Pushpa"
+    },
+    {
+      "type": "textarea",
+      "id": "ch2_text_1",
+      "label": "Chapter 2 Paragraph 1",
+      "default": "The collection is dedicated to Pushpa, an artist and entrepreneur whose spirit lives through every vessel we shape. Smriti explores how memory transforms into living objects that participate in daily nourishment."
+    },
+    {
+      "type": "text",
+      "id": "ch2_quote",
+      "label": "Chapter 2 Italic Quote",
+      "default": "NOTHING IS CUT AWAY. NOTHING IS DISCARDED. THE FORM FOLLOWS THE MATERIAL."
+    },
+    {
+      "type": "textarea",
+      "id": "ch2_text_2",
+      "label": "Chapter 2 Paragraph 2",
+      "default": "Recycled clay is reworked rather than discarded, with zero material cut-offs, preserving the raw organic character of the clay."
+    },
+    {
+      "type": "image_picker",
+      "id": "ch2_image",
+      "label": "Chapter 2 Image"
+    },
+    {
+      "type": "header",
+      "content": "Chapter 3 — Founder & Impact"
+    },
+    {
+      "type": "text",
+      "id": "ch3_eyebrow",
+      "label": "Chapter 3 Eyebrow",
+      "default": "FOUNDER & COMMUNITY"
+    },
+    {
+      "type": "text",
+      "id": "ch3_title",
+      "label": "Chapter 3 Title",
+      "default": "Amankshii Rawatt • Social Impact"
+    },
+    {
+      "type": "textarea",
+      "id": "ch3_text_1",
+      "label": "Chapter 3 Paragraph 1",
+      "default": "Amankshii Rawatt founded The Creative Platter to explore how art can exist within everyday life. Her multidisciplinary background informs a practice rooted in material sensitivity, restraint, and human rhythm."
+    },
+    {
+      "type": "text",
+      "id": "ch3_quote",
+      "label": "Chapter 3 Italic Quote",
+      "default": "At The Creative Platter, we honour the vision of village women, as a social impact enterprise."
+    },
+    {
+      "type": "textarea",
+      "id": "ch3_text_2",
+      "label": "Chapter 3 Paragraph 2",
+      "default": "Production takes place in a village-based studio environment near Gurugram, working closely with women artisans. The focus lies on skill, continuity, and long-term collaboration allowing craft to function as a contemporary design practice."
+    },
+    {
+      "type": "image_picker",
+      "id": "ch3_image",
+      "label": "Chapter 3 Image"
+    },
+    {
+      "type": "header",
+      "content": "Editorial Acclaim (White Luxury Look)"
+    },
+    {
+      "type": "text",
+      "id": "acclaim_eyebrow",
+      "label": "Acclaim Eyebrow",
+      "default": "EDITORIAL ACCLAIM"
+    },
+    {
+      "type": "text",
+      "id": "acclaim_title",
+      "label": "Acclaim Title",
+      "default": "Recognised by Leading Design Platforms"
+    },
+    {
+      "type": "text",
+      "id": "acclaim_subtitle",
+      "label": "Acclaim Subtitle",
+      "default": "Showcased across leading cultural and design platforms for contemporary craft language."
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1200,
+      "max": 1600,
+      "step": 40,
+      "unit": "px",
+      "label": "Max Container Width",
+      "default": 1440
+    }
+  ],
+  "blocks": [
+    {
+      "type": "acclaim_item",
+      "name": "Press / Acclaim Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Publication Logo Image (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Publication Name",
+          "default": "VOGUE"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review Quote / Description",
+          "default": "Featured for contemporary Indian ceramic language & mindful dining aesthetics."
+        },
+        {
+          "type": "url",
+          "id": "article_url",
+          "label": "Article / Press Link URL (Optional)"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "TCP Studio Story"
+      "name": "TCP Studio Story",
+      "blocks": [
+        {
+          "type": "acclaim_item",
+          "settings": {
+            "title": "VOGUE",
+            "quote": "Featured for contemporary Indian ceramic language & mindful dining aesthetics."
+          }
+        },
+        {
+          "type": "acclaim_item",
+          "settings": {
+            "title": "CONDÉ NAST",
+            "quote": "Celebrated for bespoke hospitality tableware and curated resort collections."
+          }
+        },
+        {
+          "type": "acclaim_item",
+          "settings": {
+            "title": "THE HINDU",
+            "quote": "Highlighted for social impact craft and empowering Gurugram village women makers."
+          }
+        },
+        {
+          "type": "acclaim_item",
+          "settings": {
+            "title": "TODAY'S HOME",
+            "quote": "Showcased for architectural stoneware and soulful everyday rituals."
+          }
+        }
+      ]
     }
   ]
 }
